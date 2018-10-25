@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import Faq from './components/faq';
 import fire from './fire.js';
 
 class App extends React.Component {
@@ -70,6 +71,7 @@ class App extends React.Component {
 
     return (
       <div style={{margin:'30px'}}>
+        <Faq />
         <form onSubmit={this.addData}>
           <input
             type="text"

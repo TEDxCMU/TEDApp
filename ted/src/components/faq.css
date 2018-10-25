@@ -1,0 +1,26 @@
+.faq {
+    font-family: Helvetica;
+    font-size: 12px;
+}
+
+.faq h1 {
+    font-size: 3em;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.faq h2 {
+    font-size: 2em;
+}
+
+.faq h3 {
+    font-size: 1.2em;
+}
+
+.faq p {
+    font-size: 1em;
+}
+
+.faq a {
+    color: #e62b1e;
+}
