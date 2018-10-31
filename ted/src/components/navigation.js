@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../components/navigation.css';
+import '../components/navigation.css';
 import {NavLink} from 'react-router-dom';
 
 export class Navigation extends Component {
