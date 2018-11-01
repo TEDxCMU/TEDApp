@@ -1,0 +1,14 @@
+header a {
+    float: left;
+    text-align: center;
+    padding: 12px;
+    line-height: 25px;
+    -webkit-transition: color 0.5s ease-out;
+    -moz-transition: color 0.5s ease-out;
+    -o-transition: color 0.5s ease-out;
+    transition: color 0.5s ease-out;
+  }
+  
+header a:hover {
+    color: #000;
+}

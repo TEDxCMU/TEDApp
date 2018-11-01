@@ -3,11 +3,22 @@ import '../components/navigation.css';
 import {NavLink} from 'react-router-dom';
 
 export class Navigation extends Component {
-    render () {
+    render() {
         return (
             <div>
                 <header>
-                <h1>Project Hi</h1>
+                <h1>TEDxCMU App</h1>
+                    <div className="nav">
+                        <NavLink to="/" exact activeStyle={{color:'#e62b1e'}}>
+                            Home
+                        </NavLink>
+                        <NavLink to="/schedule" exact activeStyle={{color:'#e62b1e'}}>
+                            Manager Dash
+                        </NavLink>
+                        <NavLink to="/faq" exact activeStyle={{color:'#e62b1e'}}>
+                            FAQ
+                        </NavLink>
+                    </div>
                     {this.props.user ?
                         <div>
                         <div className='user-profile'>
@@ -19,15 +30,6 @@ export class Navigation extends Component {
                         <button onClick={this.props.login}>Log In</button>
                     }
                 </header>
-
-                <div style={{display: 'flex', justifyContent: 'space-around'}} >
-                    <NavLink to="/" exact activeStyle={{color:'green'}}>
-                        Home
-                    </NavLink>
-                    <NavLink to="/schedule" exact activeStyle={{color:'green'}}>
-                        Manager Dash
-                    </NavLink>
-                </div>
             </div>
         );        
     }

@@ -1,39 +1,148 @@
-html {
-  font-family: 'Barlow';
+/**
+* Sources/Aids:
+* -----------------------------
+* styleshout.com (Kard v1.0 Main Stylesheet, 03-01-2016)
+* Reset stylesheet: html5doctor.com | v1.6.1 | 2010-09-17 | Richard Clark | http://richardclarkdesigns.com
+* Link effect: https://codemyui.com/theoutline-squiggle-link-hover-effect/
+*
+* Organization:
+* -----------------------------
+* 01. Imports
+* 02. CSS Variables
+* 03. Reset stylesheet
+* 04. General style & overrides
+* 05. Typography
+* 06. Navigation & header styles
+* 07. Footer styles
+* 08. Forms (TBD)
+* 09. Buttons
+* 10. List styling
+* 11. Components (separate CSS files)
+* 12. Responsive styles
+* -----------------------------
+**/
+
+/* ---------- 01. IMPORTS (START) ---------- */
+/* ---------- 01. IMPORTS (END) ---------- */
+
+/* ---------- 02. CSS VARIABLES (START) ---------- */
+:root {
+  --tedblack: #000;
+  --tedgrey: #4e4e4e;
+  --tedred: #e62b1e;
+  --tedwhite: #fff;
+  --tedoffwhite: #fafafa;
+  --tedredhover: #e62b1e;
+  --opaque: rgba(0, 0, 0, 0.35);
+  --tedfont: "Helvetica";
+}
+/* ---------- 02. CSS VARIABLES (END) ---------- */
+
+/* ---------- 03. RESET STYLESHEET (START) ---------- */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
 }
 
 body {
-  font-family: 'Barlow', sans-serif;
-  background-color: #fff;
+    line-height: 1;
 }
 
-header {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  color: #fff;
-  background-color: #103D5D;
-  padding: 33px 0 25px 15px;
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+    display: block;
 }
 
-header h1 {
-  font-size: 25px;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  display: inline-block;
-  margin: 0;
-  vertical-align: middle;
-  
+nav ul {
+    list-style: none;
 }
 
-.fa {
-  font-size: 22px;
-  transform: translateY(50deg);  
+blockquote, q {
+    quotes: none;
 }
 
-header i {
-  vertical-align: middle;
-  margin-left: 12px;
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+ins {
+    background-color: var(--tedred);
+    color: #000;
+    text-decoration: none;
+}
+
+mark {
+    background-color: var(--tedred);
+    color: var(--tedblack); 
+    font-style: italic;
+    font-weight: bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom: 1px dotted;
+    cursor: help;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* change border color to suit needs */
+hr {
+    display: block;
+    height: 1px;
+    border: 0;   
+    border-top: 1px solid var(--tedblack);
+    margin: em 0;
+    padding: 0;
+}
+
+input, select {
+    vertical-align: middle;
+}
+/* ----- 03. RESET STYLESHEET (END) ----- */
+
+/* ----- 04. GENERAL STYLES & OVERRIDES (START) ----- */
+
+/* --- DOCUMENT STYLING --- */
+html {
+  font-family: var(--tedfont), sans-serif;
+}
+
+body {
+  font-family: var(--tedfont), sans-serif;
+  background-color: var(--tedwhite);
 }
 
 .container {
@@ -43,12 +152,325 @@ header i {
   width: 100%;
 }
 
+/* --- HEADING STYLING --- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--tedfont), sans-serif;
+  color: var(--tedblack);
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  margin-bottom: 1.0em;
+}
+
+h1 {
+  font-size: 3em;
+  line-height: 1.355;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+@media only screen and (max-width:600px) {
+  h1 {
+    font-size: 2.6em;
+    letter-spacing: -.07em;
+  }
+}
+
+h2 {
+  font-size: 2.4em;
+  line-height: 1.25;
+  font-weight: 400;
+  padding: 0;
+  margin: 0.5em;
+}
+
+h3 {
+  font-size: 2em;
+  line-height: 1.5;
+  margin-bottom: 1.0em;
+}
+
+h4 {
+  font-size: 1.7em;
+  line-height: 1.5;
+  margin-bottom: 1.1em;
+}
+
+h5 {
+  font-size: 1.4em;
+  line-height: 1.3;
+  text-transform: uppercase;
+  letter-spacing: 0em;
+  margin-bottom: 0.5em;
+}
+
+h6 {
+  font-size: 1.3em;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+  margin-bottom: 0.5em;
+}
+
+p {
+  font-size: 1em;
+  color: var(--tedgrey);
+  margin-bottom: 1.5em;
+  line-height: 1.4;
+}
+
+a {
+  color: var(--tedred);
+  text-decoration: none;
+}
+
+p a {
+  color: var(--tedgrey);
+  text-decoration: none;
+  background: linear-gradient(to bottom, var(--tedred) 0%, var(--tedred) 100%);
+	background-position: 0 105%;
+	background-repeat: repeat-x;
+	background-size: 3px 3px;
+}
+
+p a:hover {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='#e62b1e' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
+  background-position: 0 100%;
+  background-size: auto 6px;
+  background-repeat: repeat-x;
+  text-decoration: none;
+}
+
+/* --- BLOCKQUOTE STYLING -- */
+blockquote {
+  margin: 3em 0;
+  padding-left: 4em;
+  position: relative;
+}
+
+blockquote:before {
+  content: "\201C";
+  font-size: 8em;
+  line-height: 0px;
+  margin: 0;
+  color: var(--tedgrey);
+  font-family: var(--tedfont), sans-serif;
+  position: absolute;
+  top: 3em;
+  left: 0;
+}
+
+blockquote p {
+  font-family: var(--tedfont), serif;
+  font-style: italic;
+  padding: 0;
+  font-size: 1.9em;
+  line-height: 1.737;
+}
+
+blockquote cite {
+  display: block;
+  font-size: 1.3em;
+  font-style: normal;
+  line-height: 1.616;
+}
+
+/* --- MISCELLANEOUS STYLING --- */
+small {
+  font-size: 0.7em;
+  line-height: inherit;
+}
+
+hr {
+  border: solid var(--tedgrey);
+  border-width: 1px 0 0;
+  clear: both;
+  margin: 2.4em 0 1.5em;
+  height: 0;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+code {
+  font-size: 1.4em;
+  margin: 0 .2em;
+  padding: .3em .6em;
+  white-space: nowrap;
+  background: var(--tedoffwhite);
+  border: 1px solid var(--tedoffwhite);
+  border-radius: 3px;
+}
+/* ---------- 04. GENERAL STYLES & OVERRIDES (END) ---------- */
+
+/* ---------- 05. TYPOGRAPHY (START) ---------- */
+/* ---------- 05. TYPOGRAPHY (START) ---------- */
+
+/* ---------- 06. NAVIGATION & HEADER STYLING (START) ---------- */
+header {
+  width: 100%;
+  min-height: 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: relative;
+  color: var(--tedblack);
+  background-color: var(--tedwhite);
+  padding: 20px 10px 25px 10px;
+}
+
+header h1 {
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+}
+
+header a {
+  color: var(--tedgrey)
+}
+
+header .logo {
+  float: left;
+  margin-left: 20px;
+  margin-right: 50px;
+  margin-top: 25px;
+  position: relative;
+}
+
+/*.fa {
+  font-size: 22px;
+  transform: translateY(50deg);  
+}*/
+
+header i {
+  vertical-align: middle;
+  margin-left: 12px;
+}
+/* ---------- 06. NAVIGATION & HEADER STYLING (END) ---------- */
+
+/* ---------- 07. FOOTER STYLING (START) ---------- */
+footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  min-height: 50px;
+  position: relative;
+  color: var(--tedblack);
+  background-color: var(--tedwhite);
+  padding: 20px 10px;
+}
+/* ---------- 07. FOOTER STYLING (END) ---------- */
+
+/* ---------- 08. FORM STYLING (START) ---------- */
+fieldset {
+  border: none;
+}
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+  display: block;
+  height: 6rem;
+  padding: 1.5em 0;
+  border: 0;
+  outline: none;
+  justify-content: center;
+  color: var(--tedgrey);
+  font-family: var(--tedfont), sans-serif;
+  font-size: 1.5em;
+  line-height: 3em;
+  max-width: 100%;
+  background: transparent;
+  border-bottom: 1px solid var(--opaque);
+  -moz-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  -webkit-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+input {
+  align-self: center;
+  font-size: 22px;
+  color: var(--tedblack);
+  font-size: 16px;
+  padding-top: 15px;
+  margin-bottom: 17px;
+  border: 0;
+  display: block;
+  width: calc(100%);
+}
+/* ---------- 08. FORM STYLING (END) ---------- */
+
+/* ---------- 09. BUTTON STYLING (START) ---------- */
+form button {
+  width: 100%;
+  margin-top: 10px;
+}
+
+button {
+  border-radius: 2px;
+  min-width: 88px;
+  background-color: var(--tedred);
+  cursor: pointer;
+  border: 0;
+  min-width: 120px;
+  color: var(--tedwhite);
+  font-size: 14px;
+  box-shadow: 0 2px 5px 0 var(--opaque);
+  padding: 10px 6px;
+}
+/* ---------- 09. BUTTON STYLING (END) ---------- */
+
+/* ---------- 10. LIST STYLING (START) ---------- */
+ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 10px;
+  padding: 10px;
+  width: 100%;
+}
+
+li {
+  list-style-type: none;
+  width: 80%;
+  padding: 20px 20px;
+  margin-right: 50px;
+  background-color: var(--tedoffwhite);
+  color: var(--tedblack);
+  margin-bottom: 30px;
+  border-radius: 3px;
+  -webkit-box-shadow: 1px 1px 26px -2px var(--opaque);
+  -moz-box-shadow: 1px 1px 26px -2px var(--opaque);
+  box-shadow: 2px 2px 26px -2px var(--opaque);
+}
+
+li h3 {
+  background-color: var(--tedblack);
+  margin: 0;
+  color: var(--tedwhite);
+  font-weight: 300;
+  padding: 15px;
+}
+
+li p {
+  padding: 15px;
+}
+/* ---------- 10. LIST STYLING (END) ---------- */
+
+/* ---------- 11. COMPONENT STYLING (START) ---------- */
 .add-item {
   display: flex;
   border-radius: 2px;
-  border-top: 3px solid #103D5D;
+  border-top: 3px solid var(--tedred);
   margin-right: 50px;
-  background-color: rgb(237, 237, 237);
+  background-color: var(--tedoffwhite);
   padding: 60px 18px;
   box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12), 0 1px 8px 0 rgba(0,0,0,.2);
   margin-bottom: 34px;  
@@ -72,78 +494,35 @@ header i {
   overflow: hidden;
 }
 
-input {
-  align-self: center;
-  font-size: 22px;
-  color: #000;
-  font-size: 16px;
-  padding-top: 15px;
-  margin-bottom: 17px;
-  border: 0;
-  display: block;
-  width: calc(100%);
-}
-
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-
-li {
-  width: calc(50% - 50px);
-  list-style-type: none;
-  margin-right: 50px;
-  background-color: rgb(237, 237, 237);
-  color: #000;
-  margin-bottom: 30px;
-  box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12), 0 1px 8px 0 rgba(0,0,0,.2);
-}
-
-h2 {
-  padding: 0;
-  margin: 0;
-  font-weight: 400;
-}
-
-li h3 {
-  background-color: #103D5D;
-  margin: 0;
-  color: #fff;
-  font-weight: 300;
-  padding: 15px;
-}
-
-li p {
-  padding: 15px;
-}
-
-form button {
-  width: 100%;
-  margin-top: 10px;
-}
-
-button {
-  border-radius: 2px;
-  min-width: 88px;
-  background-color: #FA6900;
-  cursor: pointer;
-  border: 0;
-  min-width: 120px;
-  color: #fff;
-  font-size: 14px;
-  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
-  padding: 10px 6px;
-}
-
 img {
   max-width: 50px;
   border-radius: 50px;
-  align: right;
+  text-align: right;
 }
 
-.foo {
-  text-align: center;
+/* ---------- 11. COMPONENT STYLING (END) ---------- */
+
+/* ---------- 12. RESPONSIVE STYLING (START) ---------- */
+@media only screen and (max-width:1024px) {
+  p {
+    font-size: 1em;
+  }
 }
+@media only screen and (max-width:768px) {
+  p {
+    font-size: 0.95em;
+  }
+}
+@media only screen and (max-width:600px) {
+  /* COLLAPSE MENU */
+  p {
+    font-size: 0.95em;
+  }
+}
+@media only screen and (max-width:400px) {
+  p {
+    font-size: 0.9em;
+    text-align: justify;
+  }
+}
+/* ---------- 12. RESPONSIVE STYLING (END) ---------- */
