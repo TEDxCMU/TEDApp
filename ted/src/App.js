@@ -3,10 +3,9 @@ import './App.css';
 import { auth, provider } from './fire';
 import { Schedule } from './components/schedule.js';
 import { Navigation } from './components/navigation.js';
-import {BrowserRouter as Router} from 'react-router-dom';
+import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
-
 
 class App extends Component {
   constructor() {

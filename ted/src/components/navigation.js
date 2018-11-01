@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 // import '../app.css';
+=======
+import '../components/navigation.css';
+>>>>>>> 3d42c84adffd6a42d2ac16590593b33f020c1eb1
 import {NavLink} from 'react-router-dom';
 
 export class Navigation extends Component {
