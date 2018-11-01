@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../components/navigation.css';
+import '../App.css';
 import {NavLink} from 'react-router-dom';
 
 export class Navigation extends Component {
@@ -30,6 +30,18 @@ export class Navigation extends Component {
                         <button onClick={this.props.login}>Log In</button>
                     }
                 </header>
+<<<<<<< HEAD
+=======
+
+                <div style={{display: 'flex', justifyContent: 'space-around'}} >
+                    <NavLink to="/" exact activeStyle={{color:'green'}}>
+                        Home
+                    </NavLink>
+                    <NavLink to="/schedule" exact activeStyle={{color:'green'}}>
+                        Schedule
+                    </NavLink>
+                </div>
+>>>>>>> 36afb81e3878459c3d64d04631ad0405a676f9ad
             </div>
         );        
     }

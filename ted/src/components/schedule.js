@@ -1,0 +1,66 @@
+import React, { Component } from 'react';
+import '../App.css';
+import { BrowserRouter as Router} from 'react-router-dom';
+import moment from 'moment';
+import Route from 'react-router-dom/Route';
+import fire from '../fire.js';
+
+export class Schedule extends Component {
+  constructor() {
+    super();
+    this.state = {
+      allEvents: []
+    }
+
+
+  }
+  render() {
+    console.log(this.state.allEvents)
+    let newList = [];
+    this.state.allEvents.forEach(event => {
+        let name = event[0];
+        let time = moment().format(event[1]);
+
+        newList.push (
+            <li >{name} ({time})</li>
+          ) 
+        console.log(newList.length)
+    })
+
+    return (
+      <div>
+          <ul>{newList}</ul>
+      </div>
+    );
+  }
+
+  updateInput = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  }
+
+  componentDidMount() {
+    const db = fire.firestore();
+    db.settings({
+      timestampsInSnapshots: true
+    });
+    var wholeData = []
+    db.collection('itinerary').get()
+    .then(snapshot => {
+        snapshot.forEach(doc => {
+            console.log(doc.data)
+            const entries = Object.entries(doc.data())
+            wholeData = (entries)
+        }
+    );
+      this.setState({allEvents: wholeData})
+    })
+    .catch(error => {
+      console.log('Error!', error);
+    })
+  }
+
+}
+
+export default Schedule;
