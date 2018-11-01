@@ -20,13 +20,13 @@ class App extends Component {
 
   }
   render() {
-    // var listOfData = this.state.allData.map((val, i)=>{
-    //   var name = val.name
-    //   var age = val.age
-    //   return (
-    //     <li key={i}>{name} ({age})</li>
-    //   ) 
-    // })
+    var listOfData = this.state.allData.map((val, i)=>{
+      var name = val.name
+      var age = val.age
+      return (
+        <li key={i}>{name} ({age})</li>
+      ) 
+    })
 
     return (
       <div>

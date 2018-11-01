@@ -16,10 +16,15 @@ export class Schedule extends Component {
   }
   render() {
     console.log(this.state.allEvents)
-    var newList = this.state.allEvents.forEach(event => {
-        console.log(event)
-        console.log(event[0])
-        return (<li>Name: {event[0]}, Time: {moment(event[1])}</li>)
+    let newList = [];
+    this.state.allEvents.forEach(event => {
+        let name = event[0];
+        let time = moment().format(event[1]);
+
+        newList.push (
+            <li >{name} ({time})</li>
+          ) 
+        console.log(newList.length)
     })
 
     return (
@@ -44,15 +49,12 @@ export class Schedule extends Component {
     db.collection('itinerary').get()
     .then(snapshot => {
         snapshot.forEach(doc => {
-        console.log(doc.data)
-        // console.log(doc.id, '=>', doc.data());
-        // console.log(doc.data().name + doc.data().age);
-        const keys = Object.keys(doc.data())
-        const entries = Object.entries(doc.data())
-        wholeData = (entries)
-      });
+            console.log(doc.data)
+            const entries = Object.entries(doc.data())
+            wholeData = (entries)
+        }
+    );
       this.setState({allEvents: wholeData})
-      console.log(this.state.allEvents)
     })
     .catch(error => {
       console.log('Error!', error);
