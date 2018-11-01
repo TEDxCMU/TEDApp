@@ -20,24 +20,23 @@ class App extends Component {
 
   }
   render() {
-
-    var listOfData = this.state.allData.map((val, i)=>{
-      var name = val.name
-      var age = val.age
-      return (
-        <li key={i}>{name} ({age})</li>
-      ) 
-    })
+    // var listOfData = this.state.allData.map((val, i)=>{
+    //   var name = val.name
+    //   var age = val.age
+    //   return (
+    //     <li key={i}>{name} ({age})</li>
+    //   ) 
+    // })
 
     return (
       <div>
         <Router>
           <div className="App">
           <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
-          {/* <Route path="/" exact strict render={this.homePage}/> */}
+          <Route path="/" exact strict render={this.schedulePage}/>
           </div>
         </Router>
-        <ul>{listOfData}</ul>
+        {/* <ul>{listOfData}</ul> */}
       </div>
     );
   }
@@ -48,7 +47,7 @@ class App extends Component {
     });
   }
 
-  homePage = (props) => {
+  schedulePage = (props) => {
     return (
       <Schedule
       user={this.state.user} /> 

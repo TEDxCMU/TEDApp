@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import { BrowserRouter as Router} from 'react-router-dom';
+import moment from 'moment';
 import Route from 'react-router-dom/Route';
 import fire from '../fire.js';
 
@@ -8,26 +9,22 @@ export class Schedule extends Component {
   constructor() {
     super();
     this.state = {
-      user: null,
-      allData: []
+      allEvents: []
     }
-    //pass THIS to global navigation hamburger menu so people can login and logout everywhere
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
+
 
   }
   render() {
-
-    var listOfData = this.state.allData.map((val, i)=>{
-      var name = val.name
-      var age = val.age
-      return (
-        <li key={i}>{name} ({age})</li>
-      ) 
+    console.log(this.state.allEvents)
+    var newList = this.state.allEvents.forEach(event => {
+        console.log(event)
+        console.log(event[0])
+        return (<li>Name: {event[0]}, Time: {moment(event[1])}</li>)
     })
 
     return (
       <div>
+          <ul>{newList}</ul>
       </div>
     );
   }
@@ -44,17 +41,18 @@ export class Schedule extends Component {
       timestampsInSnapshots: true
     });
     var wholeData = []
-    db.collection('member').orderBy('name', 'asc').get()
+    db.collection('itinerary').get()
     .then(snapshot => {
-      snapshot.forEach(doc => {
+        snapshot.forEach(doc => {
+        console.log(doc.data)
         // console.log(doc.id, '=>', doc.data());
         // console.log(doc.data().name + doc.data().age);
-        console.log(doc.data());
-        wholeData.push(doc.data())
+        const keys = Object.keys(doc.data())
+        const entries = Object.entries(doc.data())
+        wholeData = (entries)
       });
-      console.log(wholeData)
-      this.setState({allData: wholeData})
-      console.log(this.state.allData)
+      this.setState({allEvents: wholeData})
+      console.log(this.state.allEvents)
     })
     .catch(error => {
       console.log('Error!', error);

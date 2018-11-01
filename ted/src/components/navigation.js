@@ -25,7 +25,7 @@ export class Navigation extends Component {
                         Home
                     </NavLink>
                     <NavLink to="/schedule" exact activeStyle={{color:'green'}}>
-                        Manager Dash
+                        Schedule
                     </NavLink>
                 </div>
             </div>
