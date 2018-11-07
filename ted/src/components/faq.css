@@ -4,12 +4,12 @@
     text-align: left;
 }
 
-h1 {
+.faq h1 {
     text-align: center;
     text-transform: uppercase;
 }
 
-h2 {
+.faq h2 {
     text-align: center;
     text-transform: uppercase;
 }

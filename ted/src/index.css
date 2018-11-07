@@ -1,4 +1,4 @@
-/**
+/* *
 * Sources/Aids:
 * -----------------------------
 * styleshout.com (Kard v1.0 Main Stylesheet, 03-01-2016)
@@ -23,6 +23,13 @@
 **/
 
 /* ---------- 01. IMPORTS (START) ---------- */
+@font-face {
+  font-family: 'Helvetica';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Helvetica'), local('Helvetica'),
+       url('./fonts/helvetica.ttf') format('truetype'), /* Safari, Android, iOS */
+}
 /* ---------- 01. IMPORTS (END) ---------- */
 
 /* ---------- 02. CSS VARIABLES (START) ---------- */
@@ -31,8 +38,8 @@
   --tedgrey: #4e4e4e;
   --tedred: #e62b1e;
   --tedwhite: #fff;
-  --tedoffwhite: #fafafa;
-  --tedredhover: #e62b1e;
+  --tedoffwhite: #f8f8f8;
+  --tedredhover: #c42318;
   --opaque: rgba(0, 0, 0, 0.35);
   --tedfont: "Helvetica";
 }
@@ -61,6 +68,7 @@ time, mark, audio, video {
 }
 
 body {
+    font-family: "Helvetica", serif;
     line-height: 1;
 }
 
@@ -93,7 +101,7 @@ a {
 
 ins {
     background-color: var(--tedred);
-    color: #000;
+    color: var(--tedblack);
     text-decoration: none;
 }
 
@@ -145,14 +153,14 @@ body {
   background-color: var(--tedwhite);
 }
 
-.container {
+/* .container {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-}
+} */
 
-/* --- HEADING STYLING --- */
+/* --- TYPOGRAPHY --- */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--tedfont), sans-serif;
   color: var(--tedblack);
@@ -163,7 +171,7 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 3em;
-  line-height: 1.355;
+  line-height: 1.3;
   font-weight: 600;
   letter-spacing: 0.3px;
 }
@@ -177,43 +185,43 @@ h1 {
 
 h2 {
   font-size: 2.4em;
-  line-height: 1.25;
-  font-weight: 400;
-  padding: 0;
-  margin: 0.5em;
+  font-weight: 600;
+  /* line-height: 1.25; */
+  /* padding: 0; */
+  /* margin: 0.5em; */
 }
 
 h3 {
   font-size: 2em;
   line-height: 1.5;
-  margin-bottom: 1.0em;
+  /* margin-bottom: 1.0em; */
 }
 
 h4 {
   font-size: 1.7em;
   line-height: 1.5;
-  margin-bottom: 1.1em;
+  /* margin-bottom: 1.1em; */
 }
 
 h5 {
   font-size: 1.4em;
-  line-height: 1.3;
+  line-height: 1.2;
   text-transform: uppercase;
-  letter-spacing: 0em;
-  margin-bottom: 0.5em;
+  /* letter-spacing: 0em; */
+  /* margin-bottom: 0.5em; */
 }
 
 h6 {
   font-size: 1.3em;
-  line-height: 1.2;
-  letter-spacing: 0.01em;
-  margin-bottom: 0.5em;
+  /* line-height: 1.2; */
+  /* letter-spacing: 0em; */
+  /* margin-bottom: 0.5em; */
 }
 
 p {
   font-size: 1em;
   color: var(--tedgrey);
-  margin-bottom: 1.5em;
+  margin-bottom: 1.3em;
   line-height: 1.4;
 }
 
@@ -234,7 +242,7 @@ p a {
 p a:hover {
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='#e62b1e' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
   background-position: 0 100%;
-  background-size: auto 6px;
+  background-size: auto 5px;
   background-repeat: repeat-x;
   text-decoration: none;
 }
@@ -248,13 +256,13 @@ blockquote {
 
 blockquote:before {
   content: "\201C";
-  font-size: 8em;
+  font-size: 6em;
   line-height: 0px;
   margin: 0;
   color: var(--tedgrey);
   font-family: var(--tedfont), sans-serif;
   position: absolute;
-  top: 3em;
+  top: 0.4em;
   left: 0;
 }
 
@@ -262,13 +270,13 @@ blockquote p {
   font-family: var(--tedfont), serif;
   font-style: italic;
   padding: 0;
-  font-size: 1.9em;
+  font-size: 1.5em;
   line-height: 1.737;
 }
 
 blockquote cite {
   display: block;
-  font-size: 1.3em;
+  font-size: 1.15em;
   font-style: normal;
   line-height: 1.616;
 }
@@ -292,60 +300,19 @@ del {
 }
 
 code {
-  font-size: 1.4em;
-  margin: 0 .2em;
+  font-size: 1.1em;
+  margin: 0 .3em;
   padding: .3em .6em;
   white-space: nowrap;
   background: var(--tedoffwhite);
   border: 1px solid var(--tedoffwhite);
   border-radius: 3px;
 }
+
 /* ---------- 04. GENERAL STYLES & OVERRIDES (END) ---------- */
 
 /* ---------- 05. TYPOGRAPHY (START) ---------- */
 /* ---------- 05. TYPOGRAPHY (START) ---------- */
-
-/* ---------- 06. NAVIGATION & HEADER STYLING (START) ---------- */
-header {
-  width: 100%;
-  min-height: 70px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: relative;
-  color: var(--tedblack);
-  background-color: var(--tedwhite);
-  padding: 20px 10px 25px 10px;
-}
-
-header h1 {
-  display: inline-block;
-  margin: 0;
-  vertical-align: middle;
-}
-
-header a {
-  color: var(--tedgrey)
-}
-
-header .logo {
-  float: left;
-  margin-left: 20px;
-  margin-right: 50px;
-  margin-top: 25px;
-  position: relative;
-}
-
-/*.fa {
-  font-size: 22px;
-  transform: translateY(50deg);  
-}*/
-
-header i {
-  vertical-align: middle;
-  margin-left: 12px;
-}
-/* ---------- 06. NAVIGATION & HEADER STYLING (END) ---------- */
 
 /* ---------- 07. FOOTER STYLING (START) ---------- */
 footer {
@@ -383,7 +350,7 @@ select {
   color: var(--tedgrey);
   font-family: var(--tedfont), sans-serif;
   font-size: 1.5em;
-  line-height: 3em;
+  line-height: 2em;
   max-width: 100%;
   background: transparent;
   border-bottom: 1px solid var(--opaque);
@@ -410,45 +377,117 @@ input {
 /* ---------- 09. BUTTON STYLING (START) ---------- */
 form button {
   width: 100%;
-  margin-top: 10px;
+  /* margin-top: 10px; */
 }
 
-button {
-  border-radius: 2px;
-  min-width: 88px;
-  background-color: var(--tedred);
-  cursor: pointer;
-  border: 0;
-  min-width: 120px;
+button,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: .1em;
+  /* line-height: 5.4em; */
+  /* height: 3em; */
+  /* padding: 0 3em; */
+  margin: 0 .3em 1.2em 0;
   color: var(--tedwhite);
-  font-size: 14px;
-  box-shadow: 0 2px 5px 0 var(--opaque);
-  padding: 10px 6px;
+  background-color: var(--tedgrey);
+  min-width: 80px;
+  box-shadow: 2px 2px 6px 0 var(--opaque);
+  cursor: pointer;
+  border-radius: 3px;
+  border: none;
+  text-align: center;
+  white-space: nowrap;
+  -moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	/* background: #d8d8d8;
+	color: #313131; */
+}
+
+button:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+button:focus,
+input[type="submit"]:focus,
+input[type="reset"]:focus,
+input[type="button"]:focus {
+	background: var(--tedblack);
+	color: var(--tedwhite);
+	outline: 0;
+}
+
+button.button-primary,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+	background: var(--tedred);
+	color: var(--tedwhite);
+}
+
+button.button-primary:hover,
+input[type="submit"].button-primary:hover,
+input[type="reset"].button-primary:hover,
+input[type="button"].button-primary:hover,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+	background: var(--tedredhover);
+}
+
+button.full-width {
+	width: 100%;
+  height: 5em !important;
+	line-height: 5em !important;
+	padding: 0em 2.5em !important;
+}
+
+button.medium {
+	height: 4.5em !important;
+	line-height: 4.5em !important;
+	padding: 0 1.4em !important;
+}
+button.large {
+	height: 5em !important;
+	line-height: 5em !important;
+	padding: 0em 2.5em !important;
+}
+button.stroke {
+  background: transparent !important;
+  color: var(--tedgrey);
+	border: 3px solid var(--tedgrey);
+	line-height: 3.8em;
+}
+button.stroke.medium {
+	line-height: 4.3em !important;
+}
+button.stroke.large {
+	line-height: 4.3em !important;
+}
+button.stroke:hover {
+	border: 3px solid var(--tedred);
+	color: var(--tedred);
+}
+button::-moz-focus-inner, input::-moz-focus-inner {
+	border: 0;
+	padding: 0;
 }
 /* ---------- 09. BUTTON STYLING (END) ---------- */
 
 /* ---------- 10. LIST STYLING (START) ---------- */
-ul {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin: 10px;
-  padding: 10px;
-  width: 100%;
-}
 
 li {
-  list-style-type: none;
   width: 80%;
-  padding: 20px 20px;
-  margin-right: 50px;
-  background-color: var(--tedoffwhite);
-  color: var(--tedblack);
-  margin-bottom: 30px;
-  border-radius: 3px;
-  -webkit-box-shadow: 1px 1px 26px -2px var(--opaque);
-  -moz-box-shadow: 1px 1px 26px -2px var(--opaque);
-  box-shadow: 2px 2px 26px -2px var(--opaque);
+  padding: 10px;
 }
 
 li h3 {
@@ -495,7 +534,7 @@ li p {
 }
 
 img {
-  max-width: 50px;
+  width: 50%;
   border-radius: 50px;
   text-align: right;
 }
@@ -522,7 +561,13 @@ img {
 @media only screen and (max-width:400px) {
   p {
     font-size: 0.9em;
+    flex-direction: row;
     text-align: justify;
   }
 }
 /* ---------- 12. RESPONSIVE STYLING (END) ---------- */
+
+.space-evely {
+  display: flex;
+  align-content: space-between;
+}
