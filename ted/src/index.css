@@ -36,6 +36,7 @@
 :root {
   --tedblack: #000;
   --tedgrey: #4e4e4e;
+  --tedlightgrey: #aaaaaa;
   --tedred: #e62b1e;
   --tedwhite: #fff;
   --tedoffwhite: #f8f8f8;
@@ -329,9 +330,11 @@ footer {
 /* ---------- 07. FOOTER STYLING (END) ---------- */
 
 /* ---------- 08. FORM STYLING (START) ---------- */
+
 fieldset {
   border: none;
 }
+
 input[type="email"],
 input[type="number"],
 input[type="search"],
@@ -342,15 +345,16 @@ input[type="password"],
 textarea,
 select {
   display: block;
-  height: 6rem;
-  padding: 1.5em 0;
+  height: 2em;
+  padding: 1em 0;
   border: 0;
   outline: none;
   justify-content: center;
   color: var(--tedgrey);
   font-family: var(--tedfont), sans-serif;
-  font-size: 1.5em;
-  line-height: 2em;
+  font-size: 1em;
+  line-height: 1em;
+  width: 70%;
   max-width: 100%;
   background: transparent;
   border-bottom: 1px solid var(--opaque);
@@ -361,9 +365,112 @@ select {
   transition: all 0.3s ease-in-out;
 }
 
-input {
+textarea {
+	min-height: 5em;
+}
+
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+	color: var(--tedblack);
+	border-bottom: 2px solid var(--tedred);
+}
+label, legend {
+	font-family: var(--tedfont), sans-serif;
+  font-size: 1.4em;
+  margin-top: .6em;
+	margin-bottom: .6em;
+	color: var(--tedblack);
+	display: block;
+}
+input[type="checkbox"], input[type="radio"] {
+	display: inline;
+}
+label > .label-text {
+	display: inline-block;
+	margin-left: 1em;
+	font-family: "poppins-regular", sans-serif;
+	line-height: inherit;
+}
+label > input[type="checkbox"], label > input[type="radio"] {
+	margin: 0;
+	position: relative;
+	top: .15em;
+}
+
+/* ---------- Style Placeholder Text ---------- */
+::-webkit-input-placeholder {
+	color: var(--tedlightgrey);
+}
+:-moz-placeholder {
+	color: var(--tedlightgrey);  /* Firefox 18- */
+}
+::-moz-placeholder {
+	color: var(--tedlightgrey);  /* Firefox 19+ */
+}
+:-ms-input-placeholder {
+	color: var(--tedlightgrey);
+}
+.placeholder {
+	color: var(--tedlightgrey) !important;
+}
+
+/* ========================================================== */
+.ss-custom-select {
+	position: relative;
+	padding: 0;
+}
+.ss-custom-select select {
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+	text-indent: 0.01px;
+	text-overflow: '';
+	margin: 0;
+	line-height: 3rem;
+	vertical-align: middle;
+}
+.ss-custom-select select option {
+	padding-left: 2rem;
+	padding-right: 2rem;
+}
+.ss-custom-select select::-ms-expand {
+	display: none;
+}
+.ss-custom-select::after {
+	content: '\f0d7';
+	font-family: 'FontAwesome';
+	position: absolute;
+	top: 50%;
+	right: 1.5rem;
+	margin-top: -10px;
+	bottom: auto;
+	width: 20px;
+	height: 20px;
+	line-height: 20px;
+	font-size: 18px;
+	text-align: center;
+	pointer-events: none;
+	color: #252525;
+}
+
+/* IE9 and below */
+.oldie .ss-custom-select::after {
+	display: none;
+}
+
+/* ======================================================================== */
+
+/* input {
   align-self: center;
-  font-size: 22px;
   color: var(--tedblack);
   font-size: 16px;
   padding-top: 15px;
@@ -371,14 +478,10 @@ input {
   border: 0;
   display: block;
   width: calc(100%);
-}
+} */
 /* ---------- 08. FORM STYLING (END) ---------- */
 
 /* ---------- 09. BUTTON STYLING (START) ---------- */
-form button {
-  width: 100%;
-  /* margin-top: 10px; */
-}
 
 button,
 input[type="submit"],
@@ -390,9 +493,8 @@ input[type="button"] {
   text-transform: uppercase;
   text-decoration: none;
   letter-spacing: .1em;
-  /* line-height: 5.4em; */
-  /* height: 3em; */
-  /* padding: 0 3em; */
+  height: 3em;
+  padding: 0 3em;
   margin: 0 .3em 1.2em 0;
   color: var(--tedwhite);
   background-color: var(--tedgrey);
@@ -408,8 +510,6 @@ input[type="button"] {
 	-webkit-transition: all 0.3s ease-in-out;
 	-ms-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
-	/* background: #d8d8d8;
-	color: #313131; */
 }
 
 button:hover,

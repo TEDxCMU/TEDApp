@@ -139,7 +139,7 @@ const StyleGuide = () => {
             <div>
                 <footer>
                     <div class="copyright">
-                        <span>© TEDxCMU 2018.</span> 
+                        <span>© TEDxCMU 2018. </span> 
                         <span>Find us at <a href="http://tedxcmu.org/">tedxcmu.org</a></span>	         	
                     </div>
                 </footer>

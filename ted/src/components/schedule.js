@@ -61,7 +61,6 @@ export class Schedule extends Component {
       console.log('Error!', error);
     })
   }
-
 }
 
 export default Schedule;
