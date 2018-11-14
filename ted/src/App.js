@@ -6,6 +6,8 @@ import { Navigation } from './components/navigation.js';
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
+import Faq from './components/faq';
+import StyleGuide from './components/styleguide';
 
 class App extends Component {
   constructor() {
@@ -34,6 +36,8 @@ class App extends Component {
           <div className="App">
           <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
           <Route path="/" exact strict render={this.schedulePage}/>
+          <Route path="/faq" exact strict render={this.faqPage}/>
+          <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
           </div>
         </Router>
         {/* <ul>{listOfData}</ul> */}
@@ -50,6 +54,20 @@ class App extends Component {
   schedulePage = (props) => {
     return (
       <Schedule
+      user={this.state.user} /> 
+    );
+  }
+
+  faqPage = (props) => {
+    return (
+      <Faq
+      user={this.state.user} /> 
+    );
+  }
+
+  styleGuidePage = (props) => {
+    return (
+      <StyleGuide
       user={this.state.user} /> 
     );
   }

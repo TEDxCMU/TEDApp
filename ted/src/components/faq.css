@@ -1,26 +1,15 @@
 .faq {
-    font-family: Helvetica;
-    font-size: 12px;
+    width: 75%;
+    margin: auto;
+    text-align: left;
 }
 
-h1 {
-    font-size: 3em;
-    text-transform: uppercase;
+.faq h1 {
     text-align: center;
+    text-transform: uppercase;
 }
 
-h2 {
-    font-size: 2em;
-}
-
-h3 {
-    font-size: 1.2em;
-}
-
-.faq p {
-    font-size: 1em;
-}
-
-.faq a {
-    color: #e62b1e;
+.faq h2 {
+    text-align: center;
+    text-transform: uppercase;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import './schedule.css';
 import { BrowserRouter as Router} from 'react-router-dom';
 import moment from 'moment';
 import Route from 'react-router-dom/Route';
@@ -23,7 +24,7 @@ export class Schedule extends Component {
         let time = moment().format(event[1]);
 
         newList.push (
-            <li >{name} ({time})</li>
+            <li ><span><strong>{name}</strong></span> — <span>{time}</span></li>
           ) 
         console.log(newList.length)
     })
@@ -35,7 +36,7 @@ export class Schedule extends Component {
     }
 
     return (
-      <div>
+      <div className="schedule">
           <ul>{newList}</ul>
       </div>
     );
@@ -67,7 +68,6 @@ export class Schedule extends Component {
       console.log('Error!', error);
     })
   }
-
 }
 
 export default Schedule;

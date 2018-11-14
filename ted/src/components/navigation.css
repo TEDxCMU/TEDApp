@@ -1,0 +1,52 @@
+header {
+    width: 100%;
+    min-height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    color: var(--tedblack);
+    background-color: var(--tedwhite);
+    padding: 20px 10px 25px 10px;
+}
+
+header a {
+    float: left;
+    text-align: center;
+    padding: 15px;
+    line-height: 25px;
+    -webkit-transition: color 0.3s ease-out;
+    -moz-transition: color 0.3s ease-out;
+    -o-transition: color 0.3s ease-out;
+    transition: color 0.3s ease-out;
+}
+
+header a {
+    color: var(--tedgrey)
+}
+
+header a:hover {
+    color: var(--tedblack);
+}
+
+header img {
+    width: 175px;
+}
+
+header h1 {
+    display: inline-block;
+    margin: 0;
+    vertical-align: middle;
+}
+
+header .logo {
+    float: left;
+    margin-left: 20px;
+    margin-right: 50px;
+    margin-top: 25px;
+    position: relative;
+}
+
+header i {
+    vertical-align: middle;
+}
