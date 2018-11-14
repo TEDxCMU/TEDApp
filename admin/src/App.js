@@ -1,16 +1,44 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { auth, provider } from './fire';
+import { Schedule } from './components/schedule.js';
+import { Navigation } from './components/navigation.js';
+import { BrowserRouter as Router} from 'react-router-dom';
+import Route from 'react-router-dom/Route';
 import fire from './fire.js';
 
-class App extends React.Component {
+class App extends Component {
   constructor() {
     super();
     this.state = {
-      name: '',
-      age: '',
+      user: null,
       allData: []
-    };
+    }
+    //pass THIS to global navigation hamburger menu so people can login and logout everywhere
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+
+  }
+  render() {
+    var listOfData = this.state.allData.map((val, i)=>{
+      var name = val.name
+      var age = val.age
+      return (
+        <li key={i}>{name} ({age})</li>
+      ) 
+    })
+
+    return (
+      <div>
+        <Router>
+          <div className="App">
+          <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
+          <Route path="/" exact strict render={this.schedulePage}/>
+          </div>
+        </Router>
+        {/* <ul>{listOfData}</ul> */}
+      </div>
+    );
   }
 
   updateInput = e => {
@@ -19,23 +47,14 @@ class App extends React.Component {
     });
   }
 
-  addData = e => {
-    e.preventDefault();
-    const db = fire.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
-    db.collection('member').add({
-      name: this.state.name,
-      age: this.state.age
-    });
-    this.setState({
-      name: '',
-      age: ''
-    });
-  };
+  schedulePage = (props) => {
+    return (
+      <Schedule
+      user={this.state.user} /> 
+    );
+  }
 
-  getData = () => {
+  componentDidMount() {
     const db = fire.firestore();
     db.settings({
       timestampsInSnapshots: true
@@ -57,48 +76,33 @@ class App extends React.Component {
       console.log('Error!', error);
     })
   }
-  
-  render() {
-    
-    var listOfData = this.state.allData.map((val, i)=>{
-      var name = val.name
-      var age = val.age
-      return (
-        <li key={i}>{name} ({age})</li>
-      ) 
-    })
 
-    return (
-      <div style={{margin:'30px'}}>
-        <form onSubmit={this.addData}>
-          <input
-            type="text"
-            name="name"
-            placeholder="Input your name..."
-            onChange={this.updateInput}
-            value={this.state.name}
-          />
-          <br/>
-          <input
-            type="number"
-            name="age"
-            placeholder="Input your age..."
-            onChange={this.updateInput}
-            value={this.state.age}
-          />
-          <br/>
-          <button type="submit">Submit</button>
-        </form>
+  logout() {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null
+        });
+      });
+  }
 
-        <button onClick={this.getData}>
-          Get Data
-        </button>
-
-        <ul>{listOfData}</ul>
-
-      </div>
-      );
-    }
-   }
+  login() {
+    auth.signInWithPopup(provider) 
+      .then((result) => {
+        const user = result.user;
+        const email = user.email.toString();
+        if (email.match(/@leftfieldlabs.com/) === null){
+          console.log("thou shall not pass");
+          this.logout();
+        }
+        else {
+            console.log("thou shall pass");
+            this.setState({
+              user
+            });
+        }
+      });
+  }
+}
 
 export default App;
