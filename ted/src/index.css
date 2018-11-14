@@ -302,20 +302,7 @@ code {
 
 /* ---------- 04. GENERAL STYLES & OVERRIDES (END) ---------- */
 
-/* ---------- 05. FOOTER STYLING (START) ---------- */
-footer {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  min-height: 50px;
-  position: relative;
-  color: var(--tedblack);
-  background-color: var(--tedwhite);
-  padding: 20px 10px;
-}
-/* ---------- 05. FOOTER STYLING (END) ---------- */
-
-/* ---------- 06. FORM STYLING (START) ---------- */
+/* ---------- 05. FORM STYLING (START) ---------- */
 
 fieldset {
   border: none;
@@ -453,9 +440,9 @@ label > input[type="checkbox"], label > input[type="radio"] {
 }
 
 /* =========================================================== */
-/* ---------- 06. FORM STYLING (END) ---------- */
+/* ---------- 05. FORM STYLING (END) ---------- */
 
-/* ---------- 07. BUTTON STYLING (START) ---------- */
+/* ---------- 06. BUTTON STYLING (START) ---------- */
 
 button,
 input[type="submit"],
@@ -555,9 +542,9 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	border: 0;
 	padding: 0;
 }
-/* ---------- 07. BUTTON STYLING (END) ---------- */
+/* ---------- 06. BUTTON STYLING (END) ---------- */
 
-/* ---------- 08. LIST STYLING (START) ---------- */
+/* ---------- 07. LIST STYLING (START) ---------- */
 
 li {
   width: 80%;
@@ -575,13 +562,13 @@ li h3 {
 li p {
   padding: 15px;
 }
-/* ---------- 08. LIST STYLING (END) ---------- */
+/* ---------- 07. LIST STYLING (END) ---------- */
 
-/* ---------- 09. COMPONENT STYLING (START) ---------- */
+/* ---------- 08. COMPONENT STYLING (START) ---------- */
 
-/* ---------- 09. COMPONENT STYLING (END) ---------- */
+/* ---------- 08. COMPONENT STYLING (END) ---------- */
 
-/* ---------- 10. RESPONSIVE STYLING (START) ---------- */
+/* ---------- 09. RESPONSIVE STYLING (START) ---------- */
 @media only screen and (max-width:1024px) {
   p {
     font-size: 1em;
@@ -605,7 +592,7 @@ li p {
     text-align: justify;
   }
 }
-/* ---------- 10. RESPONSIVE STYLING (END) ---------- */
+/* ---------- 09. RESPONSIVE STYLING (END) ---------- */
 
 .space-evely {
   display: flex;

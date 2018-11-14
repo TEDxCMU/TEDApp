@@ -8,6 +8,7 @@ import Route from 'react-router-dom/Route';
 import fire from './fire.js';
 import Faq from './components/faq';
 import StyleGuide from './components/styleguide';
+import Footer from './components/footer';
 
 class App extends Component {
   constructor() {
@@ -41,6 +42,7 @@ class App extends Component {
             </div>
         </Router>
         {/* <ul>{listOfData}</ul> */}
+        <Footer />
       </div>
     );
   }
