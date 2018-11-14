@@ -16,7 +16,6 @@ export class Schedule extends Component {
   }
   render() {
     console.log(this.state.allEvents)
-    let allEvents = this.state.allEvents;
     let newList = [];
     this.state.allEvents.forEach(event => {
         let name = event[0];
@@ -27,12 +26,6 @@ export class Schedule extends Component {
           ) 
         console.log(newList.length)
     })
-
-    function orderByDate(arr, dateProp) {
-      return arr.slice().sort(function (a, b) {
-        return a[dateProp] < b[dateProp] ? -1 : 1;
-      });
-    }
 
     return (
       <div>
