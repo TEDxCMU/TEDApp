@@ -23,7 +23,7 @@ export class Schedule extends Component {
         let time = moment().format(event[1]);
 
         newList.push (
-            <li ><span><strong>{name}</strong></span> — <span>{time}</span></li>
+            <li ><span><strong>{name}</strong></span>: <span>{time}</span></li>
           ) 
         console.log(newList.length)
     })

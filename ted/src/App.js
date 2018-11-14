@@ -33,12 +33,12 @@ class App extends Component {
     return (
       <div>
         <Router>
-          <div className="App">
-          <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
-          <Route path="/" exact strict render={this.schedulePage}/>
-          <Route path="/faq" exact strict render={this.faqPage}/>
-          <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
-          </div>
+            <div className="App">
+              <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
+              <Route path="/" exact strict render={this.schedulePage}/>
+              <Route path="/faq" exact strict render={this.faqPage}/>
+              <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
+            </div>
         </Router>
         {/* <ul>{listOfData}</ul> */}
       </div>

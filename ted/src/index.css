@@ -11,14 +11,12 @@
 * 02. CSS Variables
 * 03. Reset stylesheet
 * 04. General style & overrides
-* 05. Typography
-* 06. Navigation & header styles
-* 07. Footer styles
-* 08. Forms (TBD)
-* 09. Buttons
-* 10. List styling
-* 11. Components (separate CSS files)
-* 12. Responsive styles
+* 05. Footer
+* 06. Forms (TBD)
+* 07. Buttons
+* 08. List styling
+* 09. Components (separate CSS files)
+* 10. Responsive styles
 * -----------------------------
 **/
 
@@ -127,7 +125,6 @@ table {
     border-spacing: 0;
 }
 
-/* change border color to suit needs */
 hr {
     display: block;
     height: 1px;
@@ -154,13 +151,6 @@ body {
   background-color: var(--tedwhite);
 }
 
-/* .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-} */
-
 /* --- TYPOGRAPHY --- */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--tedfont), sans-serif;
@@ -180,7 +170,7 @@ h1 {
 @media only screen and (max-width:600px) {
   h1 {
     font-size: 2.6em;
-    letter-spacing: -.07em;
+    letter-spacing: -.05em;
   }
 }
 
@@ -257,7 +247,7 @@ blockquote {
 
 blockquote:before {
   content: "\201C";
-  font-size: 6em;
+  font-size: 4em;
   line-height: 0px;
   margin: 0;
   color: var(--tedgrey);
@@ -271,7 +261,7 @@ blockquote p {
   font-family: var(--tedfont), serif;
   font-style: italic;
   padding: 0;
-  font-size: 1.5em;
+  font-size: 1.2em;
   line-height: 1.737;
 }
 
@@ -312,24 +302,20 @@ code {
 
 /* ---------- 04. GENERAL STYLES & OVERRIDES (END) ---------- */
 
-/* ---------- 05. TYPOGRAPHY (START) ---------- */
-/* ---------- 05. TYPOGRAPHY (START) ---------- */
-
-/* ---------- 07. FOOTER STYLING (START) ---------- */
+/* ---------- 05. FOOTER STYLING (START) ---------- */
 footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  width: 100%;
   min-height: 50px;
   position: relative;
   color: var(--tedblack);
   background-color: var(--tedwhite);
   padding: 20px 10px;
 }
-/* ---------- 07. FOOTER STYLING (END) ---------- */
+/* ---------- 05. FOOTER STYLING (END) ---------- */
 
-/* ---------- 08. FORM STYLING (START) ---------- */
+/* ---------- 06. FORM STYLING (START) ---------- */
 
 fieldset {
   border: none;
@@ -355,7 +341,6 @@ select {
   font-size: 1em;
   line-height: 1em;
   width: 70%;
-  max-width: 100%;
   background: transparent;
   border-bottom: 1px solid var(--opaque);
   -moz-transition: all 0.3s ease-in-out;
@@ -467,21 +452,10 @@ label > input[type="checkbox"], label > input[type="radio"] {
 	display: none;
 }
 
-/* ======================================================================== */
+/* =========================================================== */
+/* ---------- 06. FORM STYLING (END) ---------- */
 
-/* input {
-  align-self: center;
-  color: var(--tedblack);
-  font-size: 16px;
-  padding-top: 15px;
-  margin-bottom: 17px;
-  border: 0;
-  display: block;
-  width: calc(100%);
-} */
-/* ---------- 08. FORM STYLING (END) ---------- */
-
-/* ---------- 09. BUTTON STYLING (START) ---------- */
+/* ---------- 07. BUTTON STYLING (START) ---------- */
 
 button,
 input[type="submit"],
@@ -492,7 +466,7 @@ input[type="button"] {
   font-size: 1em;
   text-transform: uppercase;
   text-decoration: none;
-  letter-spacing: .1em;
+  letter-spacing: .05em;
   height: 3em;
   padding: 0 3em;
   margin: 0 .3em 1.2em 0;
@@ -546,20 +520,20 @@ input[type="button"].button-primary:focus {
 
 button.full-width {
 	width: 100%;
-  height: 5em !important;
-	line-height: 5em !important;
-	padding: 0em 2.5em !important;
+  height: 4em !important;
+	line-height: 4em !important;
+	padding: 0em 2em !important;
 }
 
 button.medium {
-	height: 4.5em !important;
-	line-height: 4.5em !important;
-	padding: 0 1.4em !important;
+	height: 3.6em !important;
+	line-height: 3.6em !important;
+	padding: 0 1.1em !important;
 }
 button.large {
-	height: 5em !important;
-	line-height: 5em !important;
-	padding: 0em 2.5em !important;
+	height: 4em !important;
+	line-height: 4em !important;
+	padding: 0em 2em !important;
 }
 button.stroke {
   background: transparent !important;
@@ -568,10 +542,10 @@ button.stroke {
 	line-height: 3.8em;
 }
 button.stroke.medium {
-	line-height: 4.3em !important;
+	line-height: 3.45em !important;
 }
 button.stroke.large {
-	line-height: 4.3em !important;
+	line-height: 3.45em !important;
 }
 button.stroke:hover {
 	border: 3px solid var(--tedred);
@@ -581,9 +555,9 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	border: 0;
 	padding: 0;
 }
-/* ---------- 09. BUTTON STYLING (END) ---------- */
+/* ---------- 07. BUTTON STYLING (END) ---------- */
 
-/* ---------- 10. LIST STYLING (START) ---------- */
+/* ---------- 08. LIST STYLING (START) ---------- */
 
 li {
   width: 80%;
@@ -601,47 +575,13 @@ li h3 {
 li p {
   padding: 15px;
 }
-/* ---------- 10. LIST STYLING (END) ---------- */
+/* ---------- 08. LIST STYLING (END) ---------- */
 
-/* ---------- 11. COMPONENT STYLING (START) ---------- */
-.add-item {
-  display: flex;
-  border-radius: 2px;
-  border-top: 3px solid var(--tedred);
-  margin-right: 50px;
-  background-color: var(--tedoffwhite);
-  padding: 60px 18px;
-  box-shadow: 0 3px 4px 0 rgba(0,0,0,.14), 0 3px 3px -2px rgba(0,0,0,.12), 0 1px 8px 0 rgba(0,0,0,.2);
-  margin-bottom: 34px;  
-  width: 100%;
-  margin-right: auto;
-  justify-content: center;
-}
+/* ---------- 09. COMPONENT STYLING (START) ---------- */
 
-.display-item {
-  width: 100%;
-}
+/* ---------- 09. COMPONENT STYLING (END) ---------- */
 
-.display-item button {
-  margin-top: 20px;
-  margin-left: auto;
-  display: block;
-}
-
-.add-item form {
-  width: 100%;
-  overflow: hidden;
-}
-
-img {
-  width: 50%;
-  border-radius: 50px;
-  text-align: right;
-}
-
-/* ---------- 11. COMPONENT STYLING (END) ---------- */
-
-/* ---------- 12. RESPONSIVE STYLING (START) ---------- */
+/* ---------- 10. RESPONSIVE STYLING (START) ---------- */
 @media only screen and (max-width:1024px) {
   p {
     font-size: 1em;
@@ -665,7 +605,7 @@ img {
     text-align: justify;
   }
 }
-/* ---------- 12. RESPONSIVE STYLING (END) ---------- */
+/* ---------- 10. RESPONSIVE STYLING (END) ---------- */
 
 .space-evely {
   display: flex;
