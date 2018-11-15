@@ -3,6 +3,7 @@ import './App.css';
 import { auth, provider } from './fire';
 import { Schedule } from './components/schedule.js';
 import { Navigation } from './components/navigation.js';
+import { Login } from './components/login.js';
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
@@ -34,12 +35,13 @@ class App extends Component {
     return (
       <div>
         <Router>
-            <div className="App">
-              <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
-              <Route path="/" exact strict render={this.schedulePage}/>
-              <Route path="/faq" exact strict render={this.faqPage}/>
-              <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
-            </div>
+          <div className="App">
+          <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
+          <Route path="/" exact strict render={this.schedulePage}/>
+          <Route path="/faq" exact strict render={this.faqPage}/>
+          <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
+          <Route path="/login" exact strict render={this.loginPage}/>
+          </div>
         </Router>
         {/* <ul>{listOfData}</ul> */}
         <Footer />
@@ -74,7 +76,16 @@ class App extends Component {
     );
   }
 
+  loginPage = (props) => {
+    return (
+      <Login
+      user={this.state.user}
+      login={this.login} /> 
+    );
+  }
+
   componentDidMount() {
+    console.log(this.state.user)
     const db = fire.firestore();
     db.settings({
       timestampsInSnapshots: true
@@ -106,22 +117,33 @@ class App extends Component {
       });
   }
 
-  login() {
-    auth.signInWithPopup(provider) 
-      .then((result) => {
-        const user = result.user;
-        const email = user.email.toString();
-        if (email.match(/@leftfieldlabs.com/) === null){
-          console.log("thou shall not pass");
-          this.logout();
-        }
-        else {
-            console.log("thou shall pass");
-            this.setState({
-              user
-            });
-        }
-      });
+  login = (data) => {
+    console.log("hello")
+    
+    let userInfo = data;
+    console.log(userInfo)
+    // if (this.user === null) {
+      console.log("Logging you in!")
+      this.setState({
+        user: userInfo
+      }, () => console.log(this.state.user))
+    // }
+
+    // auth.signInWithPopup(provider) 
+    //   .then((result) => {
+    //     const user = result.user;
+    //     const email = user.email.toString();
+    //     if (email.match(/@leftfieldlabs.com/) === null){
+    //       console.log("thou shall not pass");
+    //       this.logout();
+    //     }
+    //     else {
+    //         console.log("thou shall pass");
+    //         this.setState({
+    //           user
+    //         });
+    //     }
+    //   });
   }
 }
 
