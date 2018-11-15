@@ -23,6 +23,9 @@ export class Navigation extends Component {
                         <NavLink to="/styleguide" exact activeStyle={{color:'#e62b1e'}}>
                             Style Guide
                         </NavLink>
+                        <NavLink to="/login" exact activeStyle={{color:'#e62b1e'}}>
+                            Log In
+                        </NavLink>
                     </div>
                     {this.props.user ?
                         <div>
