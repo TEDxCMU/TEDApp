@@ -1,13 +1,7 @@
 header {
-    width: 100%;
-    min-height: 70px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: relative;
-    color: var(--tedblack);
     background-color: var(--tedwhite);
-    padding: 20px 10px 25px 10px;
+    padding: 0 10px 25px 10px;
+    margin-bottom: 75px;
 }
 
 header a {
@@ -22,7 +16,7 @@ header a {
 }
 
 header a {
-    color: var(--tedgrey)
+    color: var(--white)
 }
 
 header a:hover {
@@ -30,7 +24,7 @@ header a:hover {
 }
 
 header img {
-    width: 175px;
+    max-width: 130px;
 }
 
 header h1 {
@@ -40,13 +34,71 @@ header h1 {
 }
 
 header .logo {
-    float: left;
-    margin-left: 20px;
-    margin-right: 50px;
-    margin-top: 25px;
-    position: relative;
+    left: 36px;
+    top: 36px;
+    position: fixed;
 }
 
 header i {
     vertical-align: middle;
 }
+
+
+/* ---------- 13. HAMBURGER MENU (START) ---------- */
+/* Position and sizing of burger button */
+.bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    right: 36px;
+    top: 36px;
+  }
+  
+  /* Color/shape of burger icon bars */
+  .bm-burger-bars {
+    background: var(--tedblack);
+  }
+  
+  /* Position and sizing of clickable cross button */
+  .bm-cross-button {
+    height: 24px;
+    width: 24px;
+  }
+  
+  /* Color/shape of close button cross */
+  .bm-cross {
+    background: var(--tedblack);
+  }
+  
+  /* General sidebar styles */
+  .bm-menu {
+    background: var(--tedwhite);
+    padding: 2.5em 1.5em 0;
+    font-size: 1.15em;
+  }
+  
+  /* Morph shape necessary with bubble or elastic */
+  .bm-morph-shape {
+    fill: var;
+  }
+  
+  /* Wrapper for item list */
+  .bm-item-list {
+    color: var(--tedgrey);
+    padding: 0.8em;
+  }
+  
+  /* Individual item */
+  .bm-item {
+    display: inline-block;
+  }
+  
+  /* Styling of overlay */
+  .bm-overlay {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .bm-menu-wrap {
+      right: 0;
+  }
+  /* ---------- 13. HAMBURGER MENU (END) ---------- */

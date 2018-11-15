@@ -9,6 +9,7 @@ import Route from 'react-router-dom/Route';
 import fire from './fire.js';
 import Faq from './components/faq';
 import StyleGuide from './components/styleguide';
+import Footer from './components/footer';
 
 class App extends Component {
   constructor() {
@@ -34,6 +35,7 @@ class App extends Component {
     return (
       <div>
         <Router>
+<<<<<<< HEAD
           <div className="App">
           <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
           <Route path="/" exact strict render={this.schedulePage}/>
@@ -41,8 +43,17 @@ class App extends Component {
           <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
           <Route path="/login" exact strict render={this.loginPage}/>
           </div>
+=======
+            <div className="App">
+              <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
+              <Route path="/" exact strict render={this.schedulePage}/>
+              <Route path="/faq" exact strict render={this.faqPage}/>
+              <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
+            </div>
+>>>>>>> 69106ca9fb97c8eb59a1ebdc29e69920e40c3ccd
         </Router>
         {/* <ul>{listOfData}</ul> */}
+        <Footer />
       </div>
     );
   }
