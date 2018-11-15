@@ -16,7 +16,9 @@ class App extends Component {
     super();
     this.state = {
       user: null,
-      allData: []
+      allData: [],
+      iosPopUp: false,
+      chromePopUp: false
     }
     //pass THIS to global navigation hamburger menu so people can login and logout everywhere
     this.login = this.login.bind(this);
@@ -43,6 +45,17 @@ class App extends Component {
           <Route path="/login" exact strict render={this.loginPage}/>
           </div>
         </Router>
+        {this.state.chromePopUp === true ? 
+          <div>Add this app to ur Homescreen!</div>
+          :
+          <div align="center">Not an Android</div>
+        }
+        <br/>
+        {this.state.iosPopUp === true ? 
+          <div>Add this app to ur Homescreen!</div>
+          :
+          <div align="center">Not an iPhone</div>
+        }
         {/* <ul>{listOfData}</ul> */}
         <Footer />
       </div>
@@ -85,6 +98,14 @@ class App extends Component {
   }
 
   componentDidMount() {
+    let isInWebAppiOS = (window.navigator.standalone == true);
+    console.log(isInWebAppiOS)
+    let isInWebAppChrome = (window.matchMedia('(display-mode: standalone)').matches);
+    console.log(isInWebAppChrome)
+    this.setState({
+      iosPopUp: isInWebAppiOS,
+      chromePopUp: isInWebAppChrome
+    })
     console.log(this.state.user)
     const db = fire.firestore();
     db.settings({
