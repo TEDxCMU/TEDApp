@@ -1,10 +1,12 @@
 import React from 'react';
 import './faq.css';
+import Dropdown from './dropdown';
 
 const Faq = () => {
     return (
         <div className="faq">
             <h1>General FAQ</h1>
+            <Dropdown />
             <div>
                 <h6>I’d like to know about upcoming TEDxCMU events?</h6>
                 <p>Subscribe <a href="http://tedxcmu.us3.list-manage.com/subscribe/post?u=eb8a63a687a4d582ce3b6b515&id=ce11cda9eb" target="_blank">here</a> to get on our mailing list to receive information about the conference theme, Mini-Events, Main Event details, ticket sales, and other news about TEDxCMU!</p>

@@ -27,6 +27,7 @@ export class Navigation extends Component {
 
     render() {
         return (
+            <div id="navigation">
             <header>
                 <img src={logo} className="logo" alt="TEDxCMU"></img>
                 <Menu className="bm-menu" right 
@@ -58,6 +59,7 @@ export class Navigation extends Component {
                     }
                 </Menu>
             </header>
+            </div>
         );        
     }
 };

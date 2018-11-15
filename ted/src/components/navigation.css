@@ -100,5 +100,10 @@ header i {
 
   .bm-menu-wrap {
       right: 0;
+      background-color: white;
   }
   /* ---------- 13. HAMBURGER MENU (END) ---------- */
+
+  #navigation {
+      background: white !important;
+  }
