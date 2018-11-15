@@ -10,6 +10,8 @@ import fire from './fire.js';
 import Faq from './components/faq';
 import StyleGuide from './components/styleguide';
 import Footer from './components/footer';
+import { isAndroid, isIOS } from "react-device-detect";
+
 
 class App extends Component {
   constructor() {
@@ -35,6 +37,7 @@ class App extends Component {
     })
 
     return (
+
       <div>
         <Router>
           <div className="App">
@@ -46,15 +49,15 @@ class App extends Component {
           </div>
         </Router>
         {this.state.chromePopUp === true ? 
-          <div>Add this app to ur Homescreen!</div>
+          <button align="center">Add this app to ur iOS Homescreen!</button>
           :
-          <div align="center">Not an Android</div>
+          <div align="center"></div>
         }
         <br/>
         {this.state.iosPopUp === true ? 
-          <div>Add this app to ur Homescreen!</div>
+          <button align="center">Add this app to ur iOS Homescreen!</button>
           :
-          <div align="center">Not an iPhone</div>
+          <div align="center"></div>
         }
         {/* <ul>{listOfData}</ul> */}
         <Footer />
@@ -98,14 +101,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    let isInWebAppiOS = (window.navigator.standalone == true);
-    console.log(isInWebAppiOS)
-    let isInWebAppChrome = (window.matchMedia('(display-mode: standalone)').matches);
-    console.log(isInWebAppChrome)
-    this.setState({
-      iosPopUp: isInWebAppiOS,
-      chromePopUp: isInWebAppChrome
-    })
+    console.log(this.state)
+    if (isAndroid) {
+      this.setState({
+        chromePopUp: isAndroid,
+      })
+    }
+    if (isIOS) {
+      this.setState({
+        iosPopUp: isIOS,
+      })
+    }
+
     console.log(this.state.user)
     const db = fire.firestore();
     db.settings({
@@ -115,9 +122,6 @@ class App extends Component {
     db.collection('member').orderBy('name', 'asc').get()
     .then(snapshot => {
       snapshot.forEach(doc => {
-        // console.log(doc.id, '=>', doc.data());
-        // console.log(doc.data().name + doc.data().age);
-        console.log(doc.data());
         wholeData.push(doc.data())
       });
       console.log(wholeData)
@@ -143,28 +147,10 @@ class App extends Component {
     
     let userInfo = data;
     console.log(userInfo)
-    // if (this.user === null) {
       console.log("Logging you in!")
       this.setState({
         user: userInfo
       }, () => console.log(this.state.user))
-    // }
-
-    // auth.signInWithPopup(provider) 
-    //   .then((result) => {
-    //     const user = result.user;
-    //     const email = user.email.toString();
-    //     if (email.match(/@leftfieldlabs.com/) === null){
-    //       console.log("thou shall not pass");
-    //       this.logout();
-    //     }
-    //     else {
-    //         console.log("thou shall pass");
-    //         this.setState({
-    //           user
-    //         });
-    //     }
-    //   });
   }
 }
 
