@@ -8,6 +8,7 @@ export class Login extends Component {
       super();
       this.state = {
         name: "",
+        email: "",
         password: "",
         found: true
       }
@@ -31,7 +32,8 @@ export class Login extends Component {
                     Password:
                     <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
                 </label>
-                <button type="button" onClick={this.checkLogin}>Log In</button>
+                <button type="button" onClick={this.checkSpeakerLogin}>Speaker Log In</button>
+                <button type="button" onClick={this.checkTEDLogin}>TED Log In</button>
             </form>            
         </div>
       );
@@ -42,27 +44,51 @@ export class Login extends Component {
         this.setState({[name]: e.target.value});
       }
   
-    checkLogin = () => {
+    checkSpeakerLogin = () => {
         const db = fire.firestore();
         db.settings({
           timestampsInSnapshots: true
         });
-        var credential = (db.collection('speakers').where('password', '==', 'bsags'));
         var speakersRef = db.collection('speakers');
         var query = speakersRef.where('email', '==', this.state.email).where('password', '==', this.state.password).get()
           .then(snapshot => {
-              if (snapshot.size === 0){
-                return this.setState({found: false})
-              } 
+            if (snapshot.size === 0){
+              return this.setState({found: false})
+            } 
             snapshot.forEach(doc => {
                 console.log(doc.data())
-              this.props.login(doc.data());
+                this.setState({
+                  found: true
+                }, () => this.props.login(doc.data()))
             });
           })
           .catch(err => {
             console.log('Error getting documents', err);
           });
     }
+
+    checkTEDLogin = () => {
+      const db = fire.firestore();
+      db.settings({
+        timestampsInSnapshots: true
+      });
+      var boardRef = db.collection('board');
+      var query = boardRef.where('email', '==', this.state.email).where('password', '==', this.state.password).get()
+        .then(snapshot => {
+          if (snapshot.size === 0){
+            return this.setState({found: false})
+          } 
+          snapshot.forEach(doc => {
+              console.log(doc.data())
+              this.setState({
+                found: true
+              }, () => this.props.login(doc.data()))
+          });
+        })
+        .catch(err => {
+          console.log('Error getting documents', err);
+        });
+  }
 
     componentDidMount() {
         console.log("now on the login page");
