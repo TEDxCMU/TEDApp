@@ -305,6 +305,10 @@ code {
 
 /* ---------- 05. FORM STYLING (START) ---------- */
 
+form {
+  width: 80%;
+}
+
 fieldset {
   border: none;
 }
@@ -319,7 +323,7 @@ input[type="password"],
 textarea,
 select {
   display: block;
-  height: 2em;
+  height: 1em;
   padding: 1em 0;
   border: 0;
   outline: none;
@@ -328,7 +332,7 @@ select {
   font-family: var(--tedfont), sans-serif;
   font-size: 1em;
   line-height: 1em;
-  width: 70%;
+  width: 100%;
   background: transparent;
   border-bottom: 1px solid var(--opaque);
   -moz-transition: all 0.3s ease-in-out;
@@ -339,6 +343,7 @@ select {
 }
 
 textarea {
+  font-size: 1em;
 	min-height: 5em;
 }
 
@@ -352,12 +357,14 @@ input[type="password"]:focus,
 textarea:focus,
 select:focus {
 	color: var(--tedblack);
-	border-bottom: 2px solid var(--tedred);
+	border-bottom: 1px solid var(--tedred);
 }
 label, legend {
-	font-family: var(--tedfont), sans-serif;
-  font-size: 1.4em;
-  margin-top: .6em;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-family: var(--tedfont), sans-serif;
+  font-size: 1em;
+  margin-top: 1em;
 	margin-bottom: .6em;
 	color: var(--tedblack);
 	display: block;
@@ -368,7 +375,6 @@ input[type="checkbox"], input[type="radio"] {
 label > .label-text {
 	display: inline-block;
 	margin-left: 1em;
-	font-family: "poppins-regular", sans-serif;
 	line-height: inherit;
 }
 label > input[type="checkbox"], label > input[type="radio"] {
@@ -450,6 +456,7 @@ input[type="submit"],
 input[type="reset"],
 input[type="button"] {
   display: inline-block;
+  float: right;
   font-weight: 600;
   font-size: 1em;
   text-transform: uppercase;

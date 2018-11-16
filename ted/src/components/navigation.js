@@ -37,11 +37,14 @@ export class Navigation extends Component {
                         <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/" exact activeStyle={{color:'#e62b1e'}}>
                             Home
                         </NavLink>
+                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/speakers" exact activeStyle={{color:'#e62b1e'}}>
+                            Speakers
+                        </NavLink>
                         <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/schedule" exact activeStyle={{color:'#e62b1e'}}>
                             Manager Dash
                         </NavLink>
                         <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/faq" exact activeStyle={{color:'#e62b1e'}}>
-                            FAQ
+                            FAQs
                         </NavLink>
                         <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/styleguide" exact activeStyle={{color:'#e62b1e'}}>
                             Style Guide

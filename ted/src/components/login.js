@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import './schedule.css';
+import './login.css';
 import fire from '../fire.js';
 
 export class Login extends Component {
@@ -18,7 +18,7 @@ export class Login extends Component {
     render() {
   
       return (
-        <div className="schedule">
+        <div className="login">
             <form>
                 {this.state.found === true ?
                 <h1>  </h1>
@@ -26,13 +26,12 @@ export class Login extends Component {
                 :
                 <h1> Could not find an account with that email/password.</h1>
                 }
-                <label>
-                    Email:
-                    <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
-                    Password:
-                    <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
-                </label>
-                <button type="button" onClick={this.checkSpeakerLogin}>Speaker Log In</button>
+                <label>Email:</label>
+                <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
+                <label>Password:</label>
+                <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
+                <br />
+                <button type="button" className="button-primary" onClick={this.checkSpeakerLogin}>Speaker Log In</button>
                 <button type="button" onClick={this.checkTEDLogin}>TED Log In</button>
             </form>            
         </div>

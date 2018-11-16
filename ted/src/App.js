@@ -8,6 +8,7 @@ import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
 import Faq from './components/faq';
+import Speakers from './components/speakers';
 import StyleGuide from './components/styleguide';
 import Footer from './components/footer';
 import { isAndroid, isIOS } from "react-device-detect";
@@ -44,6 +45,7 @@ class App extends Component {
           <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
           <Route path="/" exact strict render={this.schedulePage}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
+          <Route path="/speakers" exact strict render={this.speakersPage}/>
           <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
           <Route path="/login" exact strict render={this.loginPage}/>
           </div>
@@ -97,6 +99,13 @@ class App extends Component {
       <Login
       user={this.state.user}
       login={this.login} /> 
+    );
+  }
+
+  speakersPage = (props) => {
+    return (
+      <Speakers
+      user={this.state.user} /> 
     );
   }
 
