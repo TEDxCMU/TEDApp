@@ -30,8 +30,6 @@ export class Schedule extends Component {
     //    let f_time = j_time.format("h:mm a");
     //    event[1] = f_time; 
     // })
-
-
     
     console.log(this.state.allEvents) 
 
@@ -65,8 +63,6 @@ export class Schedule extends Component {
         </ul>
       </div>
     );
-
-    
   }
 
   updateInput = e => {
@@ -101,12 +97,10 @@ export class Schedule extends Component {
         event[1] = j_time; 
       })
 
-      var i;
-      var j;
-      for(i = 0; i < this.state.allEvents.length; i++) {
+      for(var i = 0; i < this.state.allEvents.length; i++) {
         let min = this.state.allEvents[i][1];
         let min_idx = i;
-        for(j = i+1; j < this.state.allEvents.length; j++) {
+        for(var j = i+1; j < this.state.allEvents.length; j++) {
           let next = this.state.allEvents[j][1];
           //console.log(j);
           //console.log(moment(next).isBefore(min));
@@ -115,13 +109,10 @@ export class Schedule extends Component {
             min_idx = j;
           }             
         }
-
         //console.log(min_idx);
-
         let temp = this.state.allEvents[min_idx];
         this.state.allEvents[min_idx] = this.state.allEvents[i];
-        this.state.allEvents[i] = temp;
-        
+        this.state.allEvents[i] = temp;       
       }
 
       this.state.allEvents.forEach(event => {
@@ -129,6 +120,7 @@ export class Schedule extends Component {
         event[1] = f_time; 
         //console.log(typeof event[1]);
       })
+
     })
     .catch(error => {
       console.log('Error!', error);
@@ -136,6 +128,5 @@ export class Schedule extends Component {
   }
 
 }
-
 
 export default Schedule;
