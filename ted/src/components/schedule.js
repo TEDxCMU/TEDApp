@@ -104,16 +104,24 @@ export class Schedule extends Component {
       var i;
       var j;
       for(i = 0; i < this.state.allEvents.length; i++) {
-        let curr = this.state.allEvents[i][1];
-        //console.log(curr);
+        let min = this.state.allEvents[i][1];
+        let min_idx = i;
         for(j = i+1; j < this.state.allEvents.length; j++) {
-          let next = this.state.allEvents[j][1]; 
-          if(moment(curr).isAfter(next)) {
-            let temp = this.state.allEvents[i];
-            this.state.allEvents[i] = this.state.allEvents[j];
-            this.state.allEvents[j] = temp;
-          }
+          let next = this.state.allEvents[j][1];
+          //console.log(j);
+          //console.log(moment(next).isBefore(min));
+          if(moment(next).isBefore(min)) {
+            min = this.state.allEvents[j][1];
+            min_idx = j;
+          }             
         }
+
+        //console.log(min_idx);
+
+        let temp = this.state.allEvents[min_idx];
+        this.state.allEvents[min_idx] = this.state.allEvents[i];
+        this.state.allEvents[i] = temp;
+        
       }
 
       this.state.allEvents.forEach(event => {
