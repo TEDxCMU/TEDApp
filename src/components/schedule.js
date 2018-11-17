@@ -71,7 +71,7 @@ export class Schedule extends Component {
     });
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const db = fire.firestore();
     db.settings({
       timestampsInSnapshots: true
@@ -89,37 +89,37 @@ export class Schedule extends Component {
         }
     );
       
-      this.setState({allEvents: wholeData})
-
-      this.state.allEvents.forEach(event => {
+      wholeData.forEach(event => {
         let j_time = moment(event[1],"h:mm a");
         //console.log(typeof j_time);
         event[1] = j_time; 
       })
 
-      for(var i = 0; i < this.state.allEvents.length; i++) {
-        let min = this.state.allEvents[i][1];
+      for(var i = 0; i < wholeData.length; i++) {
+        let min = wholeData[i][1];
         let min_idx = i;
-        for(var j = i+1; j < this.state.allEvents.length; j++) {
-          let next = this.state.allEvents[j][1];
-          //console.log(j);
+        for(var j = i+1; j < wholeData.length; j++) {
+          let next = wholeData[j][1];
+          //console.log(j);n
           //console.log(moment(next).isBefore(min));
           if(moment(next).isBefore(min)) {
-            min = this.state.allEvents[j][1];
+            min = wholeData[j][1];
             min_idx = j;
           }             
         }
         //console.log(min_idx);
-        let temp = this.state.allEvents[min_idx];
-        this.state.allEvents[min_idx] = this.state.allEvents[i];
-        this.state.allEvents[i] = temp;       
+        let temp = wholeData[min_idx];
+        wholeData[min_idx] = wholeData[i];
+        wholeData[i] = temp;       
       }
 
-      this.state.allEvents.forEach(event => {
+      wholeData.forEach(event => {
         let f_time = event[1].format("h:mm a");
         event[1] = f_time; 
         //console.log(typeof event[1]);
       })
+
+      this.setState({allEvents: wholeData})
 
     })
     .catch(error => {
