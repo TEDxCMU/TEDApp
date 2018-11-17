@@ -79,12 +79,8 @@ export class Schedule extends Component {
     var wholeData = []
     db.collection('itinerarytest').get()
     .then(snapshot => {
-      //console.log("the snapshot is: ", snapshot)
         snapshot.forEach(doc => {
-            //console.log("the document is: ", doc.data())
             const entries = Object.entries(doc.data())
-            //console.log(entries)
-            //console.log(typeof entries === "array")
             wholeData = (entries)
         }
     );
