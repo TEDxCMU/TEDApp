@@ -13,33 +13,60 @@ export class Schedule extends Component {
       allEvents: []
     }
 
-
   }
+
+  deleteEvent = (index, e) => {
+    const newList = Object.assign([],this.newList);
+    newList.splice(index, 1);
+    this.setState({newList:newList});
+  }
+
   render() {
-    console.log(this.state.allEvents)
-    let allEvents = this.state.allEvents;
+    console.log(this.state.allEvents)  
     let newList = [];
+
+    // this.state.allEvents.forEach(event => {
+    //    let j_time = moment(event[1],"h:mm a");
+    //    let f_time = j_time.format("h:mm a");
+    //    event[1] = f_time; 
+    // })
+
+
+    
+    console.log(this.state.allEvents) 
+
     this.state.allEvents.forEach(event => {
-        let name = event[0];
-        let time = moment().format(event[1]);
+        //let name = event[0];
 
         newList.push (
-            <li key={name}><span><strong>{name}</strong></span> — <span>{time}</span></li>
-          ) 
-        console.log(newList.length)
-    })
+          <li ><span><strong>{event[0]}</strong></span> — <span>{event[1]}</span></li>
+        ) 
 
-    function orderByDate(arr, dateProp) {
-      return arr.slice().sort(function (a, b) {
-        return a[dateProp] < b[dateProp] ? -1 : 1;
-      });
-    }
+        //console.log(newList.length)
+    })
+  
+    //function handleClick() {
+    //  if(this.state !== undefined && this.state.allEvents !== undefined && this.state.allEvents.length != 0) { 
+    //    this.state.allEvents.shift(); 
+    //    console.log(this.state.allEvents);
+    //    this.setState(this.state.allEvents);
+    //  }
+    //}
+    
+    //<ul>{newList}</ul>
+    //<button onClick={handleClick}>main</button>
+    //<button class="Hello" onClick={handleClick}>test</button>
+    //{console.log(newList === undefined)}
 
     return (
-      <div className="schedule">
-          <ul>{newList}</ul>
+      <div className="schedule">      
+        <ul>
+          {newList} 
+        </ul>
       </div>
     );
+
+    
   }
 
   updateInput = e => {
@@ -54,20 +81,53 @@ export class Schedule extends Component {
       timestampsInSnapshots: true
     });
     var wholeData = []
-    db.collection('itinerary').get()
+    db.collection('itinerarytest').get()
     .then(snapshot => {
+      //console.log("the snapshot is: ", snapshot)
         snapshot.forEach(doc => {
-            console.log(doc.data)
+            //console.log("the document is: ", doc.data())
             const entries = Object.entries(doc.data())
+            //console.log(entries)
+            //console.log(typeof entries === "array")
             wholeData = (entries)
         }
     );
+      
       this.setState({allEvents: wholeData})
+
+      this.state.allEvents.forEach(event => {
+        let j_time = moment(event[1],"h:mm a");
+        //console.log(typeof j_time);
+        event[1] = j_time; 
+      })
+
+      var i;
+      var j;
+      for(i = 0; i < this.state.allEvents.length; i++) {
+        let curr = this.state.allEvents[i][1];
+        //console.log(curr);
+        for(j = i+1; j < this.state.allEvents.length; j++) {
+          let next = this.state.allEvents[j][1]; 
+          if(moment(curr).isAfter(next)) {
+            let temp = this.state.allEvents[i];
+            this.state.allEvents[i] = this.state.allEvents[j];
+            this.state.allEvents[j] = temp;
+          }
+        }
+      }
+
+      this.state.allEvents.forEach(event => {
+        let f_time = event[1].format("h:mm a");
+        event[1] = f_time; 
+        //console.log(typeof event[1]);
+      })
     })
     .catch(error => {
       console.log('Error!', error);
     })
   }
+
 }
+
 
 export default Schedule;
