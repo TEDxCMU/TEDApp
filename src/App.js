@@ -42,7 +42,7 @@ class App extends Component {
       <div>
         <Router>
           <div className="App">
-          <Navigation user={this.state.user} login={this.login} logout={this.logout}/>
+          <Navigation user={this.state.user} login={this.login} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
           <Route path="/" exact strict render={this.schedulePage}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
           <Route path="/speakers" exact strict render={this.speakersPage}/>
@@ -50,17 +50,19 @@ class App extends Component {
           <Route path="/login" exact strict render={this.loginPage}/>
           </div>
         </Router>
-        {this.state.chromePopUp === true ? 
-          <button align="center">Add this app to ur iOS Homescreen!</button>
+        <div style={{display: 'flex', flexDirection: "column", alignItems:"center"}}> 
+          {this.state.chromePopUp === true ? 
+          <button align="center">Add app to Android Home Screen!</button>
           :
           <div align="center"></div>
-        }
-        <br/>
-        {this.state.iosPopUp === true ? 
-          <button align="center">Add this app to ur iOS Homescreen!</button>
+          }
+          <br/>
+          {this.state.iosPopUp === true ? 
+          <button align="center">Add app to iOS Home Screen!</button>
           :
           <div align="center"></div>
-        }
+          }
+        </div>
         {/* <ul>{listOfData}</ul> */}
         <Footer />
       </div>
