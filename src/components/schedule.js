@@ -71,7 +71,7 @@ export class Schedule extends Component {
     });
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const db = fire.firestore();
     db.settings({
       timestampsInSnapshots: true

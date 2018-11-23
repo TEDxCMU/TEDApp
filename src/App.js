@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { auth, provider } from './fire';
-import { Schedule } from './components/schedule.js';
+import { NewSchedule } from './components/newSchedule.js';
 import { Navigation } from './components/navigation.js';
 import { Login } from './components/login.js';
 import { BrowserRouter as Router} from 'react-router-dom';
@@ -77,7 +77,7 @@ class App extends Component {
 
   schedulePage = (props) => {
     return (
-      <Schedule
+      <NewSchedule
       user={this.state.user} /> 
     );
   }
