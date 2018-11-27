@@ -13,3 +13,8 @@
     text-align: center;
     text-transform: uppercase;
 }
+
+.faq .justified {
+    display: flex;
+    justify-content: center;
+}
