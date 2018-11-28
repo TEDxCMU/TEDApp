@@ -9,10 +9,11 @@ import fire from '../fire.js';
 export class NewSchedule extends Component {
   constructor() {
     super();
+    this.addCount = this.addCount.bind(this);
     this.state = {
-      allEvents: []
+      allEvents: [],
+      updateCount: 0
     }
-
   }
 
   deleteEvent = (index, e) => {
@@ -66,48 +67,69 @@ export class NewSchedule extends Component {
 
   shiftEndTime = (index, endTime) => {
     // return early if this is the last event
+    console.log(index)
     if (this.state.allEvents.length === index + 1) return;
     let eventNum = index;
     let newEnd = endTime;
     let nextEvent = index + 1;
     let allElements = this.state.allEvents;
     let immediateNextEvent= moment(allElements[nextEvent].start, 'hh:mm A'); 
-    let justEnded = moment(newEnd, 'hh:mm A')
+    let justEnded = moment(newEnd, 'hh:mm A');
     let duration = moment.duration(justEnded.diff(immediateNextEvent));
-    this.updateFireTimes(allElements[index].start, allElements[index].start, justEnded.format('hh:mm A'))
-    // console.log("the duration is: ", duration.asMinutes());
-    const db = fire.firestore();
-    // go through all events afte the one that just ended
+    this.updateFireTimes(allElements[index].start, allElements[index].start, justEnded.format('hh:mm A'));
+    // go through all events after the one that just ended
     for (let i = eventNum + 1; i < allElements.length; i++) {
+      console.log("starting updated count is: ", this.state.updateCount)
       //add the calculated duration between the original end and the new end
       var start = moment(allElements[i].start, 'hh:mm A').add(duration, 'minutes');
       var end = moment(allElements[i].end, 'hh:mm A').add(duration, 'minutes');
       var shiftedStart = start.format('hh:mm A');
       // console.log(shiftedStart)
       var shiftedEnd = end.format('hh:mm A');
-      this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd)
-      // console.log("updated some shit");
+      this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd, i)
+      console.log("intermediate updated count: ", this.state.updateCount);
     }
-    //reload the page
-    this.componentWillMount();
-    window.location.reload();
+
+    console.log("the final update count is: ", this.state.updateCount)
+    //reload the page if all elements have been updated
+    if (this.state.updateCount === allElements.length-index-1){
+      console.log("HELLO!")
+      this.componentWillMount();
+      window.location.reload();
+    }
+
   }
 
-  updateFireTimes = (start, newStart, newEnd) => {
+  updateFireTimes = (start, newStart, newEnd, index) => {
+    console.log("SHALOM")
+    let newCount = this.state.updateCount + 1
+    // console.log(newCount)
+    let that = this;
+    let i = index;
+    console.log("index is: ", i)
     const db = fire.firestore();
     var eventRef = db.collection("detailed itinerary").where("start", "==", start);
     console.log(eventRef);
     eventRef.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
+            // console.log("the state is: ", this);
             // Build doc ref from doc.id
             var timeRef = db.collection('detailed itinerary').doc(doc.id);
-            var updateStart = timeRef.update({
+            timeRef.update({
               start: newStart,
               end: newEnd
-            });
+            }).then(console.log("hello", i))
+            .catch(console.log("ERROR", i));
         });
     })
+  }
+
+  addCount = (count) => {
+    console.log("ADDING SHIT NOW")
+    this.setState({
+      updateCount: count
+    });
   }
 
   componentWillMount = () => {
