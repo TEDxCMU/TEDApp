@@ -508,6 +508,14 @@ input[type="button"].button-primary {
 	color: var(--tedwhite);
 }
 
+button.button-sent,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+	background: var(--tedoffwhite);
+	color: var(--tedblack);
+}
+
 button.button-primary:hover,
 input[type="submit"].button-primary:hover,
 input[type="reset"].button-primary:hover,

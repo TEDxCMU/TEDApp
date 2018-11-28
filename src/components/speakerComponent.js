@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import '../App.css';
 import './speakers.css';
 import Dropdown from './dropdown';
-import fire from '../fire.js';
-import moment from 'moment';
 
 export class SpeakerComponent extends Component {
     constructor() {
@@ -29,7 +27,15 @@ export class SpeakerComponent extends Component {
                     <label align='center'>Ask Question</label>
                     <input type="text" name={index} value={question} onChange={this.props.handleChange}/>
                     <button type="button" className="button-primary" onClick={() => this.props.logState()}>Log state</button>
-                    <button type="button" className="button-primary" onClick={() => this.props.createQuestion({id}, {question})}>Send</button>
+                    {this.props.speaker.asked === true ? 
+                    <div>
+                        <button type="button" className="button-sent">Sent</button>
+                    </div>     
+                    :
+                    <div>
+                        <button type="button" className="button-primary" onClick={() => this.props.createQuestion({id}, {question}, {index})}>Send</button>
+                    </div>     
+                    }           
                 </form>
             </Dropdown>
         </div>
