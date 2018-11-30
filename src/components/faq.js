@@ -49,7 +49,7 @@ export class Faq extends Component {
             },
             {
                 question: "I’d like to volunteer.",
-                answer: "Thank you for your interest in joining the team! TEDxCMU wouldn’t exist without the contributions volunteers make at our events. We select our day-of-event volunteers a month to two in advance of the event. <br/> You can also scroll to the bottom of the page to subscribe to our newsletter and receive all the announcements about future ticket sales, adventures, salons and more. We look forward to seeing you!",
+                answer: "Thank you for your interest in joining the team! TEDxCMU wouldn’t exist without the contributions volunteers make at our events. We select our day-of-event volunteers a month to two in advance of the event. You can also scroll to the bottom of the page to subscribe to our newsletter and receive all the announcements about future ticket sales, adventures, salons and more. We look forward to seeing you!",
                 category: "volunteer"
             },
             {
