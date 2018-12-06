@@ -30,6 +30,8 @@ class App extends Component {
 
   }
   render() {
+    console.log("RENDERING MAIN APP")
+    console.log(this.state.user)
     var listOfData = this.state.allData.map((val, i)=>{
       var name = val.name
       var age = val.age
@@ -41,9 +43,12 @@ class App extends Component {
     return (
 
       <div>
+        
         <Router>
           <div className="App">
-          <Navigation user={this.state.user} login={this.login} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
+          {/* <Navigation user={this.state.user} login={this.login} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/> */}
+          {/* <this.navigationPage/> */}
+          <this.navigationPage/>
           <Route path="/" exact strict render={this.schedulePage}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
           <Route path="/speakers" exact strict render={this.speakersPage}/>
@@ -76,6 +81,18 @@ class App extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+  }
+
+  navigationPage = (uzer) => {
+    return(
+      <Navigation
+      user= {uzer} 
+      login={this.login} 
+      logout={this.logout} 
+      isiPhone={this.state.iosPopUp} 
+      isAndroid={this.state.chromePopUp}
+      />
+    )
   }
 
   schedulePage = (props) => {
@@ -171,7 +188,7 @@ class App extends Component {
       console.log("Logging you in!")
       this.setState({
         user: userInfo
-      }, () => console.log(this.state.user))
+      }, () => this.render())
   }
 }
 

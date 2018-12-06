@@ -40,6 +40,19 @@ export class Navigation extends Component {
                         <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/speakers" exact activeStyle={{color:'#e62b1e'}}>
                             Speakers
                         </NavLink>
+                        <div>
+                            {this.state.type !== null && this.state.type === 2 ?
+                                <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/questions" exact activeStyle={{color:'#e62b1e'}}>
+                                    My Questions
+                                </NavLink>
+                            :
+                                <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/questions" exact activeStyle={{color:'#e62b1e'}}>
+                                    My Questions
+                                </NavLink>
+                                
+                            }
+                        </div>
+
                         <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/schedule" exact activeStyle={{color:'#e62b1e'}}>
                             Manager Dash
                         </NavLink>
@@ -64,9 +77,24 @@ export class Navigation extends Component {
                         <button className="full-width button-primary" onClick={this.props.login}>Log In</button>
                     }
                 </Menu>
+                <button onClick={this.componentDidMount}>REMOUNT BITCHES</button>
             </header>
             </div>
         );        
+    }
+
+    componentDidMount = () => {
+        console.log("navigation is mounted")
+        console.log(this.state)
+        console.log(this.props.user)
+        let savedUser = this.props.user;
+        console.log(savedUser)
+        if (savedUser !== null) {
+            console.log(savedUser.type)
+            this.setState({
+                type: savedUser.type
+            })
+        }
     }
 };
 
