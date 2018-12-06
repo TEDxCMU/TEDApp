@@ -4,6 +4,7 @@ import { auth, provider } from './fire';
 import { NewSchedule } from './components/newSchedule.js';
 import { Navigation } from './components/navigation.js';
 import { Login } from './components/login.js';
+import { MyQuestions } from './components/myQuestions.js'
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
@@ -48,6 +49,8 @@ class App extends Component {
           <Route path="/speakers" exact strict render={this.speakersPage}/>
           <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
           <Route path="/login" exact strict render={this.loginPage}/>
+          <Route path="/questions" exact strict render={this.questionsPage}/>
+
           </div>
         </Router>
         <div style={{display: 'flex', flexDirection: "column", alignItems:"center"}}> 
@@ -78,6 +81,13 @@ class App extends Component {
   schedulePage = (props) => {
     return (
       <NewSchedule
+      user={this.state.user} /> 
+    );
+  }
+
+  questionsPage = (props) => {
+    return (
+      <MyQuestions
       user={this.state.user} /> 
     );
   }

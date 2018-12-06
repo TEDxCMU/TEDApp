@@ -30,7 +30,7 @@ export class Speakers extends Component {
                     index={index} 
                     handleChange={this.handleChange} 
                     id={speaker.id} 
-                    question={this.state.questions[index]} c
+                    question={this.state.questions[index]}
                     createQuestion={this.createQuestion}>
                 </SpeakerComponent> 
             ) 

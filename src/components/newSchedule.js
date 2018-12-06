@@ -5,12 +5,15 @@ import { BrowserRouter as Router} from 'react-router-dom';
 import moment from 'moment';
 import Route from 'react-router-dom/Route';
 import fire from '../fire.js';
+import TimePicker from 'rc-time-picker';
+import 'rc-time-picker/assets/index.css';
 
 export class NewSchedule extends Component {
   constructor() {
     super();
     this.addCount = this.addCount.bind(this);
     this.state = {
+      value: moment(),
       allEvents: [],
       updateCount: 0
     }
@@ -51,10 +54,20 @@ export class NewSchedule extends Component {
     })
 
     return (
-      <div className="schedule">      
-        <ul>
-          {newList} 
-        </ul>
+      <div>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <TimePicker style={{align: 'center'}}
+            defaultValue={this.state.value}
+            onChange={this.handleValueChange}
+          />
+          <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
+        </div>
+
+        <div className="schedule">      
+          <ul>
+            {newList} 
+          </ul>
+        </div>
       </div>
     );
   }
@@ -63,6 +76,37 @@ export class NewSchedule extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
+  }
+
+  handleValueChange = (value) => {
+    console.log(value && value.format('HH:mm:ss'));
+    this.setState({ value });
+  }
+
+  clear = () => {
+    this.setState({
+      value: undefined,
+    });
+  }
+
+  shiftAll = (newStart) => {
+    let allElements = this.state.allEvents;
+    let immediateNextEvent= moment(allElements[0].start, 'hh:mm A'); 
+    let conferenceStart = newStart;
+    console.log("the new conference start time is: ", conferenceStart.format('hh:mm A'))
+    let duration = moment.duration(conferenceStart.diff(immediateNextEvent));
+    // go through all events after the one that just ended
+    for (let i = 0; i < allElements.length; i++) {
+      console.log("starting updated count is: ", this.state.updateCount)
+      //add the calculated duration between the original end and the new end
+      var start = moment(allElements[i].start, 'hh:mm A').add(duration, 'minutes');
+      var end = moment(allElements[i].end, 'hh:mm A').add(duration, 'minutes');
+      var shiftedStart = start.format('hh:mm A');
+      // console.log(shiftedStart)
+      var shiftedEnd = end.format('hh:mm A');
+      this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd, i)
+      console.log("intermediate updated count: ", this.state.updateCount);
+    }
   }
 
   shiftEndTime = (index, endTime) => {
@@ -75,6 +119,7 @@ export class NewSchedule extends Component {
     let allElements = this.state.allEvents;
     let immediateNextEvent= moment(allElements[nextEvent].start, 'hh:mm A'); 
     let justEnded = moment(newEnd, 'hh:mm A');
+    console.log("the just ended is: ", justEnded.format('hh:mm A'))
     let duration = moment.duration(justEnded.diff(immediateNextEvent));
     this.updateFireTimes(allElements[index].start, allElements[index].start, justEnded.format('hh:mm A'));
     // go through all events after the one that just ended
@@ -146,8 +191,8 @@ export class NewSchedule extends Component {
     );
 
       wholeData.forEach(event => {
-        let j_time = moment(event.start, "HH:mm").format("hh:mm A");
-        let k_time = moment(event.end, "HH:mm").format("hh:mm A");
+        let j_time = moment(event.start, "hh:mm A").format("hh:mm A");
+        let k_time = moment(event.end, "hh:mm A").format("hh:mm A");
         event.start = j_time; 
         event.end = k_time; 
       })
@@ -169,8 +214,8 @@ export class NewSchedule extends Component {
       }
 
       wholeData.forEach(event => {
-        let f_time = moment(event.start, "HH:mm").format("hh:mm A");
-        let g_time = moment(event.end, "HH:mm").format("hh:mm A");
+        let f_time = moment(event.start, "hh:mm A").format("hh:mm A");
+        let g_time = moment(event.end, "hh:mm A").format("hh:mm A");
         event.start = f_time;
         event.end = g_time; 
       })
