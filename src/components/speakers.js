@@ -4,6 +4,12 @@ import './speakers.css';
 import fire from '../fire.js';
 import moment from 'moment';
 import SpeakerComponent from './speakerComponent.js';
+import { BrowserRouter as Router, Link } from 'react-router-dom';
+import Route from 'react-router-dom/Route';
+
+const SpeakerPage = ({match}) => {
+    return ( <h1> Welcome User {match.params.username} </h1> );
+  }
 
 export class Speakers extends Component {
     constructor() {
@@ -30,17 +36,38 @@ export class Speakers extends Component {
                     index={index} 
                     handleChange={this.handleChange} 
                     id={speaker.id} 
-                    question={this.state.questions[index]}
+                    question={this.state.questions[index]} c
                     createQuestion={this.createQuestion}>
                 </SpeakerComponent> 
             ) 
         })
 
+        
+
       return (
         <div className="speakers">
-            {newList}
+            {this.state.allSpeakers.map((speaker) => {
+                return(
+                    <div>
+                    <Link to={{
+                        pathname: '/speakers/'+speaker.name.toString(),
+                        state: {
+                            id: speaker.id,
+                            name: speaker.name
+
+                        }}}>
+                    <li key={speaker.id}>
+                        <h6>Hello {speaker.name}</h6>
+                    </li>
+                    </Link>
+                    
+                    <Route path={`/speakers/:speakerId`} exact strict component={SpeakerPage}/>
+                    </div>
+                );
+            })}
+            {newList}    
         </div>
-      );
+      ); 
     }
 
     logState = () => {
