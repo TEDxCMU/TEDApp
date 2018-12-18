@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
+import { auth, provider } from '../fire.js';
 import {NavLink} from 'react-router-dom';
 import logo from '../logo.png';
 import './navigation.css';
@@ -26,6 +27,7 @@ export class Navigation extends Component {
     }
 
     render() {
+        console.log(this.props.user)
         return (
             <div id="navigation">
             <header>
@@ -66,15 +68,15 @@ export class Navigation extends Component {
                             Log In
                         </NavLink>
                     </div>
-                    {this.props.user ?
+                    {this.props.user === null ?
+                        <div></div>
+                        :
                         <div>
                         <div className='user-profile'>
                             <img src={this.props.user.photoURL} alt=""/>
                         </div>
                         <button className="full-width button-primary" onClick={this.props.logout}>Log Out</button> 
                         </div>
-                        :
-                        <button className="full-width button-primary" onClick={this.props.login}>Log In</button>
                     }
                 </Menu>
                 <button onClick={this.componentDidMount}>REMOUNT BITCHES</button>
@@ -82,6 +84,12 @@ export class Navigation extends Component {
             </div>
         );        
     }
+
+    logout() {
+        auth.signOut()
+          .then(() => {
+          });
+      }
 
     componentDidMount = () => {
         console.log("navigation is mounted")

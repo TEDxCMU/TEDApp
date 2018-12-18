@@ -20,7 +20,11 @@ export class MyQuestions extends Component {
 
     
     render() {
+      console.log(this.props.user)
+      console.log(this.props.user)
       console.log(this.state.questions)
+      let currentUser = fire.auth().currentUser.email;
+      console.log(currentUser);
       let newList = [];
       this.state.questions.forEach(question => {    
           let index = this.state.questions.indexOf(question);
@@ -35,7 +39,6 @@ export class MyQuestions extends Component {
                   time={q.time} 
                   answerQuestion={this.createQuestion}
                   id={this.state.id}>
-
               </QuestionComponent> 
           ) 
       })
@@ -49,24 +52,45 @@ export class MyQuestions extends Component {
 
 
     componentDidMount = () => {
+      if (fire.auth().currentUser === null) {
+        return
+      }
+      let userEmail = fire.auth().currentUser.email;
       const db = fire.firestore();
       db.settings({
         timestampsInSnapshots: true
       });
       var wholeData = [];
+      
       let speakerID = "wLs9MTPHfZk5AbebslaQ"
-      db.collection('speakers').doc(speakerID).collection("questions").get()
-      .then(snapshot => {
-          snapshot.forEach(doc => {
-              let docCopy = doc.data();
-              console.log(docCopy)
-              wholeData.push(docCopy)
-          });
-          // let questions = Array(wholeData.length)
-        this.setState(
-            {questions: wholeData
-          }, () => console.log(this.state.questions))
+      let speakerRef = db.collection('speakers').where('email', '==', userEmail);
+      console.log(speakerRef)
+      speakerRef.get().then(snapshot => {
+        snapshot.forEach(snap => {
+          snap.collection("questions").get()
+          .then(snapsh0t => {
+            snapsh0t.forEach(doc => {
+              wholeData.push(doc.data())
+            })
+          })
+          if (wholeData.length === snap.data().size) {
+            this.setState({
+              questions: wholeData
+            })
+          }
+        })
       })
+      // .then(snapsh0t => {
+      //     snapsh0t.forEach(doc => {
+      //         let docCopy = doc.data();
+      //         console.log(docCopy)
+      //         wholeData.push(docCopy)
+      //     });
+      //     // let questions = Array(wholeData.length)
+      //   this.setState(
+      //       {questions: wholeData
+      //     }, () => console.log(this.state.questions))
+      // })
   }
       
 }

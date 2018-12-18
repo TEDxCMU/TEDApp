@@ -14,6 +14,7 @@ export class NewSchedule extends Component {
     this.addCount = this.addCount.bind(this);
     this.state = {
       value: moment(),
+      canShiftAll: true,
       allEvents: [],
       updateCount: 0
     }
@@ -26,7 +27,7 @@ export class NewSchedule extends Component {
   }
 
   render() {
-    console.log(this.state.allEvents)  
+    console.log(this.state.allEvents)
     let newList = [];
 
     // this.state.allEvents.forEach(event => {
@@ -55,6 +56,7 @@ export class NewSchedule extends Component {
 
     return (
       <div>
+        {this.state.canShiftAll ? 
         <div style={{display: 'flex', justifyContent: 'center'}}>
           <TimePicker style={{align: 'center'}}
             defaultValue={this.state.value}
@@ -62,6 +64,9 @@ export class NewSchedule extends Component {
           />
           <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
         </div>
+      :
+      <div></div>
+      }
 
         <div className="schedule">      
           <ul>
@@ -122,6 +127,9 @@ export class NewSchedule extends Component {
     console.log("the just ended is: ", justEnded.format('hh:mm A'))
     let duration = moment.duration(justEnded.diff(immediateNextEvent));
     this.updateFireTimes(allElements[index].start, allElements[index].start, justEnded.format('hh:mm A'));
+    this.setState({
+      canShiftAll: false
+    })
     // go through all events after the one that just ended
     for (let i = eventNum + 1; i < allElements.length; i++) {
       console.log("starting updated count is: ", this.state.updateCount)
@@ -164,7 +172,7 @@ export class NewSchedule extends Component {
             timeRef.update({
               start: newStart,
               end: newEnd
-            }).then(console.log("hello", i))
+            }).then(console.log("HELLO"))
             .catch(console.log("ERROR", i));
         });
     })

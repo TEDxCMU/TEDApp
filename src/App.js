@@ -15,6 +15,7 @@ import Footer from './components/footer';
 import { isAndroid, isIOS } from "react-device-detect";
 
 
+
 class App extends Component {
   constructor() {
     super();
@@ -25,8 +26,7 @@ class App extends Component {
       chromePopUp: false
     }
     //pass THIS to global navigation hamburger menu so people can login and logout everywhere
-    this.login = this.login.bind(this);
-    this.logout = this.logout.bind(this);
+    this.authListener = this.authListener.bind(this);
 
   }
   render() {
@@ -46,9 +46,7 @@ class App extends Component {
         
         <Router>
           <div className="App">
-          {/* <Navigation user={this.state.user} login={this.login} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/> */}
-          {/* <this.navigationPage/> */}
-          <this.navigationPage/>
+          <Navigation user={this.state.user} login={this.login} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
           <Route path="/" exact strict render={this.schedulePage}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
           <Route path="/speakers" exact strict render={this.speakersPage}/>
@@ -139,7 +137,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state)
+    this.authListener();
     if (isAndroid) {
       this.setState({
         chromePopUp: isAndroid,
@@ -150,46 +148,22 @@ class App extends Component {
         iosPopUp: isIOS,
       })
     }
+  }
 
-    console.log(this.state.user)
-    const db = fire.firestore();
-    db.settings({
-      timestampsInSnapshots: true
+  authListener() {
+    fire.auth().onAuthStateChanged((user) => {
+      console.log(user);
+      if (user) {
+        this.setState({ user });
+        localStorage.setItem('user', user.uid);
+      } else {
+        this.setState({ user: null });
+        localStorage.removeItem('user');
+      }
     });
-    var wholeData = []
-    db.collection('member').orderBy('name', 'asc').get()
-    .then(snapshot => {
-      snapshot.forEach(doc => {
-        wholeData.push(doc.data())
-      });
-      console.log(wholeData)
-      this.setState({allData: wholeData})
-      console.log(this.state.allData)
-    })
-    .catch(error => {
-      console.log('Error!', error);
-    })
   }
 
-  logout() {
-    auth.signOut()
-      .then(() => {
-        this.setState({
-          user: null
-        });
-      });
-  }
 
-  login = (data) => {
-    console.log("hello")
-    
-    let userInfo = data;
-    console.log(userInfo)
-      console.log("Logging you in!")
-      this.setState({
-        user: userInfo
-      }, () => this.render())
-  }
 }
 
 export default App;

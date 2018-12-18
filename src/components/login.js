@@ -31,11 +31,33 @@ export class Login extends Component {
                 <label>Password:</label>
                 <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
                 <br />
-                <button type="button" className="button-primary" onClick={this.checkSpeakerLogin}>Speaker Log In</button>
-                <button type="button" onClick={this.checkTEDLogin}>TED Log In</button>
+                {/* <button type="button" className="button-primary" onClick={this.checkSpeakerLogin}>Speaker Log In</button> */}
+                {/* onKeyPress={event => {
+                    console.log(event)
+                    if (event.key === "Enter" ) {
+                        console.log("hello senpai")
+                        this.props.login(this.state.email, this.state.password);
+                        }
+                }} */}
+                <button type="button" onClick={this.login}>TED Log In</button>
             </form>            
         </div>
       );
+    }
+
+    login = (e) => {
+      e.preventDefault();
+      fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
+        console.log(u.user.email)
+      }).catch((error) => {
+          console.log(error);
+        });
+    }
+
+    onClickButton = (event) => {
+      console.log(this.state.email)
+      event.preventDefault();
+      this.props.login(null, this.state.email.toString(), this.state.password.toString())
     }
   
     handleChange = (e) => {
@@ -43,56 +65,80 @@ export class Login extends Component {
         this.setState({[name]: e.target.value});
       }
   
-    checkSpeakerLogin = () => {
-        const db = fire.firestore();
-        db.settings({
-          timestampsInSnapshots: true
-        });
-        var speakersRef = db.collection('speakers');
-        var query = speakersRef.where('email', '==', this.state.email).where('password', '==', this.state.password).get()
-          .then(snapshot => {
-            if (snapshot.size === 0){
-              return this.setState({found: false})
-            } 
-            snapshot.forEach(doc => {
-                console.log(doc.data())
-                this.setState({
-                  found: true
-                }, () => this.props.login(doc.data()))
-            });
-          })
-          .catch(err => {
-            console.log('Error getting documents', err);
-          });
-    }
+//     checkSpeakerLogin = () => {
+//         const db = fire.firestore();
+//         db.settings({
+//           timestampsInSnapshots: true
+//         });
+//         var speakersRef = db.collection('speakers');
+//         var query = speakersRef.where('email', '==', this.state.email).where('password', '==', this.state.password).get()
+//           .then(snapshot => {
+//             if (snapshot.size === 0){
+//               return this.setState({found: false})
+//             } 
+//             snapshot.forEach(doc => {
+//                 console.log(doc.data())
+//                 this.setState({
+//                   found: true
+//                 }, () => this.props.login(doc.data()))
+//             });
+//           })
+//           .catch(err => {
+//             console.log('Error getting documents', err);
+//           });
+//     }
 
-    checkTEDLogin = () => {
-      const db = fire.firestore();
-      db.settings({
-        timestampsInSnapshots: true
-      });
-      var boardRef = db.collection('board');
-      var query = boardRef.where('email', '==', this.state.email).where('password', '==', this.state.password).get()
-        .then(snapshot => {
-          if (snapshot.size === 0){
-            return this.setState({found: false})
-          } 
-          snapshot.forEach(doc => {
-              console.log(doc.data())
-              this.setState({
-                found: true
-              }, () => this.props.login(doc.data()))
-          });
-        })
-        .catch(err => {
-          console.log('Error getting documents', err);
-        });
-  }
+//     checkTEDLogin = () => {
+//       const db = fire.firestore();
+//       db.settings({
+//         timestampsInSnapshots: true
+//       });
+//       var boardRef = db.collection('board');
+//       var query = boardRef.where('email', '==', this.state.email).where('password', '==', this.state.password).get()
+//         .then(snapshot => {
+//           if (snapshot.size === 0){
+//             return this.setState({found: false})
+//           } 
+//           snapshot.forEach(doc => {
+//               console.log(doc.data())
+//               this.setState({
+//                 found: true
+//               }, () => this.props.login(doc.data()))
+//           });
+//         })
+//         .catch(err => {
+//           console.log('Error getting documents', err);
+//         });
+//   }
 
-    componentDidMount() {
-        console.log("now on the login page");
-        console.log(this.props.user)
-    }
+//   checkLogin = () => {
+//     const db = fire.firestore();
+//     db.settings({
+//       timestampsInSnapshots: true
+//     });
+//     var boardRef = db.collection('board');
+//     var query = boardRef.where('email', '==', this.state.email).where('password', '==', this.state.password).get()
+//       .then(snapshot => {
+//         if (snapshot.size === 0){
+//           return this.setState({found: false})
+//         } 
+//         snapshot.forEach(doc => {
+//             console.log(doc.data())
+//             this.setState({
+//               found: true
+//             }, () => this.props.login(doc.data()))
+//         });
+//       })
+//       .catch(err => {
+//         console.log('Error getting documents', err);
+//       });
+// }
+
+
+    // componentDidMount() {
+    //     console.log("now on the login page");
+    //     console.log(this.props.user)
+    // }
   }
   
   export default Login;
