@@ -16,29 +16,23 @@ export class MyQuestions extends Component {
         questions: new Array(500),
         id: null
       }
+      this.componentDidMount = this.componentDidMount.bind(this);
     }
 
-    
+
     render() {
-      console.log(this.props.user)
-      console.log(this.props.user)
-      console.log(this.state.questions)
-      let currentUser = fire.auth().currentUser.email;
-      console.log(currentUser);
       let newList = [];
       this.state.questions.forEach(question => {    
           let index = this.state.questions.indexOf(question);
-          console.log(index)
-          let q = this.state.questions[index]
-          console.log(question)
           newList.push (
               <QuestionComponent
+                  key={question.id}
                   index={index}
-                  question={q.question}  
-                  answer={q.answer} 
-                  time={q.time} 
+                  question={question.question}  
+                  answer={question.answer} 
+                  time={question.time} 
                   answerQuestion={this.answerQuestion}
-                  id={this.state.id}>
+                  id={question.id}>
               </QuestionComponent> 
           ) 
       })
@@ -50,61 +44,53 @@ export class MyQuestions extends Component {
     );
   }
 
-
-    componentDidMount = () => {
-      if (fire.auth().currentUser === null) {
-        return
-      }
-      let userEmail = fire.auth().currentUser.email;
-      const db = fire.firestore();
-      db.settings({
-        timestampsInSnapshots: true
-      });
-      var wholeData = [];
-    
-      let speakerRef = db.collection('speakers').where('email', '==', userEmail);
-      console.log(speakerRef)
-      db.collection('speakers').doc(userEmail).collection("questions").get()
-      .then(snapshot => {
-          snapshot.forEach(doc => {
-              let docCopy = doc.data();
-              docCopy.id = doc.id;
-              console.log(docCopy)
-              wholeData.push(docCopy)
-          });
-          // let questions = Array(wholeData.length)
-        this.setState(
-            {questions: wholeData
-          }, () => console.log(this.state.questions))
-      })
-      // speakerRef.get().then(snapshot => {
-      //   console.log(snapshot.docs)
-      //   snapshot.data().forEach(snap => {
-      //     snap.collection("questions").get()
-      //     .then(snapsh0t => {
-      //       snapsh0t.forEach(doc => {
-      //         wholeData.push(doc.data())
-      //       })
-      //     })
-      //     if (wholeData.length === snap.data().size) {
-      //       this.setState({
-      //         questions: wholeData
-      //       })
-      //     }
-      //   })
-      // })
-      // .then(snapsh0t => {
-      //     snapsh0t.forEach(doc => {
-      //         let docCopy = doc.data();
-      //         console.log(docCopy)
-      //         wholeData.push(docCopy)
-      //     });
-      //     // let questions = Array(wholeData.length)
-      //   this.setState(
-      //       {questions: wholeData
-      //     }, () => console.log(this.state.questions))
-      // })
+  answerQuestion = (id, text) => {
+    let email = fire.auth().currentUser.email;
+    let now = moment().format('hh:mm A');
+    let db = fire.firestore();
+    db.collection("speakers").doc(email).collection("questions").doc(id).set({
+        answer: text,
+        timeAnswered: now
+    })
+    .then(function() {
+        console.log("Document successfully written!")
+        // window.location.reload();
+    })
+    .catch(function(error) {
+        console.error("Error writing document: ", error);
+    });
   }
+
+  componentDidMount = () => {
+    if (fire.auth().currentUser === null && localStorage.getItem('userEmail') === undefined) {
+      console.log("returning")
+      return
+    }
+    let userEmail = localStorage.getItem('userEmail');
+    const db = fire.firestore();
+    db.settings({
+      timestampsInSnapshots: true
+    });
+    var wholeData = [];
+  
+    let speakerRef = db.collection('speakers').where('email', '==', userEmail);
+    console.log(speakerRef)
+    db.collection('speakers').doc(userEmail).collection("questions").get()
+    .then(snapshot => {
+        snapshot.forEach(doc => {
+            let docCopy = doc.data();
+            docCopy.id = doc.id;
+            console.log(docCopy)
+            wholeData.push(docCopy)
+        });
+        // let questions = Array(wholeData.length)
+      this.setState(
+          {questions: wholeData
+        }, () => console.log(this.state.questions))
+    })
+  }
+
+
       
 }
 export default MyQuestions;

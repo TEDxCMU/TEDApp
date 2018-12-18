@@ -29,13 +29,6 @@ export class NewSchedule extends Component {
   render() {
     console.log(this.state.allEvents)
     let newList = [];
-
-    // this.state.allEvents.forEach(event => {
-    //    let j_time = moment(event[1],"h:mm a");
-    //    let f_time = j_time.format("h:mm a");
-    //    event[1] = f_time; 
-    // })
-    
     console.log(this.state.allEvents) 
 
     this.state.allEvents.forEach(event => {
@@ -47,7 +40,7 @@ export class NewSchedule extends Component {
         console.log(index)
 
         newList.push (
-          <li >
+          <li key={index}>
             <span><strong>{a}</strong></span> — <span>{b}</span>
             <button onClick={() => { this.shiftEndTime(index, moment().format('hh:mm A')) }}>Event Ended</button> 
           </li>

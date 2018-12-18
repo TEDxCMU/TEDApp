@@ -5,65 +5,64 @@ import './speakers.css';
 import fire from '../fire.js';
 import Dropdown from './dropdown';
 
-export class MyQuestions extends Component {
+export class QuestionComponent extends Component {
     constructor() {
       super();
       this.state = {
-        allSpeakers: [],
-        questions: new Array(500),
       }
     }
 
     
     render() {
-    let time = this.props.time;
+    console.log(this.state)
     let question = this.props.question;
     let index = this.props.index;
-    let answer = this.props.answer;
     let id = this.props.id;
-
     return (
         <div className="speakers">
             <Dropdown title={question}>
                 <form align='center'>
                     <label align='center'>Answer Question</label>
-                    <input type="text" name={index} value={question} onChange={this.props.handleChange}/>
-                    <button type="button" className="button-primary" onClick={() => this.props.logState()}>Log state</button>
-                    {/* {this.props.speaker.asked === true ? 
+                    <input type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
+                    {this.props.answered === true ? 
                     <div>
-                        <button type="button" className="button-sent">Sent</button>
+                        <button type="button" className="button-sent">Answered</button>
                     </div>     
                     :
-                    <div>
-                        <button type="button" className="button-primary" onClick={() => this.props.createQuestion({id}, {question}, {index})}>Send</button>
-                    </div>     
-                    }            */}
+                        <button type="button" className="button-primary" onClick={() => this.props.answerQuestion(id, this.state.answer, index)}>Answer Question</button> 
+                    }           
                 </form>
             </Dropdown>
         </div>
     );
   }
 
+    handleChange = (e) => {
+      this.setState({ [e.target.name] : e.target.value });
+    }
 
     componentDidMount = () => {
-      const db = fire.firestore();
-      db.settings({
-        timestampsInSnapshots: true
-      });
-      var wholeData = [];
-      let speakerID = "wLs9MTPHfZk5AbebslaQ"
-      db.collection('speakers').doc(speakerID).collection("questions").get()
-      .then(snapshot => {
-          snapshot.forEach(doc => {
-              let docCopy = doc.data();
-              wholeData.push(docCopy)
-          });
-          // let questions = Array(wholeData.length)
-        this.setState(
-            {questions: wholeData
-          }, () => console.log(this.state.questions))
-      })
-  }
+        this.setState({
+            answer: this.props.answer
+        })
+    //   const db = fire.firestore();
+    //   db.settings({
+    //     timestampsInSnapshots: true
+    //   });
+    //   var wholeData = [];
+    //   let speakerID = "wLs9MTPHfZk5AbebslaQ"
+    //   db.collection('speakers').doc(speakerID).collection("questions").get()
+    //   .then(snapshot => {
+    //       snapshot.forEach(doc => {
+    //           let docCopy = doc.data();
+    //           wholeData.push(docCopy)
+    //       });
+    //       // let questions = Array(wholeData.length)
+    //     this.setState(
+    //         {questions: wholeData
+    //       }, () => console.log(this.state.questions))
+    //   })
+    }
       
 }
-export default MyQuestions;
+export default QuestionComponent;

@@ -20,11 +20,12 @@ export class SpeakerComponent extends Component {
             <Dropdown title={this.props.name}>
                 Hey there friend whats poppin
                 <div className="video">
-                    <iframe src="https://embed.ted.com/talks/dawn_wacek_a_librarian_s_case_against_overdue_book_fines" frameborder="0" scrolling="no" allowfullscreen></iframe>
+                    <iframe src="https://embed.ted.com/talks/dawn_wacek_a_librarian_s_case_against_overdue_book_fines" frameBorder="0" scrolling="no" allowFullScreen></iframe>
                     <br /> 
                 </div>
                 <form align='center'>
                     <label align='center'>Ask Question</label>
+                    {/* repurposing the index property as a "name" tage for the input field so the onChange knows which speaker question to update*/}
                     <input type="text" name={index} value={question} onChange={this.props.handleChange}/>
                     <button type="button" className="button-primary" onClick={() => this.props.logState()}>Log state</button>
                     {this.props.speaker.asked === true ? 

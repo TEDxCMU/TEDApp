@@ -43,14 +43,12 @@ export class Navigation extends Component {
                             Speakers
                         </NavLink>
                         <div>
-                            {this.state.type !== null && this.state.type === 2 ?
+                            {this.props.user !== null ?
                                 <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/questions" exact activeStyle={{color:'#e62b1e'}}>
                                     My Questions
                                 </NavLink>
                             :
-                                <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/questions" exact activeStyle={{color:'#e62b1e'}}>
-                                    My Questions
-                                </NavLink>
+                                <div></div>
                                 
                             }
                         </div>
