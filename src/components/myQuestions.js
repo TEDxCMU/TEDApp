@@ -37,7 +37,7 @@ export class MyQuestions extends Component {
                   question={q.question}  
                   answer={q.answer} 
                   time={q.time} 
-                  answerQuestion={this.createQuestion}
+                  answerQuestion={this.answerQuestion}
                   id={this.state.id}>
               </QuestionComponent> 
           ) 
@@ -61,25 +61,38 @@ export class MyQuestions extends Component {
         timestampsInSnapshots: true
       });
       var wholeData = [];
-      
-      let speakerID = "wLs9MTPHfZk5AbebslaQ"
+    
       let speakerRef = db.collection('speakers').where('email', '==', userEmail);
       console.log(speakerRef)
-      speakerRef.get().then(snapshot => {
-        snapshot.forEach(snap => {
-          snap.collection("questions").get()
-          .then(snapsh0t => {
-            snapsh0t.forEach(doc => {
-              wholeData.push(doc.data())
-            })
-          })
-          if (wholeData.length === snap.data().size) {
-            this.setState({
-              questions: wholeData
-            })
-          }
-        })
+      db.collection('speakers').doc(userEmail).collection("questions").get()
+      .then(snapshot => {
+          snapshot.forEach(doc => {
+              let docCopy = doc.data();
+              docCopy.id = doc.id;
+              console.log(docCopy)
+              wholeData.push(docCopy)
+          });
+          // let questions = Array(wholeData.length)
+        this.setState(
+            {questions: wholeData
+          }, () => console.log(this.state.questions))
       })
+      // speakerRef.get().then(snapshot => {
+      //   console.log(snapshot.docs)
+      //   snapshot.data().forEach(snap => {
+      //     snap.collection("questions").get()
+      //     .then(snapsh0t => {
+      //       snapsh0t.forEach(doc => {
+      //         wholeData.push(doc.data())
+      //       })
+      //     })
+      //     if (wholeData.length === snap.data().size) {
+      //       this.setState({
+      //         questions: wholeData
+      //       })
+      //     }
+      //   })
+      // })
       // .then(snapsh0t => {
       //     snapsh0t.forEach(doc => {
       //         let docCopy = doc.data();

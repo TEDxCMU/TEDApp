@@ -32,10 +32,10 @@ export class Speakers extends Component {
                 <SpeakerComponent 
                     logState={this.logState}
                     speaker={speaker} 
-                    name={speaker.name} 
+                    name={speaker.first + ' ' + speaker.last} 
                     index={index} 
                     handleChange={this.handleChange} 
-                    id={speaker.id} 
+                    email={speaker.email}
                     question={this.state.questions[index]} c
                     createQuestion={this.createQuestion}>
                 </SpeakerComponent> 
@@ -50,14 +50,14 @@ export class Speakers extends Component {
                 return(
                     <div>
                     <Link to={{
-                        pathname: '/speakers/'+speaker.name.toString(),
+                        pathname: '/speakers/'+speaker.first+speaker.last.toString(),
                         state: {
-                            id: speaker.id,
-                            name: speaker.name
+                            email: speaker.email,
+                            name: speaker.first + ' ' + speaker.last
 
                         }}}>
-                    <li key={speaker.id}>
-                        <h6>Hello {speaker.name}</h6>
+                    <li key={speaker.email}>
+                        <h6>Hello {speaker.first}</h6>
                     </li>
                     </Link>
                     
@@ -84,13 +84,14 @@ export class Speakers extends Component {
       }
     
 
-    createQuestion = (speakerID, text, index) => {
+    createQuestion = (email, text, index) => {
+        console.log(email)
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
         let that = this;
         let speakersCopy = this.state.allSpeakers;
         console.log(index.index);
-        db.collection("speakers").doc(speakerID.id).collection("questions").add({
+        db.collection("speakers").doc(email.email).collection("questions").add({
             question: text.question,
             answer: "",
             time: now

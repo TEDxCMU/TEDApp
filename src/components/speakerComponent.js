@@ -12,7 +12,7 @@ export class SpeakerComponent extends Component {
     }
 
     render() {
-        let id = this.props.id;
+        let email = this.props.email;
         let question = this.props.question;
         let index = this.props.index;
       return (
@@ -33,7 +33,7 @@ export class SpeakerComponent extends Component {
                     </div>     
                     :
                     <div>
-                        <button type="button" className="button-primary" onClick={() => this.props.createQuestion({id}, {question}, {index})}>Send</button>
+                        <button type="button" className="button-primary" onClick={() => this.props.createQuestion({email}, {question}, {index})}>Send</button>
                     </div>     
                     }           
                 </form>

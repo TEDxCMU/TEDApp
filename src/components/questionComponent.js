@@ -25,7 +25,6 @@ export class MyQuestions extends Component {
     return (
         <div className="speakers">
             <Dropdown title={question}>
-                Hey there friend whats poppin
                 <form align='center'>
                     <label align='center'>Answer Question</label>
                     <input type="text" name={index} value={question} onChange={this.props.handleChange}/>
