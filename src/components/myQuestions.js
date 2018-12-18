@@ -29,7 +29,8 @@ export class MyQuestions extends Component {
                   key={question.id}
                   index={index}
                   question={question.question}  
-                  answer={question.answer} 
+                  answer={question.answer}
+                  answered={question.answered} 
                   time={question.time} 
                   answerQuestion={this.answerQuestion}
                   id={question.id}>
@@ -44,17 +45,24 @@ export class MyQuestions extends Component {
     );
   }
 
-  answerQuestion = (id, text) => {
+  answerQuestion = (id, text, index) => {
+    console.log(id)
     let email = fire.auth().currentUser.email;
     let now = moment().format('hh:mm A');
     let db = fire.firestore();
-    db.collection("speakers").doc(email).collection("questions").doc(id).set({
+    // need to make an instance of this class so we can access it further down in the function
+    let that = this;
+    let questionsCopy = this.state.questions; 
+    db.collection("speakers").doc(email).collection("questions").doc(id).update({
         answer: text,
         timeAnswered: now
     })
     .then(function() {
         console.log("Document successfully written!")
-        // window.location.reload();
+        questionsCopy[index].answered = true;
+        that.setState({
+            questions: questionsCopy
+        })
     })
     .catch(function(error) {
         console.error("Error writing document: ", error);
@@ -80,6 +88,7 @@ export class MyQuestions extends Component {
         snapshot.forEach(doc => {
             let docCopy = doc.data();
             docCopy.id = doc.id;
+            docCopy.answered = false;
             console.log(docCopy)
             wholeData.push(docCopy)
         });
