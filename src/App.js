@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { auth, provider } from './fire';
 import { NewSchedule } from './components/newSchedule.js';
+import { EventDetails } from './components/eventDetails.js';
 import { Navigation } from './components/navigation.js';
 import { Login } from './components/login.js';
 import { MyQuestions } from './components/myQuestions.js'
@@ -27,11 +28,12 @@ class App extends Component {
     }
     //pass THIS to global navigation hamburger menu so people can login and logout everywhere
     this.authListener = this.authListener.bind(this);
+    this.logout = this.logout.bind(this)
 
   }
   render() {
     console.log("RENDERING MAIN APP")
-    console.log(this.state.user)
+    console.log(auth.currentUser)
     var listOfData = this.state.allData.map((val, i)=>{
       var name = val.name
       var age = val.age
@@ -46,16 +48,22 @@ class App extends Component {
         
         <Router>
           <div className="App">
-          <Navigation user={this.state.user} login={this.login} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
+          <Navigation user={this.state.user} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
           <Route path="/" exact strict render={this.schedulePage}/>
+          <Route path="/events/:id" exact strict component={EventDetails}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
-          <Route path="/speakers" exact strict render={this.speakersPage}/>
           <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
           <Route path="/login" exact strict render={this.loginPage}/>
+          {/* if (localStorage.getItem("user") === null || auth().currentUser === null ?) {
+            <div>
+             <Route path="/questions" exact strict render={this.questionsPage}/>
+             </div>
+          }
+          </div> */}
           <Route path="/questions" exact strict render={this.questionsPage}/>
-
           </div>
         </Router>
+        
         <div style={{display: 'flex', flexDirection: "column", alignItems:"center"}}> 
           {this.state.chromePopUp === true ? 
           <button align="center">Add app to Android Home Screen!</button>
@@ -107,6 +115,13 @@ class App extends Component {
     );
   }
 
+  EventPage = (props) => {
+    return (
+      <EventDetails
+      user={this.state.user} /> 
+    );
+  }
+
   faqPage = (props) => {
     return (
       <Faq
@@ -150,6 +165,13 @@ class App extends Component {
     }
   }
 
+  logout = () => {
+    auth.signOut()
+      .then(() => {
+        window.location.reload();
+      });
+  }
+
   authListener() {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -158,7 +180,9 @@ class App extends Component {
         localStorage.setItem('userEmail', user.email);
       } else {
         this.setState({ user: null });
+        localStorage.removeItem('userEmail');
         localStorage.removeItem('user');
+
       }
     });
   }

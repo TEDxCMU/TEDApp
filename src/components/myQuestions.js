@@ -7,6 +7,7 @@ import QuestionComponent from './questionComponent.js'
 import moment from 'moment';
 import TimePicker from 'rc-time-picker';
 import ReactDOM from 'react-dom';
+import {Redirect} from 'react-router-dom';
 
 export class MyQuestions extends Component {
     constructor() {
@@ -14,13 +15,17 @@ export class MyQuestions extends Component {
       this.state = {
         answers: new Array(500),
         questions: new Array(500),
-        id: null
+        id: null,
+        redirectHome: false
       }
       this.componentDidMount = this.componentDidMount.bind(this);
     }
 
 
     render() {
+      if (this.state.redirectHome) {
+        return <Redirect to="/"/>
+      }
       let newList = [];
       this.state.questions.forEach(question => {    
           let index = this.state.questions.indexOf(question);
@@ -70,9 +75,12 @@ export class MyQuestions extends Component {
   }
 
   componentDidMount = () => {
-    if (fire.auth().currentUser === null && localStorage.getItem('userEmail') === undefined) {
+    if (fire.auth().currentUser === null || localStorage.getItem('userEmail') === null) {
       console.log("returning")
-      return
+      this.setState({
+        redirectHome: true
+      })
+      return;
     }
     let userEmail = localStorage.getItem('userEmail');
     const db = fire.firestore();

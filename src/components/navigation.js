@@ -36,14 +36,12 @@ export class Navigation extends Component {
                     isOpen={this.state.menuOpen}
                     onStateChange={(state) => this.handleStateChange(state)}>
                     <div className="nav">
-                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/" exact activeStyle={{color:'#e62b1e'}}>
+                        <ul>
+                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/" exact activeStyle={{color:'#e62b1e'}}>
                             Home
-                        </NavLink>
-                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/speakers" exact activeStyle={{color:'#e62b1e'}}>
-                            Speakers
-                        </NavLink>
+                        </NavLink></li>
                         <div>
-                            {this.props.user !== null ?
+                            {this.props.user !== null && localStorage.getItem("userEmail") !== "dijour@cmu.edu" ?
                                 <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/questions" exact activeStyle={{color:'#e62b1e'}}>
                                     My Questions
                                 </NavLink>
@@ -52,19 +50,13 @@ export class Navigation extends Component {
                                 
                             }
                         </div>
-
-                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/schedule" exact activeStyle={{color:'#e62b1e'}}>
-                            Manager Dash
-                        </NavLink>
-                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/faq" exact activeStyle={{color:'#e62b1e'}}>
+                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/faq" exact activeStyle={{color:'#e62b1e'}}>
                             FAQs
-                        </NavLink>
-                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/styleguide" exact activeStyle={{color:'#e62b1e'}}>
+                        </NavLink></li>
+                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/styleguide" exact activeStyle={{color:'#e62b1e'}}>
                             Style Guide
-                        </NavLink>
-                        <NavLink to="/login" exact activeStyle={{color:'#e62b1e'}}>
-                            Log In
-                        </NavLink>
+                        </NavLink></li>
+                        </ul>
                     </div>
                     {this.props.user === null ?
                         <div></div>
@@ -76,8 +68,8 @@ export class Navigation extends Component {
                         <button className="full-width button-primary" onClick={this.props.logout}>Log Out</button> 
                         </div>
                     }
+                    
                 </Menu>
-                <button onClick={this.componentDidMount}>REMOUNT BITCHES</button>
             </header>
             </div>
         );        
@@ -91,16 +83,6 @@ export class Navigation extends Component {
 
     componentDidMount = () => {
         console.log("navigation is mounted")
-        console.log(this.state)
-        console.log(this.props.user)
-        let savedUser = this.props.user;
-        console.log(savedUser)
-        if (savedUser !== null) {
-            console.log(savedUser.type)
-            this.setState({
-                type: savedUser.type
-            })
-        }
     }
 };
 

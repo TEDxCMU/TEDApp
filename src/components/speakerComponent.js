@@ -6,15 +6,11 @@ import Dropdown from './dropdown';
 export class SpeakerComponent extends Component {
     constructor() {
       super();
-      this.state = {
-        allEvents: [],
-      }
     }
 
     render() {
         let email = this.props.email;
         let question = this.props.question;
-        let index = this.props.index;
       return (
         <div className="speakers">
             <Dropdown title={this.props.name}>
@@ -25,16 +21,14 @@ export class SpeakerComponent extends Component {
                 </div>
                 <form align='center'>
                     <label align='center'>Ask Question</label>
-                    {/* repurposing the index property as a "name" tage for the input field so the onChange knows which speaker question to update*/}
-                    <input type="text" name={index} value={question} onChange={this.props.handleChange}/>
-                    <button type="button" className="button-primary" onClick={() => this.props.logState()}>Log state</button>
-                    {this.props.speaker.asked === true ? 
+                    <input type="text" name="question" value={question} onChange={this.props.handleChange}/>
+                    {this.props.asked === true ? 
                     <div>
                         <button type="button" className="button-sent">Sent</button>
                     </div>     
                     :
                     <div>
-                        <button type="button" className="button-primary" onClick={() => this.props.createQuestion({email}, {question}, {index})}>Send</button>
+                        <button type="button" className="button-primary" onClick={() => this.props.createQuestion({email}, {question})}>Send</button>
                     </div>     
                     }           
                 </form>

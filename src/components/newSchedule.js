@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import '../App.css';
 import './schedule.css';
-import { BrowserRouter as Router} from 'react-router-dom';
+import EventDetails from './eventDetails.js'
+import {Link} from 'react-router-dom';
 import moment from 'moment';
 import Route from 'react-router-dom/Route';
 import fire from '../fire.js';
@@ -26,6 +27,17 @@ export class NewSchedule extends Component {
     this.setState({newList:newList});
   }
 
+  EventComponent = ({ match }) => {
+    const event = this.state.allEvents.find(({ id }) => id === match.params.eventId)
+    console.log(event)
+    return (
+      <div>
+        <h2>{event.title}</h2>
+        <p>{event.description}</p>
+      </div>
+    )
+  }
+
   render() {
     console.log(this.state.allEvents)
     let newList = [];
@@ -39,17 +51,48 @@ export class NewSchedule extends Component {
         let index = this.state.allEvents.indexOf(event);
         console.log(index)
 
-        newList.push (
-          <li key={index}>
-            <span><strong>{a}</strong></span> — <span>{b}</span>
-            <button onClick={() => { this.shiftEndTime(index, moment().format('hh:mm A')) }}>Event Ended</button> 
+        newList.push(
+          <li>
+          <Link key={event.id} to={{
+            pathname: '/events/'+event.id,
+            state: {  
+                id: event.id,
+                title: event.title,
+                start: event.start,
+                end: event.end,
+                description: event.description,
+                speaker: event.speaker.id,
+                related: event.related
+            }
+          }}>
+            <h2>{event.title}</h2>
+            <span><strong>{event.start}</strong></span> — <span>{event.end}</span>
+          </Link>
+          {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+              <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+            :
+              <div></div>
+          }
           </li>
-        ) 
+        )
+
+        // newList.push (
+        //   <li key={index}>
+        //     <span><strong>{a}</strong></span> — <span>{b}</span>
+        //     {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+        //     <button onClick={() => { this.shiftEndTime(index, moment().format('hh:mm A')) }}>Event Ended</button> 
+        //     :
+        //     <div></div>
+        //     }
+
+        //   </li>
+        // ) 
     })
 
+    let allEvents = this.state.allEvents;
     return (
       <div>
-        {this.state.canShiftAll ? 
+        {this.state.canShiftAll && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
         <div style={{display: 'flex', justifyContent: 'center'}}>
           <TimePicker style={{align: 'center'}}
             defaultValue={this.state.value}
@@ -57,9 +100,38 @@ export class NewSchedule extends Component {
           />
           <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
         </div>
-      :
-      <div></div>
-      }
+        :
+        <div></div>
+        }
+        {/* <div>
+            <ul align="center">
+            {allEvents.map((e) => (
+              <Link key={e.id} to={{
+                pathname: '/events/'+e.id,
+                state: {  
+                    id: e.id,
+                    title: e.title,
+                    start: e.start,
+                    end: e.end,
+                    description: e.description,
+                    speaker: e.speaker.id,
+                    related: e.related
+                }
+              }}>
+                <h2>{e.title}</h2>
+                <span><strong>{e.start}</strong></span> — <span>{e.end}</span>
+                {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+                  <button onClick={() => { this.shiftEndTime(allEvents.indexOf(e), moment().format('hh:mm A')) }}>Event Ended</button> 
+                :
+                  <div></div>
+                }
+              </Link>
+            ))}
+            </ul>
+        </div> */}
+          
+
+
 
         <div className="schedule">      
           <ul>
@@ -187,7 +259,11 @@ export class NewSchedule extends Component {
     db.collection('detailed itinerary').get()
     .then(snapshot => {
         snapshot.forEach(doc => {
-            wholeData.push(doc.data())
+            let dataCopy = doc.data()
+            let id = doc.id;
+            let trimmed = id.replace(/ +/g, "");
+            dataCopy.id = trimmed;
+            wholeData.push(dataCopy);
         }
     );
 
