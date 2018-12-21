@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../App.css';
 import './speakers.css';
-import fire from '../fire.js';
+import fire from '../../fire.js';
 import moment from 'moment';
 import SpeakerComponent from './speakerComponent.js';
 

@@ -1,11 +1,8 @@
 import React from 'react';
 
 const StyleGuide = () => {
-    const style = {
-        margin: "5%"
-    }
     return (
-        <div style={style}>
+        <div>
             {/* =================== GENERAL =================== */}
             <div className="space-evenly">
                 <div>

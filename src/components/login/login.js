@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../App.css';
 import './login.css';
-import fire from '../fire.js';
+import fire from '../../fire.js';
 
 export class Login extends Component {
     constructor() {

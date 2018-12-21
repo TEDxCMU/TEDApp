@@ -35,12 +35,15 @@
   --tedblack: #000;
   --tedgrey: #4e4e4e;
   --tedlightgrey: #aaaaaa;
+  --tedbggrey: ##E5E5E5;
+  --tedblue: #6EEBFC;
   --tedred: #e62b1e;
   --tedwhite: #fff;
   --tedoffwhite: #f8f8f8;
   --tedredhover: #c42318;
+  --tedredgradient: linear-gradient(180deg, #CB2D3E 0%, #EF473A 100%);
   --opaque: rgba(0, 0, 0, 0.35);
-  --tedfont: "Helvetica";
+  --tedfont: "Open Sans";
 }
 /* ---------- 02. CSS VARIABLES (END) ---------- */
 
@@ -67,8 +70,9 @@ time, mark, audio, video {
 }
 
 body {
-    font-family: "Helvetica", serif;
+    font-family: var(--tedfont), serif;
     line-height: 1;
+    background: var(--tedbggrey);
 }
 
 article,aside,details,figcaption,figure,
@@ -130,7 +134,7 @@ hr {
     height: 1px;
     border: 0;   
     border-top: 1px solid var(--tedblack);
-    margin: em 0;
+    margin: 0;
     padding: 0;
 }
 
@@ -165,13 +169,6 @@ h1 {
   line-height: 1.3;
   font-weight: 600;
   letter-spacing: 0.3px;
-}
-
-@media only screen and (max-width:600px) {
-  h1 {
-    font-size: 2.6em;
-    letter-spacing: -.05em;
-  }
 }
 
 h2 {
@@ -225,8 +222,8 @@ a {
 p a {
   color: var(--tedgrey);
   text-decoration: none;
-  background: linear-gradient(to bottom, var(--tedred) 0%, var(--tedred) 100%);
-	background-position: 0 105%;
+  background: var(--tedredgradient);
+	background-position: 0 100%;
 	background-repeat: repeat-x;
 	background-size: 3px 3px;
 }
@@ -569,7 +566,7 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 /* ---------- 07. LIST STYLING (START) ---------- */
 
 li {
-  width: 80%;
+  width: 100%;
   padding: 10px;
 }
 
@@ -582,7 +579,7 @@ li h3 {
 }
 
 li p {
-  padding: 15px;
+  padding: 10px;
 }
 /* ---------- 07. LIST STYLING (END) ---------- */
 
@@ -603,6 +600,15 @@ li p {
 }
 @media only screen and (max-width:600px) {
   /* COLLAPSE MENU */
+  h1 {
+    font-size: 2em;
+    letter-spacing: -.05em;
+  }
+  h6 {
+    font-size: 1em;
+    font-weight: normal;
+    letter-spacing: -.05em;
+  }
   p {
     font-size: 0.95em;
   }

@@ -1,4 +1,4 @@
-.dropdown {
+.faqquestion {
     text-align: left;
     padding: 0;
     margin: 10px;
@@ -12,8 +12,14 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
     cursor: pointer;
     padding: 1em;
+    -moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-webkit-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
 }
 
 .label:hover {
@@ -24,7 +30,7 @@
     color: red;
     margin-top: 0;
     padding-top: 0;
-    padding: 0 1em 1em 1em;
+    padding: 1em;
     /* TBD */
 }
 .content p {

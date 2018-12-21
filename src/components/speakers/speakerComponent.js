@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../App.css';
 import './speakers.css';
-import Dropdown from './dropdown';
+import Dropdown from '../dropdown/dropdown';
 
 export class SpeakerComponent extends Component {
     constructor() {

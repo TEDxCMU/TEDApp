@@ -1,0 +1,22 @@
+.faq {
+    
+    width: 80%;
+    margin: 20px auto;
+    text-align: left;
+}
+
+.faq h1 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.faq h2 {
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.faq .justified {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}

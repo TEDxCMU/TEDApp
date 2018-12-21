@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
 import './App.css';
 import { auth, provider } from './fire';
-import { NewSchedule } from './components/newSchedule.js';
-import { Navigation } from './components/navigation.js';
-import { Login } from './components/login.js';
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
-import Faq from './components/faq';
-import Speakers from './components/speakers';
+
+import { NewSchedule } from './components/schedule/newSchedule.js';
+import { Navigation } from './components/navigation/navigation';
+import { Login } from './components/login/login.js';
+import Faq from './components/faq/faq';
+import Speakers from './components/speakers/speakers';
 import StyleGuide from './components/styleguide';
-import Footer from './components/footer';
+import Header from './components/header/header';
+import Footer from './components/footer/footer';
+
 import { isAndroid, isIOS } from "react-device-detect";
 
 
@@ -39,18 +42,18 @@ class App extends Component {
 
     return (
 
-      <div>
+      <div className="App">
         <Router>
-          <div className="App">
-          <Navigation user={this.state.user} login={this.login} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
-          <Route path="/" exact strict render={this.schedulePage}/>
-          <Route path="/faq" exact strict render={this.faqPage}/>
-          <Route path="/speakers" exact strict render={this.speakersPage}/>
-          <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
-          <Route path="/login" exact strict render={this.loginPage}/>
+          <div>
+            <Navigation user={this.state.user} login={this.login} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
+            <Route path="/" exact strict render={this.schedulePage}/>
+            <Route path="/faq" exact strict render={this.faqPage}/>
+            <Route path="/speakers" exact strict render={this.speakersPage}/>
+            <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
+            <Route path="/login" exact strict render={this.loginPage}/>
           </div>
         </Router>
-        <div style={{display: 'flex', flexDirection: "column", alignItems:"center"}}> 
+        {/* <div style={{display: 'flex', flexDirection: "column", alignItems:"center"}}> 
           {this.state.chromePopUp === true ? 
           <button align="center">Add app to Android Home Screen!</button>
           :
@@ -62,9 +65,9 @@ class App extends Component {
           :
           <div align="center"></div>
           }
-        </div>
+        </div> */}
         {/* <ul>{listOfData}</ul> */}
-        <Footer />
+        {/* <Footer /> */}
       </div>
     );
   }
@@ -77,37 +80,64 @@ class App extends Component {
 
   schedulePage = (props) => {
     return (
-      <NewSchedule
-      user={this.state.user} /> 
+      <div>
+        <Header
+          title="Live Schedule" 
+          description="The next talk by Po Shen Loh starts in 5 minutes in McConomy Auditorium." />
+        <NewSchedule
+          user={this.state.user} /> 
+      </div>
     );
   }
 
   faqPage = (props) => {
     return (
-      <Faq
-      user={this.state.user} /> 
+      <div>
+        <Header
+          title="FAQ"
+          description="Find answers to your questions on food, parking, or anything in-between." />
+        <Faq
+          user={this.state.user} /> 
+      </div>
+      
     );
   }
 
   styleGuidePage = (props) => {
     return (
-      <StyleGuide
-      user={this.state.user} /> 
+      <div>
+        <Header
+          title="Style Guide"
+          description="For personal reference." />
+        <StyleGuide
+          user={this.state.user} /> 
+      </div>
     );
   }
 
   loginPage = (props) => {
     return (
-      <Login
-      user={this.state.user}
-      login={this.login} /> 
+      <div>
+        <Header
+          title="Login"
+          description="" />
+        <Login
+          user={this.state.user}
+          login={this.login} /> 
+      </div>
     );
   }
 
   speakersPage = (props) => {
     return (
-      <Speakers
-      user={this.state.user} /> 
+      <div>
+        <Header
+          title="Speakers"
+          description="Learn about the six phenomenal speakers talking today." />
+        <Speakers
+          user={this.state.user} />
+      </div>
+       
     );
   }
 

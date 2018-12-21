@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../App.css';
 import './schedule.css';
 import { BrowserRouter as Router} from 'react-router-dom';
 import moment from 'moment';
 import Route from 'react-router-dom/Route';
-import fire from '../fire.js';
+import fire from '../../fire.js';
 
 export class NewSchedule extends Component {
   constructor() {
@@ -43,8 +43,8 @@ export class NewSchedule extends Component {
         console.log(index)
 
         newList.push (
-          <li >
-            <span><strong>{a}</strong></span> — <span>{b}</span>
+          <li className="schedule-item">
+            <span><strong>{a}</strong></span>{/*  — <span>{b}</span> */}
             <button onClick={() => { this.shiftEndTime(index, moment().format('hh:mm A')) }}>Event Ended</button> 
           </li>
         ) 
