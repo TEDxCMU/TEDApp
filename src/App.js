@@ -12,7 +12,6 @@ import Faq from './components/faq/faq';
 import Speakers from './components/speakers/speakers';
 import StyleGuide from './components/styleguide';
 import Header from './components/header/header';
-import Footer from './components/footer/footer';
 
 import { isAndroid, isIOS } from "react-device-detect";
 
@@ -142,7 +141,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(this.state)
+    // console.log(this.state)
     if (isAndroid) {
       this.setState({
         chromePopUp: isAndroid,
@@ -154,7 +153,7 @@ class App extends Component {
       })
     }
 
-    console.log(this.state.user)
+    // console.log(this.state.user)
     const db = fire.firestore();
     db.settings({
       timestampsInSnapshots: true
@@ -165,9 +164,9 @@ class App extends Component {
       snapshot.forEach(doc => {
         wholeData.push(doc.data())
       });
-      console.log(wholeData)
+      // console.log(wholeData)
       this.setState({allData: wholeData})
-      console.log(this.state.allData)
+      // console.log(this.state.allData)
     })
     .catch(error => {
       console.log('Error!', error);

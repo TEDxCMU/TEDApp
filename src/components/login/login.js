@@ -21,7 +21,7 @@ export class Login extends Component {
         <div className="login">
             <form>
                 {this.state.found === true ?
-                <h1>  </h1>
+                null
             
                 :
                 <h1> Could not find an account with that email/password.</h1>

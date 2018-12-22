@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import './schedule.css';
-import { BrowserRouter as Router} from 'react-router-dom';
 import moment from 'moment';
-import Route from 'react-router-dom/Route';
 import fire from '../../fire.js';
 
 export class NewSchedule extends Component {
@@ -23,7 +21,7 @@ export class NewSchedule extends Component {
   }
 
   render() {
-    console.log(this.state.allEvents)  
+    // console.log(this.state.allEvents)  
     let newList = [];
 
     // this.state.allEvents.forEach(event => {
@@ -32,18 +30,18 @@ export class NewSchedule extends Component {
     //    event[1] = f_time; 
     // })
     
-    console.log(this.state.allEvents) 
+    // console.log(this.state.allEvents) 
 
     this.state.allEvents.forEach(event => {
         //let name = event[0];
-        console.log("event start is: ", event.start)
+        // console.log("event start is: ", event.start)
         let a = event.start;
-        let b = event.end;
+        // let b = event.end;
         let index = this.state.allEvents.indexOf(event);
-        console.log(index)
+        // console.log(index)
 
         newList.push (
-          <li className="schedule-item">
+          <li key={index.toString()} className="schedule-item" >
             <span><strong>{a}</strong></span>{/*  — <span>{b}</span> */}
             <button onClick={() => { this.shiftEndTime(index, moment().format('hh:mm A')) }}>Event Ended</button> 
           </li>
@@ -102,9 +100,6 @@ export class NewSchedule extends Component {
 
   updateFireTimes = (start, newStart, newEnd, index) => {
     console.log("SHALOM")
-    let newCount = this.state.updateCount + 1
-    // console.log(newCount)
-    let that = this;
     let i = index;
     console.log("index is: ", i)
     const db = fire.firestore();

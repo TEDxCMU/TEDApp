@@ -6,7 +6,7 @@ const StyleGuide = () => {
             {/* =================== GENERAL =================== */}
             <div>
                 <div>
-                    <p><a href="#">link</a></p>
+                    <p><a href="http://google.com/">link</a></p>
                     <p><abbr title="this isn't a very good description">abbreviation</abbr></p>
                     <p><strong>strong text</strong></p>
                     <p><em>em text</em></p>
