@@ -3,8 +3,6 @@
     padding: 0;
     margin: 10px;
     border-radius: 3px;
-    -webkit-box-shadow: 1px 1px 26px -5px var(--opaque);
-    -moz-box-shadow: 1px 1px 26px -5px var(--opaque);
     box-shadow: 2px 2px 26px -5px var(--opaque);
 }
 
@@ -15,10 +13,6 @@
     align-items: center;
     cursor: pointer;
     padding: 1em;
-    -moz-transition: all 0.3s ease-in-out;
-	-o-transition: all 0.3s ease-in-out;
-	-webkit-transition: all 0.3s ease-in-out;
-	-ms-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 }
 
@@ -30,7 +24,7 @@
     color: red;
     margin-top: 0;
     padding-top: 0;
-    padding: 0 1em 1em 1em;
+    padding: 1em;
     /* TBD */
 }
 .content p {

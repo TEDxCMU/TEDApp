@@ -37,12 +37,12 @@ export class Navigation extends Component {
                     onStateChange={(state) => this.handleStateChange(state)}>
                     <div className="nav">
                         <ul>
-                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/" exact activeStyle={{color:'#e62b1e'}}>
+                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/" exact activeStyle={{color:'#6EEBFC'}}>
                             Home
                         </NavLink></li>
                         <div>
                             {this.props.user !== null && localStorage.getItem("userEmail") !== "dijour@cmu.edu" ?
-                                <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/questions" exact activeStyle={{color:'#e62b1e'}}>
+                                <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/questions" exact activeStyle={{color:'#6EEBFC'}}>
                                     My Questions
                                 </NavLink>
                             :
@@ -50,10 +50,10 @@ export class Navigation extends Component {
                                 
                             }
                         </div>
-                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/faq" exact activeStyle={{color:'#e62b1e'}}>
+                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/faq" exact activeStyle={{color:'#6EEBFC'}}>
                             FAQs
                         </NavLink></li>
-                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/styleguide" exact activeStyle={{color:'#e62b1e'}}>
+                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/styleguide" exact activeStyle={{color:'#6EEBFC'}}>
                             Style Guide
                         </NavLink></li>
                         </ul>
