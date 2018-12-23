@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import '../App.css';
-import './speakers.css';
-import fire from '../fire.js';
+import '../../App.css';
+import '../speakers/speakers.css';
+import fire from '../../fire.js';
 import moment from 'moment';
-import SpeakerComponent from './speakerComponent.js';
+import SpeakerComponent from '../speakers/speakerComponent.js';
 
 export class EventDetails extends Component {
     constructor() {

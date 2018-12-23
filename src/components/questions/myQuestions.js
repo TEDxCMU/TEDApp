@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import 'rc-time-picker/assets/index.css';
-import '../App.css';
-import './speakers.css';
-import fire from '../fire.js';
+import '../../App.css';
+import '../speakers/speakers.css';
+import fire from '../../fire.js';
 import QuestionComponent from './questionComponent.js'
 import moment from 'moment';
 import TimePicker from 'rc-time-picker';
 import ReactDOM from 'react-dom';
-import {Redirect} from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 export class MyQuestions extends Component {
     constructor() {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../App.css';
 import './login.css';
-import fire from '../fire.js';
-import { Redirect } from 'react-router-dom'
+import fire from '../../fire.js';
+import { Redirect } from 'react-router-dom';
 
 export class Login extends Component {
     constructor() {

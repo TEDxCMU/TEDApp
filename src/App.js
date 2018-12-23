@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import './App.css';
 import { auth, provider } from './fire';
-import { NewSchedule } from './components/newSchedule.js';
-import { EventDetails } from './components/eventDetails.js';
-import { Navigation } from './components/navigation.js';
-import { Login } from './components/login.js';
-import { MyQuestions } from './components/myQuestions.js'
+import { NewSchedule } from './components/schedule/newSchedule.js';
+import { EventDetails } from './components/event/eventDetails.js';
+import { Navigation } from './components/navigation/navigation.js';
+import { Login } from './components/login/login.js';
+import { MyQuestions } from './components/questions/myQuestions.js'
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
-import Faq from './components/faq';
-import Speakers from './components/speakers';
+import Faq from './components/faq/faq';
+import Speakers from './components/speakers/speakers';
 import StyleGuide from './components/styleguide';
-import Footer from './components/footer';
+import Footer from './components/footer/footer';
 import { isAndroid, isIOS } from "react-device-detect";
 
 

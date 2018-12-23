@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../App.css';
-import { auth, provider } from '../fire.js';
+import '../../App.css';
+import { auth, provider } from '../../fire.js';
 import {NavLink} from 'react-router-dom';
-import logo from '../logo.png';
+import logo from '../../logo.png';
 import './navigation.css';
 import { slide as Menu } from 'react-burger-menu';
 

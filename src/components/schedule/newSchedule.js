@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../App.css';
 import './schedule.css';
-import EventDetails from './eventDetails.js'
+import EventDetails from '../event/eventDetails.js'
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import Route from 'react-router-dom/Route';
-import fire from '../fire.js';
+import fire from '../../fire.js';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 

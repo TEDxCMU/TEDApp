@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../../App.css';
 import './schedule.css';
 import { BrowserRouter as Router} from 'react-router-dom';
 import moment from 'moment';
 import Route from 'react-router-dom/Route';
-import fire from '../fire.js';
+import fire from '../../fire.js';
 
 export class Schedule extends Component {
   constructor() {

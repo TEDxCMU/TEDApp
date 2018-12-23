@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import '../../App.css';
 import './faq.css';
-import FaqQuestion from './faqquestion';
+import FaqQuestion from './faqquestion/faqquestion';
 
 export class Faq extends Component {
 
