@@ -1,0 +1,60 @@
+header {
+    position: relative;
+    background: var(--tedredgradient);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.09);
+    border-radius:0%;
+}
+
+header a {
+    float: left;
+    text-align: center;
+    padding: 15px;
+    line-height: 25px;
+    -webkit-transition: color 0.3s ease-out;
+    -moz-transition: color 0.3s ease-out;
+    -o-transition: color 0.3s ease-out;
+    transition: color 0.3s ease-out;
+}
+
+header a {
+    color: var(--white)
+}
+
+header a:hover {
+    color: var(--tedblue);
+}
+
+header img {
+    max-width: 130px;
+}
+
+header h1 {
+    display: inline-block;
+    margin: 0;
+    vertical-align: middle;
+}
+
+header .logo {
+    left: 26px;
+    top: 36px;
+    position: absolute;
+    z-index: 1;
+}
+
+header i {
+    vertical-align: middle;
+}
+
+header h1, header h6 {
+    color: var(--tedwhite);
+    line-height: normal;
+}
+
+.header-content {
+    padding: 0 26px 15px 26px;
+}
+
+header .title {
+    margin-top: 100px;
+    line-height: 2em;
+}

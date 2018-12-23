@@ -1,108 +1,74 @@
-header {
-    background-color: var(--tedwhite);
-    padding: 0 10px 25px 10px;
-    margin-bottom: 75px;
-}
-
-header a {
-    float: left;
-    text-align: center;
-    padding: 15px;
-    line-height: 25px;
-    -webkit-transition: color 0.3s ease-out;
-    -moz-transition: color 0.3s ease-out;
-    -o-transition: color 0.3s ease-out;
-    transition: color 0.3s ease-out;
-}
-
-header a {
-    color: var(--white)
-}
-
-header a:hover {
-    color: var(--tedblack);
-}
-
-header img {
-    max-width: 130px;
-}
-
-header h1 {
-    display: inline-block;
-    margin: 0;
-    vertical-align: middle;
-}
-
-header .logo {
-    left: 36px;
-    top: 36px;
-    position: fixed;
-}
-
-header i {
-    vertical-align: middle;
-}
-
-/* ---------- 13. HAMBURGER MENU (START) ---------- */
 /* Position and sizing of burger button */
 .bm-burger-button {
-    position: fixed;
-    width: 36px;
-    height: 30px;
-    right: 36px;
-    top: 36px;
-  }
-  
-  /* Color/shape of burger icon bars */
-  .bm-burger-bars {
-    background: var(--tedblack);
-  }
-  
-  /* Position and sizing of clickable cross button */
-  .bm-cross-button {
-    height: 24px;
-    width: 24px;
-  }
-  
-  /* Color/shape of close button cross */
-  .bm-cross {
-    background: var(--tedblack);
-  }
-  
-  /* General sidebar styles */
-  .bm-menu {
-    background: var(--tedwhite);
-    padding: 2.5em 1.5em 0;
-    font-size: 1.15em;
-  }
-  
-  /* Morph shape necessary with bubble or elastic */
-  .bm-morph-shape {
-    fill: var;
-  }
-  
-  /* Wrapper for item list */
-  .bm-item-list {
-    color: var(--tedgrey);
-    padding: 0.8em;
-  }
-  
-  /* Individual item */
-  .bm-item {
-    display: inline-block;
-  }
-  
-  /* Styling of overlay */
-  .bm-overlay {
-    background: rgba(0, 0, 0, 0.2);
-  }
+  position: fixed;
+  width: 36px;
+  height: 24px;
+  right: 26px;
+  top: 42px;
+}
 
-  .bm-menu-wrap {
-      right: 0;
-      background-color: white;
-  }
-  /* ---------- 13. HAMBURGER MENU (END) ---------- */
+/* Color/shape of burger icon bars */
+.bm-burger-bars {
+  background: var(--tedwhite);
+}
 
-  #navigation {
-      background: white !important;
-  }
+/* Position and sizing of clickable cross button */
+.bm-cross-button {
+  height: 50px !important;
+  width: 50px !important;
+  box-shadow: 0;
+}
+
+/* Color/shape of close button cross */
+span .bm-cross {
+  background: var(--tedwhite);
+  right: 5px;
+  top: 5px;
+  height: 30px !important;
+  width: 3px !important;
+}
+
+/* General sidebar styles */
+.bm-menu {
+  background: var(--tedredgradient);
+  padding: 2.5em 1.5em 0;
+  font-size: 1.15em;
+}
+
+/* Morph shape necessary with bubble or elastic */
+.bm-morph-shape {
+  fill: var;
+}
+
+/* Wrapper for item list */
+.bm-item-list {
+  display: flex;
+  color: var(--tedwhite);
+  padding: 0.8em;
+  overflow-y: hidden;
+  text-align: center !important;
+}
+
+/* Individual item */
+
+.bm-item nav {
+  display: flex;
+  flex-direction: column;
+  outline: none;
+}
+
+/* Styling of overlay */
+.bm-overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.bm-menu-wrap {
+    position: absolute;
+    right: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,1);
+}
+
+#navigation {
+    background: var(--tedredgradient);
+}

@@ -12,8 +12,9 @@ import fire from './fire.js';
 import Faq from './components/faq/faq';
 import Speakers from './components/speakers/speakers';
 import StyleGuide from './components/styleguide';
-import Footer from './components/footer/footer';
 import { isAndroid, isIOS } from "react-device-detect";
+
+import Header from './components/header/header';
 
 
 
@@ -78,7 +79,6 @@ class App extends Component {
           }
         </div>
         {/* <ul>{listOfData}</ul> */}
-        <Footer />
       </div>
     );
   }
@@ -91,63 +91,100 @@ class App extends Component {
 
   navigationPage = (uzer) => {
     return(
-      <Navigation
-      user= {uzer} 
-      login={this.login} 
-      logout={this.logout} 
-      isiPhone={this.state.iosPopUp} 
-      isAndroid={this.state.chromePopUp}
-      />
+      <div>
+        <Navigation
+          user= {uzer} 
+          login={this.login} 
+          logout={this.logout} 
+          isiPhone={this.state.iosPopUp} 
+          isAndroid={this.state.chromePopUp}
+          />
+      </div>
     )
   }
 
   schedulePage = (props) => {
     return (
-      <NewSchedule
-      user={this.state.user} /> 
+      <div>
+        <Header
+          title="Live Schedule" 
+          description="The next talk by Po Shen Loh starts in 5 minutes in McConomy Auditorium." />
+        <NewSchedule
+          user={this.state.user} /> 
+      </div>
     );
   }
 
   questionsPage = (props) => {
     return (
-      <MyQuestions
-      user={this.state.user} /> 
+      <div>
+        <Header
+          title="My Questions"
+          description="Find answers to your questions here." />
+        <MyQuestions
+        user={this.state.user} /> 
+      </div>
     );
   }
 
   EventPage = (props) => {
     return (
-      <EventDetails
-      user={this.state.user} /> 
+      <div>
+        <Header
+          title="Event"
+          description="Find answers to your questions on food, parking, or anything in-between." />
+        <EventDetails
+        user={this.state.user} />
+      </div>
     );
   }
 
   faqPage = (props) => {
     return (
-      <Faq
-      user={this.state.user} /> 
+      <div>
+        <Header
+          title="FAQ"
+          description="Find answers to your questions on food, parking, or anything in-between." />
+        <Faq
+          user={this.state.user} /> 
+      </div>
     );
   }
 
   styleGuidePage = (props) => {
     return (
-      <StyleGuide
-      user={this.state.user} /> 
+      <div>
+        <Header
+          title="Style Guide"
+          description="For personal reference." />
+        <StyleGuide
+          user={this.state.user} /> 
+      </div>
     );
   }
 
   loginPage = (props) => {
     return (
-      <Login
-      user={this.state.user}
-      login={this.login} /> 
+      <div>
+        <Header
+          title="Login"
+          description="" />
+        <Login
+        user={this.state.user}
+        login={this.login} />
+      </div>
     );
   }
 
   speakersPage = (props) => {
     return (
-      <Speakers
-      user={this.state.user} /> 
+      <div>
+        <Header
+          title="Speakers"
+          description="Learn more about this years' speakers." />
+        <Speakers
+        user={this.state.user} />
+      </div>
     );
   }
 

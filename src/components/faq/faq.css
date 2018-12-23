@@ -1,6 +1,6 @@
 .faq {
     width: 80%;
-    margin: auto;
+    margin: 20px auto;
     text-align: left;
 }
 
@@ -17,4 +17,5 @@
 .faq .justified {
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }

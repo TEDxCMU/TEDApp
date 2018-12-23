@@ -1,15 +1,12 @@
 import React from 'react';
 
 const StyleGuide = () => {
-    const style = {
-        margin: "5%"
-    }
     return (
-        <div style={style}>
+        <div>
             {/* =================== GENERAL =================== */}
-            <div className="space-evenly">
+            <div>
                 <div>
-                    <p><a href="#">link</a></p>
+                    <p><a href="http://google.com/">link</a></p>
                     <p><abbr title="this isn't a very good description">abbreviation</abbr></p>
                     <p><strong>strong text</strong></p>
                     <p><em>em text</em></p>
@@ -56,7 +53,7 @@ const StyleGuide = () => {
                     <li>A list item.</li>
                 </ol>
 
-                <ul class="disc">
+                <ul className="disc">
                     <li>Here is an example</li>
                     <li>of an unordered list.</li>
                 </ul>	
@@ -84,12 +81,12 @@ const StyleGuide = () => {
                 <form>
                     <div>
                         <label for="sampleInput">Your email</label>
-                        <input class="full-width" type="email" placeholder="test@mailbox.com" id="sampleInput" />
+                        <input type="email" placeholder="test@mailbox.com" id="sampleInput" />
                     </div>
                     <div>
                         <label for="sampleRecipientInput">Reason for contacting</label>
-                        <div className="ss-custom-select">
-                            <select class="full-width" id="sampleRecipientInput">
+                        <div>
+                            <select id="sampleRecipientInput">
                                 <option value="Option 1">Questions</option>
                                 <option value="Option 2">Report</option>
                                 <option value="Option 3">Others</option>
@@ -98,20 +95,20 @@ const StyleGuide = () => {
                     </div>
 
                     <label for="exampleMessage">Message</label>
-                    <textarea class="full-width" placeholder="Your message" id="exampleMessage"></textarea>
+                    <textarea placeholder="Your message" id="exampleMessage"></textarea>
                     
-                    <label class="add-bottom">
+                    <label>
                     <input type="checkbox" />			            
-                    <span class="label-text">Send a copy to yourself</span>
+                    <span className="label-text">Send a copy to yourself</span>
                     </label>
-                    <input class="button-primary" type="submit" value="Submit" />
+                    <input type="submit" value="Submit" />
                 </form>
             </div>
             {/* =========== TABLES ============ */}
             <div>
                 <h3>Tables</h3>
                 <p>Be sure to use properly formed table markup with <code>&lt;thead&gt;</code> and <code>&lt;tbody&gt;</code> when building a <code>table</code>.</p>
-                <div class="table-responsive">
+                <div className="table-container">
                     <table>
                         <thead>
                             <tr>

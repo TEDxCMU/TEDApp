@@ -11,64 +11,47 @@
 * 02. CSS Variables
 * 03. Reset stylesheet
 * 04. General style & overrides
-* 05. Footer
-* 06. Forms (TBD)
-* 07. Buttons
-* 08. List styling
-* 09. Components (separate CSS files)
-* 10. Responsive styles
+* 05. Forms (TBD)
+* 06. Buttons
+* 07. List styling
+* 08. Components (separate CSS files)
+* 09. Responsive styles
 * -----------------------------
 **/
 
-/* ---------- 01. IMPORTS (START) ---------- */
-@font-face {
-  font-family: 'Helvetica';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Helvetica'), local('Helvetica'),
-       url('./fonts/helvetica.ttf') format('truetype'), /* Safari, Android, iOS */
-}
-/* ---------- 01. IMPORTS (END) ---------- */
+/* ---------- 01. START IMPORTS ---------- */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700');
+/* ---------- 01. END IMPORTS ---------- */
 
-/* ---------- 02. CSS VARIABLES (START) ---------- */
+/* ---------- 02. START CSS VARIABLES ---------- */
 :root {
   --tedblack: #000;
   --tedgrey: #4e4e4e;
-  --tedlightgrey: #aaaaaa;
-  --tedred: #e62b1e;
-  --tedwhite: #fff;
+  --tedlightgrey: #aaa;
+  --tedbggrey: #E5E5E5;
   --tedoffwhite: #f8f8f8;
+  --tedwhite: #fff;
+  --tedblue: #6EEBFC;
+  --tedred: #e62b1e;
   --tedredhover: #c42318;
-  --opaque: rgba(0, 0, 0, 0.35);
-  --tedfont: "Helvetica";
+  --tedredgradient: linear-gradient(180deg, #CB2D3E 0%, #EF473A 100%);
+  --opaque: rgba(0, 0, 0, 0.3);
 }
-/* ---------- 02. CSS VARIABLES (END) ---------- */
+/* ------------- 02. END CSS VARIABLES ------------ */
 
-/* ---------- 03. RESET STYLESHEET (START) ---------- */
-html, body, div, span, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-abbr, address, cite, code,
-del, dfn, em, img, ins, kbd, q, samp,
-small, strong, sub, sup, var,
-b, i,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section, summary,
-time, mark, audio, video {
+/* ---------- 03. START RESET STYLESHEET ---------- */
+* {
     margin: 0;
     padding: 0;
     border: 0;
     outline: 0;
-    font-size: 100%;
-    vertical-align: baseline;
-    background: transparent;
 }
 
 body {
-    font-family: "Helvetica", serif;
-    line-height: 1;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 100%;
+    line-height: 1.1;
+    background-color: var(--tedbggrey);
 }
 
 article,aside,details,figcaption,figure,
@@ -84,24 +67,9 @@ blockquote, q {
     quotes: none;
 }
 
-blockquote:before, blockquote:after,
-q:before, q:after {
-    content: '';
-    content: none;
-}
-
 a {
-    margin: 0;
-    padding: 0;
-    font-size: 100%;
     vertical-align: baseline;
     background: transparent;
-}
-
-ins {
-    background-color: var(--tedred);
-    color: var(--tedblack);
-    text-decoration: none;
 }
 
 mark {
@@ -115,105 +83,64 @@ del {
     text-decoration: line-through;
 }
 
-abbr[title], dfn[title] {
-    border-bottom: 1px dotted;
-    cursor: help;
-}
-
-table {
-    border-collapse: collapse;
-    border-spacing: 0;
-}
-
 hr {
     display: block;
     height: 1px;
     border: 0;   
-    border-top: 1px solid var(--tedblack);
-    margin: em 0;
-    padding: 0;
+    border-top: 1px solid var(--tedgrey);
 }
 
 input, select {
     vertical-align: middle;
 }
-/* ----- 03. RESET STYLESHEET (END) ----- */
+/* ----- 03. END RESET STYLESHEET ----- */
 
-/* ----- 04. GENERAL STYLES & OVERRIDES (START) ----- */
+/* ----- 04. START GENERAL STYLES & OVERRIDES ----- */
 
-/* --- DOCUMENT STYLING --- */
-html {
-  font-family: var(--tedfont), sans-serif;
-}
-
-body {
-  font-family: var(--tedfont), sans-serif;
-  background-color: var(--tedwhite);
-}
-
-/* --- TYPOGRAPHY --- */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--tedfont), sans-serif;
   color: var(--tedblack);
-  font-style: normal;
   text-rendering: optimizeLegibility;
-  margin-bottom: 1.0em;
+  margin-bottom: 1.0rem;
 }
 
 h1 {
-  font-size: 3em;
-  line-height: 1.3;
+  font-size: 3rem;
   font-weight: 600;
-  letter-spacing: 0.3px;
-}
-
-@media only screen and (max-width:600px) {
-  h1 {
-    font-size: 2.6em;
-    letter-spacing: -.05em;
-  }
+  line-height: 1.5;
 }
 
 h2 {
-  font-size: 2.4em;
+  font-size: 2.4rem;
   font-weight: 600;
-  /* line-height: 1.25; */
-  /* padding: 0; */
-  /* margin: 0.5em; */
+  line-height: 1.5;
 }
 
 h3 {
-  font-size: 2em;
+  font-size: 2rem;
   line-height: 1.5;
-  /* margin-bottom: 1.0em; */
 }
 
 h4 {
-  font-size: 1.7em;
+  font-size: 1.7rem;
   line-height: 1.5;
-  margin-bottom: 0em;
-  /* margin-bottom: 1.1em; */
 }
 
 h5 {
   font-size: 1.4em;
-  line-height: 1.2;
+  line-height: 1.3;
   text-transform: uppercase;
-  /* letter-spacing: 0em; */
-  /* margin-bottom: 0.5em; */
 }
 
 h6 {
-  font-size: 1.3em;
-  /* line-height: 1.2; */
-  /* letter-spacing: 0em; */
-  /* margin-bottom: 0.5em; */
+  font-size: 1.3rem;
+  line-height: 1.2;
+  font-weight: 400;
 }
 
 p {
-  font-size: 1em;
+  font-size: 1rem;
   color: var(--tedgrey);
-  margin-bottom: 1.3em;
+  margin-bottom: 1.3rem;
   line-height: 1.4;
 }
 
@@ -225,8 +152,8 @@ a {
 p a {
   color: var(--tedgrey);
   text-decoration: none;
-  background: linear-gradient(to bottom, var(--tedred) 0%, var(--tedred) 100%);
-	background-position: 0 105%;
+  background: var(--tedredgradient);
+	background-position: 0 100%;
 	background-repeat: repeat-x;
 	background-size: 3px 3px;
 }
@@ -236,41 +163,6 @@ p a:hover {
   background-position: 0 100%;
   background-size: auto 5px;
   background-repeat: repeat-x;
-  text-decoration: none;
-}
-
-/* --- BLOCKQUOTE STYLING -- */
-blockquote {
-  margin: 3em 0;
-  padding-left: 4em;
-  position: relative;
-}
-
-blockquote:before {
-  content: "\201C";
-  font-size: 4em;
-  line-height: 0px;
-  margin: 0;
-  color: var(--tedgrey);
-  font-family: var(--tedfont), sans-serif;
-  position: absolute;
-  top: 0.4em;
-  left: 0;
-}
-
-blockquote p {
-  font-family: var(--tedfont), serif;
-  font-style: italic;
-  padding: 0;
-  font-size: 1.2em;
-  line-height: 1.737;
-}
-
-blockquote cite {
-  display: block;
-  font-size: 1.15em;
-  font-style: normal;
-  line-height: 1.616;
 }
 
 /* --- MISCELLANEOUS STYLING --- */
@@ -279,31 +171,23 @@ small {
   line-height: inherit;
 }
 
-hr {
-  border: solid var(--tedgrey);
-  border-width: 1px 0 0;
-  clear: both;
-  margin: 2.4em 0 1.5em;
-  height: 0;
-}
-
 del {
   text-decoration: line-through;
 }
 
 code {
-  font-size: 1.1em;
-  margin: 0 .3em;
-  padding: .3em .6em;
+  font-size: 1.1rem;
+  margin: 0 .3rem;
+  padding: .3rem .6rem;
   white-space: nowrap;
   background: var(--tedoffwhite);
   border: 1px solid var(--tedoffwhite);
   border-radius: 3px;
 }
 
-/* ---------- 04. GENERAL STYLES & OVERRIDES (END) ---------- */
+/* ---------- 04. END GENERAL STYLES & OVERRIDES ---------- */
 
-/* ---------- 05. FORM STYLING (START) ---------- */
+/* ---------- 05. START FORM STYLING ---------- */
 
 form {
   width: 80%;
@@ -329,16 +213,11 @@ select {
   outline: none;
   justify-content: center;
   color: var(--tedgrey);
-  font-family: var(--tedfont), sans-serif;
   font-size: 1em;
   line-height: 1em;
   width: 100%;
   background: transparent;
   border-bottom: 1px solid var(--opaque);
-  -moz-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
-  -webkit-transition: all 0.3s ease-in-out;
-  -ms-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 
@@ -362,10 +241,9 @@ select:focus {
 label, legend {
   text-transform: uppercase;
   font-weight: 600;
-  font-family: var(--tedfont), sans-serif;
-  font-size: 1em;
-  margin-top: 1em;
-	margin-bottom: .6em;
+  font-size: 1rem;
+  margin-top: 1rem;
+	margin-bottom: .6rem;
 	color: var(--tedblack);
 	display: block;
 }
@@ -374,110 +252,44 @@ input[type="checkbox"], input[type="radio"] {
 }
 label > .label-text {
 	display: inline-block;
-	margin-left: 1em;
+	margin-left: 1rem;
 	line-height: inherit;
 }
 label > input[type="checkbox"], label > input[type="radio"] {
 	margin: 0;
 	position: relative;
-	top: .15em;
+	top: .15rem;
 }
 
-/* ---------- Style Placeholder Text ---------- */
-::-webkit-input-placeholder {
-	color: var(--tedlightgrey);
-}
-:-moz-placeholder {
-	color: var(--tedlightgrey);  /* Firefox 18- */
-}
-::-moz-placeholder {
-	color: var(--tedlightgrey);  /* Firefox 19+ */
-}
-:-ms-input-placeholder {
-	color: var(--tedlightgrey);
-}
 .placeholder {
 	color: var(--tedlightgrey) !important;
 }
 
-/* ========================================================== */
-.ss-custom-select {
-	position: relative;
-	padding: 0;
-}
-.ss-custom-select select {
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	-ms-appearance: none;
-	-o-appearance: none;
-	appearance: none;
-	text-indent: 0.01px;
-	text-overflow: '';
-	margin: 0;
-	line-height: 3rem;
-	vertical-align: middle;
-}
-.ss-custom-select select option {
-	padding-left: 2rem;
-	padding-right: 2rem;
-}
-.ss-custom-select select::-ms-expand {
-	display: none;
-}
-.ss-custom-select::after {
-	content: '\f0d7';
-	font-family: 'FontAwesome';
-	position: absolute;
-	top: 50%;
-	right: 1.5rem;
-	margin-top: -10px;
-	bottom: auto;
-	width: 20px;
-	height: 20px;
-	line-height: 20px;
-	font-size: 18px;
-	text-align: center;
-	pointer-events: none;
-	color: #252525;
-}
+/* ---------- 05. END FORM STYLING ---------- */
 
-/* IE9 and below */
-.oldie .ss-custom-select::after {
-	display: none;
-}
-
-/* =========================================================== */
-/* ---------- 05. FORM STYLING (END) ---------- */
-
-/* ---------- 06. BUTTON STYLING (START) ---------- */
+/* ---------- 06. START BUTTON STYLING ---------- */
 
 button,
 input[type="submit"],
 input[type="reset"],
 input[type="button"] {
-  display: inline-block;
   font-weight: 600;
-  font-size: 1em;
+  font-size: 1rem;
   text-transform: uppercase;
   text-decoration: none;
-  letter-spacing: .05em;
-  height: 3em;
-  padding: 0 3em;
-  margin: 0 .3em 1.2em 0;
-  color: var(--tedwhite);
-  background-color: var(--tedgrey);
-  min-width: 80px;
-  box-shadow: 2px 2px 6px 0 var(--opaque);
+  display: inline-block;
   cursor: pointer;
-  border-radius: 3px;
   border: none;
+  border-radius: 3px;
   text-align: center;
   white-space: nowrap;
-  -moz-transition: all 0.3s ease-in-out;
-	-o-transition: all 0.3s ease-in-out;
-	-webkit-transition: all 0.3s ease-in-out;
-	-ms-transition: all 0.3s ease-in-out;
-	transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  height: 3rem;
+  padding: 0 3rem;
+  margin: 0 .3rem 1.2rem 0;
+  min-width: 80px;
+  letter-spacing: .05rem;
+  box-shadow: 2px 2px 6px 0 var(--opaque);
 }
 
 form button,
@@ -529,32 +341,32 @@ input[type="button"].button-primary:focus {
 
 button.full-width {
 	width: 100%;
-  height: 4em !important;
-	line-height: 4em !important;
-	padding: 0em 2em !important;
+  height: 4rem;
+	line-height: 4rem;
+	padding: 0em 2rem;
 }
 
 button.medium {
-	height: 3.6em !important;
-	line-height: 3.6em !important;
-	padding: 0 1.1em !important;
+	height: 3.6rem;
+	line-height: 3.6rem;
+	padding: 0 1.1rem;
 }
 button.large {
-	height: 4em !important;
-	line-height: 4em !important;
-	padding: 0em 2em !important;
+	height: 4rem;
+	line-height: 4rem;
+	padding: 0em 2rem;
 }
 button.stroke {
-  background: transparent !important;
+  background: transparent;
   color: var(--tedgrey);
 	border: 3px solid var(--tedgrey);
-	line-height: 3.8em;
+	line-height: 3.8rem;
 }
 button.stroke.medium {
-	line-height: 3.45em !important;
+	line-height: 3.45rem;
 }
 button.stroke.large {
-	line-height: 3.45em !important;
+	line-height: 3.45rem;
 }
 button.stroke:hover {
 	border: 3px solid var(--tedred);
@@ -564,9 +376,9 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	border: 0;
 	padding: 0;
 }
-/* ---------- 06. BUTTON STYLING (END) ---------- */
+/* ---------- 06. END BUTTON STYLING ---------- */
 
-/* ---------- 07. LIST STYLING (START) ---------- */
+/* ---------- 07. START LIST STYLING ---------- */
 
 li {
   width: 80%;
@@ -582,41 +394,66 @@ li h3 {
 }
 
 li p {
-  padding: 15px;
+  padding: 10px;
 }
-/* ---------- 07. LIST STYLING (END) ---------- */
+/* ---------- 07. END LIST STYLING ---------- */
 
-/* ---------- 08. COMPONENT STYLING (START) ---------- */
+/* ---------- 08. START TABLE STYLING ---------- */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border-spacing: 0;
+  padding: 20px;
+}
 
-/* ---------- 08. COMPONENT STYLING (END) ---------- */
+th, td {
+text-align: left;
+padding: 8px;
+}
 
-/* ---------- 09. RESPONSIVE STYLING (START) ---------- */
+th {
+background-color: var(--tedgrey);
+color: white;
+}
+
+td {
+background-color: var(--tedoffwhite);
+}
+
+.table-container {
+overflow-x: auto;
+padding: 20px;
+}
+/* ---------- 08. END TABLE STYLING ---------- */
+
+/* ---------- 09. START RESPONSIVE STYLING ---------- */
 @media only screen and (max-width:1024px) {
   p {
-    font-size: 1em;
+    font-size: 1rem;
   }
 }
 @media only screen and (max-width:768px) {
   p {
-    font-size: 0.95em;
+    font-size: 0.95rem;
   }
 }
 @media only screen and (max-width:600px) {
-  /* COLLAPSE MENU */
+  h1 {
+    font-size: 2rem;
+    letter-spacing: -.05rem;
+  }
+  h6 {
+    font-size: 1rem;
+    letter-spacing: -.05rem;
+  }
   p {
-    font-size: 0.95em;
+    font-size: 0.95rem;
   }
 }
 @media only screen and (max-width:400px) {
   p {
-    font-size: 0.9em;
+    font-size: 0.9rem;
     flex-direction: row;
-    text-align: justify;
   }
 }
-/* ---------- 09. RESPONSIVE STYLING (END) ---------- */
-
-.space-evely {
-  display: flex;
-  align-content: space-between;
-}
+/* ---------- 09. END RESPONSIVE STYLING ---------- */
