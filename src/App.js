@@ -77,7 +77,7 @@ class App extends Component {
           :
           <div align="center"></div>
           }
-        </div>
+        </div> */}
         {/* <ul>{listOfData}</ul> */}
       </div>
     );

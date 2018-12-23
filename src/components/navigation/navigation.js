@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import { auth, provider } from '../../fire.js';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import logo from '../../logo.png';
 import './navigation.css';
 import { slide as Menu } from 'react-burger-menu';
@@ -27,7 +26,6 @@ export class Navigation extends Component {
     }
 
     render() {
-        console.log(this.props.user)
         return (
             <div id="navigation">
             <header>
@@ -36,53 +34,39 @@ export class Navigation extends Component {
                     isOpen={this.state.menuOpen}
                     onStateChange={(state) => this.handleStateChange(state)}>
                     <div className="nav">
-                        <ul>
-                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/" exact activeStyle={{color:'#e62b1e'}}>
+                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/" exact activeStyle={{color: '#6EEBFC'}}>
                             Home
-                        </NavLink></li>
-                        <div>
-                            {this.props.user !== null && localStorage.getItem("userEmail") !== "dijour@cmu.edu" ?
-                                <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/questions" exact activeStyle={{color:'#e62b1e'}}>
-                                    My Questions
-                                </NavLink>
-                            :
-                                <div></div>
-                                
-                            }
-                        </div>
-                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/faq" exact activeStyle={{color:'#e62b1e'}}>
+                        </NavLink>
+                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/speakers" exact activeStyle={{color:'#6EEBFC'}}>
+                            Speakers
+                        </NavLink>
+                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/schedule" exact activeStyle={{color:'#6EEBFC'}}>
+                            Manager Dash
+                        </NavLink>
+                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/faq" exact activeStyle={{color:'#6EEBFC'}}>
                             FAQs
-                        </NavLink></li>
-                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/styleguide" exact activeStyle={{color:'#e62b1e'}}>
+                        </NavLink>
+                        <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/styleguide" exact activeStyle={{color:'#6EEBFC'}}>
                             Style Guide
-                        </NavLink></li>
-                        </ul>
+                        </NavLink>
+                        <NavLink to="/login" exact activeStyle={{color:'#6EEBFC'}}>
+                            Log In
+                        </NavLink>
                     </div>
-                    {this.props.user === null ?
-                        <div></div>
-                        :
+                    {/* {this.props.user ?
                         <div>
                         <div className='user-profile'>
                             <img src={this.props.user.photoURL} alt=""/>
                         </div>
                         <button className="full-width button-primary" onClick={this.props.logout}>Log Out</button> 
                         </div>
-                    }
-                    
+                        :
+                        <button className="full-width button-primary" onClick={this.props.login}>Log In</button>
+                    } */}
                 </Menu>
             </header>
             </div>
         );        
-    }
-
-    logout() {
-        auth.signOut()
-          .then(() => {
-          });
-      }
-
-    componentDidMount = () => {
-        console.log("navigation is mounted")
     }
 };
 

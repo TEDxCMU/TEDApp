@@ -4,9 +4,6 @@ import './speakers.css';
 import Dropdown from '../dropdown/dropdown';
 
 export class SpeakerComponent extends Component {
-    constructor() {
-      super();
-    }
 
     render() {
         let email = this.props.email;
@@ -16,7 +13,7 @@ export class SpeakerComponent extends Component {
             <Dropdown title={this.props.name}>
                 Hey there friend whats poppin
                 <div className="video">
-                    <iframe src="https://embed.ted.com/talks/dawn_wacek_a_librarian_s_case_against_overdue_book_fines" frameBorder="0" scrolling="no" allowFullScreen></iframe>
+                    <iframe title={this.props.name + "'s Related TED Talks"} src="https://embed.ted.com/talks/dawn_wacek_a_librarian_s_case_against_overdue_book_fines" frameborder="0" scrolling="no" allowfullscreen></iframe>
                     <br /> 
                 </div>
                 <form align='center'>
