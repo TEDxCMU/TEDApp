@@ -3,7 +3,6 @@ import React from 'react';
 const StyleGuide = () => {
     return (
         <div>
-            {/* =================== GENERAL =================== */}
             <div>
                 <div>
                     <p><a href="http://google.com/">link</a></p>
@@ -26,7 +25,6 @@ const StyleGuide = () => {
                     <h6>H6 Heading</h6>
                 </div>
             </div>
-                {/* =================== QUOTES =================== */}
             <div>
                 <h3>Quotes</h3>
                 <blockquote>
@@ -34,10 +32,10 @@ const StyleGuide = () => {
                     to do what you believe is great work. And the only way to do great work is to love what you do.
                     If you haven't found it yet, keep looking. Don't settle. As with all matters of the heart, you'll know when you find it.
                     </p>
+                    <br />
                     <cite>Steve Jobs</cite>
                 </blockquote>
             </div>
-            {/* =================== LISTS =================== */}
             <div>
             <h3>Example Lists</h3>
                 <ol>
@@ -104,7 +102,6 @@ const StyleGuide = () => {
                     <input type="submit" value="Submit" />
                 </form>
             </div>
-            {/* =========== TABLES ============ */}
             <div>
                 <h3>Tables</h3>
                 <p>Be sure to use properly formed table markup with <code>&lt;thead&gt;</code> and <code>&lt;tbody&gt;</code> when building a <code>table</code>.</p>

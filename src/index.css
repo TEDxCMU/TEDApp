@@ -63,10 +63,6 @@ nav ul {
     list-style: none;
 }
 
-blockquote, q {
-    quotes: none;
-}
-
 a {
     vertical-align: baseline;
     background: transparent;
@@ -185,12 +181,64 @@ code {
   border-radius: 3px;
 }
 
+/* BLOCKQUOTE STYLING */
+blockquote {
+  margin: 0 20px;
+  padding: 1rem;
+  /* background-color: var(--tedoffwhite); */
+  border-left: 7px solid var(--tedgrey);
+}
+
+blockquote p {
+  font-style: italic;
+  line-height: 1.6;
+}
+
+blockquote::before {
+  content: open-quote;
+  font-size: 4rem;
+  color: var(--tedgrey);
+  line-height: 0.3em;
+  margin-right: 0.25em;
+  vertical-align: -0.5em;
+}
+
+cite {
+  color: var(--tedgrey);
+  display: block;
+  padding: 0;
+  text-align: right;
+  font-style: italic;
+}
+
+cite::before {
+  content: '— ';
+}
+
+/* DEFINITION LIST STYLING */
+
+dl {
+  margin: 20px;
+}
+
+dt {
+  font-weight: bold;
+  padding: 10px 0;
+}
+
+dd {
+  color: var(--tedgrey);
+  line-height: 1.4;
+}
+
+
 /* ---------- 04. END GENERAL STYLES & OVERRIDES ---------- */
 
 /* ---------- 05. START FORM STYLING ---------- */
 
 form {
   width: 80%;
+  margin: 20px;
 }
 
 fieldset {
