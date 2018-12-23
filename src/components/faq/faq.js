@@ -93,6 +93,7 @@ export class Faq extends Component {
 
         return (
             <div className="faq">
+                <h1>FAQ</h1>
                 <div className="justified">
                     <button onClick={this.toggleAll} className="button-primary">All</button>
                     <button onClick={this.toggleGeneral} className="button-primary">General</button>
