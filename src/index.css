@@ -428,21 +428,11 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 /* ---------- 07. START LIST STYLING ---------- */
 
-li {
-  width: 80%;
-  padding: 10px;
-}
-
 li h3 {
   background-color: var(--tedblack);
   margin: 0;
   color: var(--tedwhite);
   font-weight: 300;
-  padding: 15px;
-}
-
-li p {
-  padding: 10px;
 }
 /* ---------- 07. END LIST STYLING ---------- */
 

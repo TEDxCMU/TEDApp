@@ -69,7 +69,10 @@ export class NewSchedule extends Component {
             <div className="bullet bullet-red"></div>
             <div className="time"><strong>{event.start}</strong> — {event.end}</div>
             <br />
-            <div className="info"><h4>{event.title}</h4></div>
+            <div className="info">
+              <h4>{event.title}</h4>
+              <p>A card with more information to do stuff will go here.</p>
+            </div>
           </Link>
           {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
               <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 

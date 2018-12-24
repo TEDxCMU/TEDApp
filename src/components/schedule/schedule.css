@@ -1,61 +1,5 @@
-/* .schedule-container {
-  position: relative;
-  overflow: hidden;
-  margin: 20px;
-}
-
-.schedule-container ul {
-  position: relative;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  background-color: var(--tedblue);
-  list-style: none;
-  margin: 10px;
-  padding: 10px;
-}
-
-.schedule-container ul::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  border: 1px solid var(--tedred);
-}
-
-.schedule-container ul li {
-  margin: 10px 0;
-  background-color: var(--tedwhite);
-  border-radius: 2px;
-  position: relative;
-}
-
-.schedule-container ul li::before {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border: 10px solid var(--tedbggrey);
-  border-radius: 50%;
-  background-color: var(--tedred);
-  top: 0;
-  left: -44px;
-}
-
-.schedule-container ul li:nth-child(1) {
-  margin-top: -10px;
-}
-
-.schedule-container ul li:last-child {
-  margin-bottom: -10px;
-} */
-
-
-/* OTHER CSS */
-
 .timeline ul {
-  padding: 1em 0 0 1.4em;
+  padding: 1em 0 0 2em;
   margin: 0;
   list-style-type: none;
   position: relative;
@@ -126,10 +70,5 @@ li .bullet.bullet-grey {
 }
 
 .info {
-  width: 50%;
   padding: 0 2rem;
-}
-
-.timeline h4 {
-  margin: 0;
 }
