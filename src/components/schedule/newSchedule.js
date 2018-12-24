@@ -65,8 +65,11 @@ export class NewSchedule extends Component {
                 related: event.related
             }
           }}>
-            <h2>{event.title}</h2>
-            <span><strong>{event.start}</strong></span> — <span>{event.end}</span>
+          {/* Change bullet color here, time, and the info in a timeline event */}
+            <div className="bullet bullet-red"></div>
+            <div className="time"><strong>{event.start}</strong> — {event.end}</div>
+            <br />
+            <div className="info"><h4>{event.title}</h4></div>
           </Link>
           {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
               <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
@@ -133,7 +136,7 @@ export class NewSchedule extends Component {
 
 
 
-        <div className="schedule">      
+        <div className="timeline">      
           <ul>
             {newList} 
           </ul>

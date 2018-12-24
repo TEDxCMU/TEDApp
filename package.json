@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "fingerprintjs2": "^1.8.6",
     "firebase": "^5.5.4",
     "firebase-admin": "^6.0.0",
     "moment": "^2.22.2",

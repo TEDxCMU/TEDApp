@@ -1,38 +1,135 @@
-.schedule {
+/* .schedule-container {
   position: relative;
   overflow: hidden;
+  margin: 20px;
 }
 
-.schedule ul {
+.schedule-container ul {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  background-color: var(--tedblue);
+  list-style: none;
   margin: 10px;
   padding: 10px;
 }
 
-.schedule-item {
-  list-style-type: disc;
-  text-align: center;
-  margin: 10px 30px;
-  border-radius: 3px;
+.schedule-container ul::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  border: 1px solid var(--tedred);
+}
+
+.schedule-container ul li {
+  margin: 10px 0;
   background-color: var(--tedwhite);
-  color: var(--tedblack);
-  -webkit-box-shadow: 1px 1px 10px -5px var(--opaque);
-  -moz-box-shadow: 1px 1px 10px -5px var(--opaque);
-  box-shadow: 2px 2px 10px -5px var(--opaque);
+  border-radius: 2px;
+  position: relative;
 }
 
-.schedule-item:first-child {
-  margin-top: 0;
+.schedule-container ul li::before {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border: 10px solid var(--tedbggrey);
+  border-radius: 50%;
+  background-color: var(--tedred);
+  top: 0;
+  left: -44px;
 }
 
-.schedule li:before {
-  content: "•";
-  padding-right: 8px;
-  color: var(--tedred);
+.schedule-container ul li:nth-child(1) {
+  margin-top: -10px;
 }
 
-.schedule-item {
+.schedule-container ul li:last-child {
+  margin-bottom: -10px;
+} */
 
+
+/* OTHER CSS */
+
+.timeline ul {
+  padding: 1em 0 0 1.4em;
+  margin: 0;
+  list-style-type: none;
+  position: relative;
+}
+
+.timeline ul::before {
+  content: '';
+  height: 100%;
+  width: 1px;
+  background-color: var(--tedlightgrey); /* controls line color */
+  position: absolute;
+  top: 0;
+  left: 2.5em;
+  z-index: -1;
+}
+
+li div {
+  display: inline-block;
+  margin: 1rem 0;
+  vertical-align: top;
+}
+
+li div .info {
+  display: block;
+}
+
+li .bullet {
+  width: 1rem;
+  height: 1rem;
+  box-sizing: border-box;
+  border-radius: 50%;
+  background: var(--tedoffwhite);
+  z-index: 1;
+  margin-right: 1rem;
+  position: relative;
+}
+
+/* Event has happened */
+li .bullet.bullet-red {
+  background: var(--tedred);
+  border: 4px solid var(--tedbggrey);
+}
+
+/* Event in progress */
+li .bullet.bullet-red-active {
+  border: 1px solid var(--tedred);
+  box-shadow: 0 0 15px 0 var(--tedred);
+}
+
+li .bullet.bullet-red-active::before {
+  content: " ";
+  position: absolute;
+  z-index: 1;
+  left: 3px;
+  top: 3px;
+  border: 4px solid var(--tedred);
+  border-radius: 50%;
+}
+
+/* Event hasn't happened */
+li .bullet.bullet-grey {
+  background: var(--tedlightgrey);
+  border: 4px solid var(--tedbggrey);
+}
+
+.time {
+  padding-top: 0;
+}
+
+.info {
+  width: 50%;
+  padding: 0 2rem;
+}
+
+.timeline h4 {
+  margin: 0;
 }

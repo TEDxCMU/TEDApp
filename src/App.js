@@ -13,6 +13,8 @@ import Faq from './components/faq/faq';
 import Speakers from './components/speakers/speakers';
 import StyleGuide from './components/styleguide';
 import { isAndroid, isIOS } from "react-device-detect";
+import Fingerprint from "fingerprintjs2";
+
 
 import Header from './components/header/header';
 
@@ -55,12 +57,6 @@ class App extends Component {
           <Route path="/faq" exact strict render={this.faqPage}/>
           <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
           <Route path="/login" exact strict render={this.loginPage}/>
-          {/* if (localStorage.getItem("user") === null || auth().currentUser === null ?) {
-            <div>
-             <Route path="/questions" exact strict render={this.questionsPage}/>
-             </div>
-          }
-          </div> */}
           <Route path="/questions" exact strict render={this.questionsPage}/>
           </div>
         </Router>
@@ -77,7 +73,7 @@ class App extends Component {
           :
           <div align="center"></div>
           }
-        </div> */}
+        </div>
         {/* <ul>{listOfData}</ul> */}
       </div>
     );
@@ -188,7 +184,7 @@ class App extends Component {
     );
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.authListener();
     if (isAndroid) {
       this.setState({
@@ -200,7 +196,20 @@ class App extends Component {
         iosPopUp: isIOS,
       })
     }
+    let db = fire.firestore()
+    const fpInstance = new Fingerprint();
+		fpInstance.get((result)=> {
+        let data = {id: result}
+        localStorage.setItem('fingerprint', result)
+        db.collection("audience").doc(result.toString()).set({
+          data
+        }, () => this.setState({
+          fingerprint: result
+        }))
+				console.log(localStorage.getItem('fingerprint'))
+    });
   }
+
 
   logout = () => {
     auth.signOut()

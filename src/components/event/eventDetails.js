@@ -47,7 +47,7 @@ export class EventDetails extends Component {
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
         let that = this;
-        db.collection("speakers").doc(email.email).collection("questions").add({
+        db.collection("speakers").doc(email.email).collection("questions").doc(localStorage.getItem('fingerprint')).set({
             question: text.question,
             answer: "",
             timeAsked: now
@@ -65,9 +65,29 @@ export class EventDetails extends Component {
     }
 
     componentDidMount = () => {
+        console.log(localStorage.getItem('fingerprint'))
         let props = this.props.location.state
         this.setState({props}, () => 
         this.checkSpeaker())
+    }
+
+    checkIfAsked = () => {
+        console.log(this.state)
+        const db = fire.firestore()
+        db.collection('speakers')
+        .doc(this.state.props.speaker)
+        .collection('questions')
+        .doc(localStorage.getItem('fingerprint'))
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            /** Doc exists, so the username is not available */
+            return this.setState({
+                asked: true
+            })
+          }
+          return
+        })
     }
 
     checkSpeaker = () => {
@@ -90,7 +110,7 @@ export class EventDetails extends Component {
             console.log('Document data:', doc.data());
             this.setState({
                 speaker: doc.data()
-            })
+            }, () => this.checkIfAsked())
           }
         })
         .catch(err => {
