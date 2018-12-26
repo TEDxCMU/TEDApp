@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
+import HeaderBG from '../../header-bg.svg';
 // import { NavLink } from 'react-router-dom';
 // import headerBG from '../../header-bg.svg';
 import './header.css';
@@ -28,9 +29,14 @@ export class Header extends Component {
 
     render() {
         return (
-            <header className="header-content">
-                <h1 className="title">{this.props.title}</h1>
-                <h6 className="description">{this.props.description}</h6>
+            <header>
+                {/* <div className="header-bg">
+                    <img src={HeaderBG} alt="header background"></img>
+                </div> */}
+                <div className="header-content">
+                    <h1 className="title">{this.props.title}</h1>
+                    <h6 className="description">{this.props.description}</h6>
+                </div>
             </header>
         );        
     }

@@ -1,31 +1,22 @@
 header {
     position: relative;
-    background: var(--tedredgradient);
-    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.09);
-    border-radius:0%;
+    background-image: url(../../header-bg.svg);
+    background-repeat: no-repeat;
+    background-color: var(--tedbggrey);
+    background-size: cover;
 }
 
 header a {
+    color: var(--white);
     float: left;
     text-align: center;
     padding: 15px;
     line-height: 25px;
-    -webkit-transition: color 0.3s ease-out;
-    -moz-transition: color 0.3s ease-out;
-    -o-transition: color 0.3s ease-out;
     transition: color 0.3s ease-out;
-}
-
-header a {
-    color: var(--white)
 }
 
 header a:hover {
     color: var(--tedblue);
-}
-
-header img {
-    max-width: 130px;
 }
 
 header h1 {
@@ -39,10 +30,7 @@ header .logo {
     top: 36px;
     position: absolute;
     z-index: 1;
-}
-
-header i {
-    vertical-align: middle;
+    max-width: 130px;
 }
 
 header h1, header h6 {
@@ -50,11 +38,59 @@ header h1, header h6 {
     line-height: normal;
 }
 
+header .title {
+    margin-top: 100px;
+    line-height: 2em;
+}
+
 .header-content {
     padding: 0 26px 15px 26px;
 }
 
-header .title {
-    margin-top: 100px;
-    line-height: 2em;
+.header-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.description {
+    padding-bottom: 15px;
+}
+
+@media only screen and (max-width: 600px) {
+    /* content */
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .description {
+        padding-bottom: 50px;
+    }
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .description {
+        padding-bottom: 60px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    header {
+        position: relative;
+        background: var(--tedredgradient);
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.09);
+        border-radius:0%;
+    }
+
+    .description {
+        padding-bottom: 25px;
+    }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    /* content */
 }
