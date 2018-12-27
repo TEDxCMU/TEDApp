@@ -72,3 +72,35 @@ li .bullet.bullet-grey {
 .info {
   padding: 0 2rem;
 }
+
+/* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
+
+@media only screen and (max-width: 600px) {
+  .timeline {
+    margin-top: 275px;
+  }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .timeline {
+    margin-top: 350px;
+  }
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .timeline {
+      margin-top: 325px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  /* content */
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  /* content */
+}

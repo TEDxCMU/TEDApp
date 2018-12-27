@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import '../../App.css';
 import { auth, provider } from '../../fire.js';
 import {NavLink} from 'react-router-dom';
-import logo from '../../logo.png';
 import './navigation.css';
 import { slide as Menu } from 'react-burger-menu';
 
@@ -30,32 +29,30 @@ export class Navigation extends Component {
         console.log(this.props.user)
         return (
             <div id="navigation">
-            <header>
-                <img src={logo} className="logo" alt="TEDxCMU"></img>
-                <Menu className="bm-menu" right 
+                <Menu className="" right 
                     isOpen={this.state.menuOpen}
                     onStateChange={(state) => this.handleStateChange(state)}>
                     <div className="nav">
                         <ul>
-                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/" exact activeStyle={{color:'#6EEBFC'}}>
-                            Home
-                        </NavLink></li>
-                        <div>
-                            {this.props.user !== null && localStorage.getItem("userEmail") !== "dijour@cmu.edu" ?
-                                <NavLink onClick={() => this.closeMenu()} className="menu-item" to="/questions" exact activeStyle={{color:'#6EEBFC'}}>
-                                    My Questions
-                                </NavLink>
-                            :
-                                <div></div>
-                                
-                            }
-                        </div>
-                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/faq" exact activeStyle={{color:'#6EEBFC'}}>
-                            FAQs
-                        </NavLink></li>
-                        <li><NavLink onClick={() => this.closeMenu()} className="menu-item" to="/styleguide" exact activeStyle={{color:'#6EEBFC'}}>
-                            Style Guide
-                        </NavLink></li>
+                            <li><NavLink onClick={() => this.closeMenu()} to="/" exact activeStyle={{color:'#6EEBFC'}}>
+                                Home
+                            </NavLink></li>
+                            <div>
+                                {this.props.user !== null && localStorage.getItem("userEmail") !== "dijour@cmu.edu" ?
+                                    <NavLink onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6EEBFC'}}>
+                                        My Questions
+                                    </NavLink>
+                                :
+                                    <div></div>
+                                    
+                                }
+                            </div>
+                            <li><NavLink onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6EEBFC'}}>
+                                FAQs
+                            </NavLink></li>
+                            <li><NavLink onClick={() => this.closeMenu()} to="/styleguide" exact activeStyle={{color:'#6EEBFC'}}>
+                                Style Guide
+                            </NavLink></li>
                         </ul>
                     </div>
                     {this.props.user === null ?
@@ -70,7 +67,6 @@ export class Navigation extends Component {
                     }
                     
                 </Menu>
-            </header>
             </div>
         );        
     }

@@ -183,9 +183,8 @@ code {
 
 /* BLOCKQUOTE STYLING */
 blockquote {
-  margin: 0 20px;
+  /* margin: 0 20px; */
   padding: 1rem;
-  /* background-color: var(--tedoffwhite); */
   border-left: 7px solid var(--tedgrey);
 }
 
@@ -217,9 +216,9 @@ cite::before {
 
 /* DEFINITION LIST STYLING */
 
-dl {
+/* dl {
   margin: 20px;
-}
+} */
 
 dt {
   font-weight: bold;

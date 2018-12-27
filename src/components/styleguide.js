@@ -1,8 +1,9 @@
 import React from 'react';
+import './styleguide.css';
 
 const StyleGuide = () => {
     return (
-        <div>
+        <div className="styles">
             <div>
                 <div>
                     <p><a href="http://google.com/">link</a></p>
