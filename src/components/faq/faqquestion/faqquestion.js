@@ -24,8 +24,11 @@ export class FaqQuestion extends Component {
 
         return (
         <div className="faqquestion">
-            <div onClick={this.toggleShow} className="label"><span><h6>{this.props.question}</h6></span><h4><span>+</span></h4></div>
-            {content}
+            <div onClick={this.toggleShow} className="label">
+                <span className="question-title"><h6>{this.props.question}</h6></span>
+                <span className="question-plus"><h4 className="plus">+</h4></span>
+            </div>
+            <p>{content}</p>
         </div>
         );
       }
