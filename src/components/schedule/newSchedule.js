@@ -258,9 +258,9 @@ export class NewSchedule extends Component {
 
   componentWillMount = () => {
     const db = fire.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
+    // db.settings({
+    //   timestampsInSnapshots: true
+    // });
     var wholeData = []
     db.collection('detailed itinerary').get()
     .then(snapshot => {
