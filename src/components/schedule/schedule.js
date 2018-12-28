@@ -73,9 +73,9 @@ export class Schedule extends Component {
 
   componentDidMount() {
     const db = fire.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
+    // db.settings({
+    //   timestampsInSnapshots: true
+    // });
     var wholeData = []
     db.collection('itinerarytest').get()
     .then(snapshot => {

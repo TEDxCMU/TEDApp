@@ -5,6 +5,13 @@
   position: relative;
 }
 
+.timelineAdmin ul {
+  padding: 1em 0 0 2em;
+  margin: 0;
+  list-style-type: none;
+  position: relative;
+}
+
 .timeline ul::before {
   content: '';
   height: 100%;

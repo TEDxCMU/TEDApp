@@ -99,51 +99,32 @@ export class NewSchedule extends Component {
     return (
       <div>
         {this.state.canShiftAll && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-        <div style={{display: 'flex', justifyContent: 'center'}}>
-          <TimePicker style={{align: 'center'}}
-            defaultValue={this.state.value}
-            onChange={this.handleValueChange}
-          />
+        <div>
+          <div style={{display: 'flex', justifyContent: 'center', marginTop: '275px'}}>
+            <TimePicker style={{align: 'center'}}
+              defaultValue={this.state.value}
+              onChange={this.handleValueChange}
+            />
+          </div>
           <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
+          <div className="timelineAdmin">      
+            <ul>
+              {newList} 
+            </ul>
+          </div>
         </div>
         :
-        <div></div>
-        }
-        {/* <div>
-            <ul align="center">
-            {allEvents.map((e) => (
-              <Link key={e.id} to={{
-                pathname: '/events/'+e.id,
-                state: {  
-                    id: e.id,
-                    title: e.title,
-                    start: e.start,
-                    end: e.end,
-                    description: e.description,
-                    speaker: e.speaker.id,
-                    related: e.related
-                }
-              }}>
-                <h2>{e.title}</h2>
-                <span><strong>{e.start}</strong></span> — <span>{e.end}</span>
-                {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-                  <button onClick={() => { this.shiftEndTime(allEvents.indexOf(e), moment().format('hh:mm A')) }}>Event Ended</button> 
-                :
-                  <div></div>
-                }
-              </Link>
-            ))}
-            </ul>
-        </div> */}
-          
-
-
-
         <div className="timeline">      
           <ul>
             {newList} 
           </ul>
         </div>
+        }
+        {/* <div className="timeline">      
+          <ul>
+            {newList} 
+          </ul>
+        </div> */}
       </div>
     );
   }

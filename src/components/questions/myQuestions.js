@@ -84,9 +84,9 @@ export class MyQuestions extends Component {
     }
     let userEmail = localStorage.getItem('userEmail');
     const db = fire.firestore();
-    db.settings({
-      timestampsInSnapshots: true
-    });
+    // db.settings({
+    //   timestampsInSnapshots: true
+    // });
     var wholeData = [];
   
     let speakerRef = db.collection('speakers').where('email', '==', userEmail);
