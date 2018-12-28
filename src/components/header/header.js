@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import HeaderBG from '../../header-bg.svg';
 import logo from '../../logo.png';
+import {Link} from 'react-router-dom';
 // import { NavLink } from 'react-router-dom';
 // import headerBG from '../../header-bg.svg';
 import './header.css';
@@ -31,7 +32,13 @@ export class Header extends Component {
     render() {
         return (
             <header className="sticky">
-                <img src={logo} className="logo" alt="TEDxCMU"></img>
+                <Link key={'home'} to={{
+                    pathname: '/',
+                    state: {  
+                    }
+                }}>
+                    <img src={logo} className="logo" alt="TEDxCMU"></img>
+                </Link>
                 {/* <div className="header-bg">
                     <img src={HeaderBG} alt="header background"></img>
                 </div> */}
