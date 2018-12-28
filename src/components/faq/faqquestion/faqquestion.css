@@ -5,15 +5,26 @@
     border-radius: 3px;
     box-shadow: 2px 2px 26px -5px var(--opaque);
     background-color: var(--tedwhite);
+    position: relative;
+}
+
+.question-plus {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.question-title {
+    position: relative;
+    margin-right: 25px;
 }
 
 .label {
     display: flex;
-    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    padding: 1em;
+    padding: 1rem;
 	transition: all 0.3s ease-in-out;
 }
 

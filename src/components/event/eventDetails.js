@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
+import './eventPage.css';
 import '../speakers/speakers.css';
 import fire from '../../fire.js';
 import moment from 'moment';
@@ -19,22 +20,22 @@ export class EventDetails extends Component {
         console.log(this.state)
         let self = this.state;
             return (
-                <div>
-                { self.speaker !== undefined ?
-                <div className="speakers">
-                    <SpeakerComponent 
-                        asked={this.state.asked}
-                        speaker={this.state.speaker} 
-                        name={self.speaker.first + ' ' + self.speaker.last} 
-                        handleChange={this.handleChange} 
-                        email={self.speaker.email}
-                        question={this.state.question}
-                        createQuestion={this.createQuestion}>
-                    </SpeakerComponent> 
-                </div>
-                :
-                <div></div>
-                }
+                <div className="event-details">
+                    { self.speaker !== undefined ?
+                    <div className="speakers">
+                        <SpeakerComponent 
+                            asked={this.state.asked}
+                            speaker={this.state.speaker} 
+                            name={self.speaker.first + ' ' + self.speaker.last} 
+                            handleChange={this.handleChange} 
+                            email={self.speaker.email}
+                            question={this.state.question}
+                            createQuestion={this.createQuestion}>
+                        </SpeakerComponent> 
+                    </div>
+                    :
+                    <div></div>
+                    }
                 </div>
               ); 
         }
@@ -93,9 +94,9 @@ export class EventDetails extends Component {
     checkSpeaker = () => {
         console.log(this.state.props.id)
         const db = fire.firestore();
-        db.settings({
-          timestampsInSnapshots: true
-        });
+        // db.settings({
+        //   timestampsInSnapshots: true
+        // });
         var wholeData = [];
         let questions = new Array(9);
         for (let q in questions) {

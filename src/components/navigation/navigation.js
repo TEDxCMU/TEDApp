@@ -29,7 +29,7 @@ export class Navigation extends Component {
         console.log(this.props.user)
         return (
             <div id="navigation">
-                <Menu className="" right 
+                <Menu noOverlay right 
                     isOpen={this.state.menuOpen}
                     onStateChange={(state) => this.handleStateChange(state)}>
                     <div className="nav">
