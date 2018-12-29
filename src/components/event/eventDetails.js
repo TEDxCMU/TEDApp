@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import './eventPage.css';
 import '../speakers/speakers.css';
+import Header from '../header/header.js'
 import fire from '../../fire.js';
 import moment from 'moment';
 import SpeakerComponent from '../speakers/speakerComponent.js';
@@ -20,22 +21,33 @@ export class EventDetails extends Component {
         console.log(this.state)
         let self = this.state;
             return (
-                <div className="event-details">
-                    { self.speaker !== undefined ?
-                    <div className="speakers">
-                        <SpeakerComponent 
-                            asked={this.state.asked}
-                            speaker={this.state.speaker} 
-                            name={self.speaker.first + ' ' + self.speaker.last} 
-                            handleChange={this.handleChange} 
-                            email={self.speaker.email}
-                            question={this.state.question}
-                            createQuestion={this.createQuestion}>
-                        </SpeakerComponent> 
+                <div>
+                { self.speaker !== undefined ? 
+                <div>
+                    <Header
+                    title={self.speaker.first + ' ' + self.speaker.last} 
+                    description="The next talk by Po Shen Loh starts in 5 minutes in McConomy Auditorium." />
+                    <div className="event-details">
+                        { self.speaker !== undefined ?
+                        <div className="speakers">
+                            <SpeakerComponent 
+                                asked={this.state.asked}
+                                speaker={this.state.speaker} 
+                                name={self.speaker.first + ' ' + self.speaker.last} 
+                                handleChange={this.handleChange} 
+                                email={self.speaker.email}
+                                question={this.state.question}
+                                createQuestion={this.createQuestion}>
+                            </SpeakerComponent> 
+                        </div>
+                        :
+                        <div></div>
+                        }
                     </div>
-                    :
-                    <div></div>
-                    }
+                </div>
+                :
+                <div></div>
+                }
                 </div>
               ); 
         }
@@ -68,15 +80,16 @@ export class EventDetails extends Component {
     componentDidMount = () => {
         console.log(localStorage.getItem('fingerprint'))
         let props = this.props.location.state
-        this.setState({props}, () => 
-        this.checkSpeaker())
+        // this.setState({props}, () => 
+        // this.checkSpeaker())
+        this.checkSpeaker()
     }
 
     checkIfAsked = () => {
         console.log(this.state)
         const db = fire.firestore()
         db.collection('speakers')
-        .doc(this.state.props.speaker)
+        .doc(this.props.location.state.speaker)
         .collection('questions')
         .doc(localStorage.getItem('fingerprint'))
         .get()
@@ -92,7 +105,7 @@ export class EventDetails extends Component {
     }
 
     checkSpeaker = () => {
-        console.log(this.state.props.id)
+        // console.log(this.state.props.id)
         const db = fire.firestore();
         // db.settings({
         //   timestampsInSnapshots: true
@@ -102,7 +115,7 @@ export class EventDetails extends Component {
         for (let q in questions) {
             q = " ";
         }
-        var speakerRef = db.collection('speakers').doc(this.state.props.speaker)
+        var speakerRef = db.collection('speakers').doc(this.props.location.state.speaker)
         speakerRef.get()
         .then(doc => {
           if (!doc.exists) {
