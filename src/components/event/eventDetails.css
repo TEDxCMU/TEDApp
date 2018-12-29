@@ -5,26 +5,45 @@
     text-align: left;
 }
 
-.speakers {
+.textContents {
   margin-top: 250px;
+  padding: 20px;
+}
+
+.talk {
+  color: #A5A5A5
+}
+
+.talkTitle {
+  margin-top: 20px;
+  color: #CB2D3E;
+}
+
+.longText {
+  color: #5E5E5E;
+}
+
+.bio {
+  margin-top: 80px;
+  color: #272727;
 }
 
 @media only screen and (max-width: 600px) {
     .event-details {
-      margin-top: 275px;
+      margin-top: 160px;
     }
   } 
   
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
     .event-details {
-      margin-top: 350px;
+      margin-top: 200px;
     }
   } 
   
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px) {
     .event-details {
-        margin-top: 325px;
+        margin-top: 230px;
     }
   }

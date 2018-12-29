@@ -32,17 +32,26 @@ export class EventDetails extends Component {
                     />
                     <div className="event-details">
                         { self.speaker !== undefined ?
-                        <div className="speakers">
-                            <SpeakerComponent 
-                                asked={this.state.asked}
-                                speaker={this.state.speaker} 
-                                name={self.speaker.first + ' ' + self.speaker.last} 
-                                handleChange={this.handleChange} 
-                                email={self.speaker.email}
-                                question={this.state.question}
-                                createQuestion={this.createQuestion}>
-                            </SpeakerComponent> 
+                        <div className="textContents">
+                            <h7 className="talk">TEDxCMU Talk</h7>
+                            <h6 className="talkTitle">{self.props.title}</h6>
+                            <h7 className="longText">{self.props.description}</h7>
+                            <h6 className="bio">Speaker Bio</h6>
+                            <h7 className="longText">{self.speaker.bio}</h7>
+
+
                         </div>
+                        // <div className="speakers">
+                        //     <SpeakerComponent 
+                        //         asked={this.state.asked}
+                        //         speaker={this.state.speaker} 
+                        //         name={self.speaker.first + ' ' + self.speaker.last} 
+                        //         handleChange={this.handleChange} 
+                        //         email={self.speaker.email}
+                        //         question={this.state.question}
+                        //         createQuestion={this.createQuestion}>
+                        //     </SpeakerComponent> 
+                        // </div>
                         :
                         <div></div>
                         }
