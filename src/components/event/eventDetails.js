@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import './eventPage.css';
+import './eventDetails.css';
 import '../speakers/speakers.css';
 import Header from '../header/header.js'
 import fire from '../../fire.js';
@@ -26,7 +26,10 @@ export class EventDetails extends Component {
                 <div>
                     <Header
                     title={self.speaker.first + ' ' + self.speaker.last} 
-                    description="The next talk by Po Shen Loh starts in 5 minutes in McConomy Auditorium." />
+                    image={self.speaker.image}
+                    tag={self.speaker.tag} 
+                    speaker={true}
+                    />
                     <div className="event-details">
                         { self.speaker !== undefined ?
                         <div className="speakers">
@@ -80,9 +83,9 @@ export class EventDetails extends Component {
     componentDidMount = () => {
         console.log(localStorage.getItem('fingerprint'))
         let props = this.props.location.state
-        // this.setState({props}, () => 
-        // this.checkSpeaker())
-        this.checkSpeaker()
+        this.setState({props}, () => 
+        this.checkSpeaker())
+
     }
 
     checkIfAsked = () => {

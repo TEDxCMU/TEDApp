@@ -3,3 +3,23 @@
     margin: auto;
     text-align: left;
 }
+
+@media only screen and (max-width: 600px) {
+    .speakers {
+      margin-top: 200px;
+    }
+  } 
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    .speakers {
+      margin-top: 350px;
+    }
+  } 
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    .speakers {
+        margin-top: 325px;
+    }
+  }

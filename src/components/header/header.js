@@ -43,8 +43,32 @@ export class Header extends Component {
                     <img src={HeaderBG} alt="header background"></img>
                 </div> */}
                 <div className="header-content">
-                    <h1 className="title">{this.props.title}</h1>
-                    <h6 className="description">{this.props.description}</h6>
+                    {this.props.speaker === true ?
+                        <div className="speakerHeader">
+                            { this.props.image !== undefined ?
+                                <div>
+                                    <img className="image" src={this.props.image}></img>
+                                </div>
+                            :
+                                <div></div>
+                            }
+                            <br />
+                            <h1 className="titleSpeaker">{this.props.title}</h1>
+                            { this.props.tag !== undefined ?
+                                <div>
+                                    <h6 className="description">{this.props.tag}</h6>
+                                </div>
+                            :
+                                <div></div>
+                            }
+                        </div>
+                        :
+                        <div>
+                            <h1 className="title">{this.props.title}</h1>
+                            <h6 className="description">{this.props.description}</h6>
+                        </div>
+                    }
+                    
                 </div>
             </header>
         );        
