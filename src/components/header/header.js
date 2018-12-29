@@ -56,7 +56,7 @@ export class Header extends Component {
                             <h1 className="titleSpeaker">{this.props.title}</h1>
                             { this.props.tag !== undefined ?
                                 <div>
-                                    <h6 className="description">{this.props.tag}</h6>
+                                    <h4 className="description">{this.props.tag}</h4>
                                 </div>
                             :
                                 <div></div>

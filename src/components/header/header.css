@@ -24,7 +24,7 @@ header .logo {
 
 header h1, header h6 {
     color: var(--tedwhite);
-    line-height: normal;
+    /* font-weight: normal; */
 }
 
 header .title {

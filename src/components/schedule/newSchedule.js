@@ -70,7 +70,7 @@ export class NewSchedule extends Component {
             <div className="time"><strong>{event.start}</strong> — {event.end}</div>
             <br />
             <div className="info">
-              <h4>{event.title}</h4>
+              <h2>{event.title}</h2>
               <p>A card with more information to do stuff will go here.</p>
             </div>
           </Link>
