@@ -4,8 +4,8 @@ import HeaderBG from '../../header-bg.svg';
 import logo from '../../logo.png';
 import {Link} from 'react-router-dom';
 // import { NavLink } from 'react-router-dom';
-// import headerBG from '../../header-bg.svg';
 import './header.css';
+import { SocialIcon } from 'react-social-icons';
 // import { slide as Menu } from 'react-burger-menu';
 // import { Navigation } from '../navigation/navigation';
 
@@ -44,23 +44,35 @@ export class Header extends Component {
                 </div> */}
                 <div className="header-content">
                     {this.props.speaker === true ?
-                        <div className="speakerHeader">
+                        <div className="speaker-header">
                             { this.props.image !== undefined ?
-                                <div>
-                                    <img className="image" src={this.props.image}></img>
+                                <div className="image-container">
+                                    <div className="image-border">
+                                        <img className="image" alt="speaker" src={this.props.image}></img>
+                                    </div>
                                 </div>
                             :
                                 <div></div>
                             }
                             <br />
-                            <h1 className="titleSpeaker">{this.props.title}</h1>
+                            <h1>{this.props.title}</h1>
                             { this.props.tag !== undefined ?
                                 <div>
-                                    <h4 className="description">{this.props.tag}</h4>
+                                    <h6 className="description">{this.props.tag}</h6>
                                 </div>
                             :
                                 <div></div>
                             }
+                            { this.props.twitter !== undefined ?
+                                <div>
+                                    <SocialIcon network="twitter" url={this.props.twitter} fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
+                                </div>
+                            :
+                                <div></div>
+                            }
+                            <div className="question-btn-container">
+                                <h6><a href="" className="question-btn">AskQuestion</a></h6>
+                            </div>
                         </div>
                         :
                         <div>
@@ -68,8 +80,8 @@ export class Header extends Component {
                             <h6 className="description">{this.props.description}</h6>
                         </div>
                     }
-                    
                 </div>
+                <div className="bottom-space"></div>
             </header>
         );        
     }

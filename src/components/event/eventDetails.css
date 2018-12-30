@@ -1,49 +1,47 @@
 .event-details {
-    display: flex;
-    justify-content: center;
-    margin: auto;
-    text-align: left;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  text-align: left;
 }
 
-.textContents {
-  margin-top: 250px;
-  padding: 20px;
+.info-container {
+margin-top: 250px;
+padding: 20px;
 }
 
 .talk {
-  color: #A5A5A5
+color: var(--tedlightgrey);
 }
 
-.talkTitle {
-  margin-top: 20px;
-  color: #CB2D3E;
-}
-
-.longText {
-  color: #5E5E5E;
+.talk-title {
+margin-top: 20px;
+color: var(--tedred);
 }
 
 .bio {
-  margin-top: 80px;
-  color: #272727;
+margin-top: 80px;
+color: var(--tedblack);
 }
 
+
+/* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
 @media only screen and (max-width: 600px) {
-    .event-details {
-      margin-top: 160px;
-    }
-  } 
-  
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px) {
-    .event-details {
-      margin-top: 200px;
-    }
-  } 
-  
-  /* Medium devices (landscape tablets, 768px and up) */
-  @media only screen and (min-width: 768px) {
-    .event-details {
-        margin-top: 230px;
-    }
+  .event-details {
+    margin-top: 200px;
   }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .event-details {
+     margin-top: 230px;
+  }
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .event-details {
+      margin-top: 275px;
+  }
+}

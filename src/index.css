@@ -2,7 +2,7 @@
 * Sources/Aids:
 * -----------------------------
 * styleshout.com (Kard v1.0 Main Stylesheet, 03-01-2016)
-* Typography (font-size: 16px; line-height: 1.2; scale: 1.333): https://www.gridlover.net/try
+* Typography (font-size: 16px; line-height: 1.2; scale: 1.275): https://www.gridlover.net/try
 * Link effect: https://codemyui.com/theoutline-squiggle-link-hover-effect/
 *
 * Organization:
@@ -33,7 +33,7 @@
   --tedwhite: #fff;
   --tedblue: #6EEBFC;
   --tedred: #e62b1e;
-  --tedredhover: #c42318;
+  --tedredhover: #CB2D3E;
   --tedredgradient: linear-gradient(180deg, #CB2D3E 0%, #EF473A 100%);
   --opaque: rgba(0, 0, 0, 0.3);
 }
@@ -101,44 +101,37 @@ input, select {
 h1, h2, h3, h4, h5, h6 {
   color: var(--tedblack);
   text-rendering: optimizeLegibility;
-  margin-bottom: 1.0rem;
 }
 
 h1, .h1 {
-  font-size: 2.375rem;
-  line-height: 2.375rem;
-  margin-top: 1.1875rem;
-  margin-bottom: 2.375rem;
-  font-weight: 600;
-}
-
-h2, .h2 {
-  font-size: 1.75rem;
+  font-size: 2.0625rem;
   line-height: 2.375rem;
   margin-top: 1.1875rem;
   margin-bottom: 1.1875rem;
 }
-
+h2, .h2 {
+  font-size: 1.625rem;
+  line-height: 2.375rem;
+  margin-top: 1.1875rem;
+  margin-bottom: 1.1875rem;
+}
 h3, .h3 {
-  font-size: 1.3125rem;
+  font-size: 1.25rem;
   line-height: 2.375rem;
   margin-top: 1.1875rem;
   margin-bottom: 0rem;
 }
-
 h4, .h4 {
   font-size: 1rem;
   line-height: 1.1875rem;
   margin-top: 1.1875rem;
-  margin-bottom: 1.1875rem;
-  text-transform: uppercase;
+  margin-bottom: 0rem;
 }
-
 h5, .h5 {
   font-size: 1rem;
   line-height: 1.1875rem;
   margin-top: 1.1875rem;
-  margin-bottom: 1.1875rem;
+  margin-bottom: 0rem;
 }
 
 h6, .h6 {
@@ -154,7 +147,7 @@ p {
   font-size: 1rem;
   color: var(--tedgrey);
   margin-bottom: 1.3rem;
-  line-height: 1.4;
+  line-height: 1.4rem;
 }
 
 p, ul, ol, pre, table, blockquote {
@@ -171,56 +164,20 @@ hr, .hr {
   border: 1px solid;
   margin: -1px 0;
 }
-a, b, i, strong, em, small, code {
-  line-height: 0;
-}
+
 sub, sup {
   line-height: 0;
   position: relative;
   vertical-align: baseline;
 }
+
 sup {
   top: -0.5em;
 }
+
 sub {
   bottom: -0.25em;
 }
-
-
-/* 
-h1 {
-  font-size: 3rem;
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-h2 {
-  font-size: 2.4rem;
-  font-weight: 600;
-  line-height: 1.5;
-}
-
-h3 {
-  font-size: 2rem;
-  line-height: 1.5;
-}
-
-h4 {
-  font-size: 1.7rem;
-  line-height: 1.5;
-}
-
-h5 {
-  font-size: 1.4em;
-  line-height: 1.3;
-  text-transform: uppercase;
-}
-
-h6 {
-  font-size: 1.3rem;
-  line-height: 1.2;
-  font-weight: 400;
-} */
 
 a {
   color: var(--tedred);

@@ -27,17 +27,20 @@ export class EventDetails extends Component {
                     <Header
                     title={self.speaker.first + ' ' + self.speaker.last} 
                     image={self.speaker.image}
-                    tag={self.speaker.tag} 
+                    twitter={self.speaker.twitter}
+                    tag={self.speaker.tag}
                     speaker={true}
                     />
                     <div className="event-details">
                         { self.speaker !== undefined ?
-                        <div className="textContents">
-                            <h7 className="talk">TEDxCMU Talk</h7>
-                            <h6 className="talkTitle">{self.props.title}</h6>
-                            <h7 className="longText">{self.props.description}</h7>
+                        <div className="info-container">
+                            <p className="talk">TEDxCMU Talk</p>
+                            
+                            <h6 className="talk-title">{self.props.title}</h6>
+                            <p>{self.props.description}</p>
+
                             <h6 className="bio">Speaker Bio</h6>
-                            <h7 className="longText">{self.speaker.bio}</h7>
+                            <p>{self.speaker.bio}</p>
 
 
                         </div>
