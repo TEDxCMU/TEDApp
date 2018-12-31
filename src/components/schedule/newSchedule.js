@@ -98,7 +98,7 @@ export class NewSchedule extends Component {
     let allEvents = this.state.allEvents;
     return (
       <div>
-        {this.state.canShiftAll && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+        {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
         <div>
           <div style={{display: 'flex', justifyContent: 'center', marginTop: '275px'}}>
             <TimePicker style={{align: 'center'}}
@@ -120,11 +120,6 @@ export class NewSchedule extends Component {
           </ul>
         </div>
         }
-        {/* <div className="timeline">      
-          <ul>
-            {newList} 
-          </ul>
-        </div> */}
       </div>
     );
   }
@@ -153,6 +148,7 @@ export class NewSchedule extends Component {
     console.log("the new conference start time is: ", conferenceStart.format('hh:mm A'))
     let duration = moment.duration(conferenceStart.diff(immediateNextEvent));
     // go through all events after the one that just ended
+    localStorage.setItem("updateCount", 0)
     for (let i = 0; i < allElements.length; i++) {
       console.log("starting updated count is: ", this.state.updateCount)
       //add the calculated duration between the original end and the new end
@@ -161,8 +157,7 @@ export class NewSchedule extends Component {
       var shiftedStart = start.format('hh:mm A');
       // console.log(shiftedStart)
       var shiftedEnd = end.format('hh:mm A');
-      this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd, i)
-      console.log("intermediate updated count: ", this.state.updateCount);
+      this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd, i, allElements.length, 0)
     }
   }
 
@@ -179,9 +174,8 @@ export class NewSchedule extends Component {
     console.log("the just ended is: ", justEnded.format('hh:mm A'))
     let duration = moment.duration(justEnded.diff(immediateNextEvent));
     this.updateFireTimes(allElements[index].start, allElements[index].start, justEnded.format('hh:mm A'));
-    this.setState({
-      canShiftAll: false
-    })
+    localStorage.setItem("canShiftGlobalStartTime", false);
+    localStorage.setItem("updateCount", 0)
     // go through all events after the one that just ended
     for (let i = eventNum + 1; i < allElements.length; i++) {
       console.log("starting updated count is: ", this.state.updateCount)
@@ -191,24 +185,11 @@ export class NewSchedule extends Component {
       var shiftedStart = start.format('hh:mm A');
       // console.log(shiftedStart)
       var shiftedEnd = end.format('hh:mm A');
-      this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd, i)
-      console.log("intermediate updated count: ", this.state.updateCount);
+      this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd, i, allElements.length, index)
     }
-
-    console.log("the final update count is: ", this.state.updateCount)
-    //reload the page if all elements have been updated
-    if (this.state.updateCount === allElements.length-index-1){
-      console.log("HELLO!")
-      this.componentWillMount();
-      window.location.reload();
-    }
-
   }
 
-  updateFireTimes = (start, newStart, newEnd, index) => {
-    console.log("SHALOM")
-    let newCount = this.state.updateCount + 1
-    // console.log(newCount)
+  updateFireTimes = (start, newStart, newEnd, index, allElementsLength, allElementsIndex) => {
     let that = this;
     let i = index;
     console.log("index is: ", i)
@@ -218,16 +199,30 @@ export class NewSchedule extends Component {
     eventRef.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             console.log(doc.id, " => ", doc.data());
-            // console.log("the state is: ", this);
-            // Build doc ref from doc.id
+            let count = localStorage.getItem("updateCount");
+            let convertCount = parseInt(count)
+            localStorage.setItem("updateCount", convertCount+1)
+            console.log("intermediate updated count: ", localStorage.getItem("updateCount"));
             var timeRef = db.collection('detailed itinerary').doc(doc.id);
             timeRef.update({
               start: newStart,
               end: newEnd
-            }).then(console.log("HELLO"))
-            .catch(console.log("ERROR", i));
+            })
+            .then(that.reloadPage(allElementsLength, allElementsIndex))
         });
     })
+  }
+
+  reloadPage = (length, index) => {
+    console.log(length)
+    console.log(index)
+    console.log(length-index)
+    console.log("update count is: ", localStorage.getItem("updateCount"))
+    if (parseInt(localStorage.getItem("updateCount")) === length-index) {
+      console.log("HELLO!")
+      localStorage.removeItem("updateCount")
+      window.location.reload();
+    }
   }
 
   addCount = (count) => {
@@ -239,28 +234,27 @@ export class NewSchedule extends Component {
 
   componentWillMount = () => {
     const db = fire.firestore();
-    // db.settings({
-    //   timestampsInSnapshots: true
-    // });
     var wholeData = []
     db.collection('detailed itinerary').get()
     .then(snapshot => {
         snapshot.forEach(doc => {
             let dataCopy = doc.data()
             let id = doc.id;
+            //removing blank spaces from talk names to use as router IDs
             let trimmed = id.replace(/ +/g, "");
             dataCopy.id = trimmed;
             wholeData.push(dataCopy);
         }
     );
-
       wholeData.forEach(event => {
+        //reformating start and end times
         let j_time = moment(event.start, "hh:mm A").format("hh:mm A");
         let k_time = moment(event.end, "hh:mm A").format("hh:mm A");
         event.start = j_time; 
         event.end = k_time; 
       })
 
+      //sorting times based on when they end
       for(var i = 0; i < wholeData.length; i++) {
         let min = wholeData[i].end;
         let min_idx = i;
@@ -271,12 +265,11 @@ export class NewSchedule extends Component {
             min_idx = j;
           }             
         }
-        
         let temp = wholeData[min_idx];
         wholeData[min_idx] = wholeData[i];
         wholeData[i] = temp;       
       }
-
+      //reformating again
       wholeData.forEach(event => {
         let f_time = moment(event.start, "hh:mm A").format("hh:mm A");
         let g_time = moment(event.end, "hh:mm A").format("hh:mm A");
