@@ -1,0 +1,38 @@
+#popup {
+    display: inline-block;
+    bottom: 1000px;
+    width: 100%;
+    padding: 20px;
+    background: var(--tedredgradient);
+	z-index: 9999;
+    text-align: center;
+    border-top-left-radius: 10%;
+    border-top-right-radius: 10%;
+}
+
+.tiny {
+    vertical-align: middle;
+    padding-top: 0px;
+    padding-bottom: 1rem;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 2rem;
+    width: 2rem;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.plus {
+    float: left;
+    align-self: flex-end;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 4rem;
+    width: 4rem;
+    border-radius: 50%;
+
+}

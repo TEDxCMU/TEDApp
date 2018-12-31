@@ -52,7 +52,7 @@ export class NewSchedule extends Component {
         console.log(index)
 
         newList.push(
-          <li>
+          <li key={event.id}>
           <Link key={event.id} to={{
             pathname: '/events/'+event.id,
             state: {  
@@ -81,18 +81,6 @@ export class NewSchedule extends Component {
           }
           </li>
         )
-
-        // newList.push (
-        //   <li key={index}>
-        //     <span><strong>{a}</strong></span> — <span>{b}</span>
-        //     {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-        //     <button onClick={() => { this.shiftEndTime(index, moment().format('hh:mm A')) }}>Event Ended</button> 
-        //     :
-        //     <div></div>
-        //     }
-
-        //   </li>
-        // ) 
     })
 
     let allEvents = this.state.allEvents;

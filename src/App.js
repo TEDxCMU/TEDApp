@@ -6,6 +6,7 @@ import { EventDetails } from './components/event/eventDetails.js';
 import { Navigation } from './components/navigation/navigation.js';
 import { Login } from './components/login/login.js';
 import { MyQuestions } from './components/questions/myQuestions.js'
+import { PopUp } from './components/addToHome/addToHome.js'
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
@@ -34,16 +35,11 @@ class App extends Component {
     this.logout = this.logout.bind(this)
 
   }
+
   render() {
     console.log("RENDERING MAIN APP")
     console.log(auth.currentUser)
-    var listOfData = this.state.allData.map((val, i)=>{
-      var name = val.name
-      var age = val.age
-      return (
-        <li key={i}>{name} ({age})</li>
-      ) 
-    })
+    console.log(JSON.parse(localStorage.getItem("popup")))
 
     return (
 
@@ -58,22 +54,21 @@ class App extends Component {
           <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
           <Route path="/login" exact strict render={this.loginPage}/>
           <Route path="/questions" exact strict render={this.questionsPage}/>
+            <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
+              {this.state.chromePopUp === true && JSON.parse(localStorage.getItem("popup")) === null ? 
+              <PopUp iOS={false}/>
+              :
+              <div align="center"></div>
+              }
+              {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null ?
+              <PopUp iOS={true}/>
+              :
+              <div align="center"></div>
+              }
+            </div>
           </div>
+
         </Router>
-        
-        <div style={{display: 'flex', flexDirection: "column", alignItems:"center"}}> 
-          {this.state.chromePopUp === true ? 
-          <button align="center">Add app to Android Home Screen!</button>
-          :
-          <div align="center"></div>
-          }
-          <br/>
-          {this.state.iosPopUp === true ? 
-          <button align="center">Add app to iOS Home Screen!</button>
-          :
-          <div align="center"></div>
-          }
-        </div>
         {/* <ul>{listOfData}</ul> */}
       </div>
     );
@@ -184,14 +179,17 @@ class App extends Component {
     );
   }
 
+  isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
   componentDidMount = () => {
+    // localStorage.removeItem("popup")
     this.authListener();
     if (isAndroid) {
       this.setState({
         chromePopUp: isAndroid,
       })
     }
-    if (isIOS) {
+    if (isIOS && !this.isInStandaloneMode()) {
       this.setState({
         iosPopUp: isIOS,
       })
@@ -233,6 +231,8 @@ class App extends Component {
     });
   }
 
+
+  
 
 }
 

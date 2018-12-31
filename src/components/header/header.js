@@ -71,7 +71,7 @@ export class Header extends Component {
                                 <div></div>
                             }
                             <div className="question-btn-container">
-                                <h6><a href="" className="question-btn">AskQuestion</a></h6>
+                                <h6><a shref="" className="question-btn">AskQuestion</a></h6>
                             </div>
                         </div>
                         :
