@@ -10,6 +10,8 @@
 // To learn more about the benefits of this model and instructions on how to
 // opt-in, read http://bit.ly/CRA-PWA.
 
+register();
+
 const isLocalhost = Boolean(
   window.location.hostname === 'localhost' ||
     // [::1] is the IPv6 localhost address.
@@ -20,7 +22,7 @@ const isLocalhost = Boolean(
     )
 );
 
-export function register(config) {
+export default function register(config) {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location);
@@ -48,6 +50,7 @@ export function register(config) {
         });
       } else {
         // Is not localhost. Just register service worker
+        console.log('wont register sw. Current env: ', process.env.NODE_ENV)
         registerValidSW(swUrl, config);
       }
     });
@@ -58,6 +61,8 @@ function registerValidSW(swUrl, config) {
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
+
+      console.log("sw registered")
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {
