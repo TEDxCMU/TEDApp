@@ -55,11 +55,6 @@ class App extends Component {
           <Route path="/login" exact strict render={this.loginPage}/>
           <Route path="/questions" exact strict render={this.questionsPage}/>
             <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
-              {this.state.chromePopUp === true && JSON.parse(localStorage.getItem("popup")) === null ? 
-              <PopUp iOS={false}/>
-              :
-              <div align="center"></div>
-              }
               {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null ?
               <PopUp iOS={true}/>
               :
