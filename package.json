@@ -2,7 +2,6 @@
   "name": "ted",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://dijourcmu.github.io/tedapp/",
   "dependencies": {
     "fingerprintjs2": "^1.8.6",
     "firebase": "^5.5.4",
@@ -22,7 +21,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
