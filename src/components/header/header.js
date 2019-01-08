@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import '../../App.css';
 import HeaderBG from '../../header-bg.svg';
 import logo from '../../logo.png';
+import bottle from '../../questionbottle.svg';
 import {Link} from 'react-router-dom';
-// import { NavLink } from 'react-router-dom';
 import './header.css';
 import { SocialIcon } from 'react-social-icons';
-// import { slide as Menu } from 'react-burger-menu';
-// import { Navigation } from '../navigation/navigation';
+import Popup from 'react-popup';
 
 export class Header extends Component {
     constructor (props) {
@@ -15,6 +14,38 @@ export class Header extends Component {
         this.state = {
           menuOpen: false
         }
+    }
+
+    handleAskQuestion () {
+        const style = {
+            display: 'flex',
+            justifyText: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+            paddingTop: '50px'
+        }
+        Popup.create({
+            title: null,
+            content: <div><h4>Dear Freddy,</h4><textarea type="text" className="mm-popup__input" name="question" placeholder="Write your question here..." /></div>,
+            buttons: {
+                left: ['cancel'],
+                right: [{
+                    text: 'Send',
+                    className: 'success',
+                    action: function () {
+                        Popup.create({
+                            title: null,
+                            content: <div style={style}><img src={bottle} className="bottle" alt="Bottle" /><p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p></div>,
+                            buttons: {
+                                right: ['ok']
+                            }
+                        });
+                        // Popup.alert('Thank you for asking a question! Please check back on the Q&A page later.');
+                        Popup.close();
+                    }
+                }]
+            }
+        });
     }
 
     handleStateChange (state) {
@@ -71,7 +102,7 @@ export class Header extends Component {
                                 <div></div>
                             }
                             <div className="question-btn-container">
-                                <h6><a shref="" className="question-btn">AskQuestion</a></h6>
+                                <h6><button onClick={() => this.handleAskQuestion()} className="question-btn">AskQuestion</button></h6>
                             </div>
                         </div>
                         :

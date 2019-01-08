@@ -16,6 +16,7 @@ import StyleGuide from './components/styleguide';
 import { isAndroid, isIOS } from "react-device-detect";
 import Fingerprint from "fingerprintjs2";
 
+import Popup from 'react-popup';
 
 import Header from './components/header/header';
 
@@ -33,7 +34,6 @@ class App extends Component {
     //pass THIS to global navigation hamburger menu so people can login and logout everywhere
     this.authListener = this.authListener.bind(this);
     this.logout = this.logout.bind(this)
-
   }
 
   render() {
@@ -44,7 +44,6 @@ class App extends Component {
     return (
 
       <div>
-        
         <Router>
           <div className="App">
           <Navigation user={this.state.user} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
@@ -64,6 +63,7 @@ class App extends Component {
           </div>
 
         </Router>
+        <Popup closeBtn={true} />
         {/* <ul>{listOfData}</ul> */}
       </div>
     );
