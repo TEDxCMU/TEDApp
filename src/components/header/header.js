@@ -12,11 +12,13 @@ export class Header extends Component {
     constructor (props) {
         super(props)
         this.state = {
-          menuOpen: false
+          menuOpen: false,
         }
     }
 
     handleAskQuestion () {
+        console.log(this.props)
+        let that = this;
         const style = {
             display: 'flex',
             justifyText: 'center',
@@ -26,13 +28,15 @@ export class Header extends Component {
         }
         Popup.create({
             title: null,
-            content: <div><h4>Dear Freddy,</h4><textarea type="text" className="mm-popup__input" name="question" placeholder="Write your question here..." /></div>,
+            content: <div><h4>Dear {this.props.title},</h4><textarea type="text" className="mm-popup__input" name="question" placeholder="Write your question here..." onChange={that.props.handleChange}/></div>,
             buttons: {
                 left: ['cancel'],
                 right: [{
                     text: 'Send',
                     className: 'success',
                     action: function () {
+                        console.log("shalom")
+                        that.props.askQuestion()
                         Popup.create({
                             title: null,
                             content: <div style={style}><img src={bottle} className="bottle" alt="Bottle" /><p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p></div>,
@@ -48,16 +52,16 @@ export class Header extends Component {
         });
     }
 
-    handleStateChange (state) {
-        this.setState({menuOpen: state.isOpen})  
-      }
-
     closeMenu () {
         this.setState({menuOpen: false})
       }
 
     toggleMenu () {
     this.setState({menuOpen: !this.state.menuOpen})
+    }
+
+    componentDidMount = () => {
+        console.log(this.props)
     }
 
     render() {
@@ -101,9 +105,16 @@ export class Header extends Component {
                             :
                                 <div></div>
                             }
-                            <div className="question-btn-container">
-                                <h6><button onClick={() => this.handleAskQuestion()} className="question-btn">AskQuestion</button></h6>
-                            </div>
+                            { this.props.asked === true ?
+                                <div className="question-btn-container">
+                                    <h6><button className="question-btn">Asked</button></h6>
+                                </div>
+                            :
+                                <div className="question-btn-container">
+                                    <h6><button onClick={() => this.handleAskQuestion()} className="question-btn">AskQuestion</button></h6>
+                                </div>
+                            }
+
                         </div>
                         :
                         <div>

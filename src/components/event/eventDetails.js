@@ -12,7 +12,6 @@ export class EventDetails extends Component {
       super();
       this.state = {
         question: '',
-        asked: false
       }
       this.handleChange = this.handleChange.bind(this)
     }
@@ -22,14 +21,19 @@ export class EventDetails extends Component {
         let self = this.state;
             return (
                 <div>
-                { self.speaker !== undefined ? 
+                { this.state.asked !== undefined ? 
                 <div>
                     <Header
                     title={self.speaker.first + ' ' + self.speaker.last} 
                     image={self.speaker.image}
+                    email={self.speaker.email}
                     twitter={self.speaker.twitter}
                     tag={self.speaker.tag}
                     speaker={true}
+                    asked={this.state.asked}
+                    askQuestion={this.createQuestion}
+                    handleChange={this.handleChange}
+                    question={this.state.question}
                     />
                     <div className="event-details">
                         { self.speaker !== undefined ?
@@ -68,15 +72,15 @@ export class EventDetails extends Component {
         }
 
     handleChange = (e) => {
-        this.setState({ [e.target.name] : e.target.value });
+        this.setState({ [e.target.name] : e.target.value });        
     }
 
-    createQuestion = (email, text) => {
+    createQuestion = () => {
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
         let that = this;
-        db.collection("speakers").doc(email.email).collection("questions").doc(localStorage.getItem('fingerprint')).set({
-            question: text.question,
+        db.collection("speakers").doc(this.state.speaker.email).collection("questions").doc(localStorage.getItem('fingerprint')).set({
+            question: this.state.question,
             answer: "",
             timeAsked: now
         })
@@ -115,7 +119,11 @@ export class EventDetails extends Component {
                 asked: true
             })
           }
-          return
+          else {
+            return this.setState({
+                asked: false
+            })
+          }
         })
     }
 
