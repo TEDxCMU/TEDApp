@@ -8,6 +8,7 @@ import Route from 'react-router-dom/Route';
 import fire from '../../fire.js';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
+var _ = require('lodash');
 
 export class NewSchedule extends Component {
   constructor() {
@@ -39,6 +40,16 @@ export class NewSchedule extends Component {
   }
 
   render = () => {
+    let time = "02:55 PM"
+    let time2 = "10:00 AM"
+    let sample = moment(time, "hh:mm A").format("hh:mm A");
+    let sample2 = moment(time2, "hh:mm A").format("hh:mm A");
+    console.log(sample)
+    console.log(sample2)
+    if (moment(sample).isBefore(sample2)) {
+      console.log("TRUE MOTHA FUCKA!")
+    }
+
     if (this.state.allEvents.length === 0) {
       return (
         <div>Loading</div>
@@ -51,35 +62,34 @@ export class NewSchedule extends Component {
     this.state.allEvents.forEach(event => {
         //let name = event[0];
         console.log("event start is: ", event.start)
-        let a = event.start;
-        let b = event.end;
-        let index = this.state.allEvents.indexOf(event);
-        console.log(index)
-
-        newList.push(
-          <li key={event.id}>
-          <Link key={event.id} to={{
-            pathname: '/events/'+event.id,
-            state: {  
-                id: event.id,
-                title: event.title,
-                start: event.start,
-                end: event.end,
-                description: event.description,
-                blurb: event.blurb,
-                speaker: event.speaker.id,
-                related: event.related
-            }
-          }}>
-          {/* Change bullet color here, time, and the info in a timeline event */}
-            <div className="bullet bullet-red"></div>
-            <div className="time"><strong>{event.start}</strong> — {event.end}</div>
-            <br />
-            <div className="info">
-              <h2>{event.title}</h2>
-              <p>A card with more information to do stuff will go here.</p>
-            </div>
-          </Link>
+        // let a = event.start;
+        // let b = event.end;
+        // let index = this.state.allEvents.indexOf(event);
+        if (event.type !== "static") {
+          newList.push(
+            <li key={event.id}>
+            <Link key={event.id} to={{
+              pathname: '/events/'+event.id,
+              state: {  
+                  id: event.id,
+                  title: event.title,
+                  start: event.start,
+                  end: event.end,
+                  description: event.description,
+                  blurb: event.blurb,
+                  speaker: event.speaker.id,
+                  related: event.related
+              }
+            }}>
+            {/* Change bullet color here, time, and the info in a timeline event */}
+              <div className="bullet bullet-red"></div>
+              <div className="time"><strong>{event.start}</strong> — {event.end}</div>
+              <br />
+              <div className="info">
+                <h2>{event.title}</h2>
+                <p>{event.blurb}</p>
+              </div>
+            </Link>
           {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
               <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
             :
@@ -87,6 +97,29 @@ export class NewSchedule extends Component {
           }
           </li>
         )
+      }
+      else {
+      newList.push(
+        <li key={event.id}>
+            {/* Change bullet color here, time, and the info in a timeline event */}
+              <div className="bullet bullet-red"></div>
+              <div className="time"><strong>{event.start}</strong> — {event.end}</div>
+              <br />
+              <div className="info">
+                <h2>{event.title}</h2>
+                <p>{event.blurb}</p>
+              </div>
+          {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+              <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+            :
+              <div></div>
+          }
+      </li>
+      )}
+
+
+
+
     })
 
     let allEvents = this.state.allEvents;
@@ -222,7 +255,6 @@ export class NewSchedule extends Component {
     let that = this;
     const db = fire.firestore();
     for (let i in this.state.allEvents) {
-      console.log(i)
       db.collection('detailed itinerary')
       .onSnapshot(querySnapshot => {
         querySnapshot.docChanges().forEach(change => {
@@ -265,38 +297,36 @@ export class NewSchedule extends Component {
   }
 
   addEventsToState = (snapshot, wholeData) => {
-    console.log(snapshot)
     if (wholeData.length === snapshot.size) {
+      console.log(wholeData)
       wholeData.forEach(event => {
         //reformating start and end times
-        let j_time = moment(event.start, "hh:mm A").format("hh:mm A");
-        let k_time = moment(event.end, "hh:mm A").format("hh:mm A");
+        console.log(event)
+        let j_time = moment(event.start, "hh:mm A")
+        let k_time = moment(event.end, "hh:mm A")
+        event.start = j_time; 
+        event.end = k_time; 
+      })
+      console.log(wholeData)
+      let sortedData = wholeData.sort(function (a, b) {
+        return a.start - b.start;
+      });
+      sortedData.forEach(event => {
+        //reformating start and end times
+        console.log(event)
+        let j_time = moment(event.start, "hh:mm A").format('hh:mm A')
+        let k_time = moment(event.end, "hh:mm A").format('hh:mm A')
         event.start = j_time; 
         event.end = k_time; 
       })
 
-      //sorting times based on when they end
-      for(var i = 0; i < wholeData.length; i++) {
-        let min = wholeData[i].end;
-        let min_idx = i;
-        for(var j = i+1; j < wholeData.length; j++) {
-          let next = wholeData[j].end;
-          if(moment(next).isBefore(min)) {
-            min = wholeData[j].end;
-            min_idx = j;
-          }             
-        }
-        let temp = wholeData[min_idx];
-        wholeData[min_idx] = wholeData[i];
-        wholeData[i] = temp;       
-      }
       // we've been here before, don't need to instantiate the snapshot listener
       if (this.state.watchingForChanges) {
-        this.setState({allEvents: wholeData})
+        this.setState({allEvents: sortedData})
       }
       // first pass - let's call watchForChanges to start listening for changes to each document
       else {
-        this.setState({allEvents: wholeData, watchingForChanges: true}, () => this.watchForChanges())
+        this.setState({allEvents: sortedData, watchingForChanges: true}, () => this.watchForChanges())
       }
     }
   }

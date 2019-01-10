@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import HeaderBG from '../../header-bg.svg';
 import logo from '../../logo.png';
+import back from '../../back.png';
 import bottle from '../../questionbottle.svg';
 import {Link} from 'react-router-dom';
 import './header.css';
@@ -71,8 +72,8 @@ export class Header extends Component {
                     pathname: '/',
                     state: {  
                     }
-                }}>
-                    <img src={logo} className="logo" alt="TEDxCMU"></img>
+                    }}>
+                 <img src={this.props.image === undefined ? logo : back} className="logo" alt="TEDxCMU"></img>
                 </Link>
                 {/* <div className="header-bg">
                     <img src={HeaderBG} alt="header background"></img>
@@ -100,7 +101,7 @@ export class Header extends Component {
                             }
                             { this.props.twitter !== undefined ?
                                 <div>
-                                    <SocialIcon network="twitter" url={this.props.twitter} fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
+                                    <SocialIcon network="twitter" rel="noopener noreferrer" href={this.props.twitter} taget="_blank" fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
                                 </div>
                             :
                                 <div></div>
