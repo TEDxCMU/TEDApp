@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { auth, provider } from './fire';
-import { NewSchedule } from './components/schedule/newSchedule.js';
+import { Schedule } from './components/schedule/schedule.js';
 import { EventDetails } from './components/event/eventDetails.js';
 import { Navigation } from './components/navigation/navigation.js';
 import { Login } from './components/login/login.js';
@@ -95,7 +95,7 @@ class App extends Component {
         <Header
           title="Live Schedule" 
           description="The next talk by Po Shen Loh starts in 5 minutes in McConomy Auditorium." />
-        <NewSchedule
+        <Schedule
           user={this.state.user} /> 
       </div>
     );
