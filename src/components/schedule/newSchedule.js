@@ -8,7 +8,6 @@ import Route from 'react-router-dom/Route';
 import fire from '../../fire.js';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
-var _ = require('lodash');
 
 export class NewSchedule extends Component {
   constructor() {
