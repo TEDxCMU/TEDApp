@@ -73,7 +73,7 @@ export class Header extends Component {
                     state: {  
                     }
                     }}>
-                 <img src={this.props.image === undefined ? logo : back} className="logo" alt="TEDxCMU"></img>
+                 <img src={this.props.image === undefined ? logo : back} className={this.props.image === undefined ? "logo" : "arrow"} alt="TEDxCMU"></img>
                 </Link>
                 {/* <div className="header-bg">
                     <img src={HeaderBG} alt="header background"></img>

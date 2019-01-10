@@ -23,6 +23,15 @@ header .logo {
     max-width: 130px;
 }
 
+header .arrow {
+    left: 26px;
+    top: 36px;
+    position: absolute;
+    z-index: 1;
+    max-width: 70px;
+    max-height: 100px;  
+}
+
 header h1, header h6 {
     color: var(--tedwhite);
     /* font-weight: normal; */
