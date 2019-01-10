@@ -16,10 +16,10 @@ export class PopUp extends Component {
             <div style={{width: "100%"}}>
                 { this.props.iOS ? 
                     <div id="popup">
-                        <img src={require('./plusIcon.png')} class="plus" alt="MyImage" title="MyImage" />
+                        <img src={require('./plusIcon.png')} className="plus" alt="MyImage" title="MyImage" />
                         <div>
                             <span>Install this web app on your iPhone: Tap </span>
-                            <img src={require('./downloadIcon.png')} class="tiny" alt="MyImage" title="MyImage" />
+                            <img src={require('./downloadIcon.png')} className="tiny" alt="MyImage" title="MyImage" />
                             <span> and then "Add to Homescreen"</span>
                         </div>
                         <button type="button" onClick={(e) => this.closeModal()}>No, thanks</button>

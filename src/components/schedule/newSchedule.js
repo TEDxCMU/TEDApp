@@ -12,12 +12,12 @@ import 'rc-time-picker/assets/index.css';
 export class NewSchedule extends Component {
   constructor() {
     super();
-    this.addCount = this.addCount.bind(this);
     this.state = {
       value: moment(),
       canShiftAll: true,
       allEvents: [],
-      updateCount: 0
+      updateCount: 0,
+      watchingForChanges: false
     }
   }
 
@@ -38,7 +38,12 @@ export class NewSchedule extends Component {
     )
   }
 
-  render() {
+  render = () => {
+    if (this.state.allEvents.length === 0) {
+      return (
+        <div>Loading</div>
+      )
+    }
     console.log(this.state.allEvents)
     let newList = [];
     console.log(this.state.allEvents) 
@@ -61,6 +66,7 @@ export class NewSchedule extends Component {
                 start: event.start,
                 end: event.end,
                 description: event.description,
+                blurb: event.blurb,
                 speaker: event.speaker.id,
                 related: event.related
             }
@@ -84,33 +90,36 @@ export class NewSchedule extends Component {
     })
 
     let allEvents = this.state.allEvents;
+    let size = newList.length;
+    if (size > 0) {
     return (
-      <div>
-        {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-        <div>
-          <div style={{display: 'flex', justifyContent: 'center', marginTop: '275px'}}>
-            <TimePicker style={{align: 'center'}}
-              defaultValue={this.state.value}
-              onChange={this.handleValueChange}
-            />
+          <div>
+            {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+            <div>
+              <div style={{display: 'flex', justifyContent: 'center', marginTop: '275px'}}>
+                <TimePicker style={{align: 'center'}}
+                  defaultValue={this.state.value}
+                  onChange={this.handleValueChange}
+                />
+              </div>
+              <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
+              <div className="timelineAdmin">      
+                <ul>
+                  {newList} 
+                </ul>
+              </div>
+            </div>
+            :
+            <div className="timeline">      
+              <ul>
+                {newList} 
+              </ul>
+            </div>
+            }
           </div>
-          <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
-          <div className="timelineAdmin">      
-            <ul>
-              {newList} 
-            </ul>
-          </div>
-        </div>
-        :
-        <div className="timeline">      
-          <ul>
-            {newList} 
-          </ul>
-        </div>
-        }
-      </div>
     );
   }
+}
 
   updateInput = e => {
     this.setState({
@@ -202,10 +211,6 @@ export class NewSchedule extends Component {
   }
 
   reloadPage = (length, index) => {
-    console.log(length)
-    console.log(index)
-    console.log(length-index)
-    console.log("update count is: ", localStorage.getItem("updateCount"))
     if (parseInt(localStorage.getItem("updateCount")) === length-index) {
       console.log("HELLO!")
       localStorage.removeItem("updateCount")
@@ -213,27 +218,55 @@ export class NewSchedule extends Component {
     }
   }
 
-  addCount = (count) => {
-    console.log("ADDING SHIT NOW")
-    this.setState({
-      updateCount: count
-    });
+  watchForChanges = () => {
+    let that = this;
+    const db = fire.firestore();
+    for (let i in this.state.allEvents) {
+      console.log(i)
+      db.collection('detailed itinerary')
+      .onSnapshot(querySnapshot => {
+        querySnapshot.docChanges().forEach(change => {
+          if (change.type === 'added') {
+          }
+          if (change.type === 'modified') {
+            console.log('An event snapshot was modified', change.doc.data());
+            that.componentDidMount();
+          }
+          if (change.type === 'removed') {
+          }
+        });
+      });
+    }
   }
 
-  componentWillMount = () => {
+  componentDidMount = () => {
     const db = fire.firestore();
     var wholeData = []
-    db.collection('detailed itinerary').get()
-    .then(snapshot => {
+    let that = this;
+    db.collection('detailed itinerary').
+    get().then(snapshot => {
         snapshot.forEach(doc => {
-            let dataCopy = doc.data()
             let id = doc.id;
+            db.collection('detailed itinerary').doc(id).onSnapshot(docSnapshot => {
+              let id = docSnapshot.id;
+              let dataCopy = docSnapshot.data()
+              let trimmed = id.replace(/ +/g, "");
+              dataCopy.id = trimmed;
+              // need to trim it for the browser router
+              dataCopy.reference = id;
+              // still want to hold on to the id for further references to firestore
+              wholeData.push(dataCopy);
+              that.addEventsToState(snapshot, wholeData)
+            })
             //removing blank spaces from talk names to use as router IDs
-            let trimmed = id.replace(/ +/g, "");
-            dataCopy.id = trimmed;
-            wholeData.push(dataCopy);
-        }
-    );
+
+        });
+    })
+  }
+
+  addEventsToState = (snapshot, wholeData) => {
+    console.log(snapshot)
+    if (wholeData.length === snapshot.size) {
       wholeData.forEach(event => {
         //reformating start and end times
         let j_time = moment(event.start, "hh:mm A").format("hh:mm A");
@@ -257,20 +290,15 @@ export class NewSchedule extends Component {
         wholeData[min_idx] = wholeData[i];
         wholeData[i] = temp;       
       }
-      //reformating again
-      wholeData.forEach(event => {
-        let f_time = moment(event.start, "hh:mm A").format("hh:mm A");
-        let g_time = moment(event.end, "hh:mm A").format("hh:mm A");
-        event.start = f_time;
-        event.end = g_time; 
-      })
-
-      this.setState({allEvents: wholeData})
-
-    })
-    .catch(error => {
-      console.log('Error!', error);
-    })
+      // we've been here before, don't need to instantiate the snapshot listener
+      if (this.state.watchingForChanges) {
+        this.setState({allEvents: wholeData})
+      }
+      // first pass - let's call watchForChanges to start listening for changes to each document
+      else {
+        this.setState({allEvents: wholeData, watchingForChanges: true}, () => this.watchForChanges())
+      }
+    }
   }
 
 }
