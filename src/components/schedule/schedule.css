@@ -1,7 +1,7 @@
 /* NEW TIMELINE CODE */
  
 .timeline {
-  margin-left: 10%;
+  margin: 0 10%;
 }
  
 .timeline ul {
@@ -61,7 +61,7 @@
   border-radius: 50%;
   border: 3px solid var(--tedbggrey);
   box-sizing: border-box;
-  z-index: 2;
+  z-index: 1;
 }
 
 /* static timeline styles */
@@ -76,7 +76,7 @@
   border-radius: 50%;
   border: 3px solid var(--tedbggrey);
   box-sizing: border-box;
-  z-index: 2;
+  z-index: 1;
 }
 
 /* Use this instead of bullet class if occurred  */
