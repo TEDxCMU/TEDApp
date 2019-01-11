@@ -375,6 +375,7 @@ input[type="button"] {
   margin: 0 .3rem 1.2rem 0;
   min-width: 80px;
   letter-spacing: .05rem;
+  background: var(--tedwhite);
   box-shadow: 2px 2px 6px 0 var(--opaque);
 }
 
