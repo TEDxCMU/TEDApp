@@ -7,7 +7,7 @@ import { Navigation } from './components/navigation/navigation.js';
 import { Login } from './components/login/login.js';
 import { MyQuestions } from './components/questions/myQuestions.js';
 import { PopUp } from './components/addToHome/addToHome.js';
-import { BrainFood } from './components/brainfood/brainFood.js';
+import { BrainFood } from './components/brainFood/brainFood.js';
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
