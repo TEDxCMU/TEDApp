@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import './brainFood.css';
+import './brains.css';
 import '../speakers/speakers.css';
 import ChartistGraph from  'react-chartist';
 import Chartist from 'chartist';
