@@ -7,6 +7,8 @@
     background: var(--tedredgradient);
     background-size: cover;
     z-index: 9999;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 #popup-content h5, #popup-content p {

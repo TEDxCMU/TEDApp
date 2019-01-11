@@ -35,6 +35,7 @@
   --tedred: #e62b1e;
   --tedredhover: #CB2D3E;
   --tedredgradient: linear-gradient(180deg, #CB2D3E 0%, #EF473A 100%);
+  --tedredgradient45: linear-gradient(315deg, #CB2D3E 0%, #EF473A 100%);
   --opaque: rgba(0, 0, 0, 0.3);
 }
 /* ------------- 02. END CSS VARIABLES ------------ */
@@ -403,7 +404,7 @@ button.button-primary,
 input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
-	background: var(--tedred);
+	background: var(--tedredgradient45);
 	color: var(--tedwhite);
 }
 
@@ -444,9 +445,9 @@ button.large {
 	padding: 0em 2rem;
 }
 button.stroke {
-  background: transparent;
-  color: var(--tedgrey);
-	border: 3px solid var(--tedgrey);
+  background: var(--tedwhite);
+  color: var(--tedblack);
+	border: 3px solid var(--tedblack);
 	line-height: 3.8rem;
 }
 button.stroke.medium {
