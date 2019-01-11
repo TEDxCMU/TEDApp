@@ -4,7 +4,7 @@ import HeaderBG from '../../header-bg.svg';
 import logo from '../../logo.png';
 import back from '../../back.png';
 import bottle from '../../questionbottle.svg';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './header.css';
 import { SocialIcon } from 'react-social-icons';
 import Popup from 'react-popup';

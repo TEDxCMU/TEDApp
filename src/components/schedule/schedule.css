@@ -1,119 +1,163 @@
-.timelineAdmin ul {
-  padding: 1em 0 0 2em;
-  margin: 0;
-  list-style-type: none;
-  position: relative;
+/* NEW TIMELINE CODE */
+ 
+.timeline {
+  margin-left: 10%;
+  margin-right: 0;
 }
-
-.timelineAdmin ul::before {
-  content: '';
-  height: 100%;
-  width: 1px;
-  background-color: var(--tedlightgrey); /* controls line color */
-  position: absolute;
-  top: 0;
-  left: 2.5em;
-  z-index: -1;
-}
-
+ 
 .timeline ul {
-  padding: 1em 0 0 2em;
-  margin: 0;
   list-style-type: none;
   position: relative;
+  margin: 20px;
+  transition: all 1s linear;
 }
 
-.timeline ul::before {
-  content: '';
-  height: 100%;
-  width: 1px;
-  background-color: var(--tedlightgrey); /* controls line color */
-  position: absolute;
-  top: 0;
-  left: 2.5em;
-  z-index: -1;
-}
-
-li div {
-  display: inline-block;
-  margin: 1rem 0;
-  vertical-align: top;
-}
-
-li div .info {
-  display: block;
-}
-
-li .bullet {
-  width: 1rem;
-  height: 1rem;
-  box-sizing: border-box;
-  border-radius: 50%;
-  background: var(--tedoffwhite);
-  z-index: 1;
-  margin-right: 1rem;
+.timeline ul li {
   position: relative;
 }
-
-/* Event has happened */
-li .bullet.bullet-red {
-  background: var(--tedred);
-  border: 4px solid var(--tedbggrey);
-}
-
-/* Event in progress */
-li .bullet.bullet-red-active {
-  border: 1px solid var(--tedred);
-  box-shadow: 0 0 15px 0 var(--tedred);
-}
-
-li .bullet.bullet-red-active::before {
-  content: " ";
+ 
+.timeline ul li:not(:last-child)::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 75%;
+  border: 1px solid var(--tedlightgrey);
   position: absolute;
-  z-index: 1;
-  left: 3px;
-  top: 3px;
-  border: 4px solid var(--tedred);
-  border-radius: 50%;
+  top: 60%;
+  left: -2rem;
 }
 
-/* Event hasn't happened */
-li .bullet.bullet-grey {
-  background: var(--tedlightgrey);
-  border: 4px solid var(--tedbggrey);
+.event::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 40%;
+  border: 1px solid var(--tedlightgrey);
+  position: absolute;
+  top: 60%;
+  left: -2rem;
+  z-index: 1;
+}
+ 
+.event::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 40%;
+  border: 1px solid var(--tedlightgrey);
+  position: absolute;
+  top:0;
+  left: -2rem;
+  z-index: 1;
+}
+ 
+.bullet::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: calc(-2rem - 6px);
+  top: calc(50% - 6px);
+  background-color: var(--tedred);
+  border-radius: 50%;
+  border: 3px solid var(--tedbggrey);
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+/* static timeline styles */
+.bullet-static::before {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: calc(-2rem - 6px);
+  top: calc(50% - 6px);
+  background-color: var(--tedred);
+  border-radius: 50%;
+  border: 3px solid var(--tedbggrey);
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+/* Use this instead of bullet class if occurred  */
+.event-ended::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 100%;
+  border: 1px solid var(--tedred);
+  position: absolute;
+  top:0;
+  left: -2rem;
+}
+
+.info-static {
+  margin: 0 0 20px;
+  padding: 0 0 10px;
+}
+
+.info-talk {
+  margin: 1rem 0 2rem;
+  padding: 10px 20px;
+  box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.info-talk p {
+  margin-bottom: 5px;
+}
+
+.event-title {
+  margin: 0;
 }
 
 .time {
-  padding-top: 7px;
+  font-size: 0.9rem;
+  color: var(--tedred);
+  margin-bottom: 0;
 }
 
-.info {
-  padding: 0 2rem;
+.event-description {
+  font-size: 0.9rem;
 }
+
+/* END NEW TIMELINE CODE */
 
 /* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
 
 @media only screen and (max-width: 600px) {
   .timeline {
-    margin-top: 275px;
+    margin-top: 300px;
+    margin-left: 10%;
+    margin-right: 0;
   }
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .timeline {
-    margin-top: 350px;
+    margin-top: 300px;
+    margin-left: 10%;
+    margin-right: 5%;
   }
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .timeline {
-      margin-top: 325px;
+      margin-top: 300px;
+      margin-left: 12%;
+      margin-right: 12%;
   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-  /* content */
+  .timeline {
+    margin-top: 300px;
+    margin-left: 15%;
+    margin-right: 12%;
+}
 } 
