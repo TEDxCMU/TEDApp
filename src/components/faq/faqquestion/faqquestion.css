@@ -1,47 +1,38 @@
 .faqquestion {
-    text-align: left;
-    padding: 0;
-    margin: 10px;
     border-radius: 3px;
-    box-shadow: 2px 2px 26px -5px var(--opaque);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     background-color: var(--tedwhite);
     position: relative;
+    margin: 20px 0;
 }
 
 .question-plus {
+    font-size: 1.5rem;
+    padding: 0 15px;
+    margin: 0;
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    right: 0.75rem;
 }
 
 .question-title {
     position: relative;
-    margin-right: 25px;
+    margin-right: 2rem;
 }
 
 .label {
     display: flex;
-    justify-content: space-between;
     align-items: center;
     cursor: pointer;
     padding: 1rem;
 	transition: all 0.3s ease-in-out;
 }
 
-.label:hover {
+.label:hover, .label:active, .label:focus {
     background-color: var(--tedoffwhite);
 }
 
 .content {
-    color: red;
-    margin-top: 0;
-    padding-top: 0;
     padding: 1em;
-}
-
-.content p {
-    margin-top: 0;
-    padding-top: 0;
 }
 
 .video {

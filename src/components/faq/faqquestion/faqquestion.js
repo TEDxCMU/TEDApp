@@ -25,10 +25,10 @@ export class FaqQuestion extends Component {
         return (
         <div className="faqquestion">
             <div onClick={this.toggleShow} className="label">
-                <span className="question-title"><h6>{this.props.question}</h6></span>
-                <span className="question-plus"><h4 className="plus">+</h4></span>
+                <h6 className="question-title">{this.props.question}</h6>
+                <h4 className="question-plus">+</h4>
             </div>
-            <p>{content}</p>
+            {content}
         </div>
         );
       }
