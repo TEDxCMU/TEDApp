@@ -466,12 +466,6 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 /* ---------- 07. START LIST STYLING ---------- */
 
-li h3 {
-  background-color: var(--tedblack);
-  margin: 0;
-  color: var(--tedwhite);
-  font-weight: 300;
-}
 /* ---------- 07. END LIST STYLING ---------- */
 
 /* ---------- 08. START TABLE STYLING ---------- */

@@ -65,12 +65,12 @@ export class Schedule extends Component {
               }
             }}>
             {/* Change bullet color here, time, and the info in a timeline event */}
-              <div className="bullet bullet-red"></div>
-              <div className="time"><strong>{event.start}</strong> — {event.end}</div>
-              <br />
-              <div className="info">
-                <h2>{event.title}</h2>
-                <p>{event.blurb}</p>
+              <span class="event"></span>
+              <span class="bullet"></span>
+              <div className="info-talk">
+                <p className="time"><strong>{event.start}</strong> — {event.end}</p>
+                <h3 className="event-title">{event.title}</h3>
+                <p className="event-description">{event.blurb}</p>
               </div>
             </Link>
           {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
@@ -85,17 +85,17 @@ export class Schedule extends Component {
       newList.push(
         <li key={event.id}>
             {/* Change bullet color here, time, and the info in a timeline event */}
-              <div className="bullet bullet-red"></div>
-              <div className="time"><strong>{event.start}</strong> — {event.end}</div>
-              <br />
-              <div className="info">
-                <h2>{event.title}</h2>
-                <p>{event.blurb}</p>
-              </div>
+            <span class="event"></span>
+            <span class="bullet-static"></span>
+            <div className="info-static">
+              <p className="time"><strong>{event.start}</strong> — {event.end}</p>
+              <h5 className="event-title">{event.title}</h5>
+              <small>{event.blurb}</small>
+            </div>
           {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-              <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+            <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
             :
-              <div></div>
+            <div></div>
           }
       </li>
       )}
