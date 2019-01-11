@@ -53,6 +53,9 @@ export class Navigation extends Component {
                             <li><NavLink onClick={() => this.closeMenu()} to="/styleguide" exact activeStyle={{color:'#6EEBFC'}}>
                                 Style Guide
                             </NavLink></li>
+                            <li><NavLink onClick={() => this.closeMenu()} to="/brainFood" exact activeStyle={{color:'#6EEBFC'}}>
+                                Brain Food
+                            </NavLink></li>
                             {this.props.user === null ?
                                 <div></div>
                                 :

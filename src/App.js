@@ -5,8 +5,9 @@ import { Schedule } from './components/schedule/schedule.js';
 import { EventDetails } from './components/event/eventDetails.js';
 import { Navigation } from './components/navigation/navigation.js';
 import { Login } from './components/login/login.js';
-import { MyQuestions } from './components/questions/myQuestions.js'
-import { PopUp } from './components/addToHome/addToHome.js'
+import { MyQuestions } from './components/questions/myQuestions.js';
+import { PopUp } from './components/addToHome/addToHome.js';
+import { BrainFood } from './components/brainFood/brainFood.js';
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
@@ -17,7 +18,7 @@ import { isAndroid, isIOS } from "react-device-detect";
 import Fingerprint from "fingerprintjs2";
 
 import Popup from 'react-popup';
-
+import moment from 'moment';
 import Header from './components/header/header';
 
 
@@ -52,6 +53,7 @@ class App extends Component {
           <Route path="/faq" exact strict render={this.faqPage}/>
           <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
           <Route path="/login" exact strict render={this.loginPage}/>
+          <Route path="/brainFood" exact strict render={this.BrainFoodPage}/>
           <Route path="/questions" exact strict render={this.questionsPage}/>
             <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
               {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null ?
@@ -136,6 +138,18 @@ class App extends Component {
       </div>
     );
   }
+  
+  BrainFoodPage = (props) => {
+    return (
+      <div>
+        <Header
+          title="Brain Food"
+          description="See how the conference is going and increase your impact." />
+        <BrainFood
+          user={this.state.user} /> 
+      </div>
+    );
+  }
 
   styleGuidePage = (props) => {
     return (
@@ -192,7 +206,7 @@ class App extends Component {
         iosPopUp: isIOS,
       })
     }
-    else {
+    if ((!isAndroid) && (!isIOS)) {
       type = "Computer"
     }
     let db = fire.firestore()
@@ -217,9 +231,10 @@ class App extends Component {
   }
 
   sendFingerprintToFirestore = (type, id) => {
+    let timeAccessed = moment().format('hh:mm A');
     let db = fire.firestore()
     db.collection("audience").doc(id.toString()).set({
-      id, type
+      id, type, timeAccessed
     }, () => this.setState({
       fingerprint: id
     }))

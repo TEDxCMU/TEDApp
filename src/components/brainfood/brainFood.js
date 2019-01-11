@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import '../../App.css';
 import './brainFood.css';
 import '../speakers/speakers.css';
-import Header from '../header/header.js'
-import fire from '../../fire.js';
-import moment from 'moment';
-import SpeakerComponent from '../speakers/speakerComponent.js';
+import ChartistGraph from  'react-chartist';
+import Chartist from 'chartist';
 
 export class BrainFood extends Component {
     constructor() {
@@ -13,138 +11,75 @@ export class BrainFood extends Component {
       this.state = {
         question: '',
       }
-      this.handleChange = this.handleChange.bind(this)
     }
 
-    render() {
-        console.log(this.state)
-        let self = this.state;
-            return (
-                <div>
-                    
-                { this.state.asked !== undefined ? 
-                <div>
-                    <Header
-                    title={self.speaker.first + ' ' + self.speaker.last} 
-                    image={self.speaker.image}
-                    email={self.speaker.email}
-                    twitter={self.speaker.twitter}
-                    tag={self.speaker.tag}
-                    speaker={true}
-                    asked={this.state.asked}
-                    askQuestion={this.createQuestion}
-                    handleChange={this.handleChange}
-                    question={this.state.question}
-                    />
-                    <div className="event-details">
-                        { self.speaker !== undefined ?
-                        <div className="info-container">
-                            <p className="talk">TEDxCMU Talk</p>
-                            
-                            <h6 className="talk-title">{self.props.title}</h6>
-                            <p>{self.props.description}</p>
-
-                            <h6 className="bio">Speaker Bio</h6>
-                            <p>{self.speaker.bio}</p>
-
-
-                        </div>
-                        :
-                        <div></div>
-                        }
-                    </div>
-                </div>
-                :
-                <div></div>
+    render () {
+       
+        var chart = new Chartist.Pie('.ct-chart', {
+            series: [10, 20, 50, 20, 5, 50, 15],
+            labels: [1, 2, 3, 4, 5, 6, 7]
+          }, {
+            donut: true,
+            showLabel: false
+          });
+         
+          chart.on('draw', function(data) {
+            if(data.type === 'slice') {
+              // Get the total path length in order to use for dash array animation
+              var pathLength = data.element._node.getTotalLength();
+          
+              // Set a dasharray that matches the path length as prerequisite to animate dashoffset
+              data.element.attr({
+                'stroke-dasharray': pathLength + 'px ' + pathLength + 'px'
+              });
+          
+              // Create animation definition while also assigning an ID to the animation for later sync usage
+              var animationDefinition = {
+                'stroke-dashoffset': {
+                  id: 'anim' + data.index,
+                  dur: 1000,
+                  from: -pathLength + 'px',
+                  to:  '0px',
+                  easing: Chartist.Svg.Easing.easeOutQuint,
+                  // We need to use `fill: 'freeze'` otherwise our animation will fall back to initial (not visible)
+                  fill: 'freeze'
                 }
-                </div>
-              ); 
-        }
+              };
+          
+              // If this was not the first slice, we need to time the animation so that it uses the end sync event of the previous animation
+              if(data.index !== 0) {
+                animationDefinition['stroke-dashoffset'].begin = 'anim' + (data.index - 1) + '.end';
+              }
+          
+              // We need to set an initial value before the animation starts as we are not in guided mode which would do that for us
+              data.element.attr({
+                'stroke-dashoffset': -pathLength + 'px'
+              });
+          
+              // We can't use guided mode as the animations need to rely on setting begin manually
+              // See http://gionkunz.github.io/chartist-js/api-documentation.html#chartistsvg-function-animate
+              data.element.animate(animationDefinition, false);
+            }
+          });
+          
+          // For the sake of the example we update the chart every time it's created with a delay of 8 seconds
+          chart.on('created', function() {
+            if(window.__anim21278907124) {
+              clearTimeout(window.__anim21278907124);
+              window.__anim21278907124 = null;
+            }
+            window.__anim21278907124 = setTimeout(chart.update.bind(chart), 10000);
+          });
 
-    handleChange = (e) => {
-        this.setState({ [e.target.name] : e.target.value });        
+        return(
+        <div>
+            {/* {chart} */}
+            {/* <ChartistGraph style={{marginTop: '325px'}} data={simpleLineChartData} options={pieChartOptions} type={'Pie'} /> */}
+        </div>
+        
+        )
+        
     }
-
-    createQuestion = () => {
-        let now = moment().format('hh:mm A');
-        let db = fire.firestore();
-        let that = this;
-        db.collection("speakers").doc(this.state.speaker.email).collection("questions").doc(localStorage.getItem('fingerprint')).set({
-            question: this.state.question,
-            answer: "",
-            timeAsked: now
-        })
-        .then(function() {
-            console.log("Document successfully written!")
-            that.setState({
-                asked: true
-            })
-            // window.location.reload();
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
-    }
-
-    componentDidMount = () => {
-        console.log(localStorage.getItem('fingerprint'))
-        let props = this.props.location.state
-        this.setState({props}, () => 
-        this.checkSpeaker())
-
-    }
-
-    checkIfAsked = () => {
-        console.log(this.state)
-        const db = fire.firestore()
-        db.collection('speakers')
-        .doc(this.props.location.state.speaker)
-        .collection('questions')
-        .doc(localStorage.getItem('fingerprint'))
-        .get()
-        .then((doc) => {
-          if (doc.exists) {
-            /** Doc exists, so the username is not available */
-            return this.setState({
-                asked: true
-            })
-          }
-          else {
-            return this.setState({
-                asked: false
-            })
-          }
-        })
-    }
-
-    checkSpeaker = () => {
-        // console.log(this.state.props.id)
-        const db = fire.firestore();
-        // db.settings({
-        //   timestampsInSnapshots: true
-        // });
-        var wholeData = [];
-        let questions = new Array(9);
-        for (let q in questions) {
-            q = " ";
-        }
-        var speakerRef = db.collection('speakers').doc(this.props.location.state.speaker)
-        speakerRef.get()
-        .then(doc => {
-          if (!doc.exists) {
-            console.log('No such document!');
-          } else {
-            console.log('Document data:', doc.data());
-            this.setState({
-                speaker: doc.data()
-            }, () => this.checkIfAsked())
-          }
-        })
-        .catch(err => {
-          console.log('Error getting document', err);
-        });
-    }
-
   }
   
 export default BrainFood;

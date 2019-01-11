@@ -101,7 +101,7 @@ export class Header extends Component {
                             }
                             { this.props.twitter !== undefined ?
                                 <div>
-                                    <SocialIcon network="twitter" rel="noopener noreferrer" href={this.props.twitter} taget="_blank" fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
+                                    <SocialIcon network="twitter" rel="noopener noreferrer" url={this.props.twitter} taget="_blank" fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
                                 </div>
                             :
                                 <div></div>
