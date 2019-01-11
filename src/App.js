@@ -179,28 +179,50 @@ class App extends Component {
   componentDidMount = () => {
     // localStorage.removeItem("popup")
     this.authListener();
+    let type = "";
     if (isAndroid) {
+      type = "Android"
       this.setState({
         chromePopUp: isAndroid,
       })
     }
     if (isIOS && !this.isInStandaloneMode()) {
+      type = "iPhone"
       this.setState({
         iosPopUp: isIOS,
       })
     }
+    else {
+      type = "Computer"
+    }
     let db = fire.firestore()
     const fpInstance = new Fingerprint();
-		fpInstance.get((result)=> {
-        let data = {id: result}
-        localStorage.setItem('fingerprint', result)
-        db.collection("audience").doc(result.toString()).set({
-          data
-        }, () => this.setState({
-          fingerprint: result
-        }))
+    let that = this;
+		fpInstance.get((id)=> {
+        localStorage.setItem('fingerprint', id)
+        db.collection('audience')
+        .doc(localStorage.getItem('fingerprint'))
+        .get()
+        .then((doc) => {
+          if (doc.exists) {
+            /** Doc exists, so the username is not available */
+            return
+          }
+          else {
+            that.sendFingerprintToFirestore(type, id)
+          }
+        })
 				console.log(localStorage.getItem('fingerprint'))
     });
+  }
+
+  sendFingerprintToFirestore = (type, id) => {
+    let db = fire.firestore()
+    db.collection("audience").doc(id.toString()).set({
+      id, type
+    }, () => this.setState({
+      fingerprint: id
+    }))
   }
 
 

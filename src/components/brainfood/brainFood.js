@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import './eventDetails.css';
+import './brainFood.css';
 import '../speakers/speakers.css';
 import Header from '../header/header.js'
 import fire from '../../fire.js';
 import moment from 'moment';
 import SpeakerComponent from '../speakers/speakerComponent.js';
 
-export class EventDetails extends Component {
+export class BrainFood extends Component {
     constructor() {
       super();
       this.state = {
@@ -147,4 +147,4 @@ export class EventDetails extends Component {
 
   }
   
-export default EventDetails;
+export default BrainFood;
