@@ -71,13 +71,13 @@ export class Schedule extends Component {
                 <p className="time"><strong>{event.start}</strong> — {event.end}</p>
                 <h3 className="event-title">{event.title}</h3>
                 <p className="event-description">{event.blurb}</p>
+                {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+                  <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+                :
+                  <div></div>
+                }
               </div>
             </Link>
-          {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-              <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
-            :
-              <div></div>
-          }
           </li>
         )
       }
@@ -91,12 +91,12 @@ export class Schedule extends Component {
               <p className="time"><strong>{event.start}</strong> — {event.end}</p>
               <h5 className="event-title">{event.title}</h5>
               <small>{event.blurb}</small>
+              {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+                <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+              :
+                <div></div>
+              }
             </div>
-          {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-            <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
-            :
-            <div></div>
-          }
       </li>
       )}
     })
@@ -106,14 +106,14 @@ export class Schedule extends Component {
           <div>
             {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
             <div>
-              <div style={{display: 'flex', justifyContent: 'center', marginTop: '275px'}}>
-                <TimePicker style={{align: 'center'}}
-                  defaultValue={this.state.value}
-                  onChange={this.handleValueChange}
-                />
-              </div>
-              <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
-              <div className="timelineAdmin">      
+              <div className="timeline">      
+                <div style={{marginTop: '275px'}}>
+                  <TimePicker style={{align: 'center'}}
+                    defaultValue={this.state.value}
+                    onChange={this.handleValueChange}
+                  />
+                </div>
+                <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
                 <ul>
                   {newList} 
                 </ul>
