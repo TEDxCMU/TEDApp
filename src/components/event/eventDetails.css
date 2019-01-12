@@ -45,3 +45,26 @@ color: var(--tedblack);
       margin-top: 275px;
   }
 }
+
+@media (max-width: 420px) {
+
+  .mm-popup__box__footer__left-space {
+      float: none;
+  }
+
+  .mm-popup__box__footer__right-space {
+      float: none;
+  }
+
+  .mm-popup__box__footer {
+      padding-top: 30px;
+  }
+
+  .mm-popup__box__footer .mm-popup__btn {
+      display: block;
+      width: 100%;
+      text-align: center;
+      margin-top: 10px;
+      margin-left: 0px;
+  }
+}

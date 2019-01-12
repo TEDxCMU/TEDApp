@@ -38,7 +38,8 @@ export class MyQuestions extends Component {
                   answered={question.answered} 
                   time={question.time} 
                   answerQuestion={this.answerQuestion}
-                  id={question.id}>
+                  id={question.id}
+                  name={question.name}>
               </QuestionComponent> 
           ) 
       })

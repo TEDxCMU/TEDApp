@@ -1,4 +1,16 @@
-.dropdown {
+.dropdown-closed {
+    text-align: left;
+    padding: 0;
+    margin: 10px;
+    border-radius: 3px;
+    -webkit-box-shadow: 1px 1px 26px -5px var(--opaque);
+    -moz-box-shadow: 1px 1px 26px -5px var(--opaque);
+    box-shadow: 2px 2px 26px -5px var(--opaque);
+    padding-left: 50%;
+    padding-right: 50%;
+}
+
+.dropdown-open {
     text-align: left;
     padding: 0;
     margin: 10px;

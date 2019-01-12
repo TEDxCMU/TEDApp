@@ -28,7 +28,7 @@ export class Header extends Component {
         }
         Popup.create({
             title: null,
-            content: <div><h4>Dear {this.props.title},</h4><textarea type="text" className="mm-popup__input" name="question" placeholder="Write your question here..." onChange={that.props.handleChange}/></div>,
+            content: <div><h4>Dear {this.props.title},</h4><textarea type="text" className="mm-popup__input" name="question" placeholder="Write your question here..." onChange={that.props.handleChange}/><h4>Sincerely, </h4><input type="text" className="mm-popup__input" name="name" placeholder="Jane Doe" onChange={that.props.handleChange}/></div>,
             buttons: {
                 left: ['cancel'],
                 right: [{

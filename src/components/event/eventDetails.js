@@ -12,6 +12,7 @@ export class EventDetails extends Component {
       super();
       this.state = {
         question: '',
+        name: ''
       }
       this.handleChange = this.handleChange.bind(this)
     }
@@ -33,6 +34,7 @@ export class EventDetails extends Component {
                     askQuestion={this.createQuestion}
                     handleChange={this.handleChange}
                     question={this.state.question}
+                    name={this.state.name}
                     />
                     <div className="event-details">
                         { self.speaker !== undefined ?
@@ -69,6 +71,7 @@ export class EventDetails extends Component {
         let that = this;
         db.collection("speakers").doc(this.state.speaker.email).collection("questions").doc(localStorage.getItem('fingerprint')).set({
             question: this.state.question,
+            name: this.state.name,
             answer: "",
             timeAsked: now
         })
