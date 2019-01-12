@@ -27,6 +27,14 @@ header .logo {
     max-width: 130px;
 }
 
+#iOS {
+    -webkit-user-select:text; 
+}
+
+.iOS {
+    -webkit-user-select:text;
+}
+
 header .arrow {
     left: 26px;
     top: 36px;
