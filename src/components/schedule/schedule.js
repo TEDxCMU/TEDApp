@@ -56,6 +56,7 @@ export class Schedule extends Component {
     }
     let newList = [];
     let notification = "The conference is currently not in progress. Please check back at another time."
+    let that = this;
     this.state.allEvents.forEach(event => {
         //mark event as either being in the past, happening right now, or being in the future if it is just static
         let className = "bullet-static";
@@ -80,7 +81,7 @@ export class Schedule extends Component {
                   blurb: event.blurb,
                   speaker: event.speaker.id,
                   related: event.related,
-                  announcement: event.announcement
+                  announcement: event.announcement,
               }
             }}>
             {/* Change bullet color here, time, and the info in a timeline event */}

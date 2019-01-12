@@ -12,7 +12,8 @@ export class EventDetails extends Component {
       super();
       this.state = {
         question: '',
-        name: ''
+        name: '',
+        errors: {name: false, question: false}
       }
       this.handleChange = this.handleChange.bind(this)
     }
@@ -35,6 +36,7 @@ export class EventDetails extends Component {
                     handleChange={this.handleChange}
                     question={this.state.question}
                     name={this.state.name}
+                    errors={this.state.errors}
                     />
                     <div className="event-details">
                         { self.speaker !== undefined ?
@@ -65,7 +67,26 @@ export class EventDetails extends Component {
         this.setState({ [e.target.name] : e.target.value });        
     }
 
+    validate = (name, question) => {
+        // true means invalid, so our conditions got reversed
+        return {
+          name: name.length === 0,
+          question: question.length === 0,
+        };
+      }
+
     createQuestion = () => {
+        console.log("asking question")
+        const { name, question } = this.state;
+        let errors = this.validate(name, question);
+        console.log(errors)
+        if (errors.name || errors.question) {
+            console.log("one or more is blank")
+            return this.setState({
+                errors: errors
+            })
+        } 
+
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
         let that = this;

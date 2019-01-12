@@ -26,25 +26,33 @@ export class Header extends Component {
             alignItems: 'center',
             paddingTop: '50px'
         }
+        let nameBlank = this.props.errors.name
+        let questionBlank = this.props.errors.question
+        console.log(nameBlank, questionBlank)
         Popup.create({
             title: null,
-            content: <div><h4>Dear {this.props.title},</h4><textarea type="text" className="mm-popup__input" name="question" placeholder="Write your question here..." onChange={that.props.handleChange}/><h4>Sincerely, </h4><textarea type="text" className="mm-popup__input" name="name" placeholder="Jane Doe..." onChange={that.props.handleChange}/></div>,
+            content: <div><h4>Dear {this.props.title},</h4><textarea type="text" required className="mm-popup__input" name="question" placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/><h4>Sincerely, </h4><input type="text" required minlength="4" size className="mm-popup__input" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/></div>,
             buttons: {
                 left: ['cancel'],
                 right: [{
                     text: 'Send',
                     className: 'success',
                     action: function () {
-                        that.props.askQuestion()
-                        Popup.create({
-                            title: null,
-                            content: <div style={style}><img src={bottle} className="bottle" alt="Bottle" /><p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p></div>,
-                            buttons: {
-                                right: ['ok']
-                            }
-                        });
-                        // Popup.alert('Thank you for asking a question! Please check back on the Q&A page later.');
-                        Popup.close();
+                        if (that.props.question.length > 0 && that.props.name.length > 0) {
+                            that.props.askQuestion()
+                            Popup.create({
+                                title: null,
+                                content: <div style={style}><img src={bottle} className="bottle" alt="Bottle" /><p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p></div>,
+                                buttons: {
+                                    right: ['ok']
+                                }
+                            });
+                            // Popup.alert('Thank you for asking a question! Please check back on the Q&A page later.');
+                            Popup.close();
+                        }
+                        else {
+                            that.props.askQuestion()
+                        }
                     }
                 }]
             }
