@@ -18,7 +18,6 @@ export class Header extends Component {
     }
 
     handleAskQuestion () {
-        console.log(this.props)
         let that = this;
         const style = {
             display: 'flex',
@@ -36,7 +35,6 @@ export class Header extends Component {
                     text: 'Send',
                     className: 'success',
                     action: function () {
-                        console.log("shalom")
                         that.props.askQuestion()
                         Popup.create({
                             title: null,
@@ -59,10 +57,6 @@ export class Header extends Component {
 
     toggleMenu () {
     this.setState({menuOpen: !this.state.menuOpen})
-    }
-
-    componentDidMount = () => {
-        console.log(this.props)
     }
 
     render() {

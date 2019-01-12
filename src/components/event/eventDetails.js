@@ -17,11 +17,9 @@ export class EventDetails extends Component {
     }
 
     render() {
-        console.log(this.state)
         let self = this.state;
             return (
-                <div>
-                    
+                <div>    
                 { this.state.asked !== undefined ? 
                 <div>
                     <Header
@@ -87,7 +85,6 @@ export class EventDetails extends Component {
     }
 
     componentDidMount = () => {
-        console.log(localStorage.getItem('fingerprint'))
         let props = this.props.location.state
         this.setState({props}, () => 
         this.checkSpeaker())
@@ -95,7 +92,6 @@ export class EventDetails extends Component {
     }
 
     checkIfAsked = () => {
-        console.log(this.state)
         const db = fire.firestore()
         db.collection('speakers')
         .doc(this.props.location.state.speaker)
@@ -118,16 +114,7 @@ export class EventDetails extends Component {
     }
 
     checkSpeaker = () => {
-        // console.log(this.state.props.id)
         const db = fire.firestore();
-        // db.settings({
-        //   timestampsInSnapshots: true
-        // });
-        var wholeData = [];
-        let questions = new Array(9);
-        for (let q in questions) {
-            q = " ";
-        }
         var speakerRef = db.collection('speakers').doc(this.props.location.state.speaker)
         speakerRef.get()
         .then(doc => {

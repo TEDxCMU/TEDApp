@@ -51,7 +51,6 @@ export class MyQuestions extends Component {
   }
 
   answerQuestion = (id, text, index) => {
-    console.log(id)
     let email = fire.auth().currentUser.email;
     let now = moment().format('hh:mm A');
     let db = fire.firestore();
@@ -76,7 +75,6 @@ export class MyQuestions extends Component {
 
   componentDidMount = () => {
     if (fire.auth().currentUser === null || localStorage.getItem('userEmail') === null) {
-      console.log("returning")
       this.setState({
         redirectHome: true
       })
@@ -90,20 +88,18 @@ export class MyQuestions extends Component {
     var wholeData = [];
   
     let speakerRef = db.collection('speakers').where('email', '==', userEmail);
-    console.log(speakerRef)
     db.collection('speakers').doc(userEmail).collection("questions").get()
     .then(snapshot => {
         snapshot.forEach(doc => {
             let docCopy = doc.data();
             docCopy.id = doc.id;
             docCopy.answered = false;
-            console.log(docCopy)
             wholeData.push(docCopy)
         });
         // let questions = Array(wholeData.length)
       this.setState(
-          {questions: wholeData
-        }, () => console.log(this.state.questions))
+        {questions: wholeData}
+      )
     })
   }
 

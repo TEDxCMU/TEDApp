@@ -21,13 +21,10 @@ export class Speakers extends Component {
     }
 
     render() {
-        console.log(this.state.questions)
         let newList = [];
         this.state.allSpeakers.forEach(speaker => {    
             let index = this.state.allSpeakers.indexOf(speaker);
-            console.log(index)
             let question = this.state.questions[index]
-            console.log(question)
             newList.push (
                 <SpeakerComponent 
                     logState={this.logState}
@@ -85,12 +82,10 @@ export class Speakers extends Component {
     
 
     createQuestion = (email, text, index) => {
-        console.log(email)
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
         let that = this;
         let speakersCopy = this.state.allSpeakers;
-        console.log(index.index);
         db.collection("speakers").doc(email.email).collection("questions").add({
             question: text.question,
             answer: "",
@@ -129,8 +124,8 @@ export class Speakers extends Component {
             // let questions = Array(wholeData.length)
           this.setState(
               {allSpeakers: wholeData, 
-                questions: questions
-            }, () => console.log(this.state.questions))
+               questions: questions
+              })
         })
     }
   }

@@ -17,7 +17,6 @@ export class Login extends Component {
   
     }
     render() {
-      console.log(localStorage.getItem("userEmail"))
       if (this.state.redirect === true){
         return <Redirect to='/'/>
       }
@@ -47,7 +46,6 @@ export class Login extends Component {
     login = (e) => {
       e.preventDefault();
       fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
-        console.log(u.user.email)
         this.setState({
           redirect: true
         }, () => (console.log(this.state)))
@@ -57,7 +55,6 @@ export class Login extends Component {
     }
 
     onClickButton = (event) => {
-      console.log(this.state.email)
       event.preventDefault();
       this.props.login(null, this.state.email.toString(), this.state.password.toString())
     }

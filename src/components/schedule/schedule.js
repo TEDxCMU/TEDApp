@@ -8,6 +8,7 @@ import Route from 'react-router-dom/Route';
 import fire from '../../fire.js';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
+import Header from '../header/header';
 
 export class Schedule extends Component {
   constructor() {
@@ -44,10 +45,18 @@ export class Schedule extends Component {
         <div>Loading</div>
       )
     }
-    console.log(this.state.allEvents)
     let newList = [];
-
+    let notification = "The conference is currently not in progress. Please check back at another time."
     this.state.allEvents.forEach(event => {
+        //mark event as either being in the past, happening right now, or being in the future if it is just static
+        let className = "bullet-static";
+        if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
+          className = "now";
+          notification = event.announcement;
+        }
+        if (moment().isAfter(moment(event.end, "hh:mm A"))) {
+          className = "past";
+        }
         if (event.type !== "static") {
           newList.push(
             <li key={event.id}>
@@ -61,15 +70,16 @@ export class Schedule extends Component {
                   description: event.description,
                   blurb: event.blurb,
                   speaker: event.speaker.id,
-                  related: event.related
+                  related: event.related,
+                  announcement: event.announcement
               }
             }}>
             {/* Change bullet color here, time, and the info in a timeline event */}
-              <span class="event"></span>
-              <span class="bullet"></span>
+              <span className="event"></span>
+              <span className={className}></span>
                 <div className="info-talk">
                   <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-                  <h3 className="event-title">{event.title}</h3>
+                  <h4 className="event-title">{event.title}</h4>
                   <p className="event-description">{event.blurb}</p>
                   {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
                     <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
@@ -82,11 +92,12 @@ export class Schedule extends Component {
         )
       }
       else {
+      
       newList.push(
         <li key={event.id}>
             {/* Change bullet color here, time, and the info in a timeline event */}
-            <span class="event"></span>
-            <span class="bullet-static"></span>
+            <span className="event"></span>
+            <span className={className}></span>
             <div className="info-static">
               <p className="time"><strong>{event.start}</strong> — {event.end}</p>
               <h5 className="event-title">{event.title}</h5>
@@ -103,7 +114,11 @@ export class Schedule extends Component {
     let allEvents = this.state.allEvents;
     if (newList.length > 0) {
     return (
+          
           <div>
+            <Header
+            title="Live Schedule" 
+            description={notification} />
             {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
             <div>
               <div className="timeline">      

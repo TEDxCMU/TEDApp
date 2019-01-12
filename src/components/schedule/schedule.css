@@ -50,6 +50,7 @@
   left: -2rem;
   z-index: 1;
 }
+
  
 .bullet::before {
   content: '';
@@ -79,6 +80,36 @@
   box-sizing: border-box;
   z-index: 1;
 }
+
+/* static timeline styles */
+.now {
+  content: '';
+  position: absolute;
+  width: 21px;
+  height: 21px;
+  left: calc(-2rem - 10px);
+  top: calc(50% - 10px);
+  background-color: var(--tedred);
+  border-radius: 50%;
+  border: 5px solid rgba(245, 58, 58, 0.1);
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.past {
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  left: calc(-2rem - 6px);
+  top: calc(50% - 6px);
+  background-color: #a7a7a7;
+  border-radius: 50%;
+  border: 6px solid #a7a7a7;
+  box-sizing: border-box;
+  z-index: 1;
+}
+ 
 
 /* Use this instead of bullet class if occurred  */
 .event-ended::before {

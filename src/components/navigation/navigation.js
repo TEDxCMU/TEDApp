@@ -26,7 +26,6 @@ export class Navigation extends Component {
     }
 
     render() {
-        console.log(this.props.user)
         return (
             <div id="navigation">
                 <Menu noOverlay right 
@@ -78,9 +77,6 @@ export class Navigation extends Component {
           });
       }
 
-    componentDidMount = () => {
-        console.log("navigation is mounted")
-    }
 };
 
 export default Navigation;

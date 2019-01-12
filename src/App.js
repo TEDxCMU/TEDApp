@@ -38,12 +38,9 @@ class App extends Component {
   }
 
   render() {
-    console.log("RENDERING MAIN APP")
     console.log(auth.currentUser)
     console.log(JSON.parse(localStorage.getItem("popup")))
-
     return (
-
       <div>
         <Router>
           <div className="App">
@@ -94,9 +91,6 @@ class App extends Component {
   schedulePage = (props) => {
     return (
       <div>
-        <Header
-          title="Live Schedule" 
-          description="The next talk by Po Shen Loh starts in 5 minutes in McConomy Auditorium." />
         <Schedule
           user={this.state.user} /> 
       </div>

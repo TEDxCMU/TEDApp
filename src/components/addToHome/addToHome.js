@@ -11,7 +11,6 @@ export class PopUp extends Component {
     }
       
     render() {
-        console.log("THE IOS IS: ", this.props.iOS)
         return (
             <div style={{width: "100%"}}>
                 { this.props.iOS ? 

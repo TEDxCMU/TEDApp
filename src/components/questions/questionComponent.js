@@ -14,7 +14,6 @@ export class QuestionComponent extends Component {
 
     
     render() {
-    console.log(this.state)
     let question = this.props.question;
     let index = this.props.index;
     let id = this.props.id;
@@ -45,23 +44,6 @@ export class QuestionComponent extends Component {
         this.setState({
             answer: this.props.answer
         })
-    //   const db = fire.firestore();
-    //   db.settings({
-    //     timestampsInSnapshots: true
-    //   });
-    //   var wholeData = [];
-    //   let speakerID = "wLs9MTPHfZk5AbebslaQ"
-    //   db.collection('speakers').doc(speakerID).collection("questions").get()
-    //   .then(snapshot => {
-    //       snapshot.forEach(doc => {
-    //           let docCopy = doc.data();
-    //           wholeData.push(docCopy)
-    //       });
-    //       // let questions = Array(wholeData.length)
-    //     this.setState(
-    //         {questions: wholeData
-    //       }, () => console.log(this.state.questions))
-    //   })
     }
       
 }
