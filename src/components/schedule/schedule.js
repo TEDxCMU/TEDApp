@@ -42,15 +42,10 @@ export class Schedule extends Component {
   }
 
   render = () => {
-    const override = css`
-    display: block;
-    margin: 0 auto;
-    `;
     if (this.state.allEvents.length === 0) {
       return (
-        <div className='sweet-loading' >
+        <div>
           <BounceLoader
-            css={override}
             sizeUnit={"px"}
             size={150}
             color={'#e62b1e'}

@@ -30,7 +30,8 @@ class App extends Component {
       user: null,
       allData: [],
       iosPopUp: false,
-      chromePopUp: false
+      chromePopUp: false,
+      burgerColor: "white"
     }
     //pass THIS to global navigation hamburger menu so people can login and logout everywhere
     this.authListener = this.authListener.bind(this);
@@ -44,7 +45,7 @@ class App extends Component {
       <div>
         <Router>
           <div className="App">
-          <Navigation user={this.state.user} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
+          <Navigation user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
           <Route path="/" exact strict render={this.schedulePage}/>
           <Route path="/events/:id" exact strict component={EventDetails}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
@@ -184,7 +185,26 @@ class App extends Component {
 
   isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
+  componentWillUnmount = () => {
+      window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = (event) => {
+      let scrollTop = window.scrollY
+      console.log(window.scrollY)
+      if (scrollTop > 300) {
+        console.log("Setting red")
+        this.setState({burgerColor: "red"})
+      }
+      if (scrollTop < 300) {
+        console.log("Setting white")
+        this.setState({burgerColor: "white"})
+      }
+
+  }
+  
   componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll);
     // localStorage.removeItem("popup")
     this.authListener();
     let type = "";

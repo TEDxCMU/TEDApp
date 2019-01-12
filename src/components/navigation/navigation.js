@@ -27,7 +27,7 @@ export class Navigation extends Component {
 
     render() {
         return (
-            <div id="navigation">
+            <div id="navigation" className={this.props.burgerColor}>
                 <Menu noOverlay right 
                     isOpen={this.state.menuOpen}
                     onStateChange={(state) => this.handleStateChange(state)}>

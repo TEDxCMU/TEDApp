@@ -6,7 +6,7 @@
 }
 
 .info-container {
-margin-top: 250px;
+/* margin-top: 250px; */
 padding: 20px;
 }
 
@@ -28,21 +28,21 @@ color: var(--tedblack);
 /* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
 @media only screen and (max-width: 600px) {
   .event-details {
-    margin-top: 200px;
+    margin-top: 30px;
   }
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .event-details {
-     margin-top: 230px;
+     margin-top: 30px;
   }
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .event-details {
-      margin-top: 275px;
+      margin-top: 30px;
   }
 }
 
