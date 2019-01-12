@@ -67,16 +67,16 @@ export class Schedule extends Component {
             {/* Change bullet color here, time, and the info in a timeline event */}
               <span class="event"></span>
               <span class="bullet"></span>
-              <div className="info-talk">
-                <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-                <h3 className="event-title">{event.title}</h3>
-                <p className="event-description">{event.blurb}</p>
-                {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-                  <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
-                :
-                  <div></div>
-                }
-              </div>
+                <div className="info-talk">
+                  <p className="time"><strong>{event.start}</strong> — {event.end}</p>
+                  <h3 className="event-title">{event.title}</h3>
+                  <p className="event-description">{event.blurb}</p>
+                  {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+                    <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+                  :
+                    <div></div>
+                  }
+                </div>
             </Link>
           </li>
         )

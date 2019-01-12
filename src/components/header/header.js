@@ -112,7 +112,7 @@ export class Header extends Component {
                                 </div>
                             :
                                 <div className="question-btn-container">
-                                    <h6><button onClick={() => this.handleAskQuestion()} className="question-btn">AskQuestion</button></h6>
+                                    <h6><button onClick={() => this.handleAskQuestion()} className="question-btn">Ask Question</button></h6>
                                 </div>
                             }
 
