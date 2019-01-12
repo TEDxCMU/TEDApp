@@ -104,6 +104,10 @@ export class Faq extends Component {
             </div>
         );
     }
+
+    componentDidMount = () => {
+        this.props.isLoaded();
+    }
 }
 
 export default Faq;

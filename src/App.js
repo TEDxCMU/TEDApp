@@ -31,7 +31,8 @@ class App extends Component {
       allData: [],
       iosPopUp: false,
       chromePopUp: false,
-      burgerColor: "white"
+      burgerColor: "white",
+      loaded: false
     }
     //pass THIS to global navigation hamburger menu so people can login and logout everywhere
     this.authListener = this.authListener.bind(this);
@@ -45,17 +46,17 @@ class App extends Component {
       <div>
         <Router>
           <div className="App">
-          <Navigation user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
+          <Navigation loaded={this.state.loaded} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
           <Route path="/" exact strict render={this.schedulePage}/>
           <Route path="/events/:id" exact strict component={EventDetails}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
-          <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
+          {/* <Route path="/styleguide" exact strict render={this.styleGuidePage}/> */}
           <Route path="/login" exact strict render={this.loginPage}/>
           <Route path="/brainFood" exact strict render={this.BrainFoodPage}/>
           <Route path="/questions" exact strict render={this.questionsPage}/>
             <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
               {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null ?
-              <PopUp iOS={true}/>
+              <PopUp iOS={true} loaded={this.state.loaded}/>
               :
               <div align="center"></div>
               }
@@ -75,6 +76,12 @@ class App extends Component {
     });
   }
 
+  isLoaded = () => {
+    this.setState({
+      loaded: true
+    })
+  }
+
   navigationPage = (uzer) => {
     return(
       <div>
@@ -91,10 +98,24 @@ class App extends Component {
 
   schedulePage = (props) => {
     return (
-      <div style= {{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-        <Schedule
-          user={this.state.user} /> 
+      <div>
+        {this.state.loaded ? 
+          // now the main app div will be 100% of the total screen real estate, which means the popup appears at the bottom
+          <div style= {{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Schedule
+              user={this.state.user}
+              isLoaded={this.isLoaded} /> 
+          </div>
+          :
+          // now the main app div will be 100% of the VIEW PORT real estate, which means the loader will be centered
+          <div style= {{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Schedule
+              user={this.state.user}
+              isLoaded={this.isLoaded} /> 
+          </div>
+      }
       </div>
+
     );
   }
 
@@ -105,7 +126,8 @@ class App extends Component {
           title="My Questions"
           description="Find answers to your questions here." />
         <MyQuestions
-        user={this.state.user} /> 
+        user={this.state.user}
+        isLoaded={this.isLoaded} /> 
       </div>
     );
   }
@@ -117,7 +139,8 @@ class App extends Component {
           title="Event"
           description="Find answers to your questions on food, parking, or anything in-between." />
         <EventDetails
-        user={this.state.user} />
+        user={this.state.user}
+        isLoaded={this.isLoaded} />
       </div>
     );
   }
@@ -129,7 +152,8 @@ class App extends Component {
           title="FAQ"
           description="Find answers to your questions on food, parking, or anything in-between." />
         <Faq
-          user={this.state.user} /> 
+          user={this.state.user}
+          isLoaded={this.isLoaded} /> 
       </div>
     );
   }
@@ -141,7 +165,8 @@ class App extends Component {
           title="Brain Food"
           description="See how the conference is going and increase your impact." />
         <BrainFood
-          user={this.state.user} /> 
+          user={this.state.user}
+          isLoaded={this.isLoaded} /> 
       </div>
     );
   }
@@ -153,7 +178,8 @@ class App extends Component {
           title="Style Guide"
           description="For personal reference." />
         <StyleGuide
-          user={this.state.user} /> 
+          user={this.state.user}
+          isLoaded={this.isLoaded} /> 
       </div>
     );
   }
@@ -166,7 +192,8 @@ class App extends Component {
           description="" />
         <Login
         user={this.state.user}
-        login={this.login} />
+        login={this.login}
+        isLoaded={this.isLoaded} />
       </div>
     );
   }

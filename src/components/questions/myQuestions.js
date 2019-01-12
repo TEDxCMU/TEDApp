@@ -99,7 +99,7 @@ export class MyQuestions extends Component {
         });
         // let questions = Array(wholeData.length)
       this.setState(
-        {questions: wholeData}
+        {questions: wholeData}, () => this.props.isLoaded()
       )
     })
   }

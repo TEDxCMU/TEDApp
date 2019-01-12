@@ -28,46 +28,52 @@ export class Navigation extends Component {
     render() {
         return (
             // Would be dope to change the color of the burger bars based on props passed in from App.js scrolling
-            <div id="navigation" className={this.props.burgerColor}>
-                <Menu noOverlay right 
-                    isOpen={this.state.menuOpen}
-                    onStateChange={(state) => this.handleStateChange(state)}>
-                    <div className="nav">
-                        <ul>
-                            <li><NavLink onClick={() => this.closeMenu()} to="/" exact activeStyle={{color:'#6EEBFC'}}>
-                                Home
-                            </NavLink></li>
-                            <div>
-                                {this.props.user !== null && localStorage.getItem("userEmail") !== "dijour@cmu.edu" ?
-                                    <NavLink onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6EEBFC'}}>
-                                        My Questions
-                                    </NavLink>
-                                :
-                                    <div></div>
-                                    
-                                }
+            <div>
+                {this.props.loaded ? 
+                    <div id="navigation" className={this.props.burgerColor}>
+                        <Menu noOverlay right 
+                            isOpen={this.state.menuOpen}
+                            onStateChange={(state) => this.handleStateChange(state)}>
+                            <div className="nav">
+                                <ul>
+                                    <li><NavLink onClick={() => this.closeMenu()} to="/" exact activeStyle={{color:'#6EEBFC'}}>
+                                        Home
+                                    </NavLink></li>
+                                    <div>
+                                        {this.props.user !== null && localStorage.getItem("userEmail") !== "dijour@cmu.edu" ?
+                                            <NavLink onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6EEBFC'}}>
+                                                My Questions
+                                            </NavLink>
+                                        :
+                                            <div></div>
+                                            
+                                        }
+                                    </div>
+                                    <li><NavLink onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6EEBFC'}}>
+                                        FAQs
+                                    </NavLink></li>
+                                    {/* <li><NavLink onClick={() => this.closeMenu()} to="/styleguide" exact activeStyle={{color:'#6EEBFC'}}>
+                                        Style Guide
+                                    </NavLink></li> */}
+                                    <li><NavLink onClick={() => this.closeMenu()} to="/brainFood" exact activeStyle={{color:'#6EEBFC'}}>
+                                        Brain Food
+                                    </NavLink></li>
+                                    {this.props.user === null ?
+                                        <div></div>
+                                        :
+                                        <div>
+                                            <li>
+                                                <button className="full-width button-primary" onClick={this.props.logout}>Log Out</button> 
+                                            </li>
+                                        </div>
+                                    }
+                                </ul>
                             </div>
-                            <li><NavLink onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6EEBFC'}}>
-                                FAQs
-                            </NavLink></li>
-                            <li><NavLink onClick={() => this.closeMenu()} to="/styleguide" exact activeStyle={{color:'#6EEBFC'}}>
-                                Style Guide
-                            </NavLink></li>
-                            <li><NavLink onClick={() => this.closeMenu()} to="/brainFood" exact activeStyle={{color:'#6EEBFC'}}>
-                                Brain Food
-                            </NavLink></li>
-                            {this.props.user === null ?
-                                <div></div>
-                                :
-                                <div>
-                                    <li>
-                                        <button className="full-width button-primary" onClick={this.props.logout}>Log Out</button> 
-                                    </li>
-                                </div>
-                            }
-                        </ul>
+                        </Menu>
                     </div>
-                </Menu>
+                :
+                    <div></div>
+                }
             </div>
         );        
     }

@@ -251,23 +251,22 @@ export class Schedule extends Component {
   }
 
   watchForChanges = () => {
+    this.props.isLoaded()
     let that = this;
     const db = fire.firestore();
-    for (let i in this.state.allEvents) {
-      db.collection('detailed itinerary')
-      .onSnapshot(querySnapshot => {
-        querySnapshot.docChanges().forEach(change => {
-          if (change.type === 'added') {
-          }
-          if (change.type === 'modified') {
-            console.log('An event snapshot was modified', change.doc.data());
-            that.componentDidMount();
-          }
-          if (change.type === 'removed') {
-          }
-        });
+    db.collection('detailed itinerary')
+    .onSnapshot(querySnapshot => {
+      querySnapshot.docChanges().forEach(change => {
+        if (change.type === 'added') {
+        }
+        if (change.type === 'modified') {
+          console.log('An event snapshot was modified', change.doc.data());
+          that.componentDidMount();
+        }
+        if (change.type === 'removed') {
+        }
       });
-    }
+    });
   }
 
   componentDidMount = () => {

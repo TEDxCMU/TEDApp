@@ -135,6 +135,7 @@ const StyleGuide = () => {
             </div>
         </div>
     );
+
 }
 
 export default StyleGuide;
