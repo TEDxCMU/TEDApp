@@ -27,6 +27,7 @@ export class Navigation extends Component {
 
     render() {
         return (
+            // Would be dope to change the color of the burger bars based on props passed in from App.js scrolling
             <div id="navigation" className={this.props.burgerColor}>
                 <Menu noOverlay right 
                     isOpen={this.state.menuOpen}
