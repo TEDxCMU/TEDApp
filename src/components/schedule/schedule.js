@@ -9,6 +9,8 @@ import fire from '../../fire.js';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import Header from '../header/header';
+import { css } from '@emotion/core';
+import { BounceLoader } from 'react-spinners';
 
 export class Schedule extends Component {
   constructor() {
@@ -40,9 +42,21 @@ export class Schedule extends Component {
   }
 
   render = () => {
+    const override = css`
+    display: block;
+    margin: 0 auto;
+    `;
     if (this.state.allEvents.length === 0) {
       return (
-        <div>Loading</div>
+        <div className='sweet-loading' >
+          <BounceLoader
+            css={override}
+            sizeUnit={"px"}
+            size={150}
+            color={'#e62b1e'}
+            loading={this.state.loading}
+          />
+        </div> 
       )
     }
     let newList = [];
@@ -117,7 +131,7 @@ export class Schedule extends Component {
     if (newList.length > 0) {
     return (
           
-          <div>
+          <div style={{height: '100%', width: '100%'}}>
             <Header
             title="Live Schedule" 
             description={notification} />

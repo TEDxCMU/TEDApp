@@ -90,7 +90,7 @@ class App extends Component {
 
   schedulePage = (props) => {
     return (
-      <div>
+      <div style= {{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
         <Schedule
           user={this.state.user} /> 
       </div>
