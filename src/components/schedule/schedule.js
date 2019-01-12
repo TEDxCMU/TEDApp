@@ -103,7 +103,9 @@ export class Schedule extends Component {
               <h5 className="event-title">{event.title}</h5>
               <small>{event.blurb}</small>
               {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-                <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+                <div>
+                  <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+                </div>
               :
                 <div></div>
               }
