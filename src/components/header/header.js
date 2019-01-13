@@ -89,8 +89,13 @@ export class Header extends Component {
 
     render() {
         let that = this;
-        let nameBlank = this.props.errors.name
-        let questionBlank = this.props.errors.question
+        console.log(this.props)
+        let nameBlank = true;
+        let questionBlank = true;
+        if (this.props.errors !== undefined) {
+            nameBlank = this.props.errors.name
+            questionBlank = this.props.errors.question
+        }
         return (
             <header className="sticky">
                 <Link key={'home'} to={{
@@ -147,7 +152,7 @@ export class Header extends Component {
                                     <div className="modal" style={{display: "flex", flexDirection: 'column'}}>
                                         <div>
                                             <h4>Dear {this.props.title},</h4>
-                                            <textarea type="text" id="iOS" required className="mm-popup__input" name="question" placeholder={ questionBlank ? "Please write a question before submitting ." : "Write your question here..."} onChange={that.props.handleChange}/>
+                                            <textarea type="text" id="iOS" required className="mm-popup__input" name="question" placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
                                             <h4>Sincerely, </h4>
                                             <textarea type="text" style={{height: '20px'}} className="mm-popup__input__small" required minLength="4" siz="10" className="mm-popup__input" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
                                             <button align="center" style={{marginTop: '20px'}} onClick={this.sendQuestion}>Fire Away</button>
