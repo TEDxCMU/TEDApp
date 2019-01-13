@@ -23,7 +23,7 @@ export class EventDetails extends Component {
         let self = this.state;
             return (
                 <div>    
-                { this.state.asked !== undefined ? 
+                { this.state.speaker !== undefined ? 
                 <div>
                     <Header
                     title={self.speaker.first + ' ' + self.speaker.last} 
@@ -111,6 +111,7 @@ export class EventDetails extends Component {
 
     componentDidMount = () => {
         console.log(this.state.asked)
+        console.log
         let props = this.props.location.state
         this.setState({props}, () => 
         this.checkSpeaker())
@@ -119,7 +120,7 @@ export class EventDetails extends Component {
 
     checkIfAsked = () => {
         const db = fire.firestore()
-        if (this.state.speaker === null){
+        if (this.state.speaker === null || localStorage.getItem('fingerprint') === null) {
             return
         }
         db.collection('speakers')
