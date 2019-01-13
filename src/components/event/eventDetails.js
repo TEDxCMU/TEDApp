@@ -42,6 +42,7 @@ export class EventDetails extends Component {
                     <div className="event-details">
                         { self.speaker !== undefined ?
                         <div className="info-container">
+                            <p>{localStorage.getItem('fingerprint')}</p>
                             <p className="talk">TEDxCMU Talk</p>
                             
                             <h6 className="talk-title">{self.props.title}</h6>
