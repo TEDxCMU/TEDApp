@@ -86,26 +86,46 @@ export class EventDetails extends Component {
                 errors: errors
             })
         } 
-
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
         let that = this;
-        db.collection("speakers").doc(this.state.speaker.email).collection("questions").doc(localStorage.getItem('fingerprint')).set({
-            question: this.state.question,
-            name: this.state.name,
-            answer: "",
-            timeAsked: now
-        })
-        .then(function() {
-            console.log("Document successfully written!")
-            that.setState({
-                asked: true
+        if (localStorage.getItem('fingerprint') === null) {
+            db.collection("speakers").doc(this.state.speaker.email).collection("questions").add({
+                question: this.state.question,
+                name: this.state.name,
+                answer: "",
+                timeAsked: now
             })
-            // window.location.reload();
-        })
-        .catch(function(error) {
-            console.error("Error writing document: ", error);
-        });
+            .then(function() {
+                console.log("Document successfully written!")
+                that.setState({
+                    asked: true
+                })
+                // window.location.reload();
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+        }
+        else {
+            db.collection("speakers").doc(this.state.speaker.email).collection("questions").doc(localStorage.getItem('fingerprint')).set({
+                question: this.state.question,
+                name: this.state.name,
+                answer: "",
+                timeAsked: now
+            })
+            .then(function() {
+                console.log("Document successfully written!")
+                that.setState({
+                    asked: true
+                })
+                // window.location.reload();
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+        }
+
     }
 
     componentDidMount = () => {
