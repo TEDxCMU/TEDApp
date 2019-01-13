@@ -179,7 +179,7 @@ header .title {
 @media only screen and (max-width: 600px) {
     /* content */
     .mm-popup__box__footer {
-        padding-top: 0px;
+        padding-top:  0px;
     }
 } 
 

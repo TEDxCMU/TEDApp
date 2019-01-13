@@ -118,7 +118,7 @@ export class EventDetails extends Component {
     checkIfAsked = () => {
         const db = fire.firestore()
         db.collection('speakers')
-        .doc(this.props.location.state.speaker)
+        .doc(this.state.speaker.email)
         .collection('questions')
         .doc(localStorage.getItem('fingerprint'))
         .get()
