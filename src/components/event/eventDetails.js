@@ -117,6 +117,9 @@ export class EventDetails extends Component {
 
     checkIfAsked = () => {
         const db = fire.firestore()
+        if (this.state.speaker === null){
+            return
+        }
         db.collection('speakers')
         .doc(this.state.speaker.email)
         .collection('questions')
