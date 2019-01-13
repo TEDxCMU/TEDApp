@@ -55,7 +55,7 @@ class App extends Component {
           <Route path="/brainFood" exact strict render={this.BrainFoodPage}/>
           <Route path="/questions" exact strict render={this.questionsPage}/>
             <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
-              {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null ?
+              {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null && localStorage.getItem("fingerprint") !== null ?
               <PopUp iOS={true} loaded={this.state.loaded}/>
               :
               <div align="center"></div>
