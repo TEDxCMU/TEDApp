@@ -14,7 +14,6 @@ export class EventDetails extends Component {
         question: '',
         name: '',
         errors: {name: false, question: false},
-        asked: false
       }
       this.handleChange = this.handleChange.bind(this)
     }
@@ -23,7 +22,7 @@ export class EventDetails extends Component {
         let self = this.state;
             return (
                 <div>    
-                { this.state.speaker !== undefined ? 
+                { this.state.asked !== undefined ? 
                 <div>
                     <Header
                     title={self.speaker.first + ' ' + self.speaker.last} 
@@ -42,7 +41,6 @@ export class EventDetails extends Component {
                     <div className="event-details">
                         { self.speaker !== undefined ?
                         <div className="info-container">
-                            <p>{localStorage.getItem('fingerprint')}</p>
                             <p className="talk">TEDxCMU Talk</p>
                             
                             <h6 className="talk-title">{self.props.title}</h6>
@@ -120,8 +118,10 @@ export class EventDetails extends Component {
 
     checkIfAsked = () => {
         const db = fire.firestore()
-        if (this.state.speaker === null || localStorage.getItem('fingerprint') === null) {
-            return
+        if (localStorage.getItem('fingerprint') === null) {
+            return this.setState({
+                asked: false
+            })
         }
         db.collection('speakers')
         .doc(this.state.speaker.email)
@@ -154,9 +154,7 @@ export class EventDetails extends Component {
             console.log('Document data:', doc.data());
             this.setState({
                 speaker: doc.data()
-            }
-            // , () => this.checkIfAsked()
-            )
+            }, () => this.checkIfAsked())
           }
         })
         .catch(err => {
