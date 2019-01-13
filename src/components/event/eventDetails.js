@@ -129,7 +129,6 @@ export class EventDetails extends Component {
     }
 
     componentDidMount = () => {
-        console.log(this.state.asked)
         let props = this.props.location.state
         this.setState({props}, () => 
         this.checkSpeaker())

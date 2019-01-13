@@ -14,7 +14,7 @@ export class Header extends Component {
     constructor (props) {
         super(props)
         this.state = {
-          menuOpen: false,
+          confirmationOpen: false,
           open: false
         }
     }
@@ -61,26 +61,37 @@ export class Header extends Component {
     //     });
     // }
 
-    closeMenu () {
-        this.setState({menuOpen: false})
-      }
+    closeConfirmation = () => {
+        // this.setState({confirmationOpen: false}, () => this.props.askQuestion())
+        this.props.askQuestion();
+    }
 
-    toggleMenu () {
-    this.setState({menuOpen: !this.state.menuOpen})
+    openConfirmation = (e) => {
+        e.preventDefault()
+        this.setState({confirmationOpen: true}, () => console.log("shalom we opening"))
     }
 
     openModal = () => {
         this.setState({ open: true })
-      }
+    }
 
     closeModal = () => {
         this.setState({ open: false })
     }
 
-    sendQuestion = () => {
+    closeModalandOpenConfirmation = () => {
+        console.log("closing modal and opening confirmation")
+        this.setState({
+            confirmationOpen: true,
+            open: false
+        })
+    }
+
+    sendQuestion = (e) => {
+        e.preventDefault()
         if (this.props.question.length > 0 && this.props.name.length > 0) {
-            this.props.askQuestion()
-            this.closeModal();
+            this.closeModalandOpenConfirmation();
+            // this.props.askQuestion()
         }
         else {
             return;
@@ -95,6 +106,14 @@ export class Header extends Component {
         if (this.props.errors !== undefined) {
             nameBlank = this.props.errors.name
             questionBlank = this.props.errors.question
+        }
+        const style = {
+            display: 'flex',
+            justifyText: 'center',
+            flexDirection: 'column',
+            alignItems: 'center',
+            paddingTop: '50px',
+            width: '90%'
         }
         return (
             <header className="sticky">
@@ -148,6 +167,7 @@ export class Header extends Component {
                                     open={this.state.open}
                                     closeOnDocumentClick
                                     onClose={this.closeModal}
+                                    contentStyle={style}
                                     >
                                     <div className="modal" style={{display: "flex", flexDirection: 'column'}}>
                                         <div>
@@ -155,7 +175,23 @@ export class Header extends Component {
                                             <textarea type="text" id="iOS" required className="mm-popup__input" name="question" placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
                                             <h4>Sincerely, </h4>
                                             <input type="text" style={{height: '20px'}} className="mm-popup__input__small" required minLength="4" siz="10" className="mm-popup__input" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
-                                            <button align="center" style={{marginTop: '20px'}} onClick={this.sendQuestion}>Fire Away</button>
+                                            <button align="center" style={{marginTop: '20px'}} onClick={this.closeModal}>Cancel</button>
+                                            <button align="center" style={{marginTop: '20px'}} onClick={e => this.sendQuestion(e)}>Submit</button>
+                                            
+                                        </div>
+                                    </div>
+                                    </Popup>
+                                    <Popup
+                                    open={this.state.confirmationOpen}
+                                    closeOnDocumentClick
+                                    onClose={this.closeConfirmation}
+                                    contentStyle={style}
+                                    >
+                                    <div className="modal" style={{display: "flex", flexDirection: 'column'}}>
+                                        <div style={style}>
+                                            <img src={bottle} className="bottle" alt="Bottle" />
+                                            <p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
+                                            <button align="center" style={{marginTop: '20px'}} onClick={this.closeConfirmation}>Ok</button>
                                         </div>
                                     </div>
                                     </Popup>
