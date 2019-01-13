@@ -13,7 +13,8 @@ export class EventDetails extends Component {
       this.state = {
         question: '',
         name: '',
-        errors: {name: false, question: false}
+        errors: {name: false, question: false},
+        asked: false
       }
       this.handleChange = this.handleChange.bind(this)
     }
@@ -109,6 +110,7 @@ export class EventDetails extends Component {
     }
 
     componentDidMount = () => {
+        console.log(this.state.asked)
         let props = this.props.location.state
         this.setState({props}, () => 
         this.checkSpeaker())
@@ -151,7 +153,9 @@ export class EventDetails extends Component {
             console.log('Document data:', doc.data());
             this.setState({
                 speaker: doc.data()
-            }, () => this.checkIfAsked())
+            }
+            // , () => this.checkIfAsked()
+            )
           }
         })
         .catch(err => {

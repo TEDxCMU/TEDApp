@@ -154,7 +154,7 @@ export class Header extends Component {
                                             <h4>Dear {this.props.title},</h4>
                                             <textarea type="text" id="iOS" required className="mm-popup__input" name="question" placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
                                             <h4>Sincerely, </h4>
-                                            <textarea type="text" style={{height: '20px'}} className="mm-popup__input__small" required minLength="4" siz="10" className="mm-popup__input" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
+                                            <input type="text" style={{height: '20px'}} className="mm-popup__input__small" required minLength="4" siz="10" className="mm-popup__input" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
                                             <button align="center" style={{marginTop: '20px'}} onClick={this.sendQuestion}>Fire Away</button>
                                         </div>
                                     </div>
