@@ -20,7 +20,7 @@
   content: "";
   display: block;
   width: 0;
-  height: 75%;
+  height: 80%;
   border: 1px solid var(--tedlightgrey);
   position: absolute;
   top: 60%;
@@ -50,6 +50,21 @@
   left: -2rem;
   z-index: 1;
 }
+
+.event-static::before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 100%;
+  border: 1px solid var(--tedlightgrey);
+  position: absolute;
+  top: 0;
+  left: -2rem;
+}
+
+.event-static:first-child::before {
+  top: 5px;
+}
  
 .bullet::before {
   content: '';
@@ -72,7 +87,7 @@
   width: 14px;
   height: 14px;
   left: calc(-2rem - 6px);
-  top: calc(50% - 6px);
+  top: 4px;
   background-color: var(--tedred);
   border-radius: 50%;
   border: 3px solid var(--tedbggrey);
@@ -88,17 +103,20 @@
   height: 100%;
   border: 1px solid var(--tedred);
   position: absolute;
-  top:0;
+  top: 0;
   left: -2rem;
 }
 
 .info-static {
-  margin: 0 0 20px;
-  padding: 0 0 10px;
+  margin: 1rem 0;
+  padding: 10px 20px;
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  /* padding: 0 0 10px; */
 }
 
 .info-talk {
-  margin: 1rem 0 2rem;
+  margin: 2rem 0;
   padding: 10px 20px;
   box-shadow: 0px 2px 12px rgba(0, 0, 0, 0.15);
   border-radius: 5px;
@@ -122,6 +140,32 @@
 .event-description {
   font-size: 0.9rem;
 }
+
+/*
+.bullet-red {
+  background: #f00;
+  border: 4px solid #ddd;
+}
+
+
+.bullet-active {
+  border: 1px solid #f00
+  box-shadow: 0 0 15px 0 #f00;
+}
+
+.bullet-active::before {
+  content: " ";
+  position: absolute;
+  z-index: 1;
+  border: 4px solid #f00;
+  border-radius: 50%;
+}
+
+.bullet-grey {
+  background: var #ccc;
+  border: 4px solid #eee;
+}
+ */
 
 /* END NEW TIMELINE CODE */
 

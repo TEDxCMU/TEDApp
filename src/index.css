@@ -377,7 +377,7 @@ input[type="button"] {
   min-width: 80px;
   letter-spacing: .05rem;
   background: var(--tedwhite);
-  box-shadow: 2px 2px 6px 0 var(--opaque);
+  box-shadow: 0 2px 10px 0 var(--opaque);
 }
 
 form button,
@@ -395,8 +395,8 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-	background: var(--tedblack);
-	color: var(--tedwhite);
+	background: var(--tedoffwhite);
+	color: var(--tedblack);
 	outline: 0;
 }
 
@@ -424,7 +424,7 @@ button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
-	background: var(--tedredhover);
+  background: var(--tedredhover);
 }
 
 button.full-width {
