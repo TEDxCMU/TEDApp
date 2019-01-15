@@ -8,6 +8,9 @@ import Route from 'react-router-dom/Route';
 import fire from '../../fire.js';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
+import Header from '../header/header';
+// import { css } from '@emotion/core';
+import { BounceLoader } from 'react-spinners';
 
 export class Schedule extends Component {
   constructor() {
@@ -41,13 +44,29 @@ export class Schedule extends Component {
   render = () => {
     if (this.state.allEvents.length === 0) {
       return (
-        <div>Loading</div>
+        <div>
+          <BounceLoader
+            sizeUnit={"px"}
+            size={150}
+            color={'#e62b1e'}
+            loading={this.state.loading}
+          />
+        </div> 
       )
     }
-    console.log(this.state.allEvents)
     let newList = [];
-
+    let notification = "The conference is currently not in progress. Please check back at another time."
+    let that = this;
     this.state.allEvents.forEach(event => {
+        //mark event as either being in the past, happening right now, or being in the future if it is just static
+        let className = "bullet-static";
+        if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
+          className = "now";
+          notification = event.announcement;
+        }
+        if (moment().isAfter(moment(event.end, "hh:mm A"))) {
+          className = "past";
+        }
         if (event.type !== "static") {
           newList.push(
             <li key={event.id}>
@@ -61,27 +80,29 @@ export class Schedule extends Component {
                   description: event.description,
                   blurb: event.blurb,
                   speaker: event.speaker.id,
-                  related: event.related
+                  related: event.related,
+                  announcement: event.announcement,
               }
             }}>
             {/* Change bullet color here, time, and the info in a timeline event */}
-              <span class="event"></span>
-              <span class="bullet"></span>
-              <div className="info-talk">
-                <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-                <h3 className="event-title">{event.title}</h3>
-                <p className="event-description">{event.blurb}</p>
-              </div>
+              <span className="event"></span>
+              <span className={className}></span>
+                <div className="info-talk">
+                  <p className="time"><strong>{event.start}</strong> — {event.end}</p>
+                  <h4 className="event-title">{event.title}</h4>
+                  <p className="event-description">{event.blurb}</p>
+                  {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+                    <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+                  :
+                    <div></div>
+                  }
+                </div>
             </Link>
-          {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-              <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
-            :
-              <div></div>
-          }
           </li>
         )
       }
       else {
+      
       newList.push(
         <li key={event.id}>
             {/* Change bullet color here, time, and the info in a timeline event */}
@@ -91,29 +112,35 @@ export class Schedule extends Component {
               <p className="time"><strong>{event.start}</strong> — {event.end}</p>
               <h5 className="event-title">{event.title}</h5>
               <small>{event.blurb}</small>
+              {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+                <div>
+                  <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+                </div>
+              :
+                <div></div>
+              }
             </div>
-          {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-            <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
-            :
-            <div></div>
-          }
       </li>
       )}
     })
     let allEvents = this.state.allEvents;
     if (newList.length > 0) {
     return (
-          <div>
+          
+          <div style={{height: '100%', width: '100%'}}>
+            <Header
+            title="Live Schedule" 
+            description={notification} />
             {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
             <div>
-              <div style={{display: 'flex', justifyContent: 'center', marginTop: '275px'}}>
-                <TimePicker style={{align: 'center'}}
-                  defaultValue={this.state.value}
-                  onChange={this.handleValueChange}
-                />
-              </div>
-              <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
-              <div className="timelineAdmin">      
+              <div className="timeline">      
+                <div style={{marginTop: '275px'}}>
+                  <TimePicker style={{align: 'center'}}
+                    defaultValue={this.state.value}
+                    onChange={this.handleValueChange}
+                  />
+                </div>
+                <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
                 <ul>
                   {newList} 
                 </ul>
@@ -225,23 +252,22 @@ export class Schedule extends Component {
   }
 
   watchForChanges = () => {
+    this.props.isLoaded()
     let that = this;
     const db = fire.firestore();
-    for (let i in this.state.allEvents) {
-      db.collection('detailed itinerary')
-      .onSnapshot(querySnapshot => {
-        querySnapshot.docChanges().forEach(change => {
-          if (change.type === 'added') {
-          }
-          if (change.type === 'modified') {
-            console.log('An event snapshot was modified', change.doc.data());
-            that.componentDidMount();
-          }
-          if (change.type === 'removed') {
-          }
-        });
+    db.collection('detailed itinerary')
+    .onSnapshot(querySnapshot => {
+      querySnapshot.docChanges().forEach(change => {
+        if (change.type === 'added') {
+        }
+        if (change.type === 'modified') {
+          console.log('An event snapshot was modified', change.doc.data());
+          that.componentDidMount();
+        }
+        if (change.type === 'removed') {
+        }
       });
-    }
+    });
   }
 
   componentDidMount = () => {

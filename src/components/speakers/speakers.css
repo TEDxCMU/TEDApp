@@ -1,25 +1,36 @@
 .speakers {
-    width: 90%;
+    display: flex;
+    flex-direction: column; 
+    width: 85%;
     margin: auto;
+    margin-top: 500px;
     text-align: left;
+}
+
+.speaker {
+  display: flex;
+  flex-direction: column; 
+  align-items: center;
+  padding-left: 25%;
+  padding-right: 25%;
 }
 
 @media only screen and (max-width: 600px) {
     .speakers {
-      margin-top: 80px;
+      margin-top: 20px;
     }
   } 
   
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
     .speakers {
-      margin-top: 80px;
+      margin-top: 20px;
     }
   } 
   
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px) {
     .speakers {
-        margin-top: 150px;
+        margin-top: 30px;
     }
   }

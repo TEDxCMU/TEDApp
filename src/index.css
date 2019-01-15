@@ -296,15 +296,14 @@ select {
   display: block;
   height: 1em;
   padding: 1em 0;
-  border: 0;
+  border: none;
   outline: none;
-  justify-content: center;
   color: var(--tedgrey);
   font-size: 1em;
   line-height: 1em;
   width: 100%;
   background: transparent;
-  border-bottom: 1px solid var(--opaque);
+  border: 1px solid #e9ebec;
   transition: all 0.3s ease-in-out;
 }
 
@@ -323,8 +322,14 @@ input[type="password"]:focus,
 textarea:focus,
 select:focus {
 	color: var(--tedblack);
-	border-bottom: 1px solid var(--tedred);
+  border: 1px solid var(--tedlightgrey);
+  box-sizing: border-box;
 }
+
+.focus-highlight {
+  border-bottom: 1px solid var(--tedred);
+}
+
 label, legend {
   text-transform: uppercase;
   font-weight: 600;

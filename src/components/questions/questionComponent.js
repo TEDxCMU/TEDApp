@@ -14,22 +14,23 @@ export class QuestionComponent extends Component {
 
     
     render() {
-    console.log(this.state)
     let question = this.props.question;
     let index = this.props.index;
     let id = this.props.id;
+    let name = this.props.name;
+    console.log(this.props.name)
     return (
-        <div className="speakers">
-            <Dropdown title={question}>
+        <div className="speaker">
+            <Dropdown title={name}>
                 <form align='center'>
-                    <label align='center'>Answer Question</label>
+                    <label align='center'>Question: {question}</label>    
                     <input type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
                     {this.props.answered === true ? 
                     <div>
                         <button type="button" className="button-sent">Answered</button>
                     </div>     
                     :
-                        <button type="button" className="button-primary" onClick={() => this.props.answerQuestion(id, this.state.answer, index)}>Answer Question</button> 
+                        <button type="button" className="button-primary" style={{marginTop: "5px"}} onClick={() => this.props.answerQuestion(id, this.state.answer, index)}>Answer Question</button> 
                     }           
                 </form>
             </Dropdown>
@@ -45,23 +46,6 @@ export class QuestionComponent extends Component {
         this.setState({
             answer: this.props.answer
         })
-    //   const db = fire.firestore();
-    //   db.settings({
-    //     timestampsInSnapshots: true
-    //   });
-    //   var wholeData = [];
-    //   let speakerID = "wLs9MTPHfZk5AbebslaQ"
-    //   db.collection('speakers').doc(speakerID).collection("questions").get()
-    //   .then(snapshot => {
-    //       snapshot.forEach(doc => {
-    //           let docCopy = doc.data();
-    //           wholeData.push(docCopy)
-    //       });
-    //       // let questions = Array(wholeData.length)
-    //     this.setState(
-    //         {questions: wholeData
-    //       }, () => console.log(this.state.questions))
-    //   })
     }
       
 }

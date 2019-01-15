@@ -26,7 +26,7 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: var(--tedwhite);
+  background: var(--tedred);
 }
 
 /* Position and sizing of clickable cross button */

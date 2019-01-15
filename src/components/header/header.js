@@ -7,65 +7,116 @@ import bottle from '../../questionbottle.svg';
 import { Link } from 'react-router-dom';
 import './header.css';
 import { SocialIcon } from 'react-social-icons';
-import Popup from 'react-popup';
+// import Popup from 'react-popup';
+import Popup from "reactjs-popup";
 
 export class Header extends Component {
     constructor (props) {
         super(props)
         this.state = {
-          menuOpen: false,
+          confirmationOpen: false,
+          open: false
         }
     }
 
-    handleAskQuestion () {
-        console.log(this.props)
+    // handleAskQuestion () {
+    //     let that = this;
+    //     const style = {
+    //         display: 'flex',
+    //         justifyText: 'center',
+    //         flexDirection: 'column',
+    //         alignItems: 'center',
+    //         paddingTop: '50px'
+    //     }
+    //     let nameBlank = this.props.errors.name
+    //     let questionBlank = this.props.errors.question
+    //     console.log(nameBlank, questionBlank)
+    //     Popup.create({
+    //         title: null,
+    //         content: <div><h4>Dear {this.props.title},</h4><textarea type="text" id="iOS" required className="mm-popup__input" name="question" placeholder={ questionBlank ? "Please write a question before submitting ." : "Write your question here..."} onChange={that.props.handleChange}/><h4>Sincerely, </h4><textarea type="text" style={{height: '20px'}} className="mm-popup__input__small" required minLength="4" siz="10" className="mm-popup__input" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/></div>,
+    //         buttons: {
+    //             left: ['cancel'],
+    //             right: [{
+    //                 text: 'Send',
+    //                 className: 'success',
+    //                 action: function () {
+    //                     if (that.props.question.length > 0 && that.props.name.length > 0) {
+    //                         that.props.askQuestion()
+    //                         Popup.create({
+    //                             title: null,
+    //                             content: <div style={style}><img src={bottle} className="bottle" alt="Bottle" /><p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p></div>,
+    //                             buttons: {
+    //                                 right: ['ok']
+    //                             }
+    //                         });
+    //                         // Popup.alert('Thank you for asking a question! Please check back on the Q&A page later.');
+    //                         Popup.close();
+    //                     }
+    //                     else {
+    //                         that.props.askQuestion()
+    //                     }
+    //                 }
+    //             }]
+    //         }
+    //     });
+    // }
+
+    closeConfirmation = () => {
+        // this.setState({confirmationOpen: false}, () => this.props.askQuestion())
+        this.props.askQuestion();
+    }
+
+    openConfirmation = (e) => {
+        e.preventDefault()
+        this.setState({confirmationOpen: true}, () => console.log("shalom we opening"))
+    }
+
+    openModal = () => {
+        this.setState({ open: true })
+    }
+
+    closeModal = () => {
+        this.setState({ open: false })
+    }
+
+    closeModalandOpenConfirmation = () => {
+        console.log("closing modal and opening confirmation")
+        this.setState({
+            confirmationOpen: true,
+            open: false
+        })
+    }
+
+    sendQuestion = (e) => {
+        e.preventDefault()
+        if (this.props.question.length > 0 && this.props.name.length > 0) {
+            this.closeModalandOpenConfirmation();
+            // this.props.askQuestion()
+        }
+        else {
+            return;
+        }
+    }
+
+    render() {
         let that = this;
+        console.log(this.props)
+        let nameBlank = true;
+        let questionBlank = true;
+        if (this.props.errors !== undefined) {
+            nameBlank = this.props.errors.name
+            questionBlank = this.props.errors.question
+        }
         const style = {
             display: 'flex',
             justifyText: 'center',
             flexDirection: 'column',
-            alignItems: 'center',
-            paddingTop: '50px'
+            alignItems: 'space-between',
+            padding: '30px 40px',
+            width: '70%',
+            border: 'none',
+            borderRadius: '10px'
         }
-        Popup.create({
-            title: null,
-            content: <div><h4>Dear {this.props.title},</h4><textarea type="text" className="mm-popup__input" name="question" placeholder="Write your question here..." onChange={that.props.handleChange}/></div>,
-            buttons: {
-                left: ['cancel'],
-                right: [{
-                    text: 'Send',
-                    className: 'success',
-                    action: function () {
-                        console.log("shalom")
-                        that.props.askQuestion()
-                        Popup.create({
-                            title: null,
-                            content: <div style={style}><img src={bottle} className="bottle" alt="Bottle" /><p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p></div>,
-                            buttons: {
-                                right: ['ok']
-                            }
-                        });
-                        // Popup.alert('Thank you for asking a question! Please check back on the Q&A page later.');
-                        Popup.close();
-                    }
-                }]
-            }
-        });
-    }
-
-    closeMenu () {
-        this.setState({menuOpen: false})
-      }
-
-    toggleMenu () {
-    this.setState({menuOpen: !this.state.menuOpen})
-    }
-
-    componentDidMount = () => {
-        console.log(this.props)
-    }
-
-    render() {
         return (
             <header className="sticky">
                 <Link key={'home'} to={{
@@ -101,7 +152,7 @@ export class Header extends Component {
                             }
                             { this.props.twitter !== undefined ?
                                 <div>
-                                    <SocialIcon network="twitter" rel="noopener noreferrer" href={this.props.twitter} taget="_blank" fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
+                                    <SocialIcon network="twitter" rel="noopener noreferrer" url={this.props.twitter} taget="_blank" fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
                                 </div>
                             :
                                 <div></div>
@@ -112,7 +163,41 @@ export class Header extends Component {
                                 </div>
                             :
                                 <div className="question-btn-container">
-                                    <h6><button onClick={() => this.handleAskQuestion()} className="question-btn">AskQuestion</button></h6>
+                                    {/* <h6><button onClick={() => this.handleAskQuestion()} className="question-btn">Ask Question</button></h6> */}
+                                    <h6><button onClick={() => this.openModal()} className="question-btn">Ask Question</button></h6>
+                                    <Popup
+                                    open={this.state.open}
+                                    closeOnDocumentClick
+                                    onClose={this.closeModal}
+                                    contentStyle={style}
+                                    >
+                                    <div className="modal">
+                                        <div>
+                                            <h4>Dear {this.props.title},</h4>
+                                            <textarea type="text" id="iOS" required className="popup-input" name="question" placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
+                                            <h4>Sincerely, </h4>
+                                            <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
+                                            <div className="popup-btns">
+                                                <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
+                                                <button className="popup-btn-submit button-primary" onClick={e => this.sendQuestion(e)}>Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </Popup>
+                                    <Popup
+                                    open={this.state.confirmationOpen}
+                                    closeOnDocumentClick
+                                    onClose={this.closeConfirmation}
+                                    contentStyle={style}
+                                    >
+                                    <div className="modal" style={{border: "none"}}>
+                                        <div style={style}>
+                                            <img src={bottle} className="bottle" alt="Bottle" />
+                                            <p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
+                                            <button align="center" style={{marginTop: '20px'}} onClick={this.closeConfirmation}>Ok</button>
+                                        </div>
+                                    </div>
+                                    </Popup>
                                 </div>
                             }
 

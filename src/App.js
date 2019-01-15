@@ -5,8 +5,9 @@ import { Schedule } from './components/schedule/schedule.js';
 import { EventDetails } from './components/event/eventDetails.js';
 import { Navigation } from './components/navigation/navigation.js';
 import { Login } from './components/login/login.js';
-import { MyQuestions } from './components/questions/myQuestions.js'
-import { PopUp } from './components/addToHome/addToHome.js'
+import { MyQuestions } from './components/questions/myQuestions.js';
+import { PopUp } from './components/addToHome/addToHome.js';
+import { BrainFood } from './components/brains/brains.js';
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
@@ -17,7 +18,7 @@ import { isAndroid, isIOS } from "react-device-detect";
 import Fingerprint from "fingerprintjs2";
 
 import Popup from 'react-popup';
-
+import moment from 'moment';
 import Header from './components/header/header';
 
 
@@ -29,7 +30,9 @@ class App extends Component {
       user: null,
       allData: [],
       iosPopUp: false,
-      chromePopUp: false
+      chromePopUp: false,
+      burgerColor: "white",
+      loaded: false
     }
     //pass THIS to global navigation hamburger menu so people can login and logout everywhere
     this.authListener = this.authListener.bind(this);
@@ -37,25 +40,23 @@ class App extends Component {
   }
 
   render() {
-    console.log("RENDERING MAIN APP")
     console.log(auth.currentUser)
     console.log(JSON.parse(localStorage.getItem("popup")))
-
     return (
-
       <div>
         <Router>
           <div className="App">
-          <Navigation user={this.state.user} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
+          <Navigation loaded={this.state.loaded} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
           <Route path="/" exact strict render={this.schedulePage}/>
           <Route path="/events/:id" exact strict component={EventDetails}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
-          <Route path="/styleguide" exact strict render={this.styleGuidePage}/>
+          {/* <Route path="/styleguide" exact strict render={this.styleGuidePage}/> */}
           <Route path="/login" exact strict render={this.loginPage}/>
+          <Route path="/brainFood" exact strict render={this.BrainFoodPage}/>
           <Route path="/questions" exact strict render={this.questionsPage}/>
             <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
-              {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null ?
-              <PopUp iOS={true}/>
+              {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null && localStorage.getItem("fingerprint") !== null ?
+              <PopUp iOS={true} loaded={this.state.loaded}/>
               :
               <div align="center"></div>
               }
@@ -75,6 +76,12 @@ class App extends Component {
     });
   }
 
+  isLoaded = () => {
+    this.setState({
+      loaded: true
+    })
+  }
+
   navigationPage = (uzer) => {
     return(
       <div>
@@ -92,12 +99,23 @@ class App extends Component {
   schedulePage = (props) => {
     return (
       <div>
-        <Header
-          title="Live Schedule" 
-          description="The next talk by Po Shen Loh starts in 5 minutes in McConomy Auditorium." />
-        <Schedule
-          user={this.state.user} /> 
+        {this.state.loaded ? 
+          // now the main app div will be 100% of the total screen real estate, which means the popup appears at the bottom
+          <div style= {{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Schedule
+              user={this.state.user}
+              isLoaded={this.isLoaded} /> 
+          </div>
+          :
+          // now the main app div will be 100% of the VIEW PORT real estate, which means the loader will be centered
+          <div style= {{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+            <Schedule
+              user={this.state.user}
+              isLoaded={this.isLoaded} /> 
+          </div>
+      }
       </div>
+
     );
   }
 
@@ -108,7 +126,8 @@ class App extends Component {
           title="My Questions"
           description="Find answers to your questions here." />
         <MyQuestions
-        user={this.state.user} /> 
+        user={this.state.user}
+        isLoaded={this.isLoaded} /> 
       </div>
     );
   }
@@ -120,7 +139,8 @@ class App extends Component {
           title="Event"
           description="Find answers to your questions on food, parking, or anything in-between." />
         <EventDetails
-        user={this.state.user} />
+        user={this.state.user}
+        isLoaded={this.isLoaded} />
       </div>
     );
   }
@@ -132,7 +152,21 @@ class App extends Component {
           title="FAQ"
           description="Find answers to your questions on food, parking, or anything in-between." />
         <Faq
-          user={this.state.user} /> 
+          user={this.state.user}
+          isLoaded={this.isLoaded} /> 
+      </div>
+    );
+  }
+  
+  BrainFoodPage = (props) => {
+    return (
+      <div>
+        <Header
+          title="Brain Food"
+          description="See how the conference is going and increase your impact." />
+        <BrainFood
+          user={this.state.user}
+          isLoaded={this.isLoaded} /> 
       </div>
     );
   }
@@ -144,7 +178,8 @@ class App extends Component {
           title="Style Guide"
           description="For personal reference." />
         <StyleGuide
-          user={this.state.user} /> 
+          user={this.state.user}
+          isLoaded={this.isLoaded} /> 
       </div>
     );
   }
@@ -157,7 +192,8 @@ class App extends Component {
           description="" />
         <Login
         user={this.state.user}
-        login={this.login} />
+        login={this.login}
+        isLoaded={this.isLoaded} />
       </div>
     );
   }
@@ -176,7 +212,26 @@ class App extends Component {
 
   isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
+  componentWillUnmount = () => {
+      window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = (event) => {
+      let scrollTop = window.scrollY
+      console.log(window.scrollY)
+      if (scrollTop > 300) {
+        console.log("Setting red")
+        this.setState({burgerColor: "red"})
+      }
+      if (scrollTop < 300) {
+        console.log("Setting white")
+        this.setState({burgerColor: "white"})
+      }
+
+  }
+  
   componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll);
     // localStorage.removeItem("popup")
     this.authListener();
     let type = "";
@@ -192,7 +247,7 @@ class App extends Component {
         iosPopUp: isIOS,
       })
     }
-    else {
+    if ((!isAndroid) && (!isIOS)) {
       type = "Computer"
     }
     let db = fire.firestore()
@@ -217,9 +272,10 @@ class App extends Component {
   }
 
   sendFingerprintToFirestore = (type, id) => {
+    let timeAccessed = moment().format('hh:mm A');
     let db = fire.firestore()
     db.collection("audience").doc(id.toString()).set({
-      id, type
+      id, type, timeAccessed
     }, () => this.setState({
       fingerprint: id
     }))

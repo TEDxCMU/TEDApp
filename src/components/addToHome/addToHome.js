@@ -11,10 +11,9 @@ export class PopUp extends Component {
     }
       
     render() {
-        console.log("THE IOS IS: ", this.props.iOS)
         return (
             <div style={{width: "100%"}}>
-                { this.props.iOS ? 
+                { this.props.iOS && this.props.loaded ? 
                     <div id="popup-bg">
                         <div id="popup-content">
                             {/* <img src={require('./plusIcon.png')} className="plus" alt="add" title="add" /> */}
@@ -24,10 +23,7 @@ export class PopUp extends Component {
                         </div>
                     </div>
                 :
-                <div id="popup">
-                        <h5>Tap below to add an icon to your Android home screen for quick access!</h5>
-                        <button type="button" onClick={(e) => this.closeModal()}>No thanks</button>
-                </div>
+                <div></div>
                 }
             </div>
         );
