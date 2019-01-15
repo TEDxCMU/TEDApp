@@ -151,7 +151,7 @@ export class Header extends Component {
                                 <div></div>
                             }
                             { this.props.twitter !== undefined ?
-                                <div>
+                                <div className="twitter-icon">
                                     <SocialIcon network="twitter" rel="noopener noreferrer" url={this.props.twitter} taget="_blank" fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
                                 </div>
                             :
@@ -179,7 +179,7 @@ export class Header extends Component {
                                             <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
                                             <div className="popup-btns">
                                                 <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
-                                                <button className="popup-btn-submit button-primary" onClick={e => this.sendQuestion(e)}>Submit</button>
+                                                <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Submit</button>
                                             </div>
                                         </div>
                                     </div>
@@ -190,11 +190,11 @@ export class Header extends Component {
                                     onClose={this.closeConfirmation}
                                     contentStyle={style}
                                     >
-                                    <div className="modal" style={{border: "none"}}>
-                                        <div style={style}>
+                                    <div className="modal">
+                                        <div className="popup-response">
                                             <img src={bottle} className="bottle" alt="Bottle" />
                                             <p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
-                                            <button align="center" style={{marginTop: '20px'}} onClick={this.closeConfirmation}>Ok</button>
+                                            <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
                                         </div>
                                     </div>
                                     </Popup>

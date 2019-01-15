@@ -31,12 +31,24 @@ class App extends Component {
       allData: [],
       iosPopUp: false,
       chromePopUp: false,
-      burgerColor: "white",
+      burgerColor: "#fff",
       loaded: false
     }
     //pass THIS to global navigation hamburger menu so people can login and logout everywhere
     this.authListener = this.authListener.bind(this);
     this.logout = this.logout.bind(this)
+  }
+
+  listenScrollEvent = (e) => {
+    if (window.scrollY > 400) {
+      this.setState({burgerColor: '#e62b1e'})
+    } else {
+      this.setState({burgerColor: '#fff'})
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.listenScrollEvent)
   }
 
   render() {
