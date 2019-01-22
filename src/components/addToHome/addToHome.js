@@ -19,7 +19,7 @@ export class PopUp extends Component {
                             {/* <img src={require('./plusIcon.png')} className="plus" alt="add" title="add" /> */}
                             <h5>HEY!</h5>
                             <p>Install this web app on your iPhone! Tap <img src={require('./downloadIcon.png')} className="download-icon" alt="download icon" title="download icon" /> and then "Add to Homescreen"</p>
-                            <button type="button" onClick={(e) => this.closeModal()}>No thanks</button>
+                            <button className="button-blank" style={{marginBottom: '5px'}} type="button" onClick={(e) => this.closeModal()}>No thanks</button>
                         </div>
                     </div>
                 :
