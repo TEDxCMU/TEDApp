@@ -4,23 +4,20 @@ import './dropdown.css';
 
 export class Dropdown extends Component {
   state = {
-    showContent: false,
-    className: "closed"
+    showContent: false
   }
 
   toggleShow = () => {
     const doesShow = this.state.showContent;
     if (this.state.className === "closed") {
       this.setState(
-        { showContent: !doesShow,
-          className: "open"
+        { showContent: !doesShow
         }
       );
     }
     else {
       this.setState(
-        { showContent: !doesShow,
-          className: "closed"
+        { showContent: !doesShow
         }
       );
     }
@@ -39,16 +36,12 @@ export class Dropdown extends Component {
       }
       
       return (
-        <div className={"dropdown"+"-"+this.state.className}>
-          <div onClick={this.toggleShow} className="label">
-            <span>
-              <h4>{this.props.title}</h4>
-            </span>
-            <h4>
-              <span>+</span>
-            </h4>
-          </div>
-          {content}
+        <div className="dropdown">
+            <div onClick={this.toggleShow} className="label">
+                <h6 className="question-title">{this.props.question}</h6>
+                <h4 className="question-plus">+</h4>
+            </div>
+            {content}
         </div>
       );
     }
