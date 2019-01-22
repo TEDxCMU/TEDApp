@@ -187,7 +187,17 @@ header .title {
 }
 
 .question-btn-container {
-    position: absolute;
+    position: relative;
+}
+
+.question-pos {
+    left: 50%;
+    margin-left: -94.75px;
+}
+
+.question-pos-asked {
+    left: 50%;
+    margin-left: -64.5px;
 }
 
 .question-btn {
@@ -229,6 +239,7 @@ header .title {
     .popup-btn-cancel, .popup-btn-success {
         margin-bottom: 0;
         width: 100%;
+        
     }
 } 
 
@@ -264,10 +275,7 @@ header .title {
     .description {
         padding-bottom: 25px;
     }
-
-    .question-btn {
-        top: 25px;
-    }
+    
     .mm-popup__box__footer {
         padding-top: 20px;
     }

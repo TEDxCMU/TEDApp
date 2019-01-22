@@ -159,12 +159,11 @@ export class Header extends Component {
                             }
                             { this.props.asked === true ?
                                 <div className="question-btn-container">
-                                    <h6><button className="question-btn">Asked</button></h6>
+                                    <h6><button className="question-btn question-pos-asked">Asked</button></h6>
                                 </div>
                             :
                                 <div className="question-btn-container">
-                                    {/* <h6><button onClick={() => this.handleAskQuestion()} className="question-btn">Ask Question</button></h6> */}
-                                    <h6><button onClick={() => this.openModal()} className="question-btn">Ask Question</button></h6>
+                                    <h6><button onClick={() => this.openModal()} className="question-btn question-pos">Ask Question</button></h6>
                                     <Popup
                                     open={this.state.open}
                                     closeOnDocumentClick
