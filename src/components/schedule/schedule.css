@@ -107,19 +107,19 @@
 }
 
 /* static timeline styles */
-/* .bullet-static::before {
+.bullet-static::before {
   content: '';
   position: absolute;
   width: 14px;
   height: 14px;
   left: calc(-2rem - 6px);
-  top: 4px;
+  top: calc(50% - 6px);
   background-color: var(--tedred);
   border-radius: 50%;
   border: 3px solid var(--tedbggrey);
   box-sizing: border-box;
   z-index: 1;
-} */
+}
 
 /* static timeline styles */
 .now {

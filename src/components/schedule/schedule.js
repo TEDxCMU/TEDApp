@@ -59,7 +59,7 @@ export class Schedule extends Component {
     let that = this;
     this.state.allEvents.forEach(event => {
         //mark event as either being in the past, happening right now, or being in the future if it is just static
-        let className = "bullet";
+        let className = "bullet-static";
         if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
           className = "now";
           notification = event.announcement;
@@ -107,7 +107,7 @@ export class Schedule extends Component {
         <li key={event.id}>
             {/* Change bullet color here, time, and the info in a timeline event */}
             <span class="event-static"></span>
-            <span class="bullet"></span>
+            <span class="bullet-static"></span>
             <div className="info-static">
               <p className="time"><strong>{event.start}</strong> — {event.end}</p>
               <h5 className="event-title">{event.title}</h5>
