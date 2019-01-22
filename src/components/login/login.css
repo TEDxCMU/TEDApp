@@ -7,20 +7,20 @@
 
 @media only screen and (max-width: 600px) {
     .login {
-      margin-top: 275px;
+      margin-top: 30px;
     }
   } 
   
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
     .login {
-      margin-top: 350px;
+      margin-top: 40px;
     }
   } 
   
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px) {
     .login {
-        margin-top: 325px;
+        margin-top: 50px;
     }
   }

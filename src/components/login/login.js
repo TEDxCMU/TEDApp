@@ -37,7 +37,7 @@ export class Login extends Component {
                 <label>Password:</label>
                 <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
                 <br />
-                <button type="submit" onClick={this.login}>TED Log In</button>
+                <button className="button-primary" type="submit" onClick={this.login}>TED Log In</button>
             </form>            
         </div>
       );

@@ -453,13 +453,13 @@ button.stroke {
   background: var(--tedwhite);
   color: var(--tedblack);
 	border: 3px solid var(--tedblack);
-	line-height: 3.8rem;
+	line-height: 2.375rem;
 }
 button.stroke.medium {
-	line-height: 3.45rem;
+	line-height: 2rem;
 }
 button.stroke.large {
-	line-height: 3.45rem;
+	line-height: 2rem;
 }
 button.stroke:hover {
 	border: 3px solid var(--tedred);

@@ -92,7 +92,7 @@ export class Schedule extends Component {
                   <h4 className="event-title">{event.title}</h4>
                   <p className="event-description">{event.blurb}</p>
                   {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-                    <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+                    <button className="button-primary" onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
                   :
                     <div></div>
                   }
@@ -114,7 +114,7 @@ export class Schedule extends Component {
               <small>{event.blurb}</small>
               {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
                 <div>
-                  <button onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+                  <button className="button-primary" style={{marginTop: '10px'}} onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
                 </div>
               :
                 <div></div>
@@ -133,14 +133,14 @@ export class Schedule extends Component {
             description={notification} />
             {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
             <div>
+            <div className="new-event-time">
+                <TimePicker
+                  defaultValue={this.state.value}
+                  onChange={this.handleValueChange}
+                />
+                <button className="button-primary" style={{marginTop: '10px'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button>
+              </div> 
               <div className="timeline">      
-                <div style={{marginTop: '275px'}}>
-                  <TimePicker style={{align: 'center'}}
-                    defaultValue={this.state.value}
-                    onChange={this.handleValueChange}
-                  />
-                </div>
-                <button style={{color: 'white', background: 'red'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button> 
                 <ul>
                   {newList} 
                 </ul>

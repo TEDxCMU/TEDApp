@@ -206,6 +206,17 @@
 
 /* END NEW TIMELINE CODE */
 
+/* LOGIN MODE STYLES */
+.new-event-time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px;
+}
+/* END LOGIN MODE STYLES */
+
+
+
 /* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
 
 @media only screen and (max-width: 600px) {
