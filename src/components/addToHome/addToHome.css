@@ -5,21 +5,27 @@
     padding: 5px;
 	z-index: 9999;
     text-align: center;
-    background: var(--tedredgradient);
+    background: #2b2b2b;
     background-size: cover;
     width: 100%;
     box-sizing: border-box;
+    box-shadow: 0px 0px 19px rgba(0, 0, 0, 0.4);
+    border-radius: 7px;
     margin: 0;
 }
 
+
 #popup-content h5, #popup-content p {
+    line-height: 1rem;
     color: var(--tedwhite);
-    line-height: 0.2rem;
 }
 
+#popup-content h5 {
+    font-size: 1.5rem;
+}
 #popup-content p {
     padding: 0;
-    margin: 10px 0 15px;
+    margin: 10px 20px 15px;
     font-size: 0.8rem;
 }
 
@@ -34,6 +40,15 @@
 }
 
 .button-blank {
+    background: none;
+    color: var(--tedwhite);
+    box-shadow: none;
+    border: 1px solid var(--tedwhite);
+    border-radius: 3px;
+    transition: all 0.5s ease-in-out;
+}
+
+.button-popup {
     background: none;
     color: var(--tedwhite);
     box-shadow: none;
