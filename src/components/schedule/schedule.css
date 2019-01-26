@@ -125,13 +125,13 @@
 .now {
   content: '';
   position: absolute;
-  width: 21px;
-  height: 21px;
-  left: calc(-2rem - 10px);
-  top: calc(50% - 10px);
+  width: 14px;
+  height: 14px;
+  left: calc(-2rem - 6px);
+  top: calc(50% - 7px);
   background-color: var(--tedred);
   border-radius: 50%;
-  border: 5px solid rgba(245, 58, 58, 0.1);
+  border: 3px solid var(--tedbggrey);
   box-sizing: border-box;
   z-index: 1;
 }
@@ -145,7 +145,7 @@
   top: calc(50% - 6px);
   background-color: #a7a7a7;
   border-radius: 50%;
-  border: 6px solid #a7a7a7;
+  border: 3px solid var(--tedbggrey);
   box-sizing: border-box;
   z-index: 1;
 }
