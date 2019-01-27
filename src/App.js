@@ -40,15 +40,15 @@ class App extends Component {
   }
 
   listenScrollEvent = (e) => {
-    if (window.scrollY > 400) {
-      this.setState({burgerColor: '#e62b1e'})
+    if (window.scrollY > 250) {
+      this.setState({burgerColor: '#e62b1e'});
     } else {
-      this.setState({burgerColor: '#fff'})
+      this.setState({burgerColor: '#fff'});
     }
   }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.listenScrollEvent)
+    window.addEventListener('scroll', this.listenScrollEvent);
   }
 
   render() {

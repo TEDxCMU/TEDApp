@@ -142,7 +142,7 @@ header .title {
 .description {
     padding-top: 0;
     margin-bottom: 0;
-    padding-bottom: 0;
+    padding-bottom: 10px;
 }
 
 .bottom-space {
@@ -190,10 +190,19 @@ header .title {
     position: relative;
 }
 
+.question-pos {
+    left: 50%;
+    margin-left: -94.75px;
+}
+
+.question-pos-asked {
+    left: 50%;
+    margin-left: -64.5px;
+}
+
 .question-btn {
     position: absolute;
     top: 12px;
-    left: -95px;
     font-size: 13px;
     font-weight: bold;
     text-transform: uppercase;
@@ -230,14 +239,14 @@ header .title {
     .popup-btn-cancel, .popup-btn-success {
         margin-bottom: 0;
         width: 100%;
+        
     }
 } 
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .description {
-        padding-bottom: 20px;
-        margin-bottom: 0 !important;
+        padding-bottom: 30px;
     }
     .mm-popup__box__footer {
         padding-top: 0px;
@@ -247,8 +256,7 @@ header .title {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .description {
-        padding-bottom: 30px;
-        margin-bottom: 0 !important;
+        padding-bottom: 40px;
     }
     .mm-popup__box__footer {
         padding-top: 15px;
@@ -265,13 +273,9 @@ header .title {
     }
 
     .description {
-        padding-bottom: 10px;
-        margin-bottom: 0 !important;
+        padding-bottom: 25px;
     }
-
-    .question-btn {
-        top: 25px;
-    }
+    
     .mm-popup__box__footer {
         padding-top: 20px;
     }
