@@ -8,6 +8,7 @@
     "firebase": "^5.5.4",
     "firebase-admin": "^6.0.0",
     "gh-pages": "^2.0.1",
+    "google-map-react": "^1.1.2",
     "moment": "^2.22.2",
     "rc-time-picker": "^3.4.0",
     "react": "^16.5.2",

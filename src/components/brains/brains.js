@@ -80,6 +80,10 @@ export class BrainFood extends Component {
         )
         
     }
+
+    componentDidMount = () => {
+      this.props.isLoaded()
+    }
   }
   
 export default BrainFood;
