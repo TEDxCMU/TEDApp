@@ -53,8 +53,11 @@ class App extends Component {
   }
 
   render() {
-    console.log(auth.currentUser)
-    console.log(JSON.parse(localStorage.getItem("popup")))
+    console.log("the current user is: ", auth.currentUser)
+    console.log("this is an iOS device? ", this.state.iosPopUp)
+    console.log("the popup will show up? ", JSON.parse(localStorage.getItem("popup")))
+    console.log("the fingerprint is: ", localStorage.getItem("fingerprint"))
+    console.log("the state is loaded: ", this.state.loaded)
     return (
       <div>
         <Router>
