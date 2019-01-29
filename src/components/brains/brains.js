@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../../App.css';
+//import '../../App.css';
 import './brains.css';
 import '../speakers/speakers.css';
 
@@ -49,6 +49,7 @@ export class BrainFood extends Component {
 
   render () {
     const position = [this.state.location.lat, this.state.location.lng];
+    const position2 = [45, 9]
     return (
       <div className="map">
         <Map className="map" center={position} zoom={this.state.zoom}>
@@ -58,6 +59,13 @@ export class BrainFood extends Component {
           />
           <Marker 
             position={position}
+            icon={myIcon}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+          <Marker 
+            position={position2}
             icon={myIcon}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
