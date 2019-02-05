@@ -43,6 +43,7 @@ export class Schedule extends Component {
   }
 
   render = () => {
+    console.log(this.state.allEvents)
     if (this.state.allEvents.length === 0) {
       return (
         <div>
@@ -323,13 +324,13 @@ closeModalandOpenConfirmation = () => {
     let i = index;
     console.log("index is: ", i)
     const db = fire.firestore();
-    var eventRef = db.collection("detailed itinerary").where("start", "==", start);
+    var eventRef = db.collection("mini").where("start", "==", start);
     eventRef.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let count = localStorage.getItem("updateCount");
             let convertCount = parseInt(count)
             localStorage.setItem("updateCount", convertCount+1)
-            var timeRef = db.collection('detailed itinerary').doc(doc.id);
+            var timeRef = db.collection('mini').doc(doc.id);
             timeRef.update({
               start: newStart,
               end: newEnd
@@ -350,7 +351,7 @@ closeModalandOpenConfirmation = () => {
     this.props.isLoaded()
     let that = this;
     const db = fire.firestore();
-    db.collection('detailed itinerary')
+    db.collection('mini')
     .onSnapshot(querySnapshot => {
       querySnapshot.docChanges().forEach(change => {
         if (change.type === 'added') {
@@ -369,11 +370,11 @@ closeModalandOpenConfirmation = () => {
     const db = fire.firestore();
     var wholeData = []
     let that = this;
-    db.collection('detailed itinerary').
+    db.collection('mini').
     get().then(snapshot => {
         snapshot.forEach(doc => {
             let id = doc.id;
-            db.collection('detailed itinerary').doc(id).onSnapshot(docSnapshot => {
+            db.collection('mini').doc(id).onSnapshot(docSnapshot => {
               let id = docSnapshot.id;
               let dataCopy = docSnapshot.data()
               let trimmed = id.replace(/ +/g, "");
