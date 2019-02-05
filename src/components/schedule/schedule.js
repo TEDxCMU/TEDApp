@@ -106,8 +106,8 @@ export class Schedule extends Component {
       newList.push(
         <li key={event.id}>
             {/* Change bullet color here, time, and the info in a timeline event */}
-            <span class="event-static"></span>
-            <span class="bullet-static"></span>
+            <span className="event-static"></span>
+            <span className="bullet-static"></span>
             <div className="info-static">
               <p className="time"><strong>{event.start}</strong> — {event.end}</p>
               <h5 className="event-title">{event.title}</h5>

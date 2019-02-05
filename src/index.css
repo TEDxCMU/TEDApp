@@ -276,7 +276,6 @@ dd {
 /* ---------- 05. START FORM STYLING ---------- */
 
 form {
-  width: 80%;
   margin: 20px;
 }
 
@@ -389,7 +388,7 @@ form button,
 form input[type="submit"],
 form input[type="reset"],
 form input[type="button"] {
-  float: right;
+  margin-top: 20px;
 }
 
 button:hover,
@@ -410,7 +409,8 @@ input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
 	background: var(--tedredgradient45);
-	color: var(--tedwhite);
+  color: var(--tedwhite);
+  transition: all 0.5s ease-in-out;
 }
 
 button.button-sent,
@@ -418,7 +418,8 @@ input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
 	background: var(--tedoffwhite);
-	color: var(--tedblack);
+  color: var(--tedblack);
+  transition: all 0.5s ease-in-out;
 }
 
 button.button-primary:hover,
@@ -429,7 +430,8 @@ button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
-  background: var(--tedredhover);
+  background: var(--tedredgradient45);
+  transition: all 0.5s ease-in-out;
 }
 
 button.full-width {
@@ -440,8 +442,8 @@ button.full-width {
 }
 
 button.medium {
-	height: 3.6rem;
-	line-height: 3.6rem;
+	height: 3rem;
+	line-height: 3rem;
 	padding: 0 1.1rem;
 }
 button.large {
@@ -469,6 +471,28 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	border: 0;
 	padding: 0;
 }
+
+button.blank {
+  background: none;
+  color: var(--tedred);
+  box-shadow: none;
+  border: 1px solid var(--tedred);
+  border-radius: 3px;
+  box-sizing: border-box;
+  /* transition: all 0.5s ease-in-out; */
+}
+
+button.blank:hover {
+  color: var(--tedredhover);
+  border: 1px solid var(--tedredhover);
+  background: none;
+}
+
+button.blank:focus {
+  transition: all 0.5s ease-in-out;
+  background: var(--tedredgradient45);
+}
+
 /* ---------- 06. END BUTTON STYLING ---------- */
 
 /* ---------- 07. START LIST STYLING ---------- */

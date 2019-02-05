@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import './faq.css';
-import FaqQuestion from './faqquestion/faqquestion';
+import Dropdown from '../dropdown/dropdown';
 
 export class Faq extends Component {
 
@@ -59,12 +59,8 @@ export class Faq extends Component {
                 category: "volunteer"
             }
         ],
-        displayItems: [0, 10]
+        displayItems: [0, 3]
     }
-
-    toggleAll = () => {
-        this.setState({ displayItems: [0, 10]});
-    };
 
     toggleGeneral = () => {
         this.setState({ displayItems: [0, 3]});
@@ -79,25 +75,47 @@ export class Faq extends Component {
     }
 
     render() {
-
         let content = null;
         content = (
             <div>
                 {this.state.questions.slice(this.state.displayItems[0], this.state.displayItems[1]).map((q, index) => {
-                    return <FaqQuestion key={index} question={q.question}>
+                    return <Dropdown key={index} question={q.question}>
                         {q.answer}
-                    </FaqQuestion>
+                    </Dropdown>
                 })}
             </div>
         );
 
+        let generalClasses = "button-primary medium blank";
+        let ticketsClasses = "button-primary medium blank";
+        let volunteerClasses = "button-primary medium blank";
+
+        if (this.state.displayItems[0] === 0) {
+            generalClasses = "button-primary medium";
+        } else {
+            generalClasses += "button-primary medium blank";
+        }
+
+        if (this.state.displayItems[0] === 3) {
+            ticketsClasses = "button-primary medium";
+        } else {
+            ticketsClasses += "button-primary medium blank";
+        }
+
+        if (this.state.displayItems[0] === 8) {
+            volunteerClasses = "button-primary medium";
+        } else {
+            volunteerClasses = "button-primary medium blank";
+        }
+
+
+
         return (
             <div className="faq">
                 <div className="justified">
-                    <button onClick={this.toggleAll} className="button-primary">All</button>
-                    <button onClick={this.toggleGeneral} className="button-primary">General</button>
-                    <button onClick={this.toggleTickets} className="button-primary">Tickets</button>
-                    <button onClick={this.toggleVolunteer} className="button-primary">Volunteers</button>
+                    <button onClick={this.toggleGeneral} style={{boxShadow: 'none'}} className={generalClasses}>General</button>
+                    <button onClick={this.toggleTickets} style={{boxShadow: 'none'}} className={ticketsClasses}>Tickets</button>
+                    <button onClick={this.toggleVolunteer} style={{boxShadow: 'none'}} className={volunteerClasses}>Volunteers</button>
                 </div>
 
                 {content}

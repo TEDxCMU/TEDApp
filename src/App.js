@@ -12,7 +12,6 @@ import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
 import Faq from './components/faq/faq';
-import Speakers from './components/speakers/speakers';
 import StyleGuide from './components/styleguide';
 import { isAndroid, isIOS } from "react-device-detect";
 import Fingerprint from "fingerprintjs2";
@@ -206,18 +205,6 @@ class App extends Component {
         user={this.state.user}
         login={this.login}
         isLoaded={this.isLoaded} />
-      </div>
-    );
-  }
-
-  speakersPage = (props) => {
-    return (
-      <div>
-        <Header
-          title="Speakers"
-          description="Learn more about this years' speakers." />
-        <Speakers
-        user={this.state.user} />
       </div>
     );
   }

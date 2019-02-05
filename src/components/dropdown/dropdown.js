@@ -30,7 +30,7 @@ export class Dropdown extends Component {
       if (this.state.showContent) {
         content = (
           <div className="content">
-            <p>{this.props.children}</p>
+            {this.props.children}
           </div>
         );
       }

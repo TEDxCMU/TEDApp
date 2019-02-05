@@ -19,7 +19,7 @@ export class PopUp extends Component {
                             {/* <img src={require('./plusIcon.png')} className="plus" alt="add" title="add" /> */}
                             <p><strong>Install TEDxCMU</strong> for quick and easy access when you're on the go</p>
                             <p>Just tap <img src={require('./downloadIcon.png')} className="download-icon" alt="download icon" title="download icon" /> and then "Add to Homescreen"</p>
-                            {/* <button className="button-blank" style={{marginBottom: '5px'}} type="button" onClick={(e) => this.closeModal()}>No thanks</button> */}
+                            {/* <button className="blank" style={{marginBottom: '5px'}} type="button" onClick={(e) => this.closeModal()}>No thanks</button> */}
                         </div>
                     </div>
                 :

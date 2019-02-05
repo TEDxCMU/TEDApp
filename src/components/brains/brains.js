@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import './brains.css';
-import '../speakers/speakers.css';
+import '../questions/myQuestions.css';
 import ChartistGraph from  'react-chartist';
 import Chartist from 'chartist';
 

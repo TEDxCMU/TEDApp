@@ -1,18 +1,24 @@
 .speakers {
-    display: flex;
-    flex-direction: column; 
-    width: 85%;
-    margin: auto;
-    margin-top: 500px;
-    text-align: left;
+  width: 90%;
+  margin: 20px auto;
+  text-align: left;
 }
 
-.speaker {
+.speakers h1 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.speakers h2 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.speakers .justified {
   display: flex;
-  flex-direction: column; 
+  justify-content: center;
   align-items: center;
-  padding-left: 25%;
-  padding-right: 25%;
+  flex-wrap: wrap;
 }
 
 @media only screen and (max-width: 600px) {

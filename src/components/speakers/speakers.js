@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import './speakers.css';
+import '../questions/myQuestions.css';
 import fire from '../../fire.js';
 import moment from 'moment';
 import SpeakerComponent from './speakerComponent.js';
@@ -24,7 +24,7 @@ export class Speakers extends Component {
         let newList = [];
         this.state.allSpeakers.forEach(speaker => {    
             let index = this.state.allSpeakers.indexOf(speaker);
-            let question = this.state.questions[index]
+            let question = this.state.questions[index];
             newList.push (
                 <SpeakerComponent 
                     logState={this.logState}
@@ -33,7 +33,7 @@ export class Speakers extends Component {
                     index={index} 
                     handleChange={this.handleChange} 
                     email={speaker.email}
-                    question={this.state.questions[index]} c
+                    question={this.state.questions[index]}
                     createQuestion={this.createQuestion}>
                 </SpeakerComponent> 
             ) 

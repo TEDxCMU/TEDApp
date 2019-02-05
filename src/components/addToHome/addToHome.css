@@ -39,15 +39,6 @@
     margin: 0;
 }
 
-.button-blank {
-    background: none;
-    color: var(--tedwhite);
-    box-shadow: none;
-    border: 1px solid var(--tedwhite);
-    border-radius: 3px;
-    transition: all 0.5s ease-in-out;
-}
-
 .button-popup {
     background: none;
     color: var(--tedwhite);

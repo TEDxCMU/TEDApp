@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'rc-time-picker/assets/index.css';
 import '../../App.css';
-import '../speakers/speakers.css';
+import './myQuestions.css';
 import fire from '../../fire.js';
 import Dropdown from '../dropdown/dropdown';
 
@@ -14,23 +14,24 @@ export class QuestionComponent extends Component {
 
     
     render() {
-    let question = this.props.question;
     let index = this.props.index;
     let id = this.props.id;
+    let question = this.props.question;
     let name = this.props.name;
-    console.log(this.props.name)
     return (
         <div className="speaker">
-            <Dropdown title={name}>
-                <form align='center'>
-                    <label align='center'>Question: {question}</label>    
+            <Dropdown question={question}>
+                <form className="questions-form">
+                    <label style={{marginTop: '0'}}>Question:</label>
+                    <p>{question}</p>
+                    <small>FROM: {name}</small>
                     <input type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
                     {this.props.answered === true ? 
                     <div>
-                        <button type="button" className="button-sent">Answered</button>
+                        <button type="button" className="button-sent full-width">Answered</button>
                     </div>     
                     :
-                        <button type="button" className="button-primary" style={{marginTop: "5px"}} onClick={() => this.props.answerQuestion(id, this.state.answer, index)}>Answer Question</button> 
+                        <button type="button" style={{marginTop: '2rem', marginBottom: '10px'}} className="button-primary full-width" onClick={() => this.props.answerQuestion(id, this.state.answer, index)}>Answer</button> 
                     }           
                 </form>
             </Dropdown>
