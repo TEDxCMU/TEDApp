@@ -9,8 +9,9 @@ import fire from '../../fire.js';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import Header from '../header/header';
-// import { css } from '@emotion/core';
 import { BounceLoader } from 'react-spinners';
+import Popup from "reactjs-popup";
+
 
 export class Schedule extends Component {
   constructor() {
@@ -54,9 +55,20 @@ export class Schedule extends Component {
         </div> 
       )
     }
+    console.log(localStorage.getItem("canShiftGlobalStartTime"))
+
+    const style = {
+      display: 'flex',
+      justifyText: 'center',
+      flexDirection: 'column',
+      alignItems: 'space-between',
+      padding: '30px 40px',
+      width: '70%',
+      border: 'none',
+      borderRadius: '10px'
+    }
     let newList = [];
     let notification = "The conference is currently not in progress. Please check back at another time."
-    let that = this;
     this.state.allEvents.forEach(event => {
         //mark event as either being in the past, happening right now, or being in the future if it is just static
         let className = "bullet-static";
@@ -70,34 +82,62 @@ export class Schedule extends Component {
         if (event.type !== "static") {
           newList.push(
             <li key={event.id}>
-            <Link key={event.id} to={{
-              pathname: '/events/'+event.id,
-              state: {  
-                  id: event.id,
-                  title: event.title,
-                  start: event.start,
-                  end: event.end,
-                  description: event.description,
-                  blurb: event.blurb,
-                  speaker: event.speaker.id,
-                  related: event.related,
-                  announcement: event.announcement,
-              }
-            }}>
-            {/* Change bullet color here, time, and the info in a timeline event */}
-              <span className="event"></span>
-              <span className={className}></span>
-                <div className="info-talk">
-                  <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-                  <h4 className="event-title">{event.title}</h4>
-                  <p className="event-description">{event.blurb}</p>
-                  {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-                    <button className="button-primary" onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
-                  :
-                    <div></div>
+              {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+              <div>
+                <span className="event"></span>
+                <span className={className}></span>
+                  <div className="info-talk">
+                    <p className="time"><strong>{event.start}</strong> — {event.end}</p>
+                    <h4 className="event-title">{event.title}</h4>
+                    <p className="event-description">{event.blurb}</p>
+                    {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+                      <button className="button-primary"
+                      onClick={() => { this.openModal(allEvents.indexOf(event)) }}>Event Ended</button> 
+                    :
+                      <div></div>
+                    }
+                  </div>
+                <Link key={event.id} to={{
+                  pathname: '/events/'+event.id,
+                  state: {  
+                      id: event.id,
+                      title: event.title,
+                      start: event.start,
+                      end: event.end,
+                      description: event.description,
+                      blurb: event.blurb,
+                      speaker: event.speaker.id,
+                      related: event.related,
+                      announcement: event.announcement,
                   }
-                </div>
-            </Link>
+                }}/>
+              </div>
+              :
+              <div>
+                <Link key={event.id} to={{
+                  pathname: '/events/'+event.id,
+                  state: {  
+                      id: event.id,
+                      title: event.title,
+                      start: event.start,
+                      end: event.end,
+                      description: event.description,
+                      blurb: event.blurb,
+                      speaker: event.speaker.id,
+                      related: event.related,
+                      announcement: event.announcement,
+                  }
+                }}>
+                  <span className="event"></span>
+                  <span className={className}></span>
+                    <div className="info-talk">
+                      <p className="time"><strong>{event.start}</strong> — {event.end}</p>
+                      <h4 className="event-title">{event.title}</h4>
+                      <p className="event-description">{event.blurb}</p>
+                    </div>
+                </Link>
+              </div>
+              }
           </li>
         )
       }
@@ -114,7 +154,10 @@ export class Schedule extends Component {
               <small>{event.blurb}</small>
               {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
                 <div>
-                  <button className="button-primary" style={{marginTop: '10px'}} onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}>Event Ended</button> 
+                  <button className="button-primary" style={{marginTop: '10px'}} 
+                  // onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}
+                  onClick={() => { this.openModal(allEvents.indexOf(event)) }}
+                  >Event Ended</button> 
                 </div>
               :
                 <div></div>
@@ -124,10 +167,30 @@ export class Schedule extends Component {
       )}
     })
     let allEvents = this.state.allEvents;
+    let index = this.state.eventNum
+    let now = 
+    console.log(index)
+    // console.log(allEvents[2].title)
     if (newList.length > 0) {
     return (
           
           <div style={{height: '100%', width: '100%'}}>
+            <Popup
+            open={this.state.open}
+            closeOnDocumentClick
+            onClose={this.closeModal}
+            contentStyle={style}
+            >
+            <div className="modal">
+                <div>
+                    <h4>Are you sure you want to change the end time of "{index === undefined ? "Event Name" : allEvents[index].title}" to {moment().format('hh:mm A')}?</h4>
+                    <div className="popup-btns">
+                        <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
+                        <button className="popup-btn-success button-primary" onClick={e => this.shiftEndTime(e, index, moment().format('hh:mm A'))}>Confirm</button>
+                    </div>
+                </div>
+            </div>
+            </Popup>
             <Header
             title="Live Schedule" 
             description={notification} />
@@ -154,8 +217,39 @@ export class Schedule extends Component {
             </div>
             }
           </div>
+
     );
   }
+  
+}
+
+closeConfirmation = () => {
+  // this.setState({confirmationOpen: false}, () => this.props.askQuestion())
+  this.props.askQuestion();
+}
+
+openConfirmation = (e) => {
+  e.preventDefault()
+  this.setState({confirmationOpen: true}, () => console.log("shalom we opening"))
+}
+
+openModal = (index) => {
+  this.setState({ open: true,
+                  eventNum: index
+     
+  })
+}
+
+closeModal = () => {
+  this.setState({ open: false })
+}
+
+closeModalandOpenConfirmation = () => {
+  console.log("closing modal and opening confirmation")
+  this.setState({
+      confirmationOpen: true,
+      open: false
+  })
 }
 
   updateInput = e => {
@@ -195,8 +289,9 @@ export class Schedule extends Component {
     }
   }
 
-  shiftEndTime = (index, endTime) => {
+  shiftEndTime = (e, index, endTime) => {
     // return early if this is the last event
+    e.preventDefault();
     console.log(index)
     if (this.state.allEvents.length === index + 1) return;
     let eventNum = index;

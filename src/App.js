@@ -8,6 +8,7 @@ import { Login } from './components/login/login.js';
 import { MyQuestions } from './components/questions/myQuestions.js';
 import { PopUp } from './components/addToHome/addToHome.js';
 import { BrainFood } from './components/brains/brains.js';
+import { Map } from './components/map/map.js';
 import { BrowserRouter as Router} from 'react-router-dom';
 import Route from 'react-router-dom/Route';
 import fire from './fire.js';
@@ -51,8 +52,11 @@ class App extends Component {
   }
 
   render() {
-    console.log(auth.currentUser)
-    console.log(JSON.parse(localStorage.getItem("popup")))
+    console.log("the current user is: ", auth.currentUser)
+    console.log("this is an iOS device? ", this.state.iosPopUp)
+    console.log("the popup will show up? ", JSON.parse(localStorage.getItem("popup")))
+    console.log("the fingerprint is: ", localStorage.getItem("fingerprint"))
+    console.log("the state is loaded: ", this.state.loaded)
     return (
       <div>
         <Router>
@@ -65,6 +69,7 @@ class App extends Component {
           <Route path="/login" exact strict render={this.loginPage}/>
           <Route path="/brainFood" exact strict render={this.BrainFoodPage}/>
           <Route path="/questions" exact strict render={this.questionsPage}/>
+          <Route path="/map" exact strict render={this.mapPage}/>
             <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
               {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null && localStorage.getItem("fingerprint") !== null ?
               <PopUp iOS={true} loaded={this.state.loaded}/>
@@ -137,6 +142,19 @@ class App extends Component {
           title="My Questions"
           description="Find answers to your questions here." />
         <MyQuestions
+        user={this.state.user}
+        isLoaded={this.isLoaded} /> 
+      </div>
+    );
+  }
+
+  mapPage = (props) => {
+    return (
+      <div>
+        <Header
+          title="Map"
+          description="Navigate your way to the main event." />
+        <Map
         user={this.state.user}
         isLoaded={this.isLoaded} /> 
       </div>
