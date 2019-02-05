@@ -17,6 +17,9 @@
 .question-title {
     position: relative;
     margin-right: 2rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 .label {

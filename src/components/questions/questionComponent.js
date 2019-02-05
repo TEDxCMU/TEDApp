@@ -23,8 +23,8 @@ export class QuestionComponent extends Component {
             <Dropdown question={question}>
                 <form className="questions-form">
                     <label style={{marginTop: '0'}}>Question:</label>
-                    <p>{question}</p>
-                    <small>FROM: {name}</small>
+                    <p>"{question}"</p>
+                    <p>FROM: {name}</p>
                     <input type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
                     {this.props.answered === true ? 
                     <div>

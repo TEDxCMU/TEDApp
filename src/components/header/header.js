@@ -69,12 +69,21 @@ export class Header extends Component {
             border: 'none',
             borderRadius: '10px'
           }
+
+        let headerStyle = "sticky";
+        if (this.props.headerStyle === "fixed") {
+            headerStyle = "sticky-header";
+        } else {
+            headerStyle = "sticky";
+        }
+
+
         if (this.props.errors !== undefined) {
             nameBlank = this.props.errors.name
             questionBlank = this.props.errors.question
         }
         return (
-            <header className="sticky">
+            <header className={headerStyle}>
                 <Link key={'home'} to={{
                     pathname: '/',
                     state: {  

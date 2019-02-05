@@ -193,7 +193,8 @@ export class Schedule extends Component {
             </Popup>
             <Header
             title="Live Schedule" 
-            description={notification} />
+            description={notification}
+            headerStyle="fixed" />
             {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
             <div>
             <div className="new-event-time">
