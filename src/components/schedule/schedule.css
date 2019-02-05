@@ -1,6 +1,7 @@
 /* NEW TIMELINE CODE */
  
 .timeline {
+  margin-top: 275px;
   margin-left: 10%;
   margin-right: 0;
 }
@@ -248,7 +249,7 @@
 
 @media only screen and (max-width: 600px) {
   .timeline {
-    margin-top: 30px;
+    margin-top: 275px;
     margin-left: 10%;
     margin-right: 0;
   }
@@ -257,7 +258,7 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .timeline {
-    margin-top: 30px;
+    margin-top: 300px;
     margin-left: 10%;
     margin-right: 5%;
   }
@@ -266,7 +267,6 @@
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   .timeline {
-      margin-top: 30px;
       margin-left: 12%;
       margin-right: 12%;
   }
@@ -275,7 +275,6 @@
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
   .timeline {
-    margin-top: 30px;
     margin-left: 15%;
     margin-right: 12%;
 }

@@ -223,7 +223,6 @@ code {
 
 /* BLOCKQUOTE STYLING */
 blockquote {
-  /* margin: 0 20px; */
   padding: 1rem;
   border-left: 7px solid var(--tedgrey);
 }

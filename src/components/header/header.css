@@ -186,6 +186,12 @@ header .title {
     width: 100%;
 }
 
+.sticky-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
 .question-btn-container {
     position: relative;
 }
