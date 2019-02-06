@@ -1,7 +1,6 @@
 /* NEW TIMELINE CODE */
  
 .timeline {
-  margin-top: 275px;
   margin-left: 10%;
   margin-right: 0;
 }
@@ -249,7 +248,7 @@
 
 @media only screen and (max-width: 600px) {
   .timeline {
-    margin-top: 275px;
+    margin-top: 320px;
     margin-left: 10%;
     margin-right: 0;
   }
@@ -258,7 +257,7 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .timeline {
-    margin-top: 300px;
+    margin-top: 320px;
     margin-left: 10%;
     margin-right: 5%;
   }
