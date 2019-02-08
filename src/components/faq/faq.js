@@ -35,7 +35,7 @@ export class Faq extends Component {
             },
             {
                 question: "When do tickets go on sale?",
-                answer: "ur tickets traditionally go on sale in early March. We may have events that raffle off special discounts or give free tickets. To learn more about those events, subscribe to our newsletter and follow us on social media.",
+                answer: "Our tickets traditionally go on sale in early March. We may have events that raffle off special discounts or give free tickets. To learn more about those events, subscribe to our newsletter and follow us on social media.",
                 category: "tickets"
             },
             {
