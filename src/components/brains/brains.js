@@ -36,27 +36,32 @@ export class BrainFood extends Component {
     super();
     this.state = {
       questions: null,
-      speaker: 'rscarano@cmu.edu'
+      speaker: 'rscarano@andrew.cmu.edu'
     }
     this.componentDidMount = this.componentDidMount.bind(this);
   }
 
   toggleRoma = () => {
-      this.setState({ speaker: 'rscarano@cmu.edu'});
+      this.setState({ speaker: 'rscarano@andrew.cmu.edu'});
   }
 
   toggleSecond = () => {
-      this.setState({ speaker: 'second@lastname.com'});
+      this.setState({ speaker: 'ericc2@andrew.cmu.edu'});
   }
 
   toggleQuinn = () => {
       this.setState({ speaker: 'quinn@lastname.com'});
   }
+  
+  toggleSanjana = () => {
+      this.setState({ speaker: 'sjobalia@andrew.cmu.edu'});
+  }
 
   render () {
     let romaClasses = "button-primary medium blank";
-    let secondClasses = "button-primary medium blank";
+    let ericClasses = "button-primary medium blank";
     let quinnClasses = "button-primary medium blank";
+    let sanjanaClasses = "button-primary medium blank";
     let newList = [];
     if (this.state.questions !== null) {
       this.state.questions.forEach(question => {  
@@ -78,29 +83,34 @@ export class BrainFood extends Component {
         }  
  
     })
-    if (this.state.speaker === 'rscarano@cmu.edu') {
+    if (this.state.speaker === 'rscarano@andrew.cmu.edu') {
         romaClasses = "button-primary medium";
     } else {
         romaClasses += "button-primary medium blank";
     }
-
-    if (this.state.speaker === 'second') {
-        secondClasses = "button-primary medium";
+    if (this.state.speaker === 'ericc2@andrew.cmu.edu') {
+        ericClasses = "button-primary medium";
     } else {
-        secondClasses += "button-primary medium blank";
+        ericClasses += "button-primary medium blank";
     }
-
-    if (this.state.speaker === 'quinn@lastname.com') {
+    if (this.state.speaker === 'qrz@andrew.cmu.edu') {
         quinnClasses = "button-primary medium";
     } else {
         quinnClasses = "button-primary medium blank";
     }
+    if (this.state.speaker === 'sjobalia@andrew.cmu.edu') {
+      sanjanaClasses = "button-primary medium";
+    } else {
+      sanjanaClasses = "button-primary medium blank";
+    }
+
     }
     return (
       <div className="faq">
           <div className="justified">
               <button onClick={this.toggleRoma} style={{boxShadow: 'none'}} className={romaClasses}>Roma</button>
-              <button onClick={this.toggleSecond} style={{boxShadow: 'none'}} className={secondClasses}>Second</button>
+              <button onClick={this.toggleEric} style={{boxShadow: 'none'}} className={ericClasses}>Eric</button>
+              <button onClick={this.toggleSanjana} style={{boxShadow: 'none'}} className={sanjanaClasses}>Sanjana</button>
               <button onClick={this.toggleQuinn} style={{boxShadow: 'none'}} className={quinnClasses}>Quinn</button>
           </div>
           {this.state.questions !== null ?
@@ -118,17 +128,7 @@ export class BrainFood extends Component {
   }
 
   componentDidMount = () => {
-    // if (fire.auth().currentUser === null || localStorage.getItem('userEmail') === null) {
-    //   this.setState({
-    //     redirectHome: true
-    //   })
-    //   return;
-    // }
-    // let userEmail = localStorage.getItem('userEmail');
     const db = fire.firestore();
-    // db.settings({
-    //   timestampsInSnapshots: true
-    // });
     var wholeData = [];
     let speakerRef = db.collection('speakers').where('email', '==', this.state.speaker);
     db.collection('speakers').doc(this.state.speaker).collection("questions").get()
@@ -147,82 +147,6 @@ export class BrainFood extends Component {
     })
   }
 
-
-  //  //Function called when the submit button is pressed to submit user name and message to server
-  //  formSubmitted = (event) => {
-  //   event.preventDefault();
-  //   console.log(this.state.userMessage);
-  // }
-
-  // //Function called user resubmits a message or submits a new message
-  // //Updates the string in the name and message field
-  // valueChanged = (event) => {
-  //   const { name, value } = event.target;
-  //   this.setState((prevState) => ({
-  //     userMessage: {
-  //       ...prevState.userMessage,
-  //       [name]: value
-  //     }
-  //   }));
-  // }
-
-  // render () {
-  //   const position = [this.state.location.lat, this.state.location.lng];
-  //   const position2 = [45, 9]
-  //   return (
-  //     <div className="map">
-  //       <Map className="map" center={position} zoom={this.state.zoom}>
-  //         <TileLayer
-  //           attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-  //           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-  //         />
-  //         <Marker 
-  //           position={position}
-  //           icon={myIcon}>
-  //           <Popup>
-  //             A pretty CSS3 popup. <br /> Easily customizable.
-  //           </Popup>
-  //         </Marker>
-  //         <Marker 
-  //           position={position2}
-  //           icon={myIcon}>
-  //           <Popup>
-  //             A pretty CSS3 popup. <br /> Easily customizable.
-  //           </Popup>
-  //         </Marker>
-  //       </Map>
-  //       {/* Shows a permanent immobile card in the upper right hand corner of the screen that enables
-  //       user to enter in a name and message with a submit button. Need to integrate a loading icon and
-  //       a success message to show that the message has been successfully submitted to the server. */}
-  //       <Card body className="message-form">
-  //         <CardTitle>Welcome to Tedx CMU!</CardTitle>
-  //         <CardText>Leave a message and enter where you are from!</CardText>
-  //         <CardText>Thank you for stopping by!</CardText>
-  //         <Form onSubmit={this.formSubmitted}>
-  //           <FormGroup>
-  //             <Label for="name">Name</Label>
-  //             <Input 
-  //               onChange={this.valueChanged}
-  //               type="text" 
-  //               name="name" 
-  //               id="name" 
-  //               placeholder="Enter your name" />
-  //           </FormGroup>
-  //           <FormGroup>
-  //             <Label for="message">Message</Label>
-  //             <Input 
-  //               onChange={this.valueChanged}
-  //               type="textarea" 
-  //               name="message" 
-  //               id="message" 
-  //               placeholder="Enter a message" />
-  //           </FormGroup>
-  //           <Button type="submit" color="info">Submit</Button>
-  //         </Form>
-  //       </Card>
-  //     </div>
-  //   );
-  // }
 }
   
 export default BrainFood;
