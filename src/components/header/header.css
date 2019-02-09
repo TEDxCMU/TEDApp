@@ -21,6 +21,7 @@ header h1 {
 
 textarea {
     min-height: 2.5em;
+    font-family: 'Open Sans', sans-serif;
 }
 
 header .logo {
@@ -85,6 +86,7 @@ header .logo {
     font-size: 17px;
     padding: 12px;
     color: #808080;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .popup-input-small {
@@ -97,7 +99,8 @@ header .logo {
     box-sizing: border-box !important;
     font-size: 17px;
     padding-left: 12px !important;
-    color: #808080;
+    color: #808080;    
+    font-family: 'Open Sans', sans-serif;
 }
 
 .popup-response {
