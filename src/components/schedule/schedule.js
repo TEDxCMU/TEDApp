@@ -43,6 +43,7 @@ export class Schedule extends Component {
   }
 
   render = () => {
+    console.log(this.props.scroll)
     console.log(this.state.allEvents)
     if (this.state.allEvents.length === 0) {
       return (
@@ -169,8 +170,7 @@ export class Schedule extends Component {
     })
     let allEvents = this.state.allEvents;
     let index = this.state.eventNum
-    let now = 
-    console.log(index)
+    let now = console.log(index)
     // console.log(allEvents[2].title)
     if (newList.length > 0) {
     return (
@@ -192,10 +192,24 @@ export class Schedule extends Component {
                 </div>
             </div>
             </Popup>
+            { this.props.scroll === undefined || this.props.scroll < 50 ?
+            <div>
+            {console.log("regular schedule")}
             <Header
+            link={true}
             title="Live Schedule" 
             description={notification}
             headerStyle="fixed" />
+            </div>
+            :
+            <div>
+              {console.log("the new schedule is because:", this.props.scroll)}
+              <Header
+              link={false}
+              description={notification}
+              headerStyle="fixed" />              
+            </div>
+            }
             {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
             <div>
             <div className="new-event-time">

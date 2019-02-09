@@ -41,9 +41,12 @@ class App extends Component {
 
   listenScrollEvent = (e) => {
     if (window.scrollY > 250) {
-      this.setState({burgerColor: '#e62b1e'});
+      console.log("SHITS HAPPENING")
+      this.setState({burgerColor: '#e62b1e',
+                    scroll: window.scrollY});
     } else {
-      this.setState({burgerColor: '#fff'});
+      this.setState({burgerColor: '#fff',
+                    scroll: window.scrollY});
     }
   }
 
@@ -120,14 +123,16 @@ class App extends Component {
           <div style= {{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <Schedule
               user={this.state.user}
-              isLoaded={this.isLoaded} /> 
+              isLoaded={this.isLoaded}
+              scroll={this.state.scroll} /> 
           </div>
           :
           // now the main app div will be 100% of the VIEW PORT real estate, which means the loader will be centered
           <div style= {{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <Schedule
               user={this.state.user}
-              isLoaded={this.isLoaded} /> 
+              isLoaded={this.isLoaded}
+              scroll={this.state.scroll} /> 
           </div>
       }
       </div>
@@ -238,11 +243,13 @@ class App extends Component {
       console.log(window.scrollY)
       if (scrollTop > 300) {
         console.log("Setting red")
-        this.setState({burgerColor: "red"})
+        this.setState({burgerColor: "red",
+                      scroll: window.scrollY})
       }
       if (scrollTop < 300) {
         console.log("Setting white")
-        this.setState({burgerColor: "white"})
+        this.setState({burgerColor: "white",
+                      scroll: window.scrollY})
       }
 
   }

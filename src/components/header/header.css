@@ -130,6 +130,7 @@ header .title {
 
 .header-content {
     padding: 0 26px 15px 26px;
+    -webkit-transition: -webkit-transform .5s linear;
 }
 
 .header-bg {
@@ -143,6 +144,14 @@ header .title {
     padding-top: 0;
     margin-bottom: 0;
     padding-bottom: 20px;
+}
+
+.description-small {
+    width: 70%;
+    padding-top: 5%;
+    margin-bottom: 0;
+    margin-left: 5%;
+    padding-bottom: 5%;
 }
 
 .bottom-space {

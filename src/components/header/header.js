@@ -84,13 +84,20 @@ export class Header extends Component {
         }
         return (
             <header className={headerStyle}>
-                <Link key={'home'} to={{
-                    pathname: '/',
-                    state: {  
-                    }
-                    }}>
-                 <img src={this.props.image === undefined ? logo : back} className={this.props.image === undefined ? "logo" : "arrow"} alt="TEDxCMU"></img>
-                </Link>
+                {/* The header should be collapsed, so make the description small */}
+                {this.props.link !== undefined && this.props.link === false ?
+                <div>
+                    <h6 className="description-small">{this.props.description}</h6>
+                </div>
+                :
+                    <Link key={'home'} to={{
+                        pathname: '/',
+                        state: {  
+                        }
+                        }}>
+                    <img src={this.props.image === undefined ? logo : back} className={this.props.image === undefined ? "logo" : "arrow"} alt="TEDxCMU"></img>
+                    </Link>
+                }
                 {/* <div className="header-bg">
                     <img src={HeaderBG} alt="header background"></img>
                 </div> */}
@@ -168,8 +175,19 @@ export class Header extends Component {
                         </div>
                         :
                         <div>
-                            <h1 className="title">{this.props.title}</h1>
-                            <h6 className="description">{this.props.description}</h6>
+                            {this.props.link === false ?
+                            <div>
+                                {/* The header is collapsed, so don't add a title or description */}
+                                {/* <h1 className="title">{this.props.title}</h1>
+                                <h6 className="description">{this.props.description}</h6> */}
+                            </div>
+                            :
+                            <div>
+                                {/* This is a normal header, so put the title and description in where they should be */}
+                                <h1 className="title">{this.props.title}</h1>
+                                <h6 className="description">{this.props.description}</h6>
+                            </div>
+                            }
                         </div>
                     }
                 </div>
