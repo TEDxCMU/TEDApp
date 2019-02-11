@@ -182,11 +182,24 @@ export class Schedule extends Component {
             >
             <div className="modal">
                 <div>
-                    <h4>Are you sure you want to change the end time of "{index === undefined ? "Event Name" : allEvents[index].title}" to {moment().format('hh:mm A')}?</h4>
-                    <div className="popup-btns">
+                    { this.state.shiftingGlobal !== null && this.state.shiftingGlobal === true ? 
+                    <div>
+                      <h4>Are you sure you want to change the conference start time to {this.state.value.format('hh:mm A')}?</h4>
+                      <div className="popup-btns">
                         <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
-                        <button className="popup-btn-success button-primary" onClick={e => this.shiftEndTime(e, index, moment().format('hh:mm A'))}>Confirm</button>
+                        <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftAll(e)}>Confirm</button>
+                      </div>
                     </div>
+                    :
+                    <div>
+                      <h4>Are you sure you want to change the end time of "{index === undefined ? "Event Name" : allEvents[index].title}" to {moment().format('hh:mm A')}?</h4>
+                      <div className="popup-btns">
+                          <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
+                          <button className="popup-btn-success button-primary" onClick={e => this.shiftEndTime(e, index, moment().format('hh:mm A'))}>Confirm</button>
+                      </div>                      
+                    </div>
+                    }
+
                 </div>
             </div>
             </Popup>
@@ -211,12 +224,11 @@ export class Schedule extends Component {
             {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
             <div>
             <div className="new-event-time">
-              {console.log("THE TIME PICKER IS UP")}
                 <TimePicker
                   defaultValue={this.state.value}
                   onChange={this.handleValueChange}
                 />
-                <button className="button-primary" style={{marginTop: '10px'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button>
+                <button className="button-primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Event Start Time</button>
               </div> 
               <div className="timeline-admin">      
                 <ul>
@@ -232,40 +244,47 @@ export class Schedule extends Component {
             </div>
             }
           </div>
-
     );
+    }
   }
-  
-}
 
-closeConfirmation = () => {
-  // this.setState({confirmationOpen: false}, () => this.props.askQuestion())
-  this.props.askQuestion();
-}
+  closeConfirmation = () => {
+    // this.setState({confirmationOpen: false}, () => this.props.askQuestion())
+    this.props.askQuestion();
+  }
 
-openConfirmation = (e) => {
-  e.preventDefault()
-  this.setState({confirmationOpen: true}, () => console.log("shalom we opening"))
-}
+  openConfirmation = (e) => {
+    e.preventDefault()
+    this.setState({confirmationOpen: true})
+  }
 
-openModal = (index) => {
-  this.setState({ open: true,
-                  eventNum: index
-     
-  })
-}
+  openModal = (index) => {
+    this.setState({ open: true,
+                    eventNum: index
+      
+    })
+  }
 
-closeModal = () => {
-  this.setState({ open: false })
-}
+  openGlobalChangeModal = (e) => {
+    console.log("SHIFTING ALL EVENT TIMES MODAL IS OPEN NOW")
+    e.preventDefault();
+    this.setState({
+      open: true,
+      shiftingGlobal: true
+    })
+  }
 
-closeModalandOpenConfirmation = () => {
-  console.log("closing modal and opening confirmation")
-  this.setState({
-      confirmationOpen: true,
-      open: false
-  })
-}
+  closeModal = () => {
+    this.setState({ open: false })
+  }
+
+  closeModalandOpenConfirmation = () => {
+    console.log("closing modal and opening confirmation")
+    this.setState({
+        confirmationOpen: true,
+        open: false
+    })
+  }
 
   updateInput = e => {
     this.setState({
@@ -283,6 +302,15 @@ closeModalandOpenConfirmation = () => {
   //     value: undefined,
   //   });
   // }
+  confirmShiftAll = (e) => {
+    e.preventDefault();
+    this.setState({
+      shiftingGlobal: null,
+      open: false
+    }, () => this.shiftAll(this.state.value))
+    
+  }
+
 
   shiftAll = (newStart) => {
     let allElements = this.state.allEvents;
