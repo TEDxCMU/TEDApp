@@ -275,7 +275,10 @@ export class Schedule extends Component {
   }
 
   closeModal = () => {
-    this.setState({ open: false })
+    this.setState({ 
+      open: false,
+      shiftingGlobal: false
+     })
   }
 
   closeModalandOpenConfirmation = () => {
@@ -297,20 +300,13 @@ export class Schedule extends Component {
     this.setState({ value });
   }
 
-  // clear = () => {
-  //   this.setState({
-  //     value: undefined,
-  //   });
-  // }
   confirmShiftAll = (e) => {
     e.preventDefault();
     this.setState({
       shiftingGlobal: null,
       open: false
     }, () => this.shiftAll(this.state.value))
-    
   }
-
 
   shiftAll = (newStart) => {
     let allElements = this.state.allEvents;
@@ -377,7 +373,6 @@ export class Schedule extends Component {
               start: newStart,
               end: newEnd
             })
-            // .then(that.reloadPage(allElementsLength, allElementsIndex))
         });
     })
   }

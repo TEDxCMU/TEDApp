@@ -46,6 +46,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "babel-plugin-transform-remove-console": "^6.9.4",
     "react-social-icons": "^4.1.0"
   }
 }
