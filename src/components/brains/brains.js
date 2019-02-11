@@ -17,22 +17,27 @@ export class BrainFood extends Component {
   }
 
   toggleRoma = () => {
-      this.setState({ speaker: 'rscarano@andrew.cmu.edu'});
+      this.setState({ speaker: 'rscarano@andrew.cmu.edu'},
+      () => this.componentDidMount());
   }
 
   toggleEric = () => {
-      this.setState({ speaker: 'ericc2@andrew.cmu.edu'});
+      this.setState({ speaker: 'ericc2@andrew.cmu.edu'},
+      () => this.componentDidMount());
   }
 
   toggleQuinn = () => {
-      this.setState({ speaker: 'qrz@andrew.cmu.edu'});
+      this.setState({ speaker: 'qrz@andrew.cmu.edu'},
+      () => this.componentDidMount());
   }
   
   toggleSanjana = () => {
-      this.setState({ speaker: 'sjobalia@andrew.cmu.edu'});
+      this.setState({ speaker: 'sjobalia@andrew.cmu.edu'},
+      () => this.componentDidMount());
   }
 
   render () {
+    console.log(this.state.questions)
     let romaClasses = "button-primary medium blank";
     let ericClasses = "button-primary medium blank";
     let quinnClasses = "button-primary medium blank";
@@ -40,7 +45,7 @@ export class BrainFood extends Component {
     let newList = [];
     if (this.state.questions !== null) {
       this.state.questions.forEach(question => {  
-        if (question.answer !== "") {
+        if (question.answer.length > 0 ) {
           newList.push (
             <div className="speaker">
               <Dropdown question={question.question}>
