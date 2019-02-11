@@ -37,7 +37,7 @@ export class BrainFood extends Component {
   }
 
   render () {
-    console.log(this.state.questions)
+    // console.log(this.state.questions)
     let romaClasses = "button-primary medium blank";
     let ericClasses = "button-primary medium blank";
     let quinnClasses = "button-primary medium blank";
