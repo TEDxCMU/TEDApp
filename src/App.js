@@ -39,22 +39,29 @@ class App extends Component {
     this.logout = this.logout.bind(this)
   }
 
-  listenScrollEvent = (e) => {
-    if (window.scrollY > 250) {
-      console.log("SHITS HAPPENING")
-      this.setState({burgerColor: '#e62b1e',
-                    scroll: window.scrollY});
-    } else {
-      this.setState({burgerColor: '#fff',
-                    scroll: window.scrollY});
-    }
-  }
+  // WE DON'T NEED THIS. WILL DELETE BEFORE MAIN EVENT
+  // 
+  // 
+  // listenScrollEvent = (e) => {
+  //   if (window.location.pathname === "/") {
+  //     this.setState({burgerColor: '#fff',
+  //                   scroll: window.scrollY});
+  //   }
+  //   if (window.scrollY > 250) {
+  //     this.setState({burgerColor: '#e62b1e',
+  //                   scroll: window.scrollY});
+  //   } else {
+  //     this.setState({burgerColor: '#fff',
+  //                   scroll: window.scrollY});
+  //   }
+  // }
 
-  componentDidMount() {
-    window.addEventListener('scroll', this.listenScrollEvent);
-  }
+  // componentDidMount() {
+  //   window.addEventListener('scroll', this.listenScrollEvent);
+  // }
 
   render() {
+    console.log(window.location.pathname)
     console.log("the current user is: ", auth.currentUser)
     console.log("this is an iOS device? ", this.state.iosPopUp)
     console.log("the popup will show up? ", JSON.parse(localStorage.getItem("popup")))
@@ -241,12 +248,16 @@ class App extends Component {
   handleScroll = (event) => {
       let scrollTop = window.scrollY
       console.log(window.scrollY)
-      if (scrollTop > 300) {
+      if (window.location.pathname === "/") {
+        return this.setState({burgerColor: '#fff',
+                      scroll: window.scrollY});
+      }
+      else if (scrollTop > 300) {
         console.log("Setting red")
         this.setState({burgerColor: "red",
                       scroll: window.scrollY})
       }
-      if (scrollTop < 300) {
+      else if (scrollTop < 300) {
         console.log("Setting white")
         this.setState({burgerColor: "white",
                       scroll: window.scrollY})

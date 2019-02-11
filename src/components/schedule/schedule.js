@@ -157,7 +157,6 @@ export class Schedule extends Component {
               {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
                 <div>
                   <button className="button-primary" style={{marginTop: '10px'}} 
-                  // onClick={() => { this.shiftEndTime(allEvents.indexOf(event), moment().format('hh:mm A')) }}
                   onClick={() => { this.openModal(allEvents.indexOf(event)) }}
                   >Event Ended</button> 
                 </div>
@@ -171,7 +170,6 @@ export class Schedule extends Component {
     let allEvents = this.state.allEvents;
     let index = this.state.eventNum
     let now = console.log(index)
-    // console.log(allEvents[2].title)
     if (newList.length > 0) {
     return (
           
@@ -213,13 +211,14 @@ export class Schedule extends Component {
             {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
             <div>
             <div className="new-event-time">
+              {console.log("THE TIME PICKER IS UP")}
                 <TimePicker
                   defaultValue={this.state.value}
                   onChange={this.handleValueChange}
                 />
                 <button className="button-primary" style={{marginTop: '10px'}} onClick={() => { this.shiftAll(this.state.value) }}>New Event Start Time</button>
               </div> 
-              <div className="timeline">      
+              <div className="timeline-admin">      
                 <ul>
                   {newList} 
                 </ul>
@@ -279,11 +278,11 @@ closeModalandOpenConfirmation = () => {
     this.setState({ value });
   }
 
-  clear = () => {
-    this.setState({
-      value: undefined,
-    });
-  }
+  // clear = () => {
+  //   this.setState({
+  //     value: undefined,
+  //   });
+  // }
 
   shiftAll = (newStart) => {
     let allElements = this.state.allEvents;
@@ -350,7 +349,7 @@ closeModalandOpenConfirmation = () => {
               start: newStart,
               end: newEnd
             })
-            .then(that.reloadPage(allElementsLength, allElementsIndex))
+            // .then(that.reloadPage(allElementsLength, allElementsIndex))
         });
     })
   }
