@@ -68,7 +68,7 @@ export class Speakers extends Component {
     }
 
     logState = () => {
-        console.log(this.state.questions[0])
+        // console.log(this.state.questions[0])
     }
 
     handleChange = (e) => {
@@ -92,7 +92,7 @@ export class Speakers extends Component {
             time: now
         })
         .then(function() {
-            console.log("Document successfully written!")
+            // console.log("Document successfully written!")
             speakersCopy[index.index].asked = true;
             that.setState({
                 allSpeakers: speakersCopy

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.css';
-import HeaderBG from '../../header-bg.svg';
+// import HeaderBG from '../../header-bg.svg';
 import logo from '../../logo.png';
 import back from '../../back.png';
 import bottle from '../../questionbottle.svg';
@@ -25,7 +25,7 @@ export class Header extends Component {
 
     openConfirmation = (e) => {
         e.preventDefault()
-        this.setState({confirmationOpen: true}, () => console.log("shalom we opening"))
+        this.setState({confirmationOpen: true})
     }
 
     openModal = () => {
@@ -37,7 +37,6 @@ export class Header extends Component {
     }
 
     closeModalandOpenConfirmation = () => {
-        console.log("closing modal and opening confirmation")
         this.setState({
             confirmationOpen: true,
             open: false
@@ -56,7 +55,7 @@ export class Header extends Component {
 
     render() {
         let that = this;
-        console.log(this.props)
+        // console.log(this.props)
         let nameBlank = true;
         let questionBlank = true;
         const style = {

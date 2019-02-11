@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import 'rc-time-picker/assets/index.css';
 import '../../App.css';
 import './myQuestions.css';
-import fire from '../../fire.js';
 import Dropdown from '../dropdown/dropdown';
 
 export class QuestionComponent extends Component {

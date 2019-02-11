@@ -5,8 +5,6 @@ import '../questions/myQuestions.css';
 import fire from '../../fire.js';
 import QuestionComponent from './questionComponent.js'
 import moment from 'moment';
-import TimePicker from 'rc-time-picker';
-import ReactDOM from 'react-dom';
 import { Redirect } from 'react-router-dom';
 
 export class MyQuestions extends Component {
@@ -63,7 +61,7 @@ export class MyQuestions extends Component {
         timeAnswered: now
     })
     .then(function() {
-        console.log("Document successfully written!")
+        // console.log("Document successfully written!")
         questionsCopy[index].answered = true;
         that.setState({
             questions: questionsCopy
@@ -87,8 +85,6 @@ export class MyQuestions extends Component {
     //   timestampsInSnapshots: true
     // });
     var wholeData = [];
-  
-    let speakerRef = db.collection('speakers').where('email', '==', userEmail);
     db.collection('speakers').doc(userEmail).collection("questions").get()
     .then(snapshot => {
         snapshot.forEach(doc => {

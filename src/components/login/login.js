@@ -33,9 +33,9 @@ export class Login extends Component {
                 <h1> Could not find an account with that email/password.</h1>
                 }
                 <label>Email:</label>
-                <input type="text" name="email" value={this.state.email} onChange={this.handleChange}/>
+                <input type="text" name="email" autoComplete="email" value={this.state.email} onChange={this.handleChange}/>
                 <label>Password:</label>
-                <input type="password" name="password" value={this.state.password} onChange={this.handleChange}/>
+                <input type="password" name="password" autoComplete="password" value={this.state.password} onChange={this.handleChange}/>
                 <br />
                 <button className="button-primary" type="submit" onClick={this.login}>TED Log In</button>
             </form>            
@@ -48,9 +48,11 @@ export class Login extends Component {
       fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
         this.setState({
           redirect: true
-        }, () => (console.log(this.state)))
+        }
+        // , () => (console.log(this.state))
+        )
       }).catch((error) => {
-          console.log(error);
+          // console.log(error);
         });
     }
 

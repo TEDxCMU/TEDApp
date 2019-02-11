@@ -60,7 +60,7 @@ function registerValidSW(swUrl, config) {
     .register(swUrl)
     .then(registration => {
 
-      console.log("sw registered")
+      // console.log("sw registered")
       registration.onupdatefound = () => {
         const installingWorker = registration.installing;
         installingWorker.onstatechange = () => {

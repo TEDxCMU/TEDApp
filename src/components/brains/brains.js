@@ -41,7 +41,6 @@ export class BrainFood extends Component {
     if (this.state.questions !== null) {
       this.state.questions.forEach(question => {  
         if (question.answer !== "") {
-          let index = this.state.questions.indexOf(question);
           newList.push (
             <div className="speaker">
               <Dropdown question={question.question}>
@@ -105,7 +104,7 @@ export class BrainFood extends Component {
   componentDidMount = () => {
     const db = fire.firestore();
     var wholeData = [];
-    let speakerRef = db.collection('speakers').where('email', '==', this.state.speaker);
+    // let speakerRef = db.collection('speakers').where('email', '==', this.state.speaker);
     db.collection('speakers').doc(this.state.speaker).collection("questions").get()
     .then(snapshot => {
         snapshot.forEach(doc => {
@@ -115,7 +114,7 @@ export class BrainFood extends Component {
             wholeData.push(docCopy)
         });
         // let questions = Array(wholeData.length)
-      console.log(wholeData)
+      // console.log(wholeData)
       this.setState(
         {questions: wholeData}, () => this.props.isLoaded()
       )

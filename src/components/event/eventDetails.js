@@ -75,12 +75,12 @@ export class EventDetails extends Component {
       }
 
     createQuestion = () => {
-        console.log("asking question")
+        // console.log("asking question")
         const { name, question } = this.state;
         let errors = this.validate(name, question);
-        console.log(errors)
+        // console.log(errors)
         if (errors.name || errors.question) {
-            console.log("one or more is blank")
+            // console.log("one or more is blank")
             return this.setState({
                 errors: errors
             })
@@ -96,7 +96,7 @@ export class EventDetails extends Component {
                 timeAsked: now
             })
             .then(function() {
-                console.log("Document successfully written!")
+                // console.log("Document successfully written!")
                 that.setState({
                     asked: true
                 })
@@ -114,7 +114,7 @@ export class EventDetails extends Component {
                 timeAsked: now
             })
             .then(function() {
-                console.log("Document successfully written!")
+                // console.log("Document successfully written!")
                 that.setState({
                     asked: true
                 })
@@ -167,16 +167,16 @@ export class EventDetails extends Component {
         speakerRef.get()
         .then(doc => {
           if (!doc.exists) {
-            console.log('No such document!');
+            // console.log('No such document!');
           } else {
-            console.log('Document data:', doc.data());
+            // console.log('Document data:', doc.data());
             this.setState({
                 speaker: doc.data()
             }, () => this.checkIfAsked())
           }
         })
         .catch(err => {
-          console.log('Error getting document', err);
+        //   console.log('Error getting document', err);
         });
     }
 

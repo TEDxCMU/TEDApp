@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { auth, provider } from './fire';
+import { auth } from './fire';
 import { Schedule } from './components/schedule/schedule.js';
 import { EventDetails } from './components/event/eventDetails.js';
 import { Navigation } from './components/navigation/navigation.js';
@@ -61,12 +61,12 @@ class App extends Component {
   // }
 
   render() {
-    console.log(window.location.pathname)
-    console.log("the current user is: ", auth.currentUser)
-    console.log("this is an iOS device? ", this.state.iosPopUp)
-    console.log("the popup will show up? ", JSON.parse(localStorage.getItem("popup")))
-    console.log("the fingerprint is: ", localStorage.getItem("fingerprint"))
-    console.log("the state is loaded: ", this.state.loaded)
+    // console.log(window.location.pathname)
+    // console.log("the current user is: ", auth.currentUser)
+    // console.log("this is an iOS device? ", this.state.iosPopUp)
+    // console.log("the popup will show up? ", JSON.parse(localStorage.getItem("popup")))
+    // console.log("the fingerprint is: ", localStorage.getItem("fingerprint"))
+    // console.log("the state is loaded: ", this.state.loaded)
     return (
       <div>
         <Router>
@@ -247,18 +247,17 @@ class App extends Component {
 
   handleScroll = (event) => {
       let scrollTop = window.scrollY
-      console.log(window.scrollY)
       if (window.location.pathname === "/") {
         return this.setState({burgerColor: '#fff',
                       scroll: window.scrollY});
       }
       else if (scrollTop > 300) {
-        console.log("Setting red")
+        // Setting burger to red
         this.setState({burgerColor: "red",
                       scroll: window.scrollY})
       }
       else if (scrollTop < 300) {
-        console.log("Setting white")
+        // Setting burger to white
         this.setState({burgerColor: "white",
                       scroll: window.scrollY})
       }
@@ -302,7 +301,7 @@ class App extends Component {
             that.sendFingerprintToFirestore(type, id)
           }
         })
-				console.log(localStorage.getItem('fingerprint'))
+				// console.log(localStorage.getItem('fingerprint'))
     });
   }
 
