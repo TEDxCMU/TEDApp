@@ -123,7 +123,7 @@ export class EventDetails extends Component {
                     asked: true
                 }, () => ReactGA.event({
                     category: 'User',
-                    action: 'Create Question without Fingerprint'
+                    action: 'Create Question with Fingerprint'
                   }))
                 // window.location.reload();
             })
