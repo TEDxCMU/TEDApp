@@ -151,10 +151,7 @@ header .title {
 
 .description-small {
     width: 70%;
-    padding-top: 5%;
-    margin-bottom: 0;
-    margin-left: 5%;
-    padding-bottom: 5%;
+    padding: 20px 5% 20px 25px;
 }
 
 .bottom-space {
