@@ -98,7 +98,6 @@ export class BrainFood extends Component {
           </div>
           :
           <div className="speakers">
-            <h1>No questions answered yet!</h1>
           </div>
           }
 
