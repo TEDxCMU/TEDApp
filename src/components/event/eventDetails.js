@@ -5,6 +5,7 @@ import '../questions/myQuestions.css';
 import Header from '../header/header.js'
 import fire from '../../fire.js';
 import moment from 'moment';
+import ReactGA from 'react-ga';
 
 export class EventDetails extends Component {
     constructor() {
@@ -99,7 +100,10 @@ export class EventDetails extends Component {
                 // console.log("Document successfully written!")
                 that.setState({
                     asked: true
-                })
+                }, () => ReactGA.event({
+                    category: 'User',
+                    action: 'Create Question without Fingerprint'
+                  }))
                 // window.location.reload();
             })
             .catch(function(error) {
@@ -117,7 +121,10 @@ export class EventDetails extends Component {
                 // console.log("Document successfully written!")
                 that.setState({
                     asked: true
-                })
+                }, () => ReactGA.event({
+                    category: 'User',
+                    action: 'Create Question without Fingerprint'
+                  }))
                 // window.location.reload();
             })
             .catch(function(error) {

@@ -18,6 +18,7 @@
     "react-chartist": "^0.13.1",
     "react-device-detect": "^1.6.1",
     "react-dom": "^16.6.3",
+    "react-ga": "^2.5.7",
     "react-leaflet": "^2.2.0",
     "react-popup": "^0.9.3",
     "react-router-dom": "^4.3.1",

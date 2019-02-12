@@ -20,6 +20,7 @@ import Fingerprint from "fingerprintjs2";
 import Popup from 'react-popup';
 import moment from 'moment';
 import Header from './components/header/header';
+import ReactGA from 'react-ga';
 
 
 
@@ -39,26 +40,10 @@ class App extends Component {
     this.logout = this.logout.bind(this)
   }
 
-  // WE DON'T NEED THIS. WILL DELETE BEFORE MAIN EVENT
-  // 
-  // 
-  // listenScrollEvent = (e) => {
-  //   if (window.location.pathname === "/") {
-  //     this.setState({burgerColor: '#fff',
-  //                   scroll: window.scrollY});
-  //   }
-  //   if (window.scrollY > 250) {
-  //     this.setState({burgerColor: '#e62b1e',
-  //                   scroll: window.scrollY});
-  //   } else {
-  //     this.setState({burgerColor: '#fff',
-  //                   scroll: window.scrollY});
-  //   }
-  // }
-
-  // componentDidMount() {
-  //   window.addEventListener('scroll', this.listenScrollEvent);
-  // }
+  initializeReactGA = () => {
+    ReactGA.initialize('UA-134356076-1');
+    ReactGA.pageview('/home');
+  }
 
   render() {
     // console.log(window.location.pathname)
