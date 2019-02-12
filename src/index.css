@@ -59,7 +59,7 @@ body, .article {
   font-size: 1rem;
   line-height: 1.1875rem;
   background-color: var(--tedredhover);
-  z-index: -1000;
+  z-index: 0;
   /* background-color: rgb(34, 194, 56); */
 }
 
