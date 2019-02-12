@@ -9,8 +9,9 @@ import { MyQuestions } from './components/questions/myQuestions.js';
 import { PopUp } from './components/addToHome/addToHome.js';
 import { BrainFood } from './components/brains/brains.js';
 import { Map } from './components/map/map.js';
-import { BrowserRouter as Router} from 'react-router-dom';
-import Route from 'react-router-dom/Route';
+// import { BrowserRouter as Router} from 'react-router-dom';
+import { Router, Route } from 'react-router-dom'
+// import Route from 'react-router-dom/Route';
 import fire from './fire.js';
 import Faq from './components/faq/faq';
 import StyleGuide from './components/styleguide';
@@ -20,8 +21,10 @@ import Fingerprint from "fingerprintjs2";
 import Popup from 'react-popup';
 import moment from 'moment';
 import Header from './components/header/header';
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 
+// ReactGA.initialize('UA-134356076-1');
+// ReactGA.pageview('/home');
 
 
 class App extends Component {
@@ -40,11 +43,6 @@ class App extends Component {
     this.logout = this.logout.bind(this)
   }
 
-  initializeReactGA = () => {
-    ReactGA.initialize('UA-134356076-1');
-    ReactGA.pageview('/home');
-  }
-
   render() {
     // console.log(window.location.pathname)
     // console.log("the current user is: ", auth.currentUser)
@@ -54,7 +52,7 @@ class App extends Component {
     // console.log("the state is loaded: ", this.state.loaded)
     return (
       <div>
-        <Router>
+        <Router history={this.props.history}>
           <div className="App">
           <Navigation loaded={this.state.loaded} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
           <Route path="/" exact strict render={this.schedulePage}/>
