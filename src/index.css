@@ -58,7 +58,7 @@ body, .article {
   font-size: 1rem;
   line-height: 1.1875rem;
   background-color: var(--tedredhover);
-  z-index: 0;
+  z-index: -20;
   /* background-color: rgb(34, 194, 56); */
 }
 
@@ -68,13 +68,25 @@ UNLESS YOU KNOW WHAT IT DOES */
 
 body:before{
   content: "";
-  top: -300px;
+  top: 0;
   left: 0;
   background: var(--tedbggrey);
   /* position:-webkit-sticky; */
-  z-index: -10;
+  z-index: -2;
   width: 100vw;
-  height: 150vh;
+  height: 100vh;
+  position: fixed;
+}
+
+body:after {
+  content: "";
+  top: -300px;
+  left: 0;
+  background: var(--tedredhover);
+  /* position:-webkit-sticky; */
+  z-index: 10;
+  width: 100vw;
+  height: 300px;
   position: fixed;
 }
 
