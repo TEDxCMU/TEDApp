@@ -35,7 +35,6 @@
   --tedred: #e62b1e;
   --tedredhover: #CB2D3E;
   --tedredgradient: linear-gradient(180deg, #CB2D3E 0%, #EF473A 100%);
-  --tedredgradientFlipped: linear-gradient(0deg, #CB2D3E 0%, #EF473A 100%);
   --tedredgradient45: linear-gradient(315deg, #CB2D3E 0%, #EF473A 100%);
   --opaque: rgba(0, 0, 0, 0.3);
 }
@@ -63,15 +62,19 @@ body, .article {
   /* background-color: rgb(34, 194, 56); */
 }
 
+
+/* THIS IS A GIGANTIC HACK, DO NOT REUSE CODE 
+UNLESS YOU KNOW WHAT IT DOES */
+
 body:before{
   content: "";
-  top: 0;
+  top: -300px;
   left: 0;
   background: var(--tedbggrey);
   /* position:-webkit-sticky; */
   z-index: -10;
   width: 100vw;
-  height: 100vh;
+  height: 150vh;
   position: fixed;
 }
 
