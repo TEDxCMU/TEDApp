@@ -63,15 +63,6 @@ body, .article {
   /* background-color: rgb(34, 194, 56); */
 }
 
-.AppBg {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
-  line-height: 1.1875rem;
-  background-color: var(--tedbggrey);
-  z-index: 1000;
-  /* background-color: rgb(34, 194, 56); */
-}
-
 body:before{
   content: "";
   top: 0;
