@@ -58,20 +58,30 @@ body, .article {
   font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
   line-height: 1.1875rem;
-  background-color: var(--tedbggrey);
+  background-color: var(--tedredhover);
+  z-index: -1000;
   /* background-color: rgb(34, 194, 56); */
 }
 
+.AppBg {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.1875rem;
+  background-color: var(--tedbggrey);
+  z-index: 1000;
+  /* background-color: rgb(34, 194, 56); */
+}
 
 body:before{
-  display: block;
   content: "";
-  height: 20px;
   top: 0;
-  background: var(--tedredgradientFlipped);
-  position:-webkit-sticky;
-  z-index: 1000;
-  position:sticky;
+  left: 0;
+  background: var(--tedbggrey);
+  /* position:-webkit-sticky; */
+  z-index: -10;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
 }
 
 article,aside,details,figcaption,figure,
