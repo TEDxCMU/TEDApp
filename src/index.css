@@ -57,7 +57,8 @@ body, .article {
   font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
   line-height: 1.1875rem;
-  background-color: var(--tedbggrey);
+  /* background-color: var(--tedbggrey); */
+  background-color: rgb(34, 194, 56);
 }
 
 article,aside,details,figcaption,figure,
