@@ -192,7 +192,10 @@ export class Schedule extends Component {
                       <h4>Are you sure you want to change the end time of "{index === undefined ? "Event Name" : allEvents[index].title}" to {moment().format('hh:mm A')}?</h4>
                       <div className="popup-btns">
                           <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
-                          <button className="popup-btn-success button-primary" onClick={e => this.setState({open: false}, () => this.shiftEndTime(e, index, moment().format('hh:mm A')))}>Confirm</button>
+                          <button className="popup-btn-success button-primary" onClick={
+                            e => this.confirmShiftOne(e, index)
+                              // , () => this.shiftEndTime(e, index, moment().format('hh:mm A')))
+                            }>Confirm</button>
                       </div>                      
                     </div>
                     }
@@ -305,6 +308,14 @@ export class Schedule extends Component {
     }, () => this.shiftAll(this.state.value))
   }
 
+  confirmShiftOne = (e, index) => {
+    e.preventDefault();
+    this.setState({
+      shiftingGlobal: null,
+      open: false
+    }, () => this.shiftEndTime(index, moment().format('hh:mm A')))
+  }
+
   shiftAll = (newStart) => {
     let allElements = this.state.allEvents;
     let immediateNextEvent= moment(allElements[0].start, 'hh:mm A'); 
@@ -325,9 +336,7 @@ export class Schedule extends Component {
     }
   }
 
-  shiftEndTime = (e, index, endTime) => {
-    // return early if this is the last event
-    e.preventDefault();
+  shiftEndTime = (index, endTime) => {
     // console.log(index)
     if (this.state.allEvents.length === index + 1) return;
     let eventNum = index;
