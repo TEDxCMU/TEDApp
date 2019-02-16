@@ -114,7 +114,7 @@ class App extends Component {
             <Schedule
               user={this.state.user}
               isLoaded={this.isLoaded}
-              scroll={this.state.scroll} /> 
+              scroll={window.scrollY} /> 
           </div>
           :
           // now the main app div will be 100% of the VIEW PORT real estate, which means the loader will be centered
@@ -122,7 +122,7 @@ class App extends Component {
             <Schedule
               user={this.state.user}
               isLoaded={this.isLoaded}
-              scroll={this.state.scroll} /> 
+              scroll={window.scrollY} /> 
           </div>
       }
       </div>

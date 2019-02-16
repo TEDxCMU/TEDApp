@@ -19,7 +19,8 @@ export class Schedule extends Component {
       canShiftAll: true,
       allEvents: [],
       updateCount: 0,
-      watchingForChanges: false
+      watchingForChanges: false,
+      announcement: "The conference is currently not in progress. Please check back at another time."
     }
   }
 
@@ -68,13 +69,15 @@ export class Schedule extends Component {
       borderRadius: '10px'
     }
     let newList = [];
-    let notification = "The conference is currently not in progress. Please check back at another time."
+    let notification = this.state.announcement;
     this.state.allEvents.forEach(event => {
         //mark event as either being in the past, happening right now, or being in the future if it is just static
         let className = "bullet-static";
-        if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
-          className = "now";
-          notification = event.announcement;
+        if (notification !== "The conference is currently not in progress. Please check back at another time.") {
+          if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
+            className = "now";
+            notification = event.announcement;
+          }
         }
         if (moment().isAfter(moment(event.end, "hh:mm A"))) {
           className = "past";
@@ -203,13 +206,14 @@ export class Schedule extends Component {
                 </div>
             </div>
             </Popup>
-            { this.props.scroll === undefined || this.props.scroll < 50 ?
+            { window.scrollY < 50 ?
             <div>
             {/* {console.log("regular schedule")} */}
             <Header
             link={true}
             title="Live Schedule" 
             description={notification}
+            altAnnouncement={this.state.altAnnouncement}
             headerStyle="fixed" />
             </div>
             :
@@ -218,6 +222,7 @@ export class Schedule extends Component {
               <Header
               link={false}
               description={notification}
+              altAnnouncement={this.state.altAnnouncement}
               headerStyle="fixed" />              
             </div>
             }
@@ -412,6 +417,14 @@ export class Schedule extends Component {
     const db = fire.firestore();
     var wholeData = []
     let that = this;
+    db.collection('announcements').doc('announcement').onSnapshot((docSnapshot) => {
+      if (docSnapshot.exists) {
+        this.setState({
+          announcement: docSnapshot.data().text,
+          altAnnouncement: true
+        })
+      }
+    });
     db.collection('mini').get().then(snapshot => {
         snapshot.forEach(doc => {
             let id = doc.id;

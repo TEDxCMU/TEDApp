@@ -14,7 +14,8 @@ export class Header extends Component {
         super(props)
         this.state = {
           confirmationOpen: false,
-          open: false
+          open: false,
+          announcementOpen: false
         }
     }
 
@@ -43,6 +44,16 @@ export class Header extends Component {
         })
     }
 
+    openAnnouncement = (e) => {
+        console.log('hello')
+        e.preventDefault();
+        this.setState({ announcementOpen: true })
+    }
+
+    closeAnnouncement = () => {
+        this.setState({ announcementOpen: false })
+    }
+
     sendQuestion = (e) => {
         e.preventDefault()
         if (this.props.question.length > 0 && this.props.name.length > 0) {
@@ -55,7 +66,7 @@ export class Header extends Component {
 
     render() {
         let that = this;
-        // console.log(this.props)
+        console.log(this.props)
         let nameBlank = true;
         let questionBlank = true;
         const style = {
@@ -86,7 +97,42 @@ export class Header extends Component {
                 {/* The header should be collapsed, so make the description small */}
                 {this.props.link !== undefined && this.props.link === false ?
                 <div>
-                    <h6 className="description-small">{this.props.description}</h6>
+                    <h6 oncClick={e => this.openAnnouncement(e)} className="description-small">{this.props.description}</h6>
+                    <Popup
+                        open={this.state.announcementOpen}
+                        closeOnDocumentClick
+                        onClose={this.closeAnnouncement}
+                        contentStyle={style}
+                        >
+                        <div className="modal">
+                            <div>
+                                { this.props.altAnnouncement !== null && this.props.altAnnouncement ?
+                                <div>   
+                                    <h4>Change or delete custom announcement:</h4>
+                                    <div className="popup-btns">
+                                        <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Delete</button>
+                                    </div>
+                                    <textarea type="text" id="iOS" required className="popup-input" name="question" placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
+                                    <div className="popup-btns">
+                                        <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Submit</button>
+                                    </div>
+                                </div>
+                                :
+                                <div>
+                                <h4>Create custom announcement</h4>
+                                <div className="popup-btns">
+                                    <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
+                                    <button className="popup-btn-success button-primary" onClick={
+                                        e => this.confirmShiftOne(e)
+                                        // , () => this.shiftEndTime(e, index, moment().format('hh:mm A')))
+                                        }>Confirm</button>
+                                </div>                      
+                                </div>
+                                }
+
+                            </div>
+                        </div>
+                    </Popup>
                 </div>
                 :
                     <Link key={'home'} to={{
