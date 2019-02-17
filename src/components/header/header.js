@@ -51,15 +51,24 @@ export class Header extends Component {
     }
 
     openAnnouncement = (e) => {
+        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+            return
+        }
         e.preventDefault();
         this.setState({ announcementOpen: true })
     }
 
     closeAnnouncement = () => {
+        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+            return
+        }
         this.setState({ announcementOpen: false })
     }
 
     sendQuestion = (e) => {
+        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+            return
+        }
         e.preventDefault()
         if (this.props.question.length > 0 && this.props.name.length > 0) {
             this.closeModalandOpenConfirmation();
@@ -70,19 +79,25 @@ export class Header extends Component {
     }
 
     deleteAnnouncement = (e) => {
+        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+            return
+        }
         e.preventDefault();
         let that = this;
         let db = fire.firestore();
         db.collection('announcements').doc('announcement').delete().then(function() {
             that.setState({
                 announcementOpen: false
-            }, window.location.reload())
+            })
         }).catch(function(error) {
             console.error("Error removing document: ", error);
         });
     }
     
     updateAnnouncement = (e) => {
+        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+            return
+        }
         e.preventDefault();
         let that = this;
         let db = fire.firestore();

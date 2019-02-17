@@ -73,14 +73,12 @@ export class Schedule extends Component {
     this.state.allEvents.forEach(event => {
         //mark event as either being in the past, happening right now, or being in the future if it is just static
         let className = "bullet-static";
-        if (notification !== "The conference is currently not in progress. Please check back at another time.") {
-          if (this.state.altAnnouncement) {
-            notification = this.state.announcement;
-          }
-          else if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
-            className = "now";
-            notification = event.announcement;
-          }
+        if (this.state.altAnnouncement) {
+          notification = this.state.announcement;
+        }
+        else if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
+          className = "now";
+          notification = event.announcement;
         }
         if (moment().isAfter(moment(event.end, "hh:mm A"))) {
           className = "past";
@@ -413,7 +411,7 @@ export class Schedule extends Component {
         if (change.type === 'removed') {
         }
       });
-    });
+    });    
   }
 
   componentDidMount = () => {
@@ -425,6 +423,12 @@ export class Schedule extends Component {
         this.setState({
           announcement: docSnapshot.data().text,
           altAnnouncement: true
+        })
+      }
+      else {
+        this.setState({
+          announcement: "The conference is currently not in progress. Please check back at another time.",
+          altAnnouncement: false
         })
       }
     });
