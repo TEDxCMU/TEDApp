@@ -152,7 +152,7 @@
  */
 
 /* eslint-env browser */
-'use strict';
+// 'use strict';
 export default function register() {
   if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {
     // Your service-worker.js *must* be located at the top-level directory relative to your site.
@@ -188,6 +188,9 @@ export default function register() {
               case 'redundant':
                 console.error('The installing service worker became redundant.');
                 break;
+              
+              // default:
+              //   break;
             }
           };
         };
