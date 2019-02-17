@@ -7,7 +7,7 @@ import 'leaflet/dist/leaflet.css'
 
 import './index.css';
 import App from './App';
-import * as serviceWorker from './serviceWorker';
+import registerServiceWorker from './serviceWorker';
 
 ReactGA.initialize('UA-134356076-1');
 
@@ -24,4 +24,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.register();
+registerServiceWorker();
