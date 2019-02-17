@@ -29,11 +29,13 @@
     "react-spring": "^8.0.5",
     "reactjs-popup": "^1.3.2",
     "reactstrap": "^7.1.0",
-    "styled-components": "^4.1.3"
+    "styled-components": "^4.1.3",
+    "sw-precache": "^5.2.1",
+    "sw-precache-webpack-plugin": "^0.11.5"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
     "test": "react-scripts test",
     "predeploy": "npm run build",
     "eject": "react-scripts eject",
