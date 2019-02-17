@@ -74,7 +74,10 @@ export class Schedule extends Component {
         //mark event as either being in the past, happening right now, or being in the future if it is just static
         let className = "bullet-static";
         if (notification !== "The conference is currently not in progress. Please check back at another time.") {
-          if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
+          if (this.state.altAnnouncement) {
+            notification = this.state.announcement;
+          }
+          else if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
             className = "now";
             notification = event.announcement;
           }

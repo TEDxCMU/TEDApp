@@ -16,7 +16,7 @@ export class PopUp extends Component {
                 { this.props.iOS && this.props.loaded ? 
                     <div id="popup-bg">
                         <div id="popup-content">
-                            <div class="closeModal" onClick={(e) => {this.closeModal(e)}}>X</div>
+                            <div className="closeModal" onClick={(e) => {this.closeModal(e)}}>X</div>
                             {/* <img src={require('./plusIcon.png')} className="plus" alt="add" title="add" /> */}
                             <p><strong>Install TEDxCMU</strong> for quick and easy access when you're on the go</p>
                             <p>Just tap <img src={require('./downloadIcon.png')} className="download-icon" alt="download icon" title="download icon" /> and then "Add to Homescreen"</p>
