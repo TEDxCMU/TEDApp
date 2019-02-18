@@ -13,21 +13,25 @@ import posed from 'react-pose';
 
 
 const Item = posed.li({
-  open: { y: 0, opacity: 1, delay: 1000 },
-  closed: { y: 20, opacity: 0 },
-  transition: { type: 'spring', stiffness: 10 },
-  initialPose: 'closed'
+  enter: { y: 0, x: 0, opacity: 1,   transition: 
+    {x: { type: 'spring', stiffness: 300, damping: 15 },
+     y: { type: 'spring', stiffness: 300, damping: 15 },
+    default: { duration: 300 }} 
+  },
+  exit: { y: 20, opacity: 0, transition: { duration: 150 }}
 });
 
 const Sidebar = posed.ul({
-  open: {
-    x: '0%',
-    delayChildren: 100,
-    staggerChildren: 50
+  enter: {
+    x: 0,
+    delayChildren: 1500,
+    staggerChildren: 300,
+    transition: {
+      x: { type: 'spring', stiffness: 100, damping: 15 },
+      y: { type: 'spring', stiffness: 100, damping: 15 },
+    }
   },
-  closed: { x: '-150%', delay: 30 },
-  initialPose: 'closed',
-  transition: { type: 'spring', stiffness: 10 }
+  exit: { x: '-100%', delay: 0, transition: { duration: 0 }}
 });
 
 export class Schedule extends Component {
@@ -256,14 +260,14 @@ export class Schedule extends Component {
                 <button className="button-primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Event Start Time</button>
               </div> 
               <div className="timeline-admin">      
-                <Sidebar pose={this.state.isOpen ? 'open' : 'closed'}>
+                <Sidebar pose={this.state.isOpen ? 'enter' : 'exit'}>
                   {newList} 
                 </Sidebar>
               </div>
             </div>
             :
             <div className="timeline">      
-                <Sidebar pose={this.state.isOpen ? 'open' : 'closed'}>
+                <Sidebar pose={this.state.isOpen ? 'enter' : 'exit'}>
                   {newList} 
                 </Sidebar>
             </div>
@@ -419,7 +423,8 @@ export class Schedule extends Component {
   }
 
   watchForChanges = () => {
-    this.props.isLoaded()
+    this.props.isLoaded();
+    this.toggle();
     let that = this;
     const db = fire.firestore();
     db.collection('mini')
@@ -438,7 +443,6 @@ export class Schedule extends Component {
   }
 
   componentDidMount = () => {
-    setTimeout(this.toggle, 600);
     const db = fire.firestore();
     var wholeData = []
     let that = this;
