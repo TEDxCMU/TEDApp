@@ -9,7 +9,26 @@ import 'rc-time-picker/assets/index.css';
 import Header from '../header/header';
 import { BounceLoader } from 'react-spinners';
 import Popup from "reactjs-popup";
+import posed from 'react-pose';
 
+
+const Item = posed.li({
+  open: { y: 0, opacity: 1, delay: 1000 },
+  closed: { y: 20, opacity: 0 },
+  transition: { type: 'spring', stiffness: 10 },
+  initialPose: 'closed'
+});
+
+const Sidebar = posed.ul({
+  open: {
+    x: '0%',
+    delayChildren: 100,
+    staggerChildren: 50
+  },
+  closed: { x: '-150%', delay: 30 },
+  initialPose: 'closed',
+  transition: { type: 'spring', stiffness: 10 }
+});
 
 export class Schedule extends Component {
   constructor() {
@@ -20,7 +39,8 @@ export class Schedule extends Component {
       allEvents: [],
       updateCount: 0,
       watchingForChanges: false,
-      announcement: "The conference is currently not in progress. Please check back at another time."
+      announcement: "The conference is currently not in progress. Please check back at another time.",
+      isOpen: false
     }
   }
 
@@ -85,7 +105,7 @@ export class Schedule extends Component {
         }
         if (event.type !== "static") {
           newList.push(
-            <li key={event.id}>
+            <Item key={event.id}>
               {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
               <div>
                 <span className="event"></span>
@@ -142,13 +162,13 @@ export class Schedule extends Component {
                 </Link>
               </div>
               }
-          </li>
+          </Item>
         )
       }
       else {
       
       newList.push(
-        <li key={event.id}>
+        <Item key={event.id}>
             {/* Change bullet color here, time, and the info in a timeline event */}
             <span className="event-static"></span>
             <span className="bullet-static"></span>
@@ -166,14 +186,13 @@ export class Schedule extends Component {
                 <div></div>
               }
             </div>
-      </li>
+        </Item>
       )}
     })
     let allEvents = this.state.allEvents;
     let index = this.state.eventNum
     if (newList.length > 0) {
     return (
-          
           <div style={{height: '100%', width: '100%'}}>
             <Popup
             open={this.state.open}
@@ -237,21 +256,25 @@ export class Schedule extends Component {
                 <button className="button-primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Event Start Time</button>
               </div> 
               <div className="timeline-admin">      
-                <ul>
+                <Sidebar pose={this.state.isOpen ? 'open' : 'closed'}>
                   {newList} 
-                </ul>
+                </Sidebar>
               </div>
             </div>
             :
             <div className="timeline">      
-              <ul>
-                {newList} 
-              </ul>
+                <Sidebar pose={this.state.isOpen ? 'open' : 'closed'}>
+                  {newList} 
+                </Sidebar>
             </div>
             }
           </div>
     );
     }
+  }
+
+  toggle = () => {
+    this.setState({ isOpen: !this.state.isOpen }, console.log("lets get it"));
   }
 
   closeConfirmation = () => {
@@ -415,6 +438,7 @@ export class Schedule extends Component {
   }
 
   componentDidMount = () => {
+    setTimeout(this.toggle, 600);
     const db = fire.firestore();
     var wholeData = []
     let that = this;
