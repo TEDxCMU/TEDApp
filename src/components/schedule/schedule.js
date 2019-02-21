@@ -498,7 +498,10 @@ export class Schedule extends Component {
       })
       // we've been here before, don't need to instantiate the snapshot listener
       if (this.state.watchingForChanges) {
-        this.setState({allEvents: sortedData})
+        this.setState({
+          allEvents: sortedData,
+          isOpen: true
+        })
       }
       // first pass - let's call watchForChanges to start listening for changes to each document
       else {

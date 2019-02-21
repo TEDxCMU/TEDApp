@@ -9,6 +9,7 @@ import './header.css';
 import { SocialIcon } from 'react-social-icons';
 import Popup from "reactjs-popup";
 import fire from '../../fire.js';
+// import { useSpring, animated } from 'react-spring'
 
 export class Header extends Component {
     constructor (props) {
