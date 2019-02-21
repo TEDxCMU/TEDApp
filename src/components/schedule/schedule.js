@@ -25,7 +25,7 @@ const Sidebar = posed.ul({
   enter: {
     x: 0,
     delayChildren: 1500,
-    staggerChildren: 300,
+    staggerChildren: 50,
     transition: {
       x: { type: 'spring', stiffness: 100, damping: 15 },
       y: { type: 'spring', stiffness: 100, damping: 15 },
