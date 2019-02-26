@@ -410,7 +410,6 @@ input[type="button"] {
   min-width: 80px;
   letter-spacing: .05rem;
   background: var(--tedwhite);
-  box-shadow: 0 2px 10px 0 var(--opaque);
 }
 
 form button,
@@ -440,6 +439,7 @@ input[type="button"].button-primary {
 	background: var(--tedredgradient45);
   color: var(--tedwhite);
   transition: all 0.5s ease-in-out;
+  box-shadow: 0 2px 10px 0 var(--opaque);
 }
 
 button.button-sent,
@@ -449,6 +449,7 @@ input[type="button"].button-primary {
 	background: var(--tedoffwhite);
   color: var(--tedblack);
   transition: all 0.5s ease-in-out;
+  box-shadow: 0 2px 10px 0 var(--opaque);
 }
 
 button.button-primary:hover,
@@ -504,7 +505,6 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 button.blank {
   background: none;
   color: var(--tedred);
-  box-shadow: none;
   border: 1px solid var(--tedred);
   border-radius: 3px;
   box-sizing: border-box;
