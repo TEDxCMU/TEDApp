@@ -42,18 +42,18 @@ const Bullet = posed.span({
     transition: {
       type: 'spring',
       stiffness: 100,
-      damping: 25,
+      damping: 20,
       duration: 700,
       opacity: { ease: 'easeOut', duration: 300 }
     },
-    scale: 2
+    scale: 1.9
    },
   visible: {
     opacity: 1,
     transition: {
       type: 'spring',
       stiffness: 100,
-      damping: 25,
+      damping: 20,
       duration: 700,
       opacity: { ease: 'easeOut', duration: 300 }
     },
@@ -516,7 +516,7 @@ export class Schedule extends Component {
 
     setInterval(() => {
       this.setState({ bulletVisible: !this.state.bulletVisible });
-    }, 2000);
+    }, 1800);
   }
 
   addEventsToState = (snapshot, wholeData) => {
