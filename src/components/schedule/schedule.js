@@ -43,7 +43,7 @@ const Bullet = posed.span({
       type: 'spring',
       stiffness: 100,
       damping: 20,
-      duration: 700,
+      duration: 1200,
       opacity: { ease: 'easeOut', duration: 300 }
     },
     scale: 1.9
