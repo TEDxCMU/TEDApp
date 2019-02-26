@@ -13,18 +13,20 @@ import posed from 'react-pose';
 
 
 const Item = posed.li({
-  enter: { y: 0, x: 0, opacity: 1,   transition: 
-    {x: { type: 'spring', stiffness: 300, damping: 15 },
-     y: { type: 'spring', stiffness: 300, damping: 15 },
-    default: { duration: 300 }} 
+  enter: { y: 0, x: 0, opacity: 1, 
+    transition: {
+      x: { type: 'spring', stiffness: 300, damping: 15 },
+      y: { type: 'spring', stiffness: 300, damping: 15 },
+      default: { duration: 300 }
+    } 
   },
-  exit: { y: 20, opacity: 0, transition: { duration: 150 }}
+  exit: { y: 20, opacity: 0, transition: { duration: 150 } }
 });
 
 const Sidebar = posed.ul({
   enter: {
     x: 0,
-    delayChildren: 1500,
+    delayChildren: 1100,
     staggerChildren: 50,
     transition: {
       x: { type: 'spring', stiffness: 100, damping: 15 },
@@ -32,6 +34,31 @@ const Sidebar = posed.ul({
     }
   },
   exit: { x: '-100%', delay: 0, transition: { duration: 0 }}
+});
+
+const Bullet = posed.span({
+  hidden: {
+    opacity: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 25,
+      duration: 700,
+      opacity: { ease: 'easeOut', duration: 300 }
+    },
+    scale: 2
+   },
+  visible: {
+    opacity: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 100,
+      damping: 25,
+      duration: 700,
+      opacity: { ease: 'easeOut', duration: 300 }
+    },
+    scale: 1
+  }
 });
 
 export class Schedule extends Component {
@@ -44,7 +71,8 @@ export class Schedule extends Component {
       updateCount: 0,
       watchingForChanges: false,
       announcement: "The conference is currently not in progress. Please check back at another time.",
-      isOpen: false
+      isOpen: false,
+      bulletVisible: true
     }
   }
 
@@ -107,13 +135,18 @@ export class Schedule extends Component {
         if (moment().isAfter(moment(event.end, "hh:mm A"))) {
           className = "past";
         }
+
+        // determines if a bullet should blink!
+        let blink = (className === "now" && this.state.bulletVisible) ? 'hidden' : 'visible';
+
         if (event.type !== "static") {
           newList.push(
             <Item key={event.id}>
               {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
               <div>
                 <span className="event"></span>
-                <span className={className}></span>
+                <Bullet className={className}  pose={blink}></Bullet>
+                <span className="bullet-bg"></span>
                   <div className="info-talk">
                     <p className="time"><strong>{event.start}</strong> — {event.end}</p>
                     <h4 className="event-title">{event.title}</h4>
@@ -157,7 +190,8 @@ export class Schedule extends Component {
                   }
                 }}>
                   <span className="event"></span>
-                  <span className={className}></span>
+                  <Bullet className={className}  pose={blink}></Bullet>
+                  <span className="bullet-bg"></span>
                     <div className="info-talk">
                       <p className="time"><strong>{event.start}</strong> — {event.end}</p>
                       <h4 className="event-title">{event.title}</h4>
@@ -175,7 +209,8 @@ export class Schedule extends Component {
         <Item key={event.id}>
             {/* Change bullet color here, time, and the info in a timeline event */}
             <span className="event-static"></span>
-            <span className="bullet-static"></span>
+            <Bullet className={className}  pose={blink}></Bullet>
+            <span className="bullet-bg"></span>
             <div className="info-static">
               <p className="time"><strong>{event.start}</strong> — {event.end}</p>
               <h5 className="event-title">{event.title}</h5>
@@ -478,6 +513,10 @@ export class Schedule extends Component {
 
         });
     })
+
+    setInterval(() => {
+      this.setState({ bulletVisible: !this.state.bulletVisible });
+    }, 2000);
   }
 
   addEventsToState = (snapshot, wholeData) => {

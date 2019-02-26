@@ -52,57 +52,6 @@
   position: relative;
 }
 
-/* REMOVE TOP  */
-/* .timeline ul li:first-child::before {
-  content: "";
-  display: block;
-  width: 0;
-  height: 50%;
-  border: 3px solid var(--tedbggrey);
-  position: absolute;
-  top: 0;
-  left: -2rem;
-  z-index: 1;
-} */
- 
-/* REMOVED CODE FOR TIMELINE FIX */
-/* .timeline ul li:not(:last-child)::before {
-  content: "";
-  display: block;
-  width: 0;
-  height: 80%;
-  border: 1px solid var(--tedlightgrey);
-  position: absolute;
-  top: 60%;
-  left: -2rem;
-} */
-/* 
-.event::before {
-  content: "";
-  display: block;
-  width: 0;
-  height: 40%;
-  border: 1px solid var(--tedlightgrey);
-  position: absolute;
-  top: 60%;
-  left: -2rem;
-  z-index: 1;
-}
- 
-.event::after {
-  content: "";
-  display: block;
-  width: 0;
-  height: 40%;
-  border: 1px solid var(--tedlightgrey);
-  position: absolute;
-  top:0;
-  left: -2rem;
-  z-index: 1;
-} */
-
-/* REMOVED CODE FOR TIMELINE FIX */
-
 .event-static::before {
   content: "";
   display: block;
@@ -117,8 +66,9 @@
 .event-static:first-child::before {
   top: 5px;
 }
- 
-.bullet::before {
+
+/* static timeline styles */
+.bullet-static {
   content: '';
   position: absolute;
   width: 14px;
@@ -132,20 +82,19 @@
   z-index: 1;
 }
 
-/* static timeline styles */
-.bullet-static::before {
+.bullet-bg {
   content: '';
   position: absolute;
-  width: 14px;
-  height: 14px;
-  left: calc(-2rem - 6px);
-  top: calc(50% - 6px);
-  background-color: var(--tedred);
+  width: 18px;
+  height: 18px;
+  left: calc(-2rem - 13px);
+  top: calc(50% - 13px);
+  background-color: var(--tedbggrey);
   border-radius: 50%;
-  border: 3px solid var(--tedbggrey);
-  box-sizing: border-box;
-  z-index: 1;
+  border: 5px solid var(--tedbggrey);
+  z-index: 0;
 }
+
 
 /* static timeline styles */
 .now {
@@ -234,32 +183,6 @@
 .event-description {
   font-size: 0.9rem;
 }
-
-/*
-.bullet-red {
-  background: #f00;
-  border: 4px solid #ddd;
-}
-
-
-.bullet-active {
-  border: 1px solid #f00
-  box-shadow: 0 0 15px 0 #f00;
-}
-
-.bullet-active::before {
-  content: " ";
-  position: absolute;
-  z-index: 1;
-  border: 4px solid #f00;
-  border-radius: 50%;
-}
-
-.bullet-grey {
-  background: var #ccc;
-  border: 4px solid #eee;
-}
- */
 
 /* END NEW TIMELINE CODE */
 
