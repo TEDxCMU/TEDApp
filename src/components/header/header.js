@@ -25,10 +25,12 @@ export class Header extends Component {
     handleChange = (e) => {
         this.setState({ [e.target.name] : e.target.value });        
     }
+    
+    // code for ask speaker question popup  
 
+    //this fires when the user closes the bottle popup - unfortunately can't run this when they click send
     closeConfirmation = () => {
-        // this.setState({confirmationOpen: false}, () => this.props.askQuestion())
-        this.props.askQuestion();
+        this.props.close();
     }
 
     openConfirmation = (e) => {
@@ -48,14 +50,30 @@ export class Header extends Component {
         this.setState({
             confirmationOpen: true,
             open: false
-        })
+        }, () => this.props.askQuestion())
     }
 
+    sendQuestion = (e) => {
+        console.log("hello")
+        // if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+        //     return
+        // }
+        e.preventDefault()
+        console.log(this.props.question.length, this.props.name.length)
+        if (this.props.question.length > 0 && this.props.name.length > 0) {
+            this.closeModalandOpenConfirmation();
+        }
+        else {
+            return;
+        }
+    }
+
+
+    // code for announcement change popup
     openAnnouncement = () => {
         if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
             return
         }
-        // e.preventDefault();
         this.setState({ announcementOpen: true })
     }
 
@@ -64,19 +82,6 @@ export class Header extends Component {
             return
         }
         this.setState({ announcementOpen: false })
-    }
-
-    sendQuestion = (e) => {
-        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
-            return
-        }
-        e.preventDefault()
-        if (this.props.question.length > 0 && this.props.name.length > 0) {
-            this.closeModalandOpenConfirmation();
-        }
-        else {
-            return;
-        }
     }
 
     deleteAnnouncement = (e) => {

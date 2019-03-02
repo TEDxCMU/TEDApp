@@ -36,6 +36,7 @@ export class EventDetails extends Component {
                     handleChange={this.handleChange}
                     question={this.state.question}
                     name={this.state.name}
+                    close={this.closeConfirmationPopup}
                     errors={this.state.errors}
                     />
                     <div className="event-details">
@@ -99,8 +100,9 @@ export class EventDetails extends Component {
             .then(function() {
                 // console.log("Document successfully written!")
                 that.setState({
-                    asked: true
-                }, () => ReactGA.event({
+                    blah: true
+                },
+                 () => ReactGA.event({
                     category: 'User',
                     action: 'Create Question without Fingerprint'
                   }))
@@ -120,7 +122,7 @@ export class EventDetails extends Component {
             .then(function() {
                 // console.log("Document successfully written!")
                 that.setState({
-                    asked: true
+                    blah: true
                 }, () => ReactGA.event({
                     category: 'User',
                     action: 'Create Question with Fingerprint'
@@ -132,6 +134,12 @@ export class EventDetails extends Component {
             });
         }
 
+    }
+
+    closeConfirmationPopup = () => {
+        this.setState({
+            asked: true
+        })
     }
 
     componentDidMount = () => {
@@ -169,6 +177,9 @@ export class EventDetails extends Component {
     }
 
     checkSpeaker = () => {
+        if (this.props.location.state === undefined) {
+            {window.location.href="/"}
+        }
         const db = fire.firestore();
         var speakerRef = db.collection('speakers').doc(this.props.location.state.speaker)
         speakerRef.get()

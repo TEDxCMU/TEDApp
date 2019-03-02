@@ -496,6 +496,8 @@ export class Schedule extends Component {
       }
     });
     db.collection('mini').get().then(snapshot => {
+        var source = snapshot.metadata.fromCache ? "local cache" : "server";
+        console.log("Data came from " + source);
         snapshot.forEach(doc => {
             let id = doc.id;
             db.collection('mini').doc(id).onSnapshot(docSnapshot => {
