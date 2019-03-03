@@ -7,7 +7,8 @@ import { Navigation } from './components/navigation/navigation.js';
 import { Login } from './components/login/login.js';
 import { MyQuestions } from './components/questions/myQuestions.js';
 import { PopUp } from './components/addToHome/addToHome.js';
-import { BrainFood } from './components/brains/brains.js';
+import { RippleMap } from './components/brains/rippleMap.js';
+import { QANDA } from './components/brains/qAndA.js';
 import { Map } from './components/map/map.js';
 // import { BrowserRouter as Router} from 'react-router-dom';
 import { Router, Route } from 'react-router-dom'
@@ -188,9 +189,11 @@ class App extends Component {
         <Header
           title="Brain Food"
           description="See how the conference is going and increase your impact." />
-        <BrainFood
-          user={this.state.user}
-          isLoaded={this.isLoaded} /> 
+        <RippleMap/> 
+        <QANDA 
+        user={this.state.user}
+        isLoaded={this.isLoaded}
+        />
       </div>
     );
   }

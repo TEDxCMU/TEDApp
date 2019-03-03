@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 //import '../../App.css';
-import './brains.css';
+import './qAndA.css';
 import '../questions/myQuestions.css';
 import fire from '../../fire.js';
 import Dropdown from '../dropdown/dropdown';
 
 
-export class BrainFood extends Component {
+export class QANDA extends Component {
   constructor() {
     super();
     this.state = {
@@ -47,7 +47,7 @@ export class BrainFood extends Component {
       this.state.questions.forEach(question => {  
         if (question.answer.length > 0 ) {
           newList.push (
-            <div className="speaker">
+            <div className="speaker" key={Math.random()}>
               <Dropdown question={question.question}>
                   <form className="questions-form">
                       <label style={{marginTop: '0'}}>Question:</label>
@@ -127,4 +127,4 @@ export class BrainFood extends Component {
 
 }
   
-export default BrainFood;
+export default QANDA;
