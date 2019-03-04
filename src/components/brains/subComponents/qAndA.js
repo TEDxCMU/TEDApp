@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-//import '../../App.css';
+import '../../../App.css';
 import './qAndA.css';
-import '../questions/myQuestions.css';
-import fire from '../../fire.js';
-import Dropdown from '../dropdown/dropdown';
+import '../../questions/myQuestions.css';
+import fire from '../../../fire.js';
+import Dropdown from '../../dropdown/dropdown';
 
 
 export class QANDA extends Component {
@@ -105,7 +105,13 @@ export class QANDA extends Component {
     )
   }
 
+  componentWillUnmount = () => {
+    window.addEventListener('scroll', this.props.handleScroll);
+  }
+
   componentDidMount = () => {
+    console.log("QANDA mounted")
+    window.removeEventListener('scroll', this.props.handleScroll);
     const db = fire.firestore();
     var wholeData = [];
     // let speakerRef = db.collection('speakers').where('email', '==', this.state.speaker);
@@ -120,8 +126,7 @@ export class QANDA extends Component {
         // let questions = Array(wholeData.length)
       // console.log(wholeData)
       this.setState(
-        {questions: wholeData}, () => this.props.isLoaded()
-      )
+        {questions: wholeData})
     })
   }
 

@@ -20,6 +20,7 @@
     "react-dom": "^16.6.3",
     "react-edit-inline": "^1.0.8",
     "react-ga": "^2.5.7",
+    "react-google-autocomplete": "^1.0.18",
     "react-google-location": "^1.2.2",
     "react-leaflet": "^2.2.0",
     "react-motion": "^0.5.2",

@@ -10,7 +10,7 @@ export class Navigation extends Component {
         super(props)
         this.state = {
           menuOpen: false,
-          burgerBarColor: '#e62b1e'
+          burgerColor: '#fff'
         }
     }
 
@@ -29,7 +29,7 @@ export class Navigation extends Component {
     render() {
         var burgerBarStyle = {
             bmBurgerBars: {
-                background: this.props.burgerColor,
+                background: this.state.burgerColor,
                 transition: 'background 1s ease-in-out'
             }
         };
@@ -91,6 +91,34 @@ export class Navigation extends Component {
           .then(() => {
           });
       }
+
+      componentWillUnmount = () => {
+        window.removeEventListener('scroll', this.handleScroll);
+    }
+  
+    handleScroll = (event) => {
+        let scrollTop = window.scrollY;
+        console.log(scrollTop)
+        if (window.location.pathname === "/") {
+          return this.setState({burgerColor: '#fff',
+                        scroll: window.scrollY});
+        }
+        else if (scrollTop > 225) {
+          console.log("hello")
+          this.setState({burgerColor: "red",
+                        scroll: window.scrollY})
+        }
+        else if (scrollTop < 225) {
+          // Setting burger to white
+          this.setState({burgerColor: "#fff",
+                        scroll: window.scrollY})
+        }
+  
+    }
+    
+    componentDidMount = () => {
+      window.addEventListener('scroll', this.handleScroll);
+    }
 
 };
 

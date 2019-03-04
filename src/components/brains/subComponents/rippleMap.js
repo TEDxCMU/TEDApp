@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, forwardRef } from "react";
 import {
   ComposableMap,
   ZoomableGroup,
@@ -8,10 +8,41 @@ import {
   Marker,
 } from "react-simple-maps";
 import { Motion, spring } from "react-motion";
-import map from './static/world-110m.json';
-import '../../App.css';
+import map from '../static/world-110m.json';
+import '../../../App.css';
 import './rippleMap.css';
-import fire from '../../fire.js';
+import fire from '../../../fire.js';
+import posed from 'react-pose';
+
+const MarkerPosed = posed(forwardRef((props, innerRef) => <Marker {...props} ref={innerRef} />))({
+// const MarkerPosed = createAnimatedComponent(Marker)({
+  enter: { y: 0, x: 0, opacity: 1, 
+    transition: {
+      x: { type: 'spring', stiffness: 300, damping: 15 },
+      y: { type: 'spring', stiffness: 300, damping: 15 },
+      default: { duration: 300 }
+    } 
+  },
+  exit: { y: 20, opacity: 0, transition: { duration: 150 } }
+});
+
+const MarkersPosed = posed(forwardRef((props, innerRef) => <Markers {...props} ref={innerRef} />))({
+// const MarkersPosed = createAnimatedComponent(Markers)({
+  enter: {
+    x: 0,
+    delayChildren: 1100,
+    staggerChildren: 50,
+    transition: {
+      x: { type: 'spring', stiffness: 100, damping: 15 },
+      y: { type: 'spring', stiffness: 100, damping: 15 },
+    }
+  },
+  exit: { x: '-100%', delay: 0, transition: { duration: 0 }}
+});
+
+
+
+
 
 const wrapperStyles = {
   width: "100%",
@@ -25,16 +56,7 @@ export class RippleMap extends Component {
     this.state = {
       center: [0,20],
       zoom: 1,
-      users: [
-        { name: "Zurich", coordinates: [8.5417,47.3769] },
-        { name: "Singapore", coordinates: [103.8198,1.3521] },
-        { name: "San Francisco", coordinates: [-122.4194,37.7749] },
-        { name: "San Francisco 2", coordinates: [43.0389, 87.9065] },
-        { name: "Sydney", coordinates: [151.2093,-33.8688] },
-        { name: "Lagos", coordinates: [3.3792,6.5244] },
-        { name: "Buenos Aires", coordinates: [-58.3816,-34.6037] },
-        { name: "Shanghai", coordinates: [121.4737,31.2304] },
-      ]
+      users: []
     }
     this.handleZoomIn = this.handleZoomIn.bind(this)
     this.handleZoomOut = this.handleZoomOut.bind(this)
@@ -79,82 +101,84 @@ export class RippleMap extends Component {
         <button onClick={this.handleReset}>
           { "Reset" }
         </button>
-        <Motion
-          defaultStyle={{
-            zoom: 1,
-            x: 0,
-            y: 20,
-          }}
-          style={{
-            zoom: spring(this.state.zoom, {stiffness: 210, damping: 20}),
-            x: spring(this.state.center[0], {stiffness: 210, damping: 20}),
-            y: spring(this.state.center[1], {stiffness: 210, damping: 20}),
-          }}
-          >
-          {({zoom,x,y}) => (
-            <ComposableMap
-            projectionConfig={{
-              scale: 205
+        <div onTouchStart={e => this.touchWarning(e)}>
+          <Motion
+            defaultStyle={{
+              zoom: 1,
+              x: 0,
+              y: 20,
             }}
-              width={980}
-              height={551}
-              style={{
-                width: "100%",
-                height: "auto",
+            style={{
+              zoom: spring(this.state.zoom, {stiffness: 210, damping: 20}),
+              x: spring(this.state.center[0], {stiffness: 210, damping: 20}),
+              y: spring(this.state.center[1], {stiffness: 210, damping: 20}),
+            }}
+            >
+            {({zoom,x,y}) => (
+              <ComposableMap
+              projectionConfig={{
+                scale: 205
               }}
-              >
-              <ZoomableGroup center={[x,y]} zoom={zoom}>
-                <Geographies geography={map}>
-                  {(geographies, projection) =>
-                    geographies.map((geography, i) => geography.id !== "010" && (
-                      <Geography
+                width={980}
+                height={551}
+                style={{
+                  width: "100%",
+                  height: "auto",
+                }}
+                >
+                <ZoomableGroup center={[x,y]} zoom={zoom}>
+                  <Geographies geography={map}>
+                    {(geographies, projection) =>
+                      geographies.map((geography, i) => geography.id !== "010" && (
+                        <Geography
+                          key={i}
+                          geography={geography}
+                          projection={projection}
+                          style={{
+                            default: {
+                              fill: "#ECEFF1",
+                              stroke: "#607D8B",
+                              strokeWidth: 0.75,
+                              outline: "none",
+                            },
+                            hover: {
+                              fill: "#CFD8DC",
+                              stroke: "#607D8B",
+                              strokeWidth: 0.75,
+                              outline: "none",
+                            },
+                            pressed: {
+                              fill: "#FF5722",
+                              stroke: "#607D8B",
+                              strokeWidth: 0.75,
+                              outline: "none",
+                            },
+                          }}
+                        />
+                    ))}
+                  </Geographies>
+                  <Markers>
+                    {this.state.users.map((city, i) => (
+                      <Marker
                         key={i}
-                        geography={geography}
-                        projection={projection}
-                        style={{
-                          default: {
-                            fill: "#ECEFF1",
-                            stroke: "#607D8B",
-                            strokeWidth: 0.75,
-                            outline: "none",
-                          },
-                          hover: {
-                            fill: "#CFD8DC",
-                            stroke: "#607D8B",
-                            strokeWidth: 0.75,
-                            outline: "none",
-                          },
-                          pressed: {
-                            fill: "#FF5722",
-                            stroke: "#607D8B",
-                            strokeWidth: 0.75,
-                            outline: "none",
-                          },
-                        }}
-                      />
-                  ))}
-                </Geographies>
-                <Markers>
-                  {this.state.users.map((city, i) => (
-                    <Marker
-                      key={i}
-                      marker={city}
-                      onClick={this.handleCityClick}
-                      >
-                      <circle
-                        cx={0}
-                        cy={0}
-                        r={6}
-                        fill="#FF5722"
-                        stroke="#DF3702"
-                      />
-                    </Marker>
-                  ))}
-                </Markers>
-              </ZoomableGroup>
-            </ComposableMap>
-          )}
-        </Motion>
+                        marker={city}
+                        onClick={this.handleCityClick}
+                        >
+                        <circle
+                          cx={0}
+                          cy={0}
+                          r={6}
+                          fill="#FF5722"
+                          stroke="#DF3702"
+                        />
+                      </Marker>
+                    ))}
+                  </Markers>
+                </ZoomableGroup>
+              </ComposableMap>
+            )}
+          </Motion>
+        </div>
       </div>
     )
   }
@@ -175,6 +199,20 @@ export class RippleMap extends Component {
       })
       this.setState({users: wholeData}, () => console.log(this.state.users[0]))
     })
+  }
+
+  touchWarning = (e) => {
+    if (e.touches.length === 1) {
+      console.log("nooooooooo")
+      this.setState({
+        touchError: true
+      });
+      setTimeout(() => {
+        this.setState({
+          touchError: false
+        });
+      }, 2000);
+    }
   }
 
 }

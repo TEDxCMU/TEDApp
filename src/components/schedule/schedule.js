@@ -72,7 +72,8 @@ export class Schedule extends Component {
       watchingForChanges: false,
       announcement: "The conference is currently not in progress. Please check back at another time.",
       isOpen: false,
-      bulletVisible: true
+      bulletVisible: true,
+      scroll: 0
     }
   }
 
@@ -265,7 +266,7 @@ export class Schedule extends Component {
                 </div>
             </div>
             </Popup>
-            { window.scrollY < 50 ?
+            { this.state.scroll < 50 ?
             <div>
             {/* {console.log("regular schedule")} */}
             <Header
@@ -477,7 +478,18 @@ export class Schedule extends Component {
     });    
   }
 
+  componentWillUnmount = () => {
+    window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  handleScroll = (event) => {
+      this.setState({
+        scroll: window.scrollY
+      })
+  }
+
   componentDidMount = () => {
+    window.addEventListener('scroll', this.handleScroll);
     const db = fire.firestore();
     var wholeData = []
     let that = this;
