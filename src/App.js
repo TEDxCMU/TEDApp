@@ -35,7 +35,6 @@ class App extends Component {
       allData: [],
       iosPopUp: false,
       chromePopUp: false,
-      burgerColor: "#fff",
       loaded: false
     }
     //pass THIS to global navigation hamburger menu so people can login and logout everywhere

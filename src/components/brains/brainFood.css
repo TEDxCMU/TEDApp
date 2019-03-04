@@ -45,3 +45,9 @@
     display: flex;
     justify-content: center;
 }
+
+.submitLocation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
