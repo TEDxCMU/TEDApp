@@ -102,7 +102,7 @@ class App extends Component {
     return (
       <div> 
           {/* now the main app div will be 100% of the total screen real estate, which means the popup appears at the bottom */}
-          <div style= {{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+          <div style= {{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <Schedule
               user={this.state.user}
               isLoaded={this.isLoaded}
