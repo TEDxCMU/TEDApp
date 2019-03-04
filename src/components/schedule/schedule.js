@@ -38,26 +38,26 @@ const Sidebar = posed.ul({
 
 const Bullet = posed.span({
   hidden: {
-    opacity: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 100,
-      damping: 20,
-      duration: 1200,
-      opacity: { ease: 'easeOut', duration: 300 }
-    },
-    scale: 1.9
-   },
-  visible: {
     opacity: 1,
     transition: {
       type: 'spring',
-      stiffness: 100,
+      stiffness: 200,
       damping: 20,
-      duration: 700,
-      opacity: { ease: 'easeOut', duration: 300 }
+      duration: 1000,
+      opacity: { ease: 'easeOut', duration: 500 }
     },
     scale: 1
+   },
+  visible: {
+    opacity: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 200,
+      damping: 20,
+      duration: 1000,
+      opacity: { ease: 'easeOut', duration: 500 }
+    },
+    scale: 2.2
   }
 });
 
@@ -137,7 +137,7 @@ export class Schedule extends Component {
         }
 
         // determines if a bullet should blink!
-        let blink = (className === "now" && this.state.bulletVisible) ? 'hidden' : 'visible';
+        let blink = (className === "now" && this.state.bulletVisible) ? 'visible' : 'hidden';
 
         if (event.type !== "static") {
           newList.push(
@@ -145,6 +145,7 @@ export class Schedule extends Component {
               {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
               <div>
                 <span className="event"></span>
+                <span className={className}></span>
                 <Bullet className={className}  pose={blink}></Bullet>
                 <span className="bullet-bg"></span>
                   <div className="info-talk">
@@ -190,6 +191,7 @@ export class Schedule extends Component {
                   }
                 }}>
                   <span className="event"></span>
+                  <span className={className}></span>
                   <Bullet className={className}  pose={blink}></Bullet>
                   <span className="bullet-bg"></span>
                     <div className="info-talk">
@@ -209,6 +211,7 @@ export class Schedule extends Component {
         <Item key={event.id}>
             {/* Change bullet color here, time, and the info in a timeline event */}
             <span className="event-static"></span>
+            <span className={className}></span>
             <Bullet className={className}  pose={blink}></Bullet>
             <span className="bullet-bg"></span>
             <div className="info-static">
