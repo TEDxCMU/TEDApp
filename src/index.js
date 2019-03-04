@@ -1,9 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
-import createHistory from 'history/createBrowserHistory'
-
-import 'leaflet/dist/leaflet.css'
+import createHistory from 'history/createBrowserHistory';
 
 import './index.css';
 import App from './App';

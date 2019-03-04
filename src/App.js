@@ -7,7 +7,7 @@ import { Navigation } from './components/navigation/navigation.js';
 import { Login } from './components/login/login.js';
 import { MyQuestions } from './components/questions/myQuestions.js';
 import { PopUp } from './components/addToHome/addToHome.js';
-import { BrainFood } from './components/brains/brains.js';
+import { BrainFood } from './components/brains/brainFood.js';
 import { Map } from './components/map/map.js';
 // import { BrowserRouter as Router} from 'react-router-dom';
 import { Router, Route } from 'react-router-dom'
@@ -35,7 +35,6 @@ class App extends Component {
       allData: [],
       iosPopUp: false,
       chromePopUp: false,
-      burgerColor: "#fff",
       loaded: false
     }
     //pass THIS to global navigation hamburger menu so people can login and logout everywhere
@@ -44,12 +43,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log(window.location.pathname)
-    // console.log("the current user is: ", auth.currentUser)
-    // console.log("this is an iOS device? ", this.state.iosPopUp)
-    // console.log("the popup will show up? ", JSON.parse(localStorage.getItem("popup")))
-    // console.log("the fingerprint is: ", localStorage.getItem("fingerprint"))
-    // console.log("the state is loaded: ", this.state.loaded)
     return (
       <div>
         <Router history={this.props.history}>
@@ -95,7 +88,7 @@ class App extends Component {
     return(
       <div>
         <Navigation
-          user= {uzer} 
+          user={uzer} 
           login={this.login} 
           logout={this.logout} 
           isiPhone={this.state.iosPopUp} 
@@ -107,24 +100,14 @@ class App extends Component {
 
   schedulePage = (props) => {
     return (
-      <div>
-        {this.state.loaded ? 
-          // now the main app div will be 100% of the total screen real estate, which means the popup appears at the bottom
-          <div style= {{ width: '100%', height: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <Schedule
-              user={this.state.user}
-              isLoaded={this.isLoaded}
-              scroll={window.scrollY} /> 
-          </div>
-          :
-          // now the main app div will be 100% of the VIEW PORT real estate, which means the loader will be centered
+      <div> 
+          {/* now the main app div will be 100% of the total screen real estate, which means the popup appears at the bottom */}
           <div style= {{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
             <Schedule
               user={this.state.user}
               isLoaded={this.isLoaded}
               scroll={window.scrollY} /> 
           </div>
-      }
       </div>
 
     );
@@ -189,8 +172,10 @@ class App extends Component {
           title="Brain Food"
           description="See how the conference is going and increase your impact." />
         <BrainFood
-          user={this.state.user}
-          isLoaded={this.isLoaded} /> 
+        handleScroll={this.handleScroll}
+        user={this.state.user}
+        isLoaded={this.isLoaded}
+        />
       </div>
     );
   }
@@ -224,31 +209,7 @@ class App extends Component {
 
   isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
-  componentWillUnmount = () => {
-      window.removeEventListener('scroll', this.handleScroll);
-  }
-
-  handleScroll = (event) => {
-      let scrollTop = window.scrollY
-      if (window.location.pathname === "/") {
-        return this.setState({burgerColor: '#fff',
-                      scroll: window.scrollY});
-      }
-      else if (scrollTop > 300) {
-        // Setting burger to red
-        this.setState({burgerColor: "red",
-                      scroll: window.scrollY})
-      }
-      else if (scrollTop < 300) {
-        // Setting burger to white
-        this.setState({burgerColor: "white",
-                      scroll: window.scrollY})
-      }
-
-  }
-  
   componentDidMount = () => {
-    window.addEventListener('scroll', this.handleScroll);
     // localStorage.removeItem("popup")
     this.authListener();
     let type = "";
