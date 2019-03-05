@@ -33,7 +33,7 @@
   --tedwhite: #fff;
   --tedblue: #6EEBFC;
   --tedred: #e62b1e;
-  --tedredhover: #CB2D3E;
+  --tedredhover: #cb2d3e;
   --tedredgradient: linear-gradient(180deg, #CB2D3E 0%, #EF473A 100%);
   --tedredgradient45: linear-gradient(315deg, #CB2D3E 0%, #EF473A 100%);
   --opaque: rgba(0, 0, 0, 0.3);
