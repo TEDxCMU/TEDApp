@@ -146,14 +146,17 @@ export class RippleMap extends Component {
                         marker={city}
                         onClick={this.handleCityClick}
                         >
-                        <CircleAnim pose={this.state.isOpen ? 'enter' : 'exit'}
+                          <circle cx = {0} cy = {0} r = "7px"></circle>
+                          <circle class = "pulse" cx = {0} cy = {0} r = "10px"></circle>
+                        
+                        {/* <circle 
                           className="circle"
                           cx={0}
                           cy={0}
                           r={9}
-                          fill="#FF5722"
-                          stroke="#DF3702"
-                        />
+                          // fill="#FF5722"
+                          // stroke="#DF3702"
+                        /> */}
                       </Marker>
                     ))}
                   </Markers>
