@@ -19,7 +19,7 @@ export class BrainFood extends Component {
         email: '',
         city: '',
         fingerprint: localStorage.getItem('fingerprint'),
-        inDatabase: false,
+        inDatabase: null,
         key: "AIzaSyDcMQLOO-WbqT-IopP9CmBzkmCBzoG67fQ"
 
     }
@@ -48,57 +48,56 @@ export class BrainFood extends Component {
             </div>
             {this.state.page === 0 ? 
             <div className="mapPage">
-                { this.state.inDatabase === true ?
-                    <div className="question-btn-container">
-                        <h6><button className="question-btn question-pos-asked" style={{position: 'static', margin: '0'}}>Location Logged!</button></h6>
-                    </div>
-                :
-                    <div className="question-btn-container">
-                        <h6><button onClick={() => this.openModal()} className="question-btn question-pos" style={{position: 'static', margin: '0'}}>Ripple</button></h6>
-                        <Popup
-                        open={this.state.open}
-                        closeOnDocumentClick
-                        onClose={this.closeModal}
-                        contentStyle={style}
-                        >
-                        <div className="modal">
-                            <div>
-                                <h2>And where are you from?</h2>
-                                <Autocomplete
-                                    style={{width: '90%', paddingLeft: '12px', padding: '1em 0', boxSizing: 'border-box !important', height: '20px', color: 'var(--tedgrey)', fontFamily: 'Open Sans, sans-serif', fontSize: '1em', lineHeight: '1em', width: '100%', background: "transparent", border: '1px solid #e9ebec'}}
-                                    onPlaceSelected={(place) => {
-                                    this.setState({city: place});
-                                    }}
-                                />
-                                <h4>Name:</h4>
-                                <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={e => {this.handleChange(e)}}/>
-                                <h4>Email:</h4>
-                                <input type="text" style={{height: '20px'}} className="popup-input-small" minLength="4" siz="10" name="email" value={this.state.email} placeholder={ nameBlank ? "Please add your email." : "Jane@Doe.com..."} onChange={e => {this.handleChange(e)}}/>
+                <div className="question-btn-container">
+                    { this.state.inDatabase !== null ?
+                        <h6><button onClick={() => this.openModal()} className="question-btn question-pos" style={{position: 'static', margin: '0'}}> {this.state.inDatabase === true ? "Change Your City": "Ripple"}</button></h6>
+                    :
+                    <h6><button className="question-btn question-pos" style={{position: 'static', margin: '0', width: '80%'}}></button></h6>
 
-                                <div className="popup-btns">
-                                    <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
-                                    <button className="popup-btn-success button-primary" onClick={e => this.sendLocation(e)}>Submit</button>
-                                </div>
+                    }
+                    <Popup
+                    open={this.state.open}
+                    closeOnDocumentClick
+                    onClose={this.closeModal}
+                    contentStyle={style}
+                    >
+                    <div className="modal">
+                        <div>
+                            <h2>And where are you from?</h2>
+                            <Autocomplete
+                                style={{width: '90%', paddingLeft: '12px', padding: '1em 0', boxSizing: 'border-box !important', height: '20px', color: 'var(--tedgrey)', fontFamily: 'Open Sans, sans-serif', fontSize: '1em', lineHeight: '1em', width: '100%', background: "transparent", border: '1px solid #e9ebec'}}
+                                onPlaceSelected={(place) => {
+                                this.setState({city: place});
+                                }}
+                            />
+                            <h4>Name:</h4>
+                            <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={e => {this.handleChange(e)}}/>
+                            <h4>Email:</h4>
+                            <input type="text" style={{height: '20px'}} className="popup-input-small" minLength="4" siz="10" name="email" value={this.state.email} placeholder={ nameBlank ? "Please add your email." : "Jane@Doe.com..."} onChange={e => {this.handleChange(e)}}/>
+
+                            <div className="popup-btns">
+                                <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
+                                <button className="popup-btn-success button-primary" onClick={e => this.sendLocation(e)}>Submit</button>
                             </div>
                         </div>
-                        </Popup>
-                        <Popup
-                        open={this.state.confirmationOpen}
-                        closeOnDocumentClick
-                        onClose={this.closeConfirmation}
-                        contentStyle={style}
-                        >
-                        <div className="modal">
-                            <div className="popup-response">
-                                <img src={bottle} className="bottle" alt="Bottle" />
-                                <p>Thank you for asking a question! Please check back on the Brain Food page later.</p>
-                                <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
-                            </div>
-                        </div>
-                        </Popup>
                     </div>
-                }
-                <h1>A Global Ripple Effect</h1>
+                    </Popup>
+                    <Popup
+                    open={this.state.confirmationOpen}
+                    closeOnDocumentClick
+                    onClose={this.closeConfirmation}
+                    contentStyle={style}
+                    >
+                    <div className="modal">
+                        <div className="popup-response">
+                            <img src={bottle} className="bottle" alt="Bottle" />
+                            <p>Thank you for telling us more about yourself! Check the Brain Food page later to see the Ripple Effect!</p>
+                            <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
+                        </div>
+                    </div>
+                    </Popup>
+                </div>
+                <h1 style={{width: '90%'}}>A Global Ripple Effect</h1>
                 <RippleMap/>
             </div>
             :
@@ -197,12 +196,12 @@ export class BrainFood extends Component {
             .then(function() {
                 // console.log("Document successfully written!")
                 that.setState({
-                    blah: true
+                    inDatabase: true
                 },
                  () => ReactGA.event({
                     category: 'User',
                     action: 'Create Location without Fingerprint'
-                  }))
+                  }));
                 // window.location.reload();
             })
             .catch(function(error) {
@@ -220,11 +219,11 @@ export class BrainFood extends Component {
             .then(function() {
                 // console.log("Document successfully written!")
                 that.setState({
-                    blah: true
+                    inDatabase: true
                 }, () => ReactGA.event({
                     category: 'User',
                     action: 'Create Location with Fingerprint'
-                  }))
+                  }));
                 // window.location.reload();
             })
             .catch(function(error) {
