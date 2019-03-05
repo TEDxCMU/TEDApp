@@ -74,7 +74,7 @@ export class RippleMap extends Component {
     } 
     return (
       <div style={wrapperStyles}>
-        {/* <button onClick={this.handleZoomIn}>
+        <button onClick={this.handleZoomIn}>
           { "Zoom in" }
         </button>
         <button onClick={this.handleZoomOut}>
@@ -82,7 +82,7 @@ export class RippleMap extends Component {
         </button>
         <button onClick={this.handleReset}>
           { "Reset" }
-        </button> */}
+        </button>
         <div onTouchStart={e => this.touchWarning(e)}>
           <Motion
             defaultStyle={{
@@ -124,14 +124,14 @@ export class RippleMap extends Component {
                               outline: "none",
                             },
                             hover: {
-                              fill: "#CFD8DC",
-                              stroke: "#607D8B",
+                              fill: "#e62b1e",
+                              stroke: "#e62b1e",
                               strokeWidth: 0.75,
                               outline: "none",
                             },
                             pressed: {
-                              fill: "#FF5722",
-                              stroke: "#607D8B",
+                              fill: "##e62b1e",
+                              stroke: "#e62b1e",
                               strokeWidth: 0.75,
                               outline: "none",
                             },
@@ -148,15 +148,6 @@ export class RippleMap extends Component {
                         >
                           <circle cx = {0} cy = {0} r = "7px"></circle>
                           <circle class = "pulse" cx = {0} cy = {0} r = "10px"></circle>
-                        
-                        {/* <circle 
-                          className="circle"
-                          cx={0}
-                          cy={0}
-                          r={9}
-                          // fill="#FF5722"
-                          // stroke="#DF3702"
-                        /> */}
                       </Marker>
                     ))}
                   </Markers>

@@ -248,6 +248,11 @@ export class BrainFood extends Component {
               })
             });
           }
+          else {
+            this.setState({
+                inDatabase: false    
+              })
+          }
       });
     }
 

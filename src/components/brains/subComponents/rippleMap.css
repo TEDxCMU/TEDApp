@@ -31,11 +31,6 @@ body {
       }
 }
 
-
-body {
-	background: #454a59;
-}
-
 circle {
   stroke: var(--tedred); 
   fill: var(--tedred);
