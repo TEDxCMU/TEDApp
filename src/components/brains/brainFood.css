@@ -1,12 +1,12 @@
 #left {
-    width: 40%;
+    width: 45%;
     text-align: center;
     box-sizing: border-box;
     border-radius: 25px 0px 0px 25px;
 }
 
 #right {
-    width: 40%;
+    width: 45%;
     text-align: center;
     box-sizing: border-box;
     border-radius: 0px 25px 25px 0px;
@@ -39,6 +39,7 @@
 .unselected {
     border: 2px solid var(--tedred);
     background: white;
+    color: var(--tedred);
 }
 
 .pageSelect {

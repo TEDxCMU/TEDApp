@@ -1,4 +1,4 @@
-import React, { Component, forwardRef } from "react";
+import React, { Component } from "react";
 import {
   ComposableMap,
   ZoomableGroup,
@@ -20,13 +20,25 @@ const wrapperStyles = {
   margin: "0 auto",
 }
 
+const CircleAnim = posed.circle({
+  enter: { y: 0, x: 0, opacity: 1, 
+    transition: {
+      x: { type: 'spring', stiffness: 300, damping: 15 },
+      y: { type: 'spring', stiffness: 300, damping: 15 },
+      default: { duration: 300 }
+    } 
+  },
+  exit: { y: 20, opacity: 0, transition: { duration: 150 } }
+});
+
 export class RippleMap extends Component {
   constructor() {
     super()
     this.state = {
       center: [0,20],
       zoom: 1,
-      users: []
+      users: [],
+      isOpen: false
     }
     this.handleZoomIn = this.handleZoomIn.bind(this)
     this.handleZoomOut = this.handleZoomOut.bind(this)
@@ -134,13 +146,17 @@ export class RippleMap extends Component {
                         marker={city}
                         onClick={this.handleCityClick}
                         >
-                        <circle
+                          <circle cx = {0} cy = {0} r = "7px"></circle>
+                          <circle class = "pulse" cx = {0} cy = {0} r = "10px"></circle>
+                        
+                        {/* <circle 
+                          className="circle"
                           cx={0}
                           cy={0}
                           r={9}
-                          fill="#FF5722"
-                          stroke="#DF3702"
-                        />
+                          // fill="#FF5722"
+                          // stroke="#DF3702"
+                        /> */}
                       </Marker>
                     ))}
                   </Markers>
@@ -157,7 +173,7 @@ export class RippleMap extends Component {
     const db = fire.firestore();
     var wholeData = []
     db.collection('maps').
-    get().then(snapshot => {
+    onSnapshot( (snapshot) => {
       snapshot.forEach(doc => {
         console.log(doc.data())
         let data = doc.data();
@@ -165,9 +181,12 @@ export class RippleMap extends Component {
           name: data.name,
           coordinates: [data.lng, data.lat]
         };
-        wholeData.push(newUser)
-      })
-      this.setState({users: wholeData}, () => console.log(this.state.users[0]))
+        wholeData.push(newUser);
+      });
+      this.setState({
+          users: wholeData,
+          isOpen: true
+      });
     })
   }
 
