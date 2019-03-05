@@ -47,7 +47,6 @@ export class Schedule extends Component {
       watchingForChanges: false,
       announcement: "The conference is currently not in progress. Please check back at another time.",
       isOpen: false,
-      bulletVisible: true,
       scroll: 0
     }
   }
@@ -111,9 +110,6 @@ export class Schedule extends Component {
         if (moment().isAfter(moment(event.end, "hh:mm A"))) {
           className = "past";
         }
-
-        // determines if a bullet should blink!
-        let blink = (className === "now" && this.state.bulletVisible) ? 'visible' : 'hidden';
 
         if (event.type !== "static") {
           newList.push(
@@ -502,10 +498,6 @@ export class Schedule extends Component {
 
         });
     })
-
-    setInterval(() => {
-      this.setState({ bulletVisible: !this.state.bulletVisible });
-    }, 1800);
   }
 
   addEventsToState = (snapshot, wholeData) => {
