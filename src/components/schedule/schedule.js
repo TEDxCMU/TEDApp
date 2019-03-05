@@ -36,31 +36,6 @@ const Sidebar = posed.ul({
   exit: { x: '-100%', delay: 0, transition: { duration: 0 }}
 });
 
-const Bullet = posed.span({
-  hidden: {
-    opacity: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 200,
-      damping: 20,
-      duration: 1000,
-      opacity: { ease: 'easeOut', duration: 500 }
-    },
-    scale: 1
-   },
-  visible: {
-    opacity: 0,
-    transition: {
-      type: 'spring',
-      stiffness: 200,
-      damping: 20,
-      duration: 1000,
-      opacity: { ease: 'easeOut', duration: 500 }
-    },
-    scale: 2.2
-  }
-});
-
 export class Schedule extends Component {
   constructor() {
     super();
@@ -147,7 +122,6 @@ export class Schedule extends Component {
               <div>
                 <span className="event"></span>
                 <span className={className}></span>
-                <Bullet className={className}  pose={blink}></Bullet>
                 <span className="bullet-bg"></span>
                   <div className="info-talk">
                     <p className="time"><strong>{event.start}</strong> — {event.end}</p>
@@ -193,7 +167,6 @@ export class Schedule extends Component {
                 }}>
                   <span className="event"></span>
                   <span className={className}></span>
-                  <Bullet className={className}  pose={blink}></Bullet>
                   <span className="bullet-bg"></span>
                     <div className="info-talk">
                       <p className="time"><strong>{event.start}</strong> — {event.end}</p>
@@ -213,7 +186,6 @@ export class Schedule extends Component {
             {/* Change bullet color here, time, and the info in a timeline event */}
             <span className="event-static"></span>
             <span className={className}></span>
-            <Bullet className={className}  pose={blink}></Bullet>
             <span className="bullet-bg"></span>
             <div className="info-static">
               <p className="time"><strong>{event.start}</strong> — {event.end}</p>

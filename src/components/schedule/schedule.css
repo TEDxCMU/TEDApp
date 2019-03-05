@@ -105,6 +105,21 @@
   top: calc(50% - 4px);
   background-color: var(--tedred);
   border-radius: 50%;
+  animation: now-pulse 2.5s infinite;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.now::before {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: 0;
+  top: 0;
+  background-color: var(--tedred);
+  border-radius: 50%;
+  animation: now-pulse-2 2.5s infinite;
   box-sizing: border-box;
   z-index: 1;
 }
@@ -195,6 +210,26 @@
 /* END LOGIN MODE STYLES */
 
 
+/* ANIMATIONS */
+@keyframes now-pulse
+{
+  0% {
+    box-shadow: 0 0 0 0px rgba(203, 45, 62, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(203, 45, 62, 0);
+  }
+}
+
+@keyframes now-pulse-2
+{
+  25% {
+    box-shadow: 0 0 0 0px rgba(203, 45, 62, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 8px rgba(203, 45, 62, 0);
+  }
+}
 
 /* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
 
