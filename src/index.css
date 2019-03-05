@@ -322,7 +322,7 @@ textarea,
 select {
   display: block;
   height: 1em;
-  padding: 1em 0;
+  padding: 1.5em 0.5em;
   border: none;
   outline: none;
   color: var(--tedgrey);
@@ -332,6 +332,7 @@ select {
   background: transparent;
   border: 1px solid #e9ebec;
   transition: all 0.3s ease-in-out;
+  box-sizing: border-box;
 }
 
 textarea {
