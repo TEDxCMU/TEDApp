@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import './brainFood.css';
 import RippleMap from './subComponents/rippleMap.js';
-import QANDA from './subComponents/qAndA.js';
+import QAndAMain from './subComponents/qAndAMain.js';
 import fire from '../../fire.js';
 import Autocomplete from 'react-google-autocomplete';
 import Popup from "reactjs-popup";
@@ -101,7 +101,7 @@ export class BrainFood extends Component {
                 <RippleMap/>
             </div>
             :
-            <QANDA
+            <QAndAMain
             handleScroll={this.props.handleScroll}
             />
             }
