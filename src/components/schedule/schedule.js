@@ -407,13 +407,13 @@ export class Schedule extends Component {
     // let i = index;
     // console.log("index is: ", i)
     const db = fire.firestore();
-    var eventRef = db.collection("mini").where("start", "==", start);
+    var eventRef = db.collection('detailed itinerary').where("start", "==", start);
     eventRef.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let count = localStorage.getItem("updateCount");
             let convertCount = parseInt(count)
             localStorage.setItem("updateCount", convertCount+1)
-            var timeRef = db.collection('mini').doc(doc.id);
+            var timeRef = db.collection('detailed itinerary').doc(doc.id);
             timeRef.update({
               start: newStart,
               end: newEnd
@@ -434,7 +434,7 @@ export class Schedule extends Component {
     this.toggle();
     let that = this;
     const db = fire.firestore();
-    db.collection('mini')
+    db.collection('detailed itinerary')
     .onSnapshot(querySnapshot => {
       querySnapshot.docChanges().forEach(change => {
         if (change.type === 'added') {
@@ -478,12 +478,12 @@ export class Schedule extends Component {
         })
       }
     });
-    db.collection('mini').get().then(snapshot => {
+    db.collection('detailed itinerary').get().then(snapshot => {
         var source = snapshot.metadata.fromCache ? "local cache" : "server";
         console.log("Data came from " + source);
         snapshot.forEach(doc => {
             let id = doc.id;
-            db.collection('mini').doc(id).onSnapshot(docSnapshot => {
+            db.collection('detailed itinerary').doc(id).onSnapshot(docSnapshot => {
               let id = docSnapshot.id;
               let dataCopy = docSnapshot.data()
               let trimmed = id.replace(/ +/g, "");
