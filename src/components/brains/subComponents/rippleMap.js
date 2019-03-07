@@ -16,20 +16,9 @@ import posed from 'react-pose';
 
 const wrapperStyles = {
   width: "100%",
-  maxWidth: 980,
+  // maxWidth: 980,
   margin: "0 auto",
 }
-
-const CircleAnim = posed.circle({
-  enter: { y: 0, x: 0, opacity: 1, 
-    transition: {
-      x: { type: 'spring', stiffness: 300, damping: 15 },
-      y: { type: 'spring', stiffness: 300, damping: 15 },
-      default: { duration: 300 }
-    } 
-  },
-  exit: { y: 20, opacity: 0, transition: { duration: 150 } }
-});
 
 export class RippleMap extends Component {
   constructor() {
@@ -67,6 +56,9 @@ export class RippleMap extends Component {
     })
   }
   render() {
+    console.log(window.innerHeight)
+    console.log(window.innerWidth)
+    console.log(window.innerWidth/window.innerHeight)
     if (this.state.users === undefined) {
       return (
         <div></div>
@@ -74,15 +66,6 @@ export class RippleMap extends Component {
     } 
     return (
       <div style={wrapperStyles}>
-        <button onClick={this.handleZoomIn}>
-          { "Zoom in" }
-        </button>
-        <button onClick={this.handleZoomOut}>
-          { "Zoom out" }
-        </button>
-        <button onClick={this.handleReset}>
-          { "Reset" }
-        </button>
         <div onTouchStart={e => this.touchWarning(e)}>
           <Motion
             defaultStyle={{
@@ -99,7 +82,7 @@ export class RippleMap extends Component {
             {({zoom,x,y}) => (
               <ComposableMap
               projectionConfig={{
-                scale: 205
+                scale: 250
               }}
                 width={980}
                 height={551}
@@ -124,13 +107,13 @@ export class RippleMap extends Component {
                               outline: "none",
                             },
                             hover: {
-                              fill: "#e62b1e",
+                              fill: "#f07f78",
                               stroke: "#e62b1e",
                               strokeWidth: 0.75,
                               outline: "none",
                             },
                             pressed: {
-                              fill: "##e62b1e",
+                              fill: "#f07f78",
                               stroke: "#e62b1e",
                               strokeWidth: 0.75,
                               outline: "none",
@@ -146,8 +129,8 @@ export class RippleMap extends Component {
                         marker={city}
                         onClick={this.handleCityClick}
                         >
-                          <circle cx = {0} cy = {0} r = "7px"></circle>
-                          <circle class = "pulse" cx = {0} cy = {0} r = "10px"></circle>
+                          <circle cx = {0} cy = {0} r = {8}></circle>
+                          <circle class = "pulse" cx = {0} cy = {0} r = {11}></circle>
                       </Marker>
                     ))}
                   </Markers>
@@ -156,6 +139,15 @@ export class RippleMap extends Component {
             )}
           </Motion>
         </div>
+        <button onClick={this.handleZoomIn}>
+          { "Zoom in" }
+        </button>
+        <button onClick={this.handleZoomOut}>
+          { "Zoom out" }
+        </button>
+        <button onClick={this.handleReset}>
+          { "Reset" }
+        </button>
       </div>
     )
   }
