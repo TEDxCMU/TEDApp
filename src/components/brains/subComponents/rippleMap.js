@@ -12,7 +12,6 @@ import map from '../static/world-110m.json';
 import '../../../App.css';
 import './rippleMap.css';
 import fire from '../../../fire.js';
-import posed from 'react-pose';
 
 const wrapperStyles = {
   width: "100%",
@@ -157,8 +156,7 @@ export class RippleMap extends Component {
   componentDidMount() {
     const db = fire.firestore();
     var wholeData = []
-    db.collection('maps').
-    onSnapshot( (snapshot) => {
+    db.collection('maps').onSnapshot( (snapshot) => {
       snapshot.forEach(doc => {
         console.log(doc.data())
         let data = doc.data();

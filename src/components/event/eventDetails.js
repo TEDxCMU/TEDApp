@@ -198,9 +198,7 @@ export class EventDetails extends Component {
     }
 
     checkSpeaker = () => {
-        if (this.props.location.state === undefined) {
-            {window.location.href="/"}
-        }
+        if (this.props.location.state === undefined) { window.location.href="/" }
         const db = fire.firestore();
         var speakerRef = db.collection('speakers').doc(this.props.location.state.speaker)
         speakerRef.get()

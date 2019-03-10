@@ -26,10 +26,8 @@ export class BrainFood extends Component {
   }
 
   render () {
-    let that = this;
     console.log(this.state)
     let nameBlank = true;
-    let questionBlank = true;
     const style = {
         display: 'flex',
         justifyText: 'center',
@@ -65,7 +63,7 @@ export class BrainFood extends Component {
                         <div>
                             <h2>And where are you from?</h2>
                             <Autocomplete
-                                style={{width: '90%', paddingLeft: '12px', padding: '1em 0', boxSizing: 'border-box !important', height: '20px', color: 'var(--tedgrey)', fontFamily: 'Open Sans, sans-serif', fontSize: '1em', lineHeight: '1em', width: '100%', background: "transparent", border: '1px solid #e9ebec'}}
+                                style={{paddingLeft: '12px', padding: '1em 0', boxSizing: 'border-box !important', height: '20px', color: 'var(--tedgrey)', fontFamily: 'Open Sans, sans-serif', fontSize: '1em', lineHeight: '1em', width: '100%', background: "transparent", border: '1px solid #e9ebec'}}
                                 onPlaceSelected={(place) => {
                                 this.setState({city: place});
                                 }}
