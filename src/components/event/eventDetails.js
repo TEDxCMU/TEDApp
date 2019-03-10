@@ -20,6 +20,22 @@ export class EventDetails extends Component {
 
     render() {
         let self = this.state;
+        let videos = [];
+        console.log(self)
+        if (self.props !== undefined) {
+            for (let video in self.props.related) {
+                videos.push(
+                    <div style={{maxWidth: '100%'}}>
+                        <div style={{ position: "relative", height: "0", paddingBottom: "56.25%"}}>
+                            <iframe src={self.props.related[video]} title={self.props.related[video]} style={{position: 'absolute', left: '0', top: '0', width: '100%', height: '100%'}} frameborder="0" scrolling="no" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="true">
+                            </iframe>
+                        </div>
+                        <br></br>
+                    </div>
+                )
+            }      
+        }
+
             return (
                 <div>    
                 { this.state.asked !== undefined ? 
@@ -49,6 +65,11 @@ export class EventDetails extends Component {
 
                             <h6 className="bio">Speaker Bio</h6>
                             <p>{self.speaker.bio}</p>
+
+                            <h6 className="talk-title">Related TED Talks</h6>
+                            <div className="videos">
+                                {videos}
+                            </div>
 
 
                         </div>

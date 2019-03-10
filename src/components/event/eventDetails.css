@@ -20,7 +20,7 @@ color: var(--tedred);
 }
 
 .bio {
-margin-top: 80px;
+margin-top: 50px;
 color: var(--tedblack);
 }
 
@@ -67,4 +67,10 @@ color: var(--tedblack);
       margin-top: 10px;
       margin-left: 0px;
   }
+}
+
+.videos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

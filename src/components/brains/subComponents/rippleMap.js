@@ -47,6 +47,7 @@ export class RippleMap extends Component {
   handleCityClick(city) {
     this.setState({
       center: city.coordinates,
+      cityClicked: city.name
     })
   }
   handleReset() {
@@ -66,6 +67,7 @@ export class RippleMap extends Component {
     } 
     return (
       <div style={wrapperStyles}>
+        <h5>{this.state.cityClicked === null ? "" : ("Rippler: " + this.state.cityClicked)}</h5>
         <div onTouchStart={e => this.touchWarning(e)}>
           <Motion
             defaultStyle={{
