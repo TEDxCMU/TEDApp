@@ -21,10 +21,8 @@ import Fingerprint from "fingerprintjs2";
 import Popup from 'react-popup';
 import moment from 'moment';
 import Header from './components/header/header';
-// import ReactGA from 'react-ga';
 
-// ReactGA.initialize('UA-134356076-1');
-// ReactGA.pageview('/home');
+console.log(process.env.REACT_APP_FIREBASE_API_KEY)
 
 
 class App extends Component {
