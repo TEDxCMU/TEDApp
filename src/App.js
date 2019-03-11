@@ -22,7 +22,7 @@ import Popup from 'react-popup';
 import moment from 'moment';
 import Header from './components/header/header';
 
-console.log(process.env.REACT_APP_FIREBASE_API_KEY)
+console.log(process.env.REACT_APP_PROJECT_ID)
 
 
 class App extends Component {
