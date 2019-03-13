@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import '../../App.css';
 // import HeaderBG from '../../header-bg.svg';
-import logo from '../../logo.png';
-import back from '../../back.png';
+import logo from '../../logo.svg';
+import back from '../../back.svg';
 import bottle from '../../questionbottle.svg';
 import { Link } from 'react-router-dom';
 import './header.css';

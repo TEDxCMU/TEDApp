@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import './addToHome.css';
-import './downloadIcon.png'
+import './downloadIcon.png';
 
 export class PopUp extends Component {
     constructor(props) {
         super();
         this.state = {
+            closed: false
         }
     }
-      
+    
     render() {
+        const closed = this.state.closed;
+        
         return (
-            <div style={{width: "100%"}}>
+            <div className={closed ? 'closed' : ''} style={{width: "100%"}}>
                 { this.props.iOS && this.props.loaded ? 
                     <div id="popup-bg">
                         <div id="popup-content">
@@ -30,10 +33,17 @@ export class PopUp extends Component {
         );
     }
 
+    reloadPage = () => {
+        window.location.reload();
+    }
+
     closeModal = (e) => {
+        this.setState({
+            closed: true
+        });
         e.preventDefault();
-        localStorage.setItem("popup", false)
-        window.location.reload()
+        localStorage.setItem("popup", false);
+        setTimeout(this.reloadPage, 500);
     }
 }
 

@@ -29,7 +29,15 @@ header .logo {
     top: 36px;
     position: absolute;
     z-index: 1;
-    max-width: 130px;
+    max-width: 60px;
+}
+
+header .arrow {
+    left: 26px;
+    top: 36px;
+    position: absolute;
+    z-index: 1;
+    height: 40px;
 }
 
 #iOS {
@@ -111,15 +119,6 @@ header .logo {
 }
 
 /* ========== END QUESTION POPUP ========== */
-
-header .arrow {
-    left: 26px;
-    top: 36px;
-    position: absolute;
-    z-index: 1;
-    max-width: 70px;
-    max-height: 100px;  
-}
 
 header h1, header h6 {
     color: var(--tedwhite);

@@ -578,3 +578,7 @@ padding: 20px;
       /* content */
   }
 /* ---------- 09. END RESPONSIVE STYLING ---------- */
+
+#arrow {
+  fill: var(--tedwhite);
+}

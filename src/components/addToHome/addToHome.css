@@ -51,6 +51,24 @@
 .closeModal {
     text-align: right;
     font-size: 1.5rem;
+    margin-top: 10px;
     margin-right: 5%;
     color: var(--tedwhite);
+}
+
+.closeModal:hover {
+    cursor: pointer;
+}
+
+.closed {
+    animation: close 0.6s;
+}
+
+@keyframes close {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
