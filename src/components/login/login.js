@@ -6,14 +6,18 @@ import { Redirect } from 'react-router-dom';
 import posed from 'react-pose';
 
 const Form = posed.form({
-  enter: { y: 0, x: 0, opacity: 1, 
-    transition: {
-      x: { type: 'spring', stiffness: 300, damping: 15 },
-      y: { type: 'spring', stiffness: 300, damping: 15 },
-      default: { duration: 300 }
-    } 
+  correct: {
+    opacity: 1
   },
-  exit: { y: 20, opacity: 0, transition: { duration: 150 } }
+  incorrect: {
+    opacity: 0,
+    transition: {
+      from: '-5px',
+      to: '5px',
+      stiffness: 200,
+      damping: 20
+    }
+  }
 });
 
 export class Login extends Component {
@@ -25,32 +29,30 @@ export class Login extends Component {
         found: true,
         redirect: false
       }
-  
-  
     }
+
     render() {
       if (this.state.redirect === true){
         return <Redirect to='/'/>
       }
+
       console.log(this.state.found);
-      // if (localStorage.getItem("userEmail") !== "dijour@cmu.edu" && this.state.redirect === true){
-      //   return <Redirect to='/questions/'/>
-      // }
       return (
         <div className="login">
-            <Form pose={this.state.found} onSubmit={this.login}>
-                {this.state.found === true ?
-                <h1> </h1>
-                :
-                <h1>Could not find an account with that email/password.</h1>
-                }
+            <form onSubmit={this.login}>
                 <label>Email:</label>
-                <input type="text" name="email" autoComplete="email" value={this.state.email} onChange={this.handleChange}/>
+                <input className={this.state.found ? '' : 'invalid' } type="text" name="email" autoComplete="email" value={this.state.email} onChange={this.handleChange}/>
                 <label>Password:</label>
-                <input type="password" name="password" autoComplete="password" value={this.state.password} onChange={this.handleChange}/>
+                <input className={this.state.found ? '' : 'invalid' } type="password" name="password" autoComplete="password" value={this.state.password} onChange={this.handleChange}/>
+                <br />
+                {this.state.found === true ?
+                <small> </small>
+                :
+                <small className="small-red">Could not find an account with that email/password.</small>
+                }
                 <br />
                 <button className="button-primary" type="submit" onClick={this.login}>TED Log In</button>
-            </Form>            
+            </form>            
         </div>
       );
     }
