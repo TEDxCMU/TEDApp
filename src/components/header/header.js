@@ -137,7 +137,7 @@ export class Header extends Component {
 
     render() {
         let that = this;
-        console.log(this.state)
+        console.log("rendering")
         let nameBlank = true;
         let questionBlank = true;
         const style = {

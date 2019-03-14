@@ -42,7 +42,7 @@ class App extends Component {
       <div>
         <Router history={this.props.history}>
           <div className="App">
-          <Navigation loaded={this.state.loaded} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
+          <Navigation loaded={true} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
           <Route path="/" exact strict render={this.schedulePage}/>
           <Route path="/events/:id" exact strict component={EventDetails}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
@@ -62,7 +62,6 @@ class App extends Component {
 
         </Router>
         <Popup closeBtn={true} />
-        {/* <ul>{listOfData}</ul> */}
       </div>
     );
   }
@@ -138,8 +137,7 @@ class App extends Component {
     return (
       <div>
         <Header
-          title="Event"
-          description="Find answers to your questions on food, parking, or anything in-between." />
+          title="Event"/>
         <EventDetails
         user={this.state.user}
         isLoaded={this.isLoaded} />

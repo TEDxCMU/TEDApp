@@ -27,6 +27,7 @@ export class Navigation extends Component {
     }
 
     render() {
+        console.log('rendering')
         var burgerBarStyle = {
             bmBurgerBars: {
                 background: this.state.burgerColor,
@@ -98,10 +99,8 @@ export class Navigation extends Component {
   
     handleScroll = (event) => {
         let scrollTop = window.scrollY;
-        console.log(scrollTop)
         if (window.location.pathname === "/") {
-          return this.setState({burgerColor: '#fff',
-                        scroll: window.scrollY});
+          return
         }
         else if (scrollTop > 225) {
           console.log("hello")
@@ -109,7 +108,7 @@ export class Navigation extends Component {
                         scroll: window.scrollY})
         }
         else if (scrollTop < 225) {
-          // Setting burger to white
+          console.log("Setting burger to white")
           this.setState({burgerColor: "#fff",
                         scroll: window.scrollY})
         }
