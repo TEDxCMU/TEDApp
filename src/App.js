@@ -137,7 +137,8 @@ class App extends Component {
     return (
       <div>
         <Header
-          title="Event"/>
+          title="Event"
+          />
         <EventDetails
         user={this.state.user}
         isLoaded={this.isLoaded} />
