@@ -27,7 +27,6 @@ export class Header extends Component {
     }
     
     // code for ask speaker question popup  
-
     //this fires when the user closes the bottle popup - unfortunately can't run this when they click send
     closeConfirmation = () => {
         this.props.close();
@@ -67,7 +66,6 @@ export class Header extends Component {
             return;
         }
     }
-
 
     // code for announcement change popup
     openAnnouncement = () => {
@@ -153,11 +151,14 @@ export class Header extends Component {
 
         let headerStyle = "sticky";
         if (this.props.headerStyle === "fixed") {
-            headerStyle = "sticky-header";
+            if (this.props.link === false) {
+                headerStyle = "sticky-header short"
+            } else {
+                headerStyle = "sticky-header"
+            }
         } else {
             headerStyle = "sticky";
         }
-
 
         if (this.props.errors !== undefined) {
             nameBlank = this.props.errors.name
@@ -212,9 +213,6 @@ export class Header extends Component {
                     <img src={this.props.image === undefined ? logo : back} className={this.props.image === undefined ? "logo" : "arrow"} alt="TEDxCMU"></img>
                     </Link>   
                 }
-                {/* <div className="header-bg">
-                    <img src={HeaderBG} alt="header background"></img>
-                </div> */}
                 <div className="header-content">
                     {this.props.speaker === true ?
                         <div className="speaker-header">
@@ -290,11 +288,7 @@ export class Header extends Component {
                         :
                         <div>
                             {this.props.link === false ?
-                            <div>
-                                {/* The header is collapsed, so don't add a title or description */}
-                                {/* <h1 className="title">{this.props.title}</h1>
-                                <h6 className="description">{this.props.description}</h6> */}
-                            </div>
+                            <div></div>
                             :
                             <div>
                                 {/* This is a normal header, so put the title and description in where they should be */}

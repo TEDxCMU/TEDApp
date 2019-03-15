@@ -47,7 +47,9 @@ export class Schedule extends Component {
       watchingForChanges: false,
       announcement: "The conference is currently not in progress. Please check back at another time.",
       isOpen: false,
-      scroll: 0
+      scroll: 0,
+      headerLink: true,
+      headerTitle: "Live Schedule"
     }
   }
 
@@ -176,10 +178,9 @@ export class Schedule extends Component {
         )
       }
       else {
-      
+      // Change bullet color here, time, and the info in a timeline event
       newList.push(
         <Item key={event.id}>
-            {/* Change bullet color here, time, and the info in a timeline event */}
             <span className="event-static"></span>
             <span className={className}></span>
             <span className="bullet-bg"></span>
@@ -201,7 +202,22 @@ export class Schedule extends Component {
       )}
     })
     let allEvents = this.state.allEvents;
-    let index = this.state.eventNum
+    let index = this.state.eventNum;
+    let hlink = this.state.headerLink;
+
+    // Adjust header based on scroll height
+    if (this.state.scroll < 50 && hlink === false) {
+      this.setState({
+          headerLink: true,
+          headerTitle: "Live Schedule"
+      });
+    } else if (this.state.scroll >= 50 && hlink === true) {
+      this.setState({
+        headerLink: false,
+        headerTitle: undefined
+      });
+    }
+
     if (newList.length > 0) {
     return (
           <div style={{height: '100%', width: '100%'}}>
@@ -233,28 +249,16 @@ export class Schedule extends Component {
                       </div>                      
                     </div>
                     }
-
                 </div>
             </div>
             </Popup>
-            { this.state.scroll < 50 ?
             <div>
-            {/* {console.log("regular schedule")} */}
-            <Header
-            link={true}
-            title="Live Schedule" 
-            description={notification}
-            altAnnouncement={this.state.altAnnouncement}
-            headerStyle="fixed" />
-            </div>
-            :
-            <div>
-              {/* {console.log("the new schedule is because:", this.props.scroll)} */}
               <Header
-              link={false}
+              link={this.state.headerLink}
+              title={this.state.headerTitle}
               description={notification}
               altAnnouncement={this.state.altAnnouncement}
-              headerStyle="fixed" />              
+              headerStyle="fixed" />
             </div>
             }
             {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
