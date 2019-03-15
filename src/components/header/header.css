@@ -197,8 +197,8 @@ header .title {
     position: fixed;
     top: 0;
     width: 100%;
-    height: 35%;
-    transition: height 0.5s;
+    height: 300px;
+    transition: height 0.3s;
 }
 
 .sticky-header.short {
