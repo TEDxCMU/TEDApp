@@ -7,6 +7,7 @@ import fire from '../../fire.js';
 import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import Header from '../header/header';
+import arrow from '../../mini-arrow.svg';
 import { BounceLoader } from 'react-spinners';
 import Popup from "reactjs-popup";
 import posed from 'react-pose';
@@ -121,6 +122,7 @@ export class Schedule extends Component {
                 <span className={className}></span>
                 <span className="bullet-bg"></span>
                   <div className="info-talk">
+                    <small className="card-arrow">MORE</small>
                     <p className="time"><strong>{event.start}</strong> — {event.end}</p>
                     <h4 className="event-title">{event.title}</h4>
                     <p className="event-description">{event.blurb}</p>
@@ -166,9 +168,12 @@ export class Schedule extends Component {
                   <span className={className}></span>
                   <span className="bullet-bg"></span>
                     <div className="info-talk">
-                      <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-                      <h4 className="event-title">{event.title}</h4>
-                      <p className="event-description">{event.blurb}</p>
+                      <div>
+                        <p className="time"><strong>{event.start}</strong> — {event.end}</p>
+                        <h4 className="event-title">{event.title}</h4>
+                        <p className="event-description">{event.blurb}</p>
+                      </div>
+                      <img src={arrow} className="info-arrow" alt="information arrow" />
                     </div>
                 </Link>
               </div>

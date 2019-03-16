@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="6px" height="10px" viewBox="0 0 6 10" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+    <title>mini_arrow_shack</title>
+    <desc>Created with Sketch.</desc>
+    <g id="info-arrow" stroke="none" stroke-width="1" fill="#aaa" fill-rule="evenodd">
+        <g id="mini_arrow_shack" transform="translate(0.000000, -1.000000)" fill="#aaa" fill-rule="nonzero">
+            <path d="M0.981,10.904 C0.72137455,10.9039844 0.472684062,10.7994623 0.291,10.614 C-0.0901428762,10.2251565 -0.0901428762,9.60284351 0.291,9.214 L3.505,5.947 L0.291,2.681 C-0.0901428762,2.29215649 -0.0901428762,1.66984351 0.291,1.281 C0.472557354,1.09530612 0.72129769,0.990629528 0.981,0.990629528 C1.24070231,0.990629528 1.48944265,1.09530612 1.671,1.281 L5.576,5.249 C5.95714288,5.63784351 5.95714288,6.26015649 5.576,6.649 L1.671,10.617 C1.48875276,10.8012654 1.24016665,10.9046628 0.981,10.904 Z"></path>
+        </g>
+    </g>
+</svg>

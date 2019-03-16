@@ -157,8 +157,7 @@
   padding: 10px 20px;
   border-color: var(--tedred);
   border-width: 1px;
-  border-style: dashed;
-  border: 1px solid #ECECEC;
+  /* border: 1px solid #ECECEC; */
   box-sizing: border-box;
   border-radius: 3px;
 }
@@ -167,20 +166,36 @@
   margin: 2rem 0;
   padding: 10px 20px;
   cursor: pointer;
-  background: #FFFFFF;
+  background: var(--tedwhite);
   border: 1px solid #F5F5F5;
   box-sizing: border-box;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13);
   border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info-talk div {
+  margin-right: 5px;
 }
 
 .info-talk p {
   margin-bottom: 5px;
 }
 
+.info-arrow {
+  color: var(--tedlightgrey);
+  padding: 0 15px 0 10px;
+  margin: 0;
+  position: absolute;
+  right: 0;
+  vertical-align: middle;
+}
+
 .info-talk:hover {
   background-color: rgba(0, 0, 0, 0.05);
-  transition: all 0.5s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .event-title {
@@ -224,7 +239,7 @@
 
 @keyframes now-pulse-2
 {
-  25% {
+  26% {
     box-shadow: 0 0 0 0px rgba(203, 45, 62, 0.5);
   }
   100% {
