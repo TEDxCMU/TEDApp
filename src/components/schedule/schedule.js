@@ -49,7 +49,8 @@ export class Schedule extends Component {
       isOpen: false,
       scroll: 0,
       headerLink: true,
-      headerTitle: "Live Schedule"
+      headerTitle: "Live Schedule",
+      nowDist: 0
     }
   }
 
@@ -458,9 +459,9 @@ export class Schedule extends Component {
   }
 
   handleScroll = (event) => {
-      this.setState({
-        scroll: window.scrollY
-      })
+    this.setState({
+      scroll: window.scrollY
+    });
   }
 
   componentDidMount = () => {
@@ -501,7 +502,7 @@ export class Schedule extends Component {
             //removing blank spaces from talk names to use as router IDs
 
         });
-    })
+    });
   }
 
   addEventsToState = (snapshot, wholeData) => {

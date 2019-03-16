@@ -51,6 +51,7 @@
 html, .root {
   font-size: 16px;
   line-height: 19px;
+  scroll-behavior: smooth;
 }
 
 body, .article {

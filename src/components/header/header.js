@@ -9,7 +9,6 @@ import './header.css';
 import { SocialIcon } from 'react-social-icons';
 import Popup from "reactjs-popup";
 import fire from '../../fire.js';
-// import { useSpring, animated } from 'react-spring'
 
 export class Header extends Component {
     constructor (props) {
@@ -53,10 +52,6 @@ export class Header extends Component {
     }
 
     sendQuestion = (e) => {
-        console.log("hello")
-        // if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
-        //     return
-        // }
         e.preventDefault()
         console.log(this.props.question.length, this.props.name.length)
         if (this.props.question.length > 0 && this.props.name.length > 0) {
