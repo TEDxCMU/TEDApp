@@ -99,7 +99,6 @@ export class Schedule extends Component {
     }
     let newList = [];
     let notification = this.state.announcement;
-    let scrollPosition = null;
     this.state.allEvents.forEach(event => {
         //mark event as either being in the past, happening right now, or being in the future if it is just static
         let className = "bullet-static";
@@ -203,7 +202,6 @@ export class Schedule extends Component {
     })
     let allEvents = this.state.allEvents;
     let index = this.state.eventNum;
-    this.updateListSelection();
     if (newList.length > 0) {
     return (
           <div style={{height: '100%', width: '100%'}}>
@@ -274,13 +272,9 @@ export class Schedule extends Component {
     }
   }
 
-  // scrollToMyRef = () => {
-  //   window.scrollTo(0, this.myRef.offsetTop)
-  // }
-
   updateListSelection = () => {
     //prevent the page from forcing a scroll after user moves around
-    if (this.state.alreadyScrolled !== null) {
+    if (this.state.alreadyScrolled === null) {
       console.log("blah")
       return
     }
@@ -310,9 +304,9 @@ export class Schedule extends Component {
   }
 
   openModal = (index) => {
-    this.setState({ open: true,
-                    eventNum: index
-      
+    this.setState(
+      { open: true,
+        eventNum: index
     })
   }
 
@@ -443,6 +437,7 @@ export class Schedule extends Component {
   watchForChanges = () => {
     this.props.isLoaded();
     this.toggle();
+    this.updateListSelection();
     let that = this;
     const db = fire.firestore();
     db.collection('detailed itinerary')
@@ -477,10 +472,6 @@ export class Schedule extends Component {
         headerTitle: undefined
       });
     }
-
-    // this.setState({
-    //   scroll: window.scrollY
-    // });
   }
 
   componentDidMount = () => {

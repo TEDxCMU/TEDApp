@@ -80,8 +80,7 @@ export class EventDetails extends Component {
                 </div>
                 :
                 <div>
-                    <Header
-                    />
+                    <Header/>
                 </div>
                 }
                 </div>
