@@ -278,6 +278,9 @@ export class Schedule extends Component {
       console.log("blah")
       return
     }
+    else if (document.getElementById("eventNow") === null ) {
+      return
+    }
     else {
       console.log("blahblah")
       let targetLi = document.getElementById("eventNow"); // id tag of the <li> element
