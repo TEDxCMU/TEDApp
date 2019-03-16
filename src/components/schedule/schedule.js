@@ -39,6 +39,7 @@ const Sidebar = posed.ul({
 export class Schedule extends Component {
   constructor() {
     super();
+    this.myRef = React.createRef()   // Create a ref object 
     this.state = {
       value: moment(),
       canShiftAll: true,
@@ -62,7 +63,6 @@ export class Schedule extends Component {
 
   EventComponent = ({ match }) => {
     const event = this.state.allEvents.find(({ id }) => id === match.params.eventId)
-    // console.log(event)
     return (
       <div>
         <h2>{event.title}</h2>
@@ -73,7 +73,6 @@ export class Schedule extends Component {
 
   render = () => {
     // console.log(this.props.scroll)
-    // console.log(this.state.allEvents)
     if (this.state.allEvents.length === 0) {
       return (
         <div>
@@ -100,6 +99,7 @@ export class Schedule extends Component {
     }
     let newList = [];
     let notification = this.state.announcement;
+    let scrollPosition = null;
     this.state.allEvents.forEach(event => {
         //mark event as either being in the past, happening right now, or being in the future if it is just static
         let className = "bullet-static";
@@ -113,10 +113,9 @@ export class Schedule extends Component {
         if (moment().isAfter(moment(event.end, "hh:mm A"))) {
           className = "past";
         }
-
         if (event.type !== "static") {
           newList.push(
-            <Item key={event.id}>
+            <Item key={event.id} id={className === "now" ? "eventNow" : null}>
               {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
               <div>
                 <span className="event"></span>
@@ -181,7 +180,7 @@ export class Schedule extends Component {
       else {
       // Change bullet color here, time, and the info in a timeline event
       newList.push(
-        <Item key={event.id}>
+        <Item key={event.id} id={className === "now" ? "eventNow" : null}>
             <span className="event-static"></span>
             <span className={className}></span>
             <span className="bullet-bg"></span>
@@ -204,21 +203,7 @@ export class Schedule extends Component {
     })
     let allEvents = this.state.allEvents;
     let index = this.state.eventNum;
-    let hlink = this.state.headerLink;
-
-    // Adjust header based on scroll height
-    if (this.state.scroll < 50 && hlink === false) {
-      this.setState({
-          headerLink: true,
-          headerTitle: "Live Schedule"
-      });
-    } else if (this.state.scroll >= 50 && hlink === true) {
-      this.setState({
-        headerLink: false,
-        headerTitle: undefined
-      });
-    }
-
+    this.updateListSelection();
     if (newList.length > 0) {
     return (
           <div style={{height: '100%', width: '100%'}}>
@@ -272,14 +257,14 @@ export class Schedule extends Component {
                 <button className="button-primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Event Start Time</button>
               </div> 
               <div className="timeline-admin">      
-                <Sidebar pose={this.state.isOpen ? 'enter' : 'exit'}>
+                <Sidebar id="itinerary" pose={this.state.isOpen ? 'enter' : 'exit'}>
                   {newList} 
                 </Sidebar>
               </div>
             </div>
             :
             <div className="timeline">      
-                <Sidebar pose={this.state.isOpen ? 'enter' : 'exit'}>
+                <Sidebar id="itinerary" pose={this.state.isOpen ? 'enter' : 'exit'}>
                   {newList} 
                 </Sidebar>
             </div>
@@ -287,6 +272,27 @@ export class Schedule extends Component {
           </div>
     );
     }
+  }
+
+  // scrollToMyRef = () => {
+  //   window.scrollTo(0, this.myRef.offsetTop)
+  // }
+
+  updateListSelection = () => {
+    //prevent the page from forcing a scroll after user moves around
+    if (this.state.alreadyScrolled !== null) {
+      console.log("blah")
+      return
+    }
+    else {
+      console.log("blahblah")
+      let targetLi = document.getElementById("eventNow"); // id tag of the <li> element
+      window.scrollTo(0, (targetLi.offsetTop - 50));
+      this.setState({
+        alreadyScrolled: true
+      })
+    }
+
   }
 
   toggle = () => {
@@ -459,9 +465,22 @@ export class Schedule extends Component {
   }
 
   handleScroll = (event) => {
-    this.setState({
-      scroll: window.scrollY
-    });
+    // Adjust header based on scroll height
+    if (window.scrollY < 50 && this.state.headerLink === false) {
+      this.setState({
+          headerLink: true,
+          headerTitle: "Live Schedule"
+      });
+    } else if (window.scrollY >= 50 && this.state.headerLink === true) {
+      this.setState({
+        headerLink: false,
+        headerTitle: undefined
+      });
+    }
+
+    // this.setState({
+    //   scroll: window.scrollY
+    // });
   }
 
   componentDidMount = () => {

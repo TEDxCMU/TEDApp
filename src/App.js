@@ -46,7 +46,6 @@ class App extends Component {
           <Route path="/" exact strict render={this.schedulePage}/>
           <Route path="/events/:id" exact strict component={EventDetails}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
-          {/* <Route path="/styleguide" exact strict render={this.styleGuidePage}/> */}
           <Route path="/login" exact strict render={this.loginPage}/>
           <Route path="/brainFood" exact strict render={this.BrainFoodPage}/>
           <Route path="/questions" exact strict render={this.questionsPage}/>
@@ -112,7 +111,7 @@ class App extends Component {
       <div>
         <Header
           title="My Questions"
-          description="Find answers to your questions here." />
+          description="See what the audience is saying, and give them your two cents!" />
         <MyQuestions
         user={this.state.user}
         isLoaded={this.isLoaded} /> 
