@@ -20,7 +20,8 @@ export class QAndAMain extends Component {
             name: '',
             errors: {name: false, question: false},
             confirmationOpen: false,
-            open: false
+            open: false,
+            openCheck: false
         }
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -81,13 +82,51 @@ export class QAndAMain extends Component {
 
     // opens the pop-up modal
     openModal = () => {
-        this.setState({ open: true })
+      const { name, question } = this.state;
+      this.setState({ 
+        open: true,
+        name: name,
+        question: question
+      })
     }
 
     // closes the popup modal
     closeModal = () => {
-        this.setState({ open: false })
+      const { name, question } = this.state;
+      this.setState({ 
+        open: false,
+        name: name,
+        question: question
+      })
     }
+
+    // opens the "are you sure" pop-up modal
+    openCheck = () => {
+      const { name, question } = this.state;
+      let errors = this.validate(name, question);
+      if (errors.name || errors.question) {
+          return this.setState({
+              errors: errors
+          })
+      }
+      this.setState({ 
+        openCheck: true,
+        open: false,
+        name: name,
+        question: question
+      })
+    }
+
+    // closes the "are you sure" popup modal
+    closeCheck = () => {
+      const { name, question } = this.state;
+        this.setState({ 
+          openCheck: false,
+          open: true,
+          name: name,
+          question: question
+        })
+    }    
 
     // function fired on the submit button for the Ask Question popup
     // calls closeModalandOpenConfirmation, which then actually sends the question
@@ -96,7 +135,8 @@ export class QAndAMain extends Component {
         if (this.state.question.length > 0 && this.state.name.length > 0) {
             this.setState({
                 confirmationOpen: true,
-                open: false
+                open: false,
+                openCheck: false
             }, () => this.createQuestion())
         }
         else {
@@ -146,7 +186,7 @@ export class QAndAMain extends Component {
             return this.setState({
                 errors: errors
             })
-        } 
+        }
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
         if (localStorage.getItem('fingerprint') === null) {
@@ -206,8 +246,11 @@ export class QAndAMain extends Component {
     }
 
     render () {
-        let nameBlank = true;
-        let questionBlank = true;
+        console.log(this.state)
+        // let nameBlank = true;
+        // let questionBlank = true;
+        let question = this.state.question;
+        let name = this.state.name;
         const style = {
             display: 'flex',
             justifyText: 'center',
@@ -313,12 +356,12 @@ export class QAndAMain extends Component {
                         <div className="modal">
                             <div>
                                 <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4>
-                                <textarea type="text" id="iOS" required className="popup-input" name="question" placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={this.handleChange}/>
+                                <textarea type="text" id="iOS" required className="popup-input" name="question" placeholder={ this.state.question === "" ? "Please write a question before submitting." : {question} } onChange={this.handleChange}/>
                                 <h4>Sincerely, </h4>
-                                <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={this.handleChange}/>
+                                <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" placeholder={ this.state.name === "" ? "Please add your name." : {name}} onChange={this.handleChange}/>
                                 <div className="popup-btns">
                                     <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
-                                    <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Submit</button>
+                                    <button className="popup-btn-success button-primary" onClick={e => this.openCheck(e)}>Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -337,6 +380,23 @@ export class QAndAMain extends Component {
                             </div>
                         </div>
                         </Popup>
+                        <Popup
+                        open={this.state.openCheck}
+                        closeOnDocumentClick
+                        onClose={this.closeCheck}
+                        contentStyle={style}
+                        >
+                        <div className="modal">
+                            <div>
+                                <h4>Ready to send off?</h4>
+                                <div className="popup-btns">
+                                    <button className="popup-btn-cancel" onClick={this.closeCheck}>Go Back</button>
+                                    <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
+                                </div>
+                            </div>
+                        </div>
+                        </Popup>
+
                     </div>
                 }
                 </div>
