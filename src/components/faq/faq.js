@@ -24,7 +24,7 @@ export class Faq extends Component {
                 category: 'general'
             },
             {
-                question: 'How much are Riple Effect tickets?',
+                question: 'How much are Ripple Effect tickets?',
                 answer: '<p>General Admission tickets cost $15, and VIP tickets are $30. VIP ticket holders receive extra swag in their bags, and get to sit in the first 4 rows!</p>',
                 category: 'tickets'
             },
@@ -45,12 +45,22 @@ export class Faq extends Component {
                 category: 'tickets'
             },
             {
-                question: 'Is there assigned seating or is it first come, first served? We bought different tiers of tickets, can we sit together? What about accessibility?',
-                answer: '<p>Seating is based on first come, first serve for mini events.</p><p>For the main event, VIP ticket holders and special guests are allowed early access to seating on the day of the event. Rows are reserved for each ticket tier and are on a first come, first served basis for seating within each respective ticket tier.</p>',
+                question: 'Is there assigned seating?',
+                answer: 'VIP ticket holders and special guests are allowed early access to seating on the day of the event.</p>',
                 category: 'tickets'
             },
             {
-                question: 'I\'d like to volunteer.',
+                question: 'We bought different tiers of tickets, can we sit together?',
+                answer: '<p>Rows are reserved for each ticket tier and are on a first come, first served basis for seating within each respective ticket tier.</p>',
+                category: 'tickets'
+            },            
+            {
+                question: 'What about accessibility?',
+                answer: '<p>McConomy auditorium is wheelchair accessible!</p>',
+                category: 'tickets'
+            },
+            {
+                question: 'I\'d like to volunteer!',
                 answer: '<p>Thank you for your interest in joining the team! TEDxCMU wouldn\'t exist without the contributions volunteers make at our events. We select our day-of-event volunteers a month to two in advance of the event. You can also <a href="http://tedxcmu.us3.list-manage.com/subscribe/post?u=eb8a63a687a4d582ce3b6b515&id=ce11cda9eb">subscribe</a> to our newsletter and receive all the announcements about future ticket sales, adventures, salons and more. We look forward to seeing you!</p>',
                 category: 'volunteer'
             },

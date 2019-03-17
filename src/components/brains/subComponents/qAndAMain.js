@@ -402,7 +402,7 @@ export class QAndAMain extends Component {
             :
                 <div></div>
             }
-                {this.state.questions !== null ?
+                {this.state.questions !== null && this.state.questions.length > 0 ?
                     <div className="speakers">
                         {newList}
                     </div>
@@ -426,10 +426,12 @@ export class QAndAMain extends Component {
     db.collection('speakers').doc(this.state.speaker).collection("questions").get()
     .then(snapshot => {
         snapshot.forEach(doc => {
-            let docCopy = doc.data();
-            docCopy.id = doc.id;
-            docCopy.answered = false;
-            wholeData.push(docCopy)
+            if (doc.data().answered) {
+                let docCopy = doc.data();
+                docCopy.id = doc.id;
+                docCopy.answered = false;
+                wholeData.push(docCopy)
+            }
         });
       this.setState(
         {questions: wholeData,

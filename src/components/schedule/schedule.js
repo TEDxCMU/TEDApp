@@ -12,6 +12,7 @@ import placeholder from '../../placeholder.svg'
 import { BounceLoader } from 'react-spinners';
 import Popup from "reactjs-popup";
 import posed from 'react-pose';
+import { networkOnly } from 'sw-toolbox';
 
 
 const Item = posed.li({
@@ -74,7 +75,7 @@ export class Schedule extends Component {
   }
 
   render = () => {
-    console.log("rendering")
+    console.log(this.state.allEvents)
     if (this.state.allEvents.length === 0) {
       return (
         <div>
@@ -172,7 +173,7 @@ export class Schedule extends Component {
                       <div>
                         <p className="time"><strong>{event.start}</strong> — {event.end}</p>
                         <h4 className="event-title">{event.blurb}</h4>
-                        <img src={event.image !== undefined ? event.image : placeholder} className="speakerPicture" alt="speaker picture" />
+                        <img src={event.image !== undefined || networkOnly ? event.image : placeholder} className="speakerPicture" alt="speaker" />
                         <p className="event-description">{event.title}</p>
                       </div>
                       <img src={arrow} className="info-arrow" alt="information arrow" />
