@@ -39,7 +39,11 @@ export class Dropdown extends Component {
         <div className="dropdown">
             <div onClick={this.toggleShow} className="label">
                 <h6 className="question-title">{this.props.question}</h6>
+                { this.state.showContent ===  false ?
                 <h4 className="question-plus">+</h4>
+                :
+                <h4 className="question-plus">–</h4>
+                }
             </div>
             {content}
         </div>
