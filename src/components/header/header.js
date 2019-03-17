@@ -225,7 +225,6 @@ export class Header extends Component {
     // calls closeModalandOpenConfirmation, which then actually sends the question
     sendQuestion = (e) => {
         e.preventDefault()
-        console.log(this.props.question.length, this.props.name.length)
         if (this.props.question.length > 0 && this.props.name.length > 0) {
             this.closeModalandOpenConfirmation();
         }
@@ -311,7 +310,7 @@ export class Header extends Component {
             })
         )
         .catch(
-            console.log("error!")
+            console.log("Error creating announcement!")
         )
     }
 

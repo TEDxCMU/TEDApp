@@ -37,7 +37,6 @@ export class QANDA extends Component {
   }
 
   render () {
-    // console.log(this.state.questions)
     let romaClasses = "button-primary medium blank";
     let ericClasses = "button-primary medium blank";
     let quinnClasses = "button-primary medium blank";
@@ -110,7 +109,6 @@ export class QANDA extends Component {
   }
 
   componentDidMount = () => {
-    console.log("QANDA mounted")
     window.removeEventListener('scroll', this.props.handleScroll);
     const db = fire.firestore();
     var wholeData = [];
@@ -123,8 +121,6 @@ export class QANDA extends Component {
             docCopy.answered = false;
             wholeData.push(docCopy)
         });
-        // let questions = Array(wholeData.length)
-      // console.log(wholeData)
       this.setState(
         {questions: wholeData})
     })

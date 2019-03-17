@@ -32,9 +32,7 @@ export class Login extends Component {
     }
 
     render() {
-      if (this.state.redirect === true){
-        console.log(fire.auth().currentUser.email)
-        console.log(this.state.email)
+      if (this.state.redirect === true) {
         if (this.state.email === "dijour@cmu.edu") {
           return <Redirect to='/'/>
         }
@@ -43,8 +41,6 @@ export class Login extends Component {
           return <Redirect to='/questions'/>
         }
       }
-
-      console.log(this.state.found);
       return (
         <div className="login">
             <form onSubmit={this.login}>

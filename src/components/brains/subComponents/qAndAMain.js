@@ -93,7 +93,6 @@ export class QAndAMain extends Component {
     // calls closeModalandOpenConfirmation, which then actually sends the question
     sendQuestion = (e) => {
         e.preventDefault()
-        console.log(this.state.question.length, this.state.name.length)
         if (this.state.question.length > 0 && this.state.name.length > 0) {
             this.setState({
                 confirmationOpen: true,
@@ -120,13 +119,11 @@ export class QAndAMain extends Component {
         .then((doc) => {
           if (doc.exists) {
             /** Doc exists, so the username is not available */
-            console.log("THIS SHIT EXISTS")
             return this.setState({
                 asked: true
             })
           }
           else {
-              console.log("THIS SHIT DOESN'T EXIST")
             return this.setState({
                 asked: false
             })
@@ -143,19 +140,15 @@ export class QAndAMain extends Component {
       }
 
     createQuestion = () => {
-        console.log("asking question")
         const { name, question } = this.state;
         let errors = this.validate(name, question);
-        // console.log(errors)
         if (errors.name || errors.question) {
-            // console.log("one or more is blank")
             return this.setState({
                 errors: errors
             })
         } 
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
-        let that = this;
         if (localStorage.getItem('fingerprint') === null) {
             db.collection("speakers").doc(this.state.speaker).collection("questions").add({
                 question: this.state.question,
@@ -164,11 +157,10 @@ export class QAndAMain extends Component {
                 timeAsked: now
             })
             .then(function() {
-                 ReactGA.event({
+                ReactGA.event({
                     category: 'User',
                     action: 'Create Question without Fingerprint'
-                  })
-                // window.location.reload();
+                }, () => this.componentDidMount())
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
@@ -186,8 +178,6 @@ export class QAndAMain extends Component {
                     category: 'User',
                     action: 'Create Question with Fingerprint'
                 }, () => this.componentDidMount())
-
-                // window.location.reload();
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
@@ -203,7 +193,6 @@ export class QAndAMain extends Component {
         .get()
         .then((doc) => {
           if (doc.exists) {
-            console.log(doc.data())
             return this.setState({
                 speakerRef: doc.data()
             }, () => this.checkIfAsked())
@@ -217,10 +206,8 @@ export class QAndAMain extends Component {
     }
 
     render () {
-        let that = this;
         let nameBlank = true;
         let questionBlank = true;
-        console.log(this.state.asked)
         const style = {
             display: 'flex',
             justifyText: 'center',
@@ -231,7 +218,6 @@ export class QAndAMain extends Component {
             border: 'none',
             borderRadius: '10px'
         }
-        // console.log(this.state.questions)
         let parkerClasses = "button-primary medium blank";
         let ranaClasses = "button-primary medium blank";
         let micahClasses = "button-primary medium blank";
@@ -375,15 +361,12 @@ export class QAndAMain extends Component {
   }
 
   componentDidMount = () => {
-    console.log("QANDA mounted")
     window.removeEventListener('scroll', this.props.handleScroll);
     const db = fire.firestore();
     var wholeData = [];
     db.collection('speakers').doc(this.state.speaker).collection("questions").get()
     .then(snapshot => {
-        console.log(snapshot)
         snapshot.forEach(doc => {
-            console.log(doc.data())
             let docCopy = doc.data();
             docCopy.id = doc.id;
             docCopy.answered = false;

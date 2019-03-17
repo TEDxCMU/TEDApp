@@ -102,12 +102,10 @@ export class Navigation extends Component {
           return
         }
         else if (scrollTop > 225 && this.state.burgerColor !== "red") {
-          console.log("hello")
           this.setState({burgerColor: "red",
                         scroll: window.scrollY})
         }
         else if (scrollTop < 225 && this.state.burgerColor !== "#fff") {
-          console.log("Setting burger to white")
           this.setState({burgerColor: "#fff",
                         scroll: window.scrollY})
         }

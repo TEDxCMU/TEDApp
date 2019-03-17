@@ -73,7 +73,6 @@ export class Schedule extends Component {
   }
 
   render = () => {
-    // console.log(this.props.scroll)
     if (this.state.allEvents.length === 0) {
       return (
         <div>
@@ -86,7 +85,6 @@ export class Schedule extends Component {
         </div> 
       )
     }
-    // console.log(localStorage.getItem("canShiftGlobalStartTime"))
 
     const style = {
       display: 'flex',
@@ -280,15 +278,13 @@ export class Schedule extends Component {
   updateListSelection = () => {
     //prevent the page from forcing a scroll after user moves around
     if (this.state.alreadyScrolled === null) {
-      console.log("blah")
       return
     }
     else if (document.getElementById("eventNow") === null ) {
       return
     }
     else {
-      console.log("blahblah")
-      let targetLi = document.getElementById("eventNow"); // id tag of the <li> element
+      let targetLi = document.getElementById("eventNow"); // id tag of the current <li> element
       window.scrollTo(0, (targetLi.offsetTop - 50));
       this.setState({
         alreadyScrolled: true
@@ -297,8 +293,9 @@ export class Schedule extends Component {
 
   }
 
+  // toggles the animations to begin loading all UL and LI elements for the itinerary
   toggle = () => {
-    this.setState({ isOpen: !this.state.isOpen }, console.log("lets get it"));
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   closeConfirmation = () => {
@@ -319,7 +316,6 @@ export class Schedule extends Component {
   }
 
   openGlobalChangeModal = (e) => {
-    // console.log("SHIFTING ALL EVENT TIMES MODAL IS OPEN NOW")
     e.preventDefault();
     this.setState({
       open: true,
@@ -335,7 +331,6 @@ export class Schedule extends Component {
   }
 
   closeModalandOpenConfirmation = () => {
-    // console.log("closing modal and opening confirmation")
     this.setState({
         confirmationOpen: true,
         open: false
@@ -349,7 +344,6 @@ export class Schedule extends Component {
   }
 
   handleValueChange = (value) => {
-    // console.log(value && value.format('HH:mm:ss'));
     this.setState({ value });
   }
 
@@ -373,24 +367,20 @@ export class Schedule extends Component {
     let allElements = this.state.allEvents;
     let immediateNextEvent= moment(allElements[0].start, 'hh:mm A'); 
     let conferenceStart = newStart;
-    // console.log("the new conference start time is: ", conferenceStart.format('hh:mm A'))
     let duration = moment.duration(conferenceStart.diff(immediateNextEvent));
     // go through all events after the one that just ended
     localStorage.setItem("updateCount", 0)
     for (let i = 0; i < allElements.length; i++) {
-      // console.log("starting updated count is: ", this.state.updateCount)
       //add the calculated duration between the original end and the new end
-      var start = moment(allElements[i].start, 'hh:mm A').add(duration, 'minutes');
-      var end = moment(allElements[i].end, 'hh:mm A').add(duration, 'minutes');
-      var shiftedStart = start.format('hh:mm A');
-      // console.log(shiftedStart)
-      var shiftedEnd = end.format('hh:mm A');
+      let start = moment(allElements[i].start, 'hh:mm A').add(duration, 'minutes');
+      let end = moment(allElements[i].end, 'hh:mm A').add(duration, 'minutes');
+      let shiftedStart = start.format('hh:mm A');
+      let shiftedEnd = end.format('hh:mm A');
       this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd, i, allElements.length, 0)
     }
   }
 
   shiftEndTime = (index, endTime) => {
-    // console.log(index)
     if (this.state.allEvents.length === index + 1) return;
     let eventNum = index;
     let newEnd = endTime;
@@ -398,27 +388,22 @@ export class Schedule extends Component {
     let allElements = this.state.allEvents;
     let immediateNextEvent= moment(allElements[nextEvent].start, 'hh:mm A'); 
     let justEnded = moment(newEnd, 'hh:mm A');
-    // console.log("the just ended is: ", justEnded.format('hh:mm A'))
     let duration = moment.duration(justEnded.diff(immediateNextEvent));
     this.updateFireTimes(allElements[index].start, allElements[index].start, justEnded.format('hh:mm A'));
     localStorage.setItem("canShiftGlobalStartTime", false);
     localStorage.setItem("updateCount", 0)
     // go through all events after the one that just ended
     for (let i = eventNum + 1; i < allElements.length; i++) {
-      // console.log("starting updated count is: ", this.state.updateCount)
       //add the calculated duration between the original end and the new end
-      var start = moment(allElements[i].start, 'hh:mm A').add(duration, 'minutes');
-      var end = moment(allElements[i].end, 'hh:mm A').add(duration, 'minutes');
-      var shiftedStart = start.format('hh:mm A');
-      // console.log(shiftedStart)
-      var shiftedEnd = end.format('hh:mm A');
+      let start = moment(allElements[i].start, 'hh:mm A').add(duration, 'minutes');
+      let end = moment(allElements[i].end, 'hh:mm A').add(duration, 'minutes');
+      let shiftedStart = start.format('hh:mm A');
+      let shiftedEnd = end.format('hh:mm A');
       this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd, i, allElements.length, index)
     }
   }
 
   updateFireTimes = (start, newStart, newEnd, index, allElementsLength, allElementsIndex) => {
-    // let i = index;
-    // console.log("index is: ", i)
     const db = fire.firestore();
     var eventRef = db.collection('detailed itinerary').where("start", "==", start);
     eventRef.get().then(function(querySnapshot) {
@@ -454,7 +439,6 @@ export class Schedule extends Component {
         if (change.type === 'added') {
         }
         if (change.type === 'modified') {
-          // console.log('An event snapshot was modified', change.doc.data());
           that.componentDidMount();
         }
         if (change.type === 'removed') {
@@ -503,7 +487,6 @@ export class Schedule extends Component {
     });
     db.collection('detailed itinerary').get().then(snapshot => {
         var source = snapshot.metadata.fromCache ? "local cache" : "server";
-        console.log("Data came from " + source);
         snapshot.forEach(doc => {
             let id = doc.id;
             db.collection('detailed itinerary').doc(id).onSnapshot(docSnapshot => {

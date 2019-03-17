@@ -253,7 +253,6 @@ class App extends Component {
             that.sendFingerprintToFirestore(type, id)
           }
         })
-				// console.log(localStorage.getItem('fingerprint'))
     });
   }
 

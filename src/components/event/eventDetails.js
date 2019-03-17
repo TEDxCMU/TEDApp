@@ -21,7 +21,6 @@ export class EventDetails extends Component {
     render() {
         let self = this.state;
         let videos = [];
-        console.log(self)
         if (self.props !== undefined) {
             for (let video in self.props.related) {
                 videos.push(
@@ -100,19 +99,15 @@ export class EventDetails extends Component {
       }
 
     createQuestion = () => {
-        // console.log("asking question")
         const { name, question } = this.state;
         let errors = this.validate(name, question);
-        // console.log(errors)
         if (errors.name || errors.question) {
-            // console.log("one or more is blank")
             return this.setState({
                 errors: errors
             })
         } 
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
-        let that = this;
         if (localStorage.getItem('fingerprint') === null) {
             db.collection("speakers").doc(this.state.speaker.email).collection("questions").add({
                 question: this.state.question,
@@ -121,15 +116,10 @@ export class EventDetails extends Component {
                 timeAsked: now
             })
             .then(function() {
-                // console.log("Document successfully written!")
-                that.setState({
-                    blah: true
-                },
-                 () => ReactGA.event({
+                ReactGA.event({
                     category: 'User',
                     action: 'Create Question without Fingerprint'
-                  }))
-                // window.location.reload();
+                  })
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
@@ -143,14 +133,10 @@ export class EventDetails extends Component {
                 timeAsked: now
             })
             .then(function() {
-                // console.log("Document successfully written!")
-                that.setState({
-                    blah: true
-                }, () => ReactGA.event({
+                ReactGA.event({
                     category: 'User',
                     action: 'Create Question with Fingerprint'
-                  }))
-                // window.location.reload();
+                  })
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
@@ -206,16 +192,13 @@ export class EventDetails extends Component {
         speakerRef.get()
         .then(doc => {
           if (!doc.exists) {
-            // console.log('No such document!');
           } else {
-            // console.log('Document data:', doc.data());
             this.setState({
                 speaker: doc.data()
             }, () => this.checkIfAsked())
           }
         })
         .catch(err => {
-        //   console.log('Error getting document', err);
         });
     }
 

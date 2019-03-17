@@ -27,7 +27,6 @@ export class Speakers extends Component {
             let question = this.state.questions[index];
             newList.push (
                 <SpeakerComponent 
-                    logState={this.logState}
                     speaker={speaker} 
                     name={speaker.first + ' ' + speaker.last} 
                     index={index} 
@@ -67,10 +66,6 @@ export class Speakers extends Component {
       ); 
     }
 
-    logState = () => {
-        // console.log(this.state.questions[0])
-    }
-
     handleChange = (e) => {
         const index = e.target.name
         let newQuestions = this.state.questions;
@@ -92,12 +87,10 @@ export class Speakers extends Component {
             time: now
         })
         .then(function() {
-            // console.log("Document successfully written!")
             speakersCopy[index.index].asked = true;
             that.setState({
                 allSpeakers: speakersCopy
             })
-            // window.location.reload();
         })
         .catch(function(error) {
             console.error("Error writing document: ", error);

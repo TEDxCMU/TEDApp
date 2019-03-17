@@ -26,7 +26,6 @@ export class BrainFood extends Component {
   }
 
   render () {
-    console.log(this.state)
     let nameBlank = true;
     const style = {
         display: 'flex',
@@ -168,11 +167,9 @@ export class BrainFood extends Component {
 
 
     sendLocationToDB = () => {
-        console.log("sending location")
         const { name, email } = this.state;
         let errors = this.validate(name, email);
         if (errors.name || errors.email) {
-            // console.log("one or more is blank")
             return this.setState({
                 errors: errors
             })
@@ -192,7 +189,6 @@ export class BrainFood extends Component {
                 timeAsked: now
             })
             .then(function() {
-                // console.log("Document successfully written!")
                 that.setState({
                     inDatabase: true
                 },
@@ -200,7 +196,6 @@ export class BrainFood extends Component {
                     category: 'User',
                     action: 'Create Location without Fingerprint'
                   }));
-                // window.location.reload();
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
@@ -215,14 +210,12 @@ export class BrainFood extends Component {
                 timeAsked: now
             })
             .then(function() {
-                // console.log("Document successfully written!")
                 that.setState({
                     inDatabase: true
                 }, () => ReactGA.event({
                     category: 'User',
                     action: 'Create Location with Fingerprint'
                   }));
-                // window.location.reload();
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
@@ -233,7 +226,6 @@ export class BrainFood extends Component {
 
 
     componentDidMount = () => {
-        console.log("hello! we logged BrainFood");
         this.props.isLoaded();
         let db = fire.firestore();
         const mapsRef = db.collection("maps").doc(localStorage.getItem("fingerprint"))

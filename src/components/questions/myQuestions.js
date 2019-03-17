@@ -50,7 +50,6 @@ export class MyQuestions extends Component {
   }
 
   answerQuestion = (id, text, index) => {
-    // console.log("answering with id: ", id, ", text: ", text, "and index: ", index)
     let email = fire.auth().currentUser.email;
     let now = moment().format('hh:mm A');
     let db = fire.firestore();
@@ -62,7 +61,6 @@ export class MyQuestions extends Component {
         timeAnswered: now
     })
     .then(function() {
-        // console.log("Document successfully written!")
         questionsCopy[index].answered = true;
         that.setState({
             questions: questionsCopy

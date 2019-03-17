@@ -44,7 +44,6 @@ export class RippleMap extends Component {
     })
   }
   handleCityClick(city) {
-    console.log(city)
     this.setState({
       center: city.coordinates,
       cityClicked: city.name
@@ -57,15 +56,11 @@ export class RippleMap extends Component {
     })
   }
   render() {
-    console.log(window.innerHeight)
-    console.log(window.innerWidth)
-    console.log(window.innerWidth/window.innerHeight)
     if (this.state.users === undefined) {
       return (
         <div></div>
       )
     } 
-    console.log(this.state.cityClicked)
     return (
       <div style={wrapperStyles}>
         <h5>{this.state.cityClicked === undefined ? "Click on the dots!" : ("Rippler: " + this.state.cityClicked)}</h5>
@@ -160,7 +155,6 @@ export class RippleMap extends Component {
     var wholeData = []
     db.collection('maps').onSnapshot( (snapshot) => {
       snapshot.forEach(doc => {
-        console.log(doc.data())
         let data = doc.data();
         let newUser = {
           name: data.name,
@@ -177,7 +171,6 @@ export class RippleMap extends Component {
 
   touchWarning = (e) => {
     if (e.touches.length === 1) {
-      console.log("nooooooooo")
       this.setState({
         touchError: true
       });
