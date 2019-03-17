@@ -210,6 +210,24 @@
 
 .event-description {
   font-size: 0.9rem;
+  float: left;
+  top: 5px;
+  vertical-align: middle;  
+  position: relative;
+  padding-left: 5px;
+}
+
+.speakerPicture {
+  vertical-align: middle;
+  position: relative;
+  top: 5px;
+  /* padding-right: 5px; */
+  /* padding: 0 0 1rem; */
+  height: 1.2rem;
+  width: 1.2rem;
+  margin: 0;
+  float: left;
+  border-radius: 50%;
 }
 
 /* END NEW TIMELINE CODE */

@@ -8,6 +8,7 @@ import TimePicker from 'rc-time-picker';
 import 'rc-time-picker/assets/index.css';
 import Header from '../header/header';
 import arrow from '../../mini-arrow.svg';
+import placeholder from '../../placeholder.svg'
 import { BounceLoader } from 'react-spinners';
 import Popup from "reactjs-popup";
 import posed from 'react-pose';
@@ -73,6 +74,7 @@ export class Schedule extends Component {
   }
 
   render = () => {
+    console.log("rendering")
     if (this.state.allEvents.length === 0) {
       return (
         <div>
@@ -162,14 +164,16 @@ export class Schedule extends Component {
                       announcement: event.announcement,
                   }
                 }}>
+                {/* THIS IS WHAT PEOPLE SEE FOR SPEAKERS:  */}
                   <span className="event"></span>
                   <span className={className}></span>
                   <span className="bullet-bg"></span>
                     <div className="info-talk">
                       <div>
                         <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-                        <h4 className="event-title">{event.title}</h4>
-                        <p className="event-description">{event.blurb}</p>
+                        <h4 className="event-title">{event.blurb}</h4>
+                        <img src={event.image !== undefined ? event.image : placeholder} className="speakerPicture" alt="speaker picture" />
+                        <p className="event-description">{event.title}</p>
                       </div>
                       <img src={arrow} className="info-arrow" alt="information arrow" />
                     </div>
@@ -505,6 +509,7 @@ export class Schedule extends Component {
     });
   }
 
+  //re-orders every event into chronological order
   addEventsToState = (snapshot, wholeData) => {
     if (wholeData.length === snapshot.size) {
       wholeData.forEach(event => {
@@ -528,7 +533,7 @@ export class Schedule extends Component {
           isOpen: true
         })
       }
-      // first pass - let's call watchForChanges to start listening for changes to each document
+      // first pass - let's call watch for changes
       else {
         this.setState({allEvents: sortedData, watchingForChanges: true}, () => this.watchForChanges())
       }
