@@ -50,8 +50,8 @@ export class BrainFood extends Component {
                     { this.state.inDatabase !== null ?
                         <h6><button onClick={() => this.openModal()} className="question-btn question-pos" style={{position: 'static', margin: '0'}}> {this.state.inDatabase === true ? "Change Your City": "Ripple"}</button></h6>
                     :
-                    <h6><button className="question-btn question-pos" style={{position: 'static', margin: '0', width: '80%'}}></button></h6>
-
+                    // <h6><button className="question-btn question-pos" style={{position: 'static', margin: '0', width: '80%'}}></button></h6>
+                        <div></div>
                     }
                     <Popup
                     open={this.state.open}

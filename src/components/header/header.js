@@ -17,7 +17,8 @@ export class Header extends Component {
           confirmationOpen: false,
           open: false,
           announcementOpen: false,
-          announcement: ''
+          announcement: '',
+          openCheck: false
         }
     }
 
@@ -150,7 +151,23 @@ export class Header extends Component {
                                             <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
                                             <div className="popup-btns">
                                                 <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
-                                                <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Submit</button>
+                                                <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </Popup>
+                                    <Popup
+                                    open={this.state.openCheck}
+                                    closeOnDocumentClick
+                                    onClose={this.closeCheck}
+                                    contentStyle={style}
+                                    >
+                                    <div className="modal">
+                                        <div>
+                                            <h4>Ready to send off?</h4>
+                                            <div className="popup-btns">
+                                                <button className="popup-btn-cancel" onClick={this.closeCheck}>Go Back</button>
+                                                <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
                                             </div>
                                         </div>
                                     </div>
@@ -220,6 +237,34 @@ export class Header extends Component {
     closeModal = () => {
         this.setState({ open: false })
     }
+
+    // opens the "are you sure" pop-up modal
+    openCheck = () => {
+        const { name, question } = this.state;
+        let errors = this.validate(name, question);
+        if (errors.name || errors.question) {
+            return this.setState({
+                errors: errors
+            })
+        }
+        this.setState({ 
+            openCheck: true,
+            open: false,
+            name: name,
+            question: question
+        })
+    }
+
+        // closes the "are you sure" popup modal
+    closeCheck = () => {
+        const { name, question } = this.state;
+        this.setState({ 
+        openCheck: false,
+        open: true,
+        name: name,
+        question: question
+        })
+    }    
 
     // function fired on the submit button for the Ask Question popup
     // calls closeModalandOpenConfirmation, which then actually sends the question

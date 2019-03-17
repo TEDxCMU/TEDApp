@@ -361,22 +361,8 @@ export class QAndAMain extends Component {
                                 <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" placeholder={ this.state.name === "" ? "Please add your name." : {name}} onChange={this.handleChange}/>
                                 <div className="popup-btns">
                                     <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
-                                    <button className="popup-btn-success button-primary" onClick={e => this.openCheck(e)}>Submit</button>
+                                    <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
                                 </div>
-                            </div>
-                        </div>
-                        </Popup>
-                        <Popup
-                        open={this.state.confirmationOpen}
-                        closeOnDocumentClick
-                        onClose={this.closeConfirmation}
-                        contentStyle={style}
-                        >
-                        <div className="modal">
-                            <div className="popup-response">
-                                <img src={bottle} className="bottle" alt="Bottle" />
-                                <p>Thank you for asking a question! Please check back on the Brain Food page later.</p>
-                                <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
                             </div>
                         </div>
                         </Popup>
@@ -396,7 +382,20 @@ export class QAndAMain extends Component {
                             </div>
                         </div>
                         </Popup>
-
+                        <Popup
+                        open={this.state.confirmationOpen}
+                        closeOnDocumentClick
+                        onClose={this.closeConfirmation}
+                        contentStyle={style}
+                        >
+                        <div className="modal">
+                            <div className="popup-response">
+                                <img src={bottle} className="bottle" alt="Bottle" />
+                                <p>Thank you for asking a question! Please check back on the Brain Food page later.</p>
+                                <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
+                            </div>
+                        </div>
+                        </Popup>
                     </div>
                 }
                 </div>
@@ -408,7 +407,7 @@ export class QAndAMain extends Component {
                         {newList}
                     </div>
                     :
-                    <div className="speakers"></div>
+                    <h4 className="speakers" style={{textAlign: 'center'}}>No answered questions yet. Check back later!</h4>
                 }
             </div>
 
