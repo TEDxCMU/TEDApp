@@ -152,6 +152,8 @@ export class EventDetails extends Component {
     }
 
     componentDidMount = () => {
+        // reset scroll to top of the page in case someone scrolled from previous page really fast
+        window.scrollTo(0, 0);
         let props = this.props.location.state
         this.setState({props}, () => 
         this.checkSpeaker())
