@@ -14,28 +14,28 @@ export class Faq extends Component {
                 category: 'general'
             },
             {
-                question: 'When and where is this year\'s Spring Mini-Event?',
-                answer: '<p>This year\'s Spring Mini-Event will be held on February 14th, 2019 at Hamerschlag B 103 at 6:30 PM - 7:30 PM.</p>',
+                question: 'When and where is this year\'s event?',
+                answer: '<p>This year\'s TEDxCMU conference, "Ripple Effet", will be held on Saturday, 03/30/2019, in the Cohon University Center, from 9:00 AM - 3:00 PM.</p>',
                 category: 'general'
             },
             {
                 question: 'Will there be food? What are the lunch options?',
-                answer: '<p>Yes! We will provide free donuts and coffee.</p>',
+                answer: '<p>Yes! Attendees receive a complementary breakfast and lunch, with vegetarian options!</p>',
                 category: 'general'
             },
             {
-                question: 'How much are Spring Mini-Event tickets?',
-                answer: '<p>The Spring Mini-Event is free!</p>',
+                question: 'How much are Riple Effect tickets?',
+                answer: '<p>General Admission tickets cost $15, and VIP tickets are $30. VIP ticket holders receive extra swag in their bags, and get to sit in the first 4 rows!</p>',
                 category: 'tickets'
             },
             {
-                question: 'Can I return main event tickets? Can I exchange my tickets?',
-                answer: '<p>For our main event, tickets are non-refundable. Tickets can be transferred, but we cannot make the transfer for you.</p>',
+                question: 'Can I return event tickets? Can I exchange my tickets?',
+                answer: '<p>Tickets are non-refundable. Tickets can be transferred to another person, but we cannot make that transfer for you.</p>',
                 category: 'tickets'
             
             },
             {
-                question: 'When do main event tickets go on sale?',
+                question: 'When do event tickets go on sale?',
                 answer: '<p>Our tickets traditionally go on sale in early March. We may have events that raffle off special discounts or give free tickets. To learn more about those events, <a href="http://tedxcmu.us3.list-manage.com/subscribe/post?u=eb8a63a687a4d582ce3b6b515&id=ce11cda9eb">subscribe</a> to our newsletter and follow us on <a href="http://facebook.com/tedxcmu">social media</a>.</p>',
                 category: 'tickets'
             },
@@ -46,7 +46,7 @@ export class Faq extends Component {
             },
             {
                 question: 'Is there assigned seating or is it first come, first served? We bought different tiers of tickets, can we sit together? What about accessibility?',
-                answer: '<p>Seating is based on first come, first serve for mini events.</p><p>For the main event, VIP ticket holders and special guests are allowed early access to seating on the day of the event. Rows are reserved for each ticket tier and is on a first come, first served basis for seating within the respective ticket tier.</p>',
+                answer: '<p>Seating is based on first come, first serve for mini events.</p><p>For the main event, VIP ticket holders and special guests are allowed early access to seating on the day of the event. Rows are reserved for each ticket tier and are on a first come, first served basis for seating within each respective ticket tier.</p>',
                 category: 'tickets'
             },
             {
