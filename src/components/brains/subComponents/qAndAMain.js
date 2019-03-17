@@ -312,12 +312,12 @@ export class QAndAMain extends Component {
                 <div>
                 { this.state.asked === true ?
                     // prevent user from asking multiple questions, if we have their device fingerprint on file
-                    <div className="question-btn-container">
-                        <h6><button className="question-btn question-pos-asked">Asked</button></h6>
+                    <div className="questi0n-btn-container">
+                        <h6><button className="questi0n-btn question-pos-asked">Asked</button></h6>
                     </div>
                 :
-                    <div className="question-btn-container">
-                        <h6><button onClick={() => this.openModal()} className="question-btn question-pos">Ask Question</button></h6>
+                    <div className="questi0n-btn-container">
+                        <h6><button onClick={() => this.openModal()} className="questi0n-btn question-pos">Ask Question</button></h6>
                         <Popup
                         open={this.state.open}
                         closeOnDocumentClick

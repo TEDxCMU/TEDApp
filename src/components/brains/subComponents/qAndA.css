@@ -225,7 +225,7 @@ header .title {
     height: 150px;
 }
 
-.question-btn-container {
+.questi0n-btn-container {
     position: relative;
 }
 
@@ -239,7 +239,7 @@ header .title {
     margin-left: -64.5px;
 }
 
-.question-btn {
+.questi0n-btn {
     position: absolute;
     top: 12px;
     font-size: 13px;
@@ -255,7 +255,7 @@ header .title {
     margin-top: -40px;
 }
 
-.question-btn:hover {
+.questi0n-btn:hover {
 	background-color: var(--tedbggrey);
 }
 
