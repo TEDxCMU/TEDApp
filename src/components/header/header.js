@@ -20,117 +20,9 @@ export class Header extends Component {
           announcement: ''
         }
     }
-    
-    handleChange = (e) => {
-        this.setState({ [e.target.name] : e.target.value });        
-    }
-    
-    // code for ask speaker question popup  
-    //this fires when the user closes the bottle popup - unfortunately can't run this when they click send
-    closeConfirmation = () => {
-        this.props.close();
-    }
-
-    openConfirmation = (e) => {
-        e.preventDefault()
-        this.setState({confirmationOpen: true})
-    }
-
-    openModal = () => {
-        this.setState({ open: true })
-    }
-
-    closeModal = () => {
-        this.setState({ open: false })
-    }
-
-    closeModalandOpenConfirmation = () => {
-        this.setState({
-            confirmationOpen: true,
-            open: false
-        }, () => this.props.askQuestion())
-    }
-
-    sendQuestion = (e) => {
-        e.preventDefault()
-        console.log(this.props.question.length, this.props.name.length)
-        if (this.props.question.length > 0 && this.props.name.length > 0) {
-            this.closeModalandOpenConfirmation();
-        }
-        else {
-            return;
-        }
-    }
-
-    // code for announcement change popup
-    openAnnouncement = () => {
-        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
-            return
-        }
-        this.setState({ announcementOpen: true })
-    }
-
-    closeAnnouncement = () => {
-        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
-            return
-        }
-        this.setState({ announcementOpen: false })
-    }
-
-    deleteAnnouncement = (e) => {
-        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
-            return
-        }
-        e.preventDefault();
-        let that = this;
-        let db = fire.firestore();
-        db.collection('announcements').doc('announcement').delete().then(function() {
-            that.setState({
-                announcementOpen: false
-            })
-        }).catch(function(error) {
-            console.error("Error removing document: ", error);
-        });
-    }
-    
-    updateAnnouncement = (e) => {
-        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
-            return
-        }
-        e.preventDefault();
-        let that = this;
-        let db = fire.firestore();
-        db.collection('announcements').doc('announcement').update({
-            text: this.state.announcement
-        })
-        .then(function() {
-            that.setState({
-                announcementOpen: false
-            })
-        })
-        .catch(function(error) {
-            // The document probably doesn't exist.
-            console.error("Error updating document: ", error);
-        });
-    }
-
-    createAnnouncement = (e) => {
-        e.preventDefault();
-        let that = this;
-        let db = fire.firestore();
-        db.collection('announcements').doc('announcement').set({text: this.state.announcement}).then(
-            that.setState({
-                announcementOpen: false
-            })
-        )
-        .catch(
-            console.log("error!")
-        )
-    }
 
     render() {
         let that = this;
-        console.log("rendering")
         let nameBlank = true;
         let questionBlank = true;
         const style = {
@@ -170,32 +62,32 @@ export class Header extends Component {
                     <div className="modal">
                         <div>
                             { this.props.altAnnouncement !== null && this.props.altAnnouncement ?
-                            <div>   
-                                <h4>Change or delete custom announcement:</h4>
-                                <div className="popup-btns">
-                                    <button className="popup-btn-success button-primary" onClick={e => this.deleteAnnouncement(e)}>Delete</button>
+                                <div>   
+                                    <h4>Change or delete custom announcement:</h4>
+                                    <div className="popup-btns">
+                                        <button className="popup-btn-success button-primary" onClick={e => this.deleteAnnouncement(e)}>Delete</button>
+                                    </div>
+                                    <textarea type="text" id="iOS" required className="popup-input" name="announcement" placeholder={ "Make a new custom announcement."} onChange={e => this.handleChange(e)}/>
+                                    <div className="popup-btns">
+                                        <button className="popup-btn-success button-primary" onClick={e => this.updateAnnouncement(e)}>Update</button>
+                                    </div>
                                 </div>
-                                <textarea type="text" id="iOS" required className="popup-input" name="announcement" placeholder={ "Make a new custom announcement."} onChange={e => this.handleChange(e)}/>
-                                <div className="popup-btns">
-                                    <button className="popup-btn-success button-primary" onClick={e => this.updateAnnouncement(e)}>Update</button>
-                                </div>
-                            </div>
                             :
-                            <div>
-                            <h4>Create custom announcement</h4>
-                            <textarea type="text" id="iOS" required className="popup-input" name="announcement" placeholder={ "Make it bold, keep it short!"} onChange={e => this.handleChange(e)}/>
-                            <div className="popup-btns">
-                                <button className="popup-btn-cancel" onClick={this.closeAnnouncement}>Cancel</button>
-                                <button className="popup-btn-success button-primary" onClick={e => this.createAnnouncement(e)}>Confirm</button>
-                            </div>                      
-                            </div>
+                                <div>
+                                <h4>Create custom announcement</h4>
+                                <textarea type="text" id="iOS" required className="popup-input" name="announcement" placeholder={ "Make it bold, keep it short!"} onChange={e => this.handleChange(e)}/>
+                                <div className="popup-btns">
+                                    <button className="popup-btn-cancel" onClick={this.closeAnnouncement}>Cancel</button>
+                                    <button className="popup-btn-success button-primary" onClick={e => this.createAnnouncement(e)}>Confirm</button>
+                                </div>                      
+                                </div>
                             }
 
                         </div>
                     </div>
                 </Popup>
                 {/* The header should be collapsed, so make the description small */}
-                {this.props.link !== undefined && this.props.link === false ?
+                { this.props.link !== undefined && this.props.link === false ?
                     <div>
                         <h6 onClick={this.openAnnouncement} className="description-small">{this.props.description}</h6>
                     </div>
@@ -237,6 +129,7 @@ export class Header extends Component {
                                 <div></div>
                             }
                             { this.props.asked === true ?
+                                // prevent user from asking multiple questions, if we have their device fingerprint on file
                                 <div className="question-btn-container">
                                     <h6><button className="question-btn question-pos-asked">Asked</button></h6>
                                 </div>
@@ -298,6 +191,131 @@ export class Header extends Component {
             </header>
         );        
     }
+    
+
+    // default handleChange for React forms
+    handleChange = (e) => {
+        this.setState({ [e.target.name] : e.target.value });        
+    }
+    
+    // code for ask speaker question popup  
+    //this fires when the user closes the bottle popup - unfortunately can't run this when they click send
+    closeConfirmation = () => {
+        this.props.close();
+    }
+
+
+    openConfirmation = (e) => {
+        e.preventDefault()
+        this.setState({confirmationOpen: true})
+    }
+
+
+    // opens the pop-up modal
+    openModal = () => {
+        this.setState({ open: true })
+    }
+
+    // closes the popup modal
+    closeModal = () => {
+        this.setState({ open: false })
+    }
+
+    // function fired on the submit button for the Ask Question popup
+    // calls closeModalandOpenConfirmation, which then actually sends the question
+    sendQuestion = (e) => {
+        e.preventDefault()
+        console.log(this.props.question.length, this.props.name.length)
+        if (this.props.question.length > 0 && this.props.name.length > 0) {
+            this.closeModalandOpenConfirmation();
+        }
+        else {
+            return;
+        }
+    }
+
+    // on submit, closes the popup and then automatically opens the confirmation
+    // then asks the question using the createQuestion function from eventDetails.js
+    closeModalandOpenConfirmation = () => {
+        this.setState({
+            confirmationOpen: true,
+            open: false
+        }, () => this.props.askQuestion())
+    }
+
+    // opens announcement modifier popup, only works if user signed in is Admin (dijour@cmu.edu)
+    openAnnouncement = () => {
+        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+            return
+        }
+        this.setState({ announcementOpen: true })
+    }
+
+
+    // closes announcement modal
+    closeAnnouncement = () => {
+        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+            return
+        }
+        this.setState({ announcementOpen: false })
+    }
+
+
+    // removes the custom announcement from the DB and closes the announcement modal
+    deleteAnnouncement = (e) => {
+        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+            return
+        }
+        e.preventDefault();
+        let that = this;
+        let db = fire.firestore();
+        db.collection('announcements').doc('announcement').delete().then(function() {
+            that.setState({
+                announcementOpen: false
+            })
+        }).catch(function(error) {
+            console.error("Error removing document: ", error);
+        });
+    }
+    
+    // update announcement in the DB and then closes popup
+    updateAnnouncement = (e) => {
+        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+            return
+        }
+        e.preventDefault();
+        let that = this;
+        let db = fire.firestore();
+        db.collection('announcements').doc('announcement').update({
+            text: this.state.announcement
+        })
+        .then(function() {
+            that.setState({
+                announcementOpen: false
+            })
+        })
+        .catch(function(error) {
+            // The document probably doesn't exist.
+            console.error("Error updating document: ", error);
+        });
+    }
+
+    // creates a brand new announcement, if one does not exist already, and then closes the popup
+    createAnnouncement = (e) => {
+        e.preventDefault();
+        let that = this;
+        let db = fire.firestore();
+        db.collection('announcements').doc('announcement').set({text: this.state.announcement}).then(
+            that.setState({
+                announcementOpen: false
+            })
+        )
+        .catch(
+            console.log("error!")
+        )
+    }
+
+    
 };
 
 export default Header;

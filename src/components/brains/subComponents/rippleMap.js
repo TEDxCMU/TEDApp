@@ -44,6 +44,7 @@ export class RippleMap extends Component {
     })
   }
   handleCityClick(city) {
+    console.log(city)
     this.setState({
       center: city.coordinates,
       cityClicked: city.name
@@ -64,9 +65,10 @@ export class RippleMap extends Component {
         <div></div>
       )
     } 
+    console.log(this.state.cityClicked)
     return (
       <div style={wrapperStyles}>
-        <h5>{this.state.cityClicked === null ? "" : ("Rippler: " + this.state.cityClicked)}</h5>
+        <h5>{this.state.cityClicked === undefined ? "Click on the dots!" : ("Rippler: " + this.state.cityClicked)}</h5>
         <div onTouchStart={e => this.touchWarning(e)}>
           <Motion
             defaultStyle={{
@@ -131,7 +133,7 @@ export class RippleMap extends Component {
                         onClick={this.handleCityClick}
                         >
                           <circle cx = {0} cy = {0} r = {8}></circle>
-                          <circle class = "pulse" cx = {0} cy = {0} r = {11}></circle>
+                          <circle className = "pulse" cx = {0} cy = {0} r = {11}></circle>
                       </Marker>
                     ))}
                   </Markers>

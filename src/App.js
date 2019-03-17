@@ -10,13 +10,14 @@ import { PopUp } from './components/addToHome/addToHome.js';
 import { BrainFood } from './components/brains/brainFood.js';
 import { Map } from './components/map/map.js';
 // import { BrowserRouter as Router} from 'react-router-dom';
-import { Router, Route } from 'react-router-dom'
+import { Router, Route, Switch} from 'react-router-dom'
 // import Route from 'react-router-dom/Route';
 import fire from './fire.js';
 import Faq from './components/faq/faq';
 import StyleGuide from './components/styleguide';
 import { isAndroid, isIOS } from "react-device-detect";
 import Fingerprint from "fingerprintjs2";
+import error404 from './404.png';
 
 import Popup from 'react-popup';
 import moment from 'moment';
@@ -32,9 +33,6 @@ class App extends Component {
       chromePopUp: false,
       loaded: false
     }
-    //pass THIS to global navigation hamburger menu so people can login and logout everywhere
-    this.authListener = this.authListener.bind(this);
-    this.logout = this.logout.bind(this)
   }
 
   render() {
@@ -43,6 +41,7 @@ class App extends Component {
         <Router history={this.props.history}>
           <div className="App">
           <Navigation loaded={true} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
+          <Switch>
           <Route path="/" exact strict render={this.schedulePage}/>
           <Route path="/events/:id" exact strict component={EventDetails}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
@@ -50,6 +49,8 @@ class App extends Component {
           <Route path="/brainFood" exact strict render={this.BrainFoodPage}/>
           <Route path="/questions" exact strict render={this.questionsPage}/>
           <Route path="/map" exact strict render={this.mapPage}/>
+          <Route component={this.noMatch} />
+          </Switch>
             <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
               {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null && localStorage.getItem("fingerprint") !== null ?
               <PopUp iOS={true} loaded={this.state.loaded}/>
@@ -58,7 +59,7 @@ class App extends Component {
               }
             </div>
           </div>
-
+          
         </Router>
         <Popup closeBtn={true} />
       </div>
@@ -77,11 +78,25 @@ class App extends Component {
     })
   }
 
-  navigationPage = (uzer) => {
+  // renders if the path is not explicitly declared (404 error)
+  noMatch = () => {
+    let error = "Oh dear, this page is not available. Just use the menu on the right to navigate to safety! If you think this is a mistake, please don't call the police, we'll just fire our web developers."
+    return (
+    <div>
+      <Header
+        title="404: Not Found"
+        description=  {error}  />
+      <img src={error404} alt="404 Error: Page Not Found" style={{ width: '40vh', height: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto'}}></img>
+    </div>
+    
+    )
+  }
+
+  navigationPage = (user) => {
     return(
       <div>
         <Navigation
-          user={uzer} 
+          user={user} 
           login={this.login} 
           logout={this.logout} 
           isiPhone={this.state.iosPopUp} 

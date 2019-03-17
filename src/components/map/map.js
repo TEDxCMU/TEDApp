@@ -13,8 +13,6 @@ export class Map extends Component {
             <h5 className="sectionTitle">Getting to CMU</h5>
             <iframe name="map" className="map" src="https://www.google.com/maps/embed/v1/place?q=place_id:ChIJwTuY5SHyNIgROLIDNCm3XbE&key=AIzaSyCTunhepxOuJE0aJPNWRhtbxCmCPIj29rI" title="map" allowFullScreen
             ></iframe>
-            {/* <h5 class="sectionTitle">Getting around CMU</h5>
-            <img src={map} alt="map"></img> */}
         </div>
         );
       }

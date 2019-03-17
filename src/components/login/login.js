@@ -33,7 +33,15 @@ export class Login extends Component {
 
     render() {
       if (this.state.redirect === true){
-        return <Redirect to='/'/>
+        console.log(fire.auth().currentUser.email)
+        console.log(this.state.email)
+        if (this.state.email === "dijour@cmu.edu") {
+          return <Redirect to='/'/>
+        }
+        // speaker login, redirect them to the myQuestions page
+        else {
+          return <Redirect to='/questions'/>
+        }
       }
 
       console.log(this.state.found);
@@ -57,33 +65,33 @@ export class Login extends Component {
       );
     }
 
+
+    // default firestore login function with added redirect to home upon successful login
     login = (e) => {
       e.preventDefault();
       fire.auth().signInWithEmailAndPassword(this.state.email, this.state.password).then((u)=>{
         this.setState({
           found: true,
           redirect: true
-        }
-        // , () => (console.log(this.state))
-        )
+        })
       }).catch((error) => {
           this.setState({
             found: false
           })
-          // console.log(error);
         });
     }
 
+    // call login method from App.js
     onClickButton = (event) => {
       event.preventDefault();
       this.props.login(null, this.state.email.toString(), this.state.password.toString())
     }
   
+    // default handle change for react forms
     handleChange = (e) => {
         const name = e.target.name
         this.setState({[name]: e.target.value});
       }
-  
   }
   
   export default Login;

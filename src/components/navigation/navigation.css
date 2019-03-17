@@ -34,6 +34,11 @@
   height: 50px !important;
   width: 50px !important;
   box-shadow: 0;
+  position: static;
+  height: 24px;
+  width: 36px;
+  right: 26px;
+  top: 42px;
 }
 
 /* Color/shape of close button cross */
