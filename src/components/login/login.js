@@ -3,22 +3,6 @@ import '../../App.css';
 import './login.css';
 import fire from '../../fire.js';
 import { Redirect } from 'react-router-dom';
-import posed from 'react-pose';
-
-const Form = posed.form({
-  correct: {
-    opacity: 1
-  },
-  incorrect: {
-    opacity: 0,
-    transition: {
-      from: '-5px',
-      to: '5px',
-      stiffness: 200,
-      damping: 20
-    }
-  }
-});
 
 export class Login extends Component {
     constructor() {

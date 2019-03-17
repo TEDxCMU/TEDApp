@@ -22,6 +22,7 @@ import error404 from './404.png';
 import Popup from 'react-popup';
 import moment from 'moment';
 import Header from './components/header/header';
+import QANDA from './components/brains/subComponents/qAndAMain';
 
 class App extends Component {
   constructor() {
@@ -46,7 +47,8 @@ class App extends Component {
           <Route path="/events/:id" exact strict component={EventDetails}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
           <Route path="/login" exact strict render={this.loginPage}/>
-          <Route path="/brainFood" exact strict render={this.BrainFoodPage}/>
+          <Route path="/ripple" exact strict render={this.RipplePage}/>
+          <Route path="/qanda" exact strict render={this.QANDAPage}/>
           <Route path="/questions" exact strict render={this.questionsPage}/>
           <Route path="/map" exact strict render={this.mapPage}/>
           <Route component={this.noMatch} />
@@ -173,13 +175,28 @@ class App extends Component {
     );
   }
   
-  BrainFoodPage = (props) => {
+  RipplePage = (props) => {
     return (
       <div>
         <Header
-          title="Brain Food"
-          description="See how the conference is going and increase your impact." />
+          title="Ripple"
+          description="See the reach of this conference and expand the Ripple Effect." />
         <BrainFood
+        handleScroll={this.handleScroll}
+        user={this.state.user}
+        isLoaded={this.isLoaded}
+        />
+      </div>
+    );
+  }
+
+  QANDAPage = () => {
+    return (
+      <div>
+        <Header
+          title="Q&amp;A"
+          description="Ask questions and get personalized replies. Answered questions appear here, so check back to see if a speaker gets back to you!" />
+        <QANDA
         handleScroll={this.handleScroll}
         user={this.state.user}
         isLoaded={this.isLoaded}

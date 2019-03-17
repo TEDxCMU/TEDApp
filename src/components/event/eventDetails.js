@@ -118,7 +118,7 @@ export class EventDetails extends Component {
             .then(function() {
                 ReactGA.event({
                     category: 'User',
-                    action: 'Create Question without Fingerprint'
+                    action: 'Create Question without Fingerprint on Speaker Page'
                   })
             })
             .catch(function(error) {
@@ -135,7 +135,7 @@ export class EventDetails extends Component {
             .then(function() {
                 ReactGA.event({
                     category: 'User',
-                    action: 'Create Question with Fingerprint'
+                    action: 'Create Question with Fingerprint on Speaker Page'
                   })
             })
             .catch(function(error) {

@@ -486,7 +486,6 @@ export class Schedule extends Component {
       }
     });
     db.collection('detailed itinerary').get().then(snapshot => {
-        var source = snapshot.metadata.fromCache ? "local cache" : "server";
         snapshot.forEach(doc => {
             let id = doc.id;
             db.collection('detailed itinerary').doc(id).onSnapshot(docSnapshot => {

@@ -39,12 +39,13 @@ export class BrainFood extends Component {
     }
     return (
         <div>
-            <div className="pageSelect">
+            {/* <div className="pageSelect">
                 <button id="left" className={this.state.page === 0 ? "selected" : "unselected"} onClick={e => this.switchPage(e, 0)}>Interact</button>
                 <button id="right" className={this.state.page === 1 ? "selected" : "unselected"} onClick={e => this.switchPage(e, 1)}>Q & A</button>
-            </div>
+            </div> */}
             {this.state.page === 0 ? 
             <div className="mapPage">
+                <h1 style={{width: '90%'}}>A Global Ripple Effect</h1>
                 <div className="question-btn-container">
                     { this.state.inDatabase !== null ?
                         <h6><button onClick={() => this.openModal()} className="question-btn question-pos" style={{position: 'static', margin: '0'}}> {this.state.inDatabase === true ? "Change Your City": "Ripple"}</button></h6>
@@ -61,6 +62,7 @@ export class BrainFood extends Component {
                     <div className="modal">
                         <div>
                             <h2>And where are you from?</h2>
+                            <h4>City:</h4>
                             <Autocomplete
                                 style={{paddingLeft: '12px', padding: '1em 0', boxSizing: 'border-box !important', height: '20px', color: 'var(--tedgrey)', fontFamily: 'Open Sans, sans-serif', fontSize: '1em', lineHeight: '1em', width: '100%', background: "transparent", border: '1px solid #e9ebec'}}
                                 onPlaceSelected={(place) => {
@@ -94,7 +96,6 @@ export class BrainFood extends Component {
                     </div>
                     </Popup>
                 </div>
-                <h1 style={{width: '90%'}}>A Global Ripple Effect</h1>
                 <RippleMap/>
             </div>
             :

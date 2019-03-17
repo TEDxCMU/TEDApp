@@ -19,7 +19,7 @@ const db = firebase.firestore();
 db.settings({
   timestampsInSnapshots: true
 });
-firebase.firestore().enablePersistence()
+firebase.firestore().enablePersistence({experimentalTabSynchronization:true});
 
 
 export const auth = firebase.auth();

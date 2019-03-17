@@ -159,7 +159,7 @@ export class QAndAMain extends Component {
             .then(function() {
                 ReactGA.event({
                     category: 'User',
-                    action: 'Create Question without Fingerprint'
+                    action: 'Create Question without Fingerprint on Q&A Page'
                 }, () => this.componentDidMount())
             })
             .catch(function(error) {
@@ -176,7 +176,7 @@ export class QAndAMain extends Component {
             .then(function() {
                 ReactGA.event({
                     category: 'User',
-                    action: 'Create Question with Fingerprint'
+                    action: 'Create Question with Fingerprint on Q&A Page'
                 }, () => this.componentDidMount())
             })
             .catch(function(error) {
