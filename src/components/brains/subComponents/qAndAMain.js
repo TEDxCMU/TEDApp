@@ -260,13 +260,6 @@ export class QAndAMain extends Component {
     }
 
     render () {
-        console.log(this.state)
-        // let nameBlank = true;
-        // let questionBlank = true;
-        const { name, question } = this.state;
-        (console.log(typeof name))
-        // let question = JSON.parse(this.state.question);
-        // let name = JSON.parse(this.state.name);
         const style = {
             display: 'flex',
             justifyText: 'center',
