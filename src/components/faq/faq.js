@@ -15,17 +15,17 @@ export class Faq extends Component {
             },
             {
                 question: 'When and where is this year\'s event?',
-                answer: '<p>This year\'s TEDxCMU conference, "Ripple Effet", will be held on Saturday, 03/30/2019, in the Cohon University Center, from 9:00 AM - 3:00 PM.</p>',
+                answer: '<p>This year\'s TEDxCMU conference, "Ripple Effet", will be held on Saturday, 03/30/2019, in the Jared L. Cohon University Center, from 9:00 AM - 3:00 PM.</p>',
                 category: 'general'
             },
             {
-                question: 'Will there be food? What are the lunch options?',
-                answer: '<p>Yes! Attendees receive a complementary breakfast and lunch, with vegetarian options!</p>',
+                question: 'Will there be food?',
+                answer: '<p>We will provide some light breakfast in the morning during registration. There will be a lunch break with catering from Chipotle (including vegetarian and gluten free options).</p>',
                 category: 'general'
             },
             {
-                question: 'How much are Ripple Effect tickets?',
-                answer: '<p>General Admission tickets cost $15, and VIP tickets are $30. VIP ticket holders receive extra swag in their bags, and get to sit in the first 4 rows!</p>',
+                question: 'How much are tickets?',
+                answer: '<p>General admission tickets are $15 and VIP admission is $30 per ticket. Ticket  purchases include access to both speaker sessions and performances, our Innovation Expo, free breakfast and a Chipotle lunch, as well as an appreciation bag with a water bottle and other goodies. VIP purchases will have more benefits and will receive more items. TEDxCMU relies on tickets and support to cover all costs per TED rules for independently organized TEDx events.</p>',
                 category: 'tickets'
             },
             {
@@ -36,7 +36,7 @@ export class Faq extends Component {
             },
             {
                 question: 'When do event tickets go on sale?',
-                answer: '<p>Our tickets traditionally go on sale in early March. We may have events that raffle off special discounts or give free tickets. To learn more about those events, <a href="http://tedxcmu.us3.list-manage.com/subscribe/post?u=eb8a63a687a4d582ce3b6b515&id=ce11cda9eb">subscribe</a> to our newsletter and follow us on <a href="http://facebook.com/tedxcmu">social media</a>.</p>',
+                answer: '<p>Tickets are on sale now! Find more information about purchasing <a href="http://carnegiemellontickets.universitytickets.com/w/event.aspx?id=1830&p=1&fbclid=IwAR1qGp31E_oTd6kL-_IHp0JvN4RCXnckFvsvEmLzRY1XnXh_E4EWs2u8kcg">here</a>. We also may have events that raffle off special discounts or give free tickets. To learn more about those events, <a href="http://tedxcmu.us3.list-manage.com/subscribe/post?u=eb8a63a687a4d582ce3b6b515&id=ce11cda9eb">subscribe</a>to our newsletter and follow us on <a href="http://facebook.com/tedxcmu">social media</a>.</p>',
                 category: 'tickets'
             },
             {
@@ -66,7 +66,7 @@ export class Faq extends Component {
             },
             {
                 question: 'Still have questions?',
-                answer: '<p>Please check out our <a href="https://www.tedxcmu.org/speaker-faq">Speaker FAQ</a> and <a href="https://www.tedxcmu.org/contact">contact us</a> about any further questions you may have!</p>',
+                answer: '<p>Please check out our <a href="https://www.tedxcmu.org/speaker-faq">Speaker FAQ</a> and <a href="https://www.tedxcmu.org/sponsors-media-faq>Sponsor & Media FAQ</a> for more information. If you can\'t find your answer, on those pages, don\'t hesitate to <a href="https://www.tedxcmu.org/contact">contact us</a> about any further questions you may have!</p>',
                 category: 'volunteer'
             }
         ],

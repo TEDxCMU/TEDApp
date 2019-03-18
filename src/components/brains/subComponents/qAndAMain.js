@@ -440,7 +440,7 @@ export class QAndAMain extends Component {
     db.collection('speakers').doc(this.state.speaker).collection("questions").get()
     .then(snapshot => {
         snapshot.forEach(doc => {
-            if (doc.data().answered) {
+            if (doc.data().answer !== "" ) {
                 let docCopy = doc.data();
                 docCopy.id = doc.id;
                 docCopy.answered = false;

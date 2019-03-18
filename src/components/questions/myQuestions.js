@@ -35,15 +35,22 @@ export class MyQuestions extends Component {
                   answer={question.answer}
                   answered={question.answered} 
                   time={question.time} 
+                  answerInDB={question.answerInDB}
                   answerQuestion={this.answerQuestion}
                   id={question.id}
-                  name={question.name}>
+                  name={question.name}
+                  close={this.state.close}>
               </QuestionComponent> 
           ) 
       })
 
     return (
       <div className="speakers">
+          {fire.auth().currentUser !== null ?
+            <div style={{textAlign: 'center'}}>Account: {fire.auth().currentUser.email}</div>
+          :
+            <div></div>
+          }
           {newList}
       </div>
     );
@@ -63,12 +70,20 @@ export class MyQuestions extends Component {
     .then(function() {
         questionsCopy[index].answered = true;
         that.setState({
-            questions: questionsCopy
-        })
+            questions: questionsCopy,
+            close: index
+        }, () => that.setClose(index))
     })
     .catch(function(error) {
         console.error("Error writing document: ", error);
     });
+  }
+
+  // close the specific question component we just answered
+  setClose = (index) => {
+    this.setState({
+      close: index
+    }, () => this.componentDidMount())
   }
 
   componentDidMount = () => {
@@ -89,6 +104,9 @@ export class MyQuestions extends Component {
         snapshot.forEach(doc => {
             let docCopy = doc.data();
             docCopy.id = doc.id;
+            if (docCopy.answer !== "") {
+              docCopy.answerInDB = true
+            }
             docCopy.answered = false;
             wholeData.push(docCopy)
         });

@@ -75,7 +75,6 @@ export class Schedule extends Component {
   }
 
   render = () => {
-    console.log(this.state.allEvents)
     if (this.state.allEvents.length === 0) {
       return (
         <div>

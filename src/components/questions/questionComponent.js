@@ -13,24 +13,22 @@ export class QuestionComponent extends Component {
 
     
     render() {
-    let index = this.props.index;
-    let id = this.props.id;
     let question = this.props.question;
     let name = this.props.name;
     return (
         <div className="speaker">
-            <Dropdown question={question}>
+            <Dropdown question={question} open={this.state.open} answered={this.props.answered}>
                 <form className="questions-form">
                     <label style={{marginTop: '0'}}>Question:</label>
                     <p>"{question}"</p>
                     <p>FROM: {name}</p>
-                    <input type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
+                    <textarea className="popup-input" type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
                     {this.props.answered === true ? 
                     <div>
                         <button type="button" className="button-sent full-width">Answered</button>
                     </div>     
                     :
-                        <button type="button" style={{marginTop: '2rem', marginBottom: '10px'}} className="button-primary full-width" onClick={() => this.props.answerQuestion(id, this.state.answer, index)}>Answer</button> 
+                        <button type="button" style={{marginTop: '2rem', marginBottom: '10px'}} className="button-primary full-width" onClick={(e) => this.closeAndSend(e)}>{this.props.answerInDB ? "Re-Submit" : "Answer"}</button> 
                     }           
                 </form>
             </Dropdown>
@@ -47,6 +45,19 @@ export class QuestionComponent extends Component {
             answer: this.props.answer
         })
     }
-      
+
+    componentWillReceiveProps = () => {
+        if (this.props.answered) {
+            this.setState({
+                open: false
+            })
+        }
+    }
+
+    closeAndSend = (e) => {
+        e.preventDefault();
+        let { index, id } = this.props;
+        this.props.answerQuestion(id, this.state.answer, index);
+    }
 }
 export default QuestionComponent;

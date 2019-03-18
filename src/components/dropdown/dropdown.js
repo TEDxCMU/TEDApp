@@ -25,9 +25,8 @@ export class Dropdown extends Component {
   };
 
     render() {
-
       let content = null;
-      if (this.state.showContent) {
+      if (this.state.showContent ) {
         content = (
           <div className="content">
             {this.props.children}
@@ -38,17 +37,22 @@ export class Dropdown extends Component {
       return (
         <div className="dropdown">
             <div onClick={this.toggleShow} className="label">
-                <h6 className="question-title">{this.props.question}</h6>
-                { this.state.showContent ===  false ?
-                <h4 className="question-plus">+</h4>
-                :
-                <h4 className="question-plus">–</h4>
-                }
+                <h6 className={this.state.showContent ? "question-title-open" : "question-title"}>{this.props.question}</h6>
+                <h4 className="question-plus">{this.state.showContent ? "-" : "+"}</h4>
             </div>
             {content}
         </div>
       );
     }
+
+    componentWillReceiveProps = (props) => {
+      if (this.props.answered) {
+        this.setState({
+          showContent: false
+        })
+      }
+    }
+
 }
 
 export default Dropdown;
