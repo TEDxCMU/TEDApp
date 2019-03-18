@@ -17,7 +17,7 @@ export class QuestionComponent extends Component {
     let name = this.props.name;
     return (
         <div className="speaker">
-            <Dropdown question={question} open={this.state.open} answered={this.props.answered}>
+            <Dropdown question={question} open={this.state.open} answered={this.props.answered} check={this.props.answerInDB}>
                 <form className="questions-form">
                     <label style={{marginTop: '0'}}>Question:</label>
                     <p>"{question}"</p>

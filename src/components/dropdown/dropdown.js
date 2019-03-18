@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import './dropdown.css';
+import check from '../../check.svg'
 
 export class Dropdown extends Component {
   state = {
@@ -38,6 +39,11 @@ export class Dropdown extends Component {
         <div className="dropdown">
             <div onClick={this.toggleShow} className="label">
                 <h6 className={this.state.showContent ? "question-title-open" : "question-title"}>{this.props.question}</h6>
+                {this.props.check ? 
+                  <img className="check" src={check}></img>
+                :
+                  <div></div>
+                }
                 <h4 className="question-plus">{this.state.showContent ? "-" : "+"}</h4>
             </div>
             {content}
