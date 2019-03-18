@@ -186,7 +186,7 @@ export class Header extends Component {
                                     <div className="modal">
                                         <div className="popup-response">
                                             <img src={bottle} className="bottle" alt="Bottle" />
-                                            <p>Thank you for asking a question! Please check back on the Brain Food page later.</p>
+                                            <p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
                                             <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
                                         </div>
                                     </div>
