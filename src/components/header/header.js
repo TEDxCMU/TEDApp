@@ -117,7 +117,7 @@ export class Header extends Component {
                             <h1>{this.props.title}</h1>
                             { this.props.tag !== undefined ?
                                 <div>
-                                    <h6 className="description">{this.props.tag}</h6>
+                                    <h6 className="description-tag">{this.props.tag}</h6>
                                 </div>
                             :
                                 <div></div>
@@ -146,9 +146,14 @@ export class Header extends Component {
                                     <div className="modal">
                                         <div>
                                             <h4>Dear {this.props.title},</h4>
-                                            <textarea type="text" id="iOS" required className="popup-input" name="question" value={that.props.question} placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
+                                            <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup-input" : "popup-input-invalid" } name="question" value={that.props.question} placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
                                             <h4>Sincerely, </h4>
-                                            <input type="text" style={{height: '20px'}} className="popup-input-small" value={that.props.name} required minLength="4" siz="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
+                                            <input type="text" style={{height: '20px'}} className={this.state.errors === undefined || this.state.errors.name === false ? "popup-input-small" : "popup-input-small-invalid" } autoComplete="off" value={that.props.name} required minLength="4" size="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
+                                            {this.state.errors === undefined ?
+                                                <small> </small>
+                                            :
+                                                <small className="small-red">Please fill in both fields before submitting.</small>
+                                            }                                         
                                             <div className="popup-btns">
                                                 <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
                                                 <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
@@ -257,10 +262,11 @@ export class Header extends Component {
     closeCheck = () => {
         const { name, question } = this.state;
         this.setState({ 
-        open: true,
-        openCheck: false,
-        name: name,
-        question: question
+            open: true,
+            openCheck: false,
+            name: name,
+            question: question,
+            errors: undefined
         })
     }    
 

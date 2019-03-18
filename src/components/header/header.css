@@ -97,6 +97,21 @@ header .arrow {
     font-family: 'Open Sans', sans-serif;
 }
 
+.popup-input-invalid {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    height: 120px;
+    border-radius: 3px;
+    outline: none;
+    box-sizing: border-box !important;
+    font-size: 17px;
+    padding: 12px;
+    color: #808080;
+    font-family: 'Open Sans', sans-serif;
+    border: 2px solid var(--tedred) !important;
+  }
+
 .popup-input-small {
     display: block;
     margin-top: 10px;
@@ -109,6 +124,21 @@ header .arrow {
     padding-left: 12px !important;
     color: #808080;    
     font-family: 'Open Sans', sans-serif;
+}
+
+.popup-input-small-invalid {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    height: 20px;
+    border-radius: 3px;
+    outline: none;
+    box-sizing: border-box !important;
+    font-size: 17px;
+    padding-left: 12px !important;
+    color: #808080;    
+    font-family: 'Open Sans', sans-serif;
+    border: 2px solid var(--tedred) !important;
 }
 
 .popup-response {
@@ -146,6 +176,13 @@ header .title {
     padding-top: 0;
     margin-bottom: 0;
     padding-bottom: 20px;
+}
+
+.description-tag {
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 20px;
+    text-align: center;
 }
 
 .description-small {

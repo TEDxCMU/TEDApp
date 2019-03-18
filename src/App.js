@@ -195,7 +195,7 @@ class App extends Component {
       <div>
         <Header
           title="Q&amp;A"
-          description="Ask questions and get personalized replies. Answered questions appear here, so check back to see if a speaker gets back to you!" />
+          description="Ask questions and get personalized replies. Answered questions appear here, so check back to see if a speaker replies to you!" />
         <QANDA
         handleScroll={this.handleScroll}
         user={this.state.user}

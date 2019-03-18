@@ -18,7 +18,6 @@ export class QAndAMain extends Component {
             speaker: 'pfelterm@andrew.cmu.edu',
             question: '',
             name: '',
-            errors: {name: false, question: false},
             confirmationOpen: false,
             open: false,
             openCheck: false
@@ -104,7 +103,7 @@ export class QAndAMain extends Component {
     openCheck = () => {
       const { name, question } = this.state;
       let errors = this.validate(name, question);
-      if (errors.name || errors.question) {
+      if (errors.name || errors.question ) {
           return this.setState({
               errors: errors
           })
@@ -124,7 +123,8 @@ export class QAndAMain extends Component {
           open: true,
           openCheck: false,
           name: name,
-          question: question
+          question: question,
+          errors: undefined
         })
     }    
 
@@ -365,9 +365,14 @@ export class QAndAMain extends Component {
                         <div className="modal">
                             <div>
                                 <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4>
-                                <textarea type="text" id="iOS" required className="popup-input" name="question" value={this.state.question} placeholder="Please write a question before submitting." onChange={this.handleChange}/>
+                                <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup-input" : "popup-input-invalid" } name="question" value={this.state.question} placeholder="Please write a question before submitting." onChange={this.handleChange}/>
                                 <h4>Sincerely, </h4>
-                                <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" placeholder="Please add your name." name="name" value={this.state.name} onChange={this.handleChange}/>
+                                <input type="text" style={{height: '20px'}} autoComplete="off" className={this.state.errors === undefined || this.state.errors.name === false ? "popup-input-small" : "popup-input-small-invalid" } required minLength="4" size="10" placeholder="Please add your name." name="name" value={this.state.name} onChange={this.handleChange}/>
+                                {this.state.errors === undefined ?
+                                    <small> </small>
+                                :
+                                    <small className="small-red">Please fill in both fields before submitting.</small>
+                                }
                                 <div className="popup-btns">
                                     <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
                                     <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
