@@ -53,6 +53,7 @@ export class EventDetails extends Component {
                     name={this.state.name}
                     close={this.closeConfirmationPopup}
                     errors={this.state.errors}
+                    validate={this.validate}
                     />
                     <div className="event-details">
                         { self.speaker !== undefined ?

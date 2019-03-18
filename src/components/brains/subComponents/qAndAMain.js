@@ -121,8 +121,8 @@ export class QAndAMain extends Component {
     closeCheck = () => {
       const { name, question } = this.state;
         this.setState({ 
-          openCheck: false,
           open: true,
+          openCheck: false,
           name: name,
           question: question
         })
@@ -134,9 +134,9 @@ export class QAndAMain extends Component {
         e.preventDefault()
         if (this.state.question.length > 0 && this.state.name.length > 0) {
             this.setState({
-                confirmationOpen: true,
                 open: false,
-                openCheck: false
+                openCheck: false,
+                confirmationOpen: true
             }, () => this.createQuestion())
         }
         else {
@@ -189,6 +189,7 @@ export class QAndAMain extends Component {
         }
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
+        let that = this;
         if (localStorage.getItem('fingerprint') === null) {
             db.collection("speakers").doc(this.state.speaker).collection("questions").add({
                 question: this.state.question,
@@ -197,10 +198,17 @@ export class QAndAMain extends Component {
                 timeAsked: now
             })
             .then(function() {
+                that.setState({
+                    name: '',
+                    question: '',
+                    open: false,
+                    openCheck: false
+                    
+                }, () =>                 
                 ReactGA.event({
                     category: 'User',
                     action: 'Create Question without Fingerprint on Q&A Page'
-                }, () => this.componentDidMount())
+                }, () => this.componentDidMount()))
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
@@ -214,10 +222,16 @@ export class QAndAMain extends Component {
                 timeAsked: now
             })
             .then(function() {
+                that.setState({
+                    name: '',
+                    question: '',
+                    open: false,
+                    openCheck: false
+                }, () =>                 
                 ReactGA.event({
                     category: 'User',
                     action: 'Create Question with Fingerprint on Q&A Page'
-                }, () => this.componentDidMount())
+                }, () => this.componentDidMount()))
             })
             .catch(function(error) {
                 console.error("Error writing document: ", error);
@@ -249,8 +263,10 @@ export class QAndAMain extends Component {
         console.log(this.state)
         // let nameBlank = true;
         // let questionBlank = true;
-        let question = this.state.question;
-        let name = this.state.name;
+        const { name, question } = this.state;
+        (console.log(typeof name))
+        // let question = JSON.parse(this.state.question);
+        // let name = JSON.parse(this.state.name);
         const style = {
             display: 'flex',
             justifyText: 'center',
@@ -356,9 +372,9 @@ export class QAndAMain extends Component {
                         <div className="modal">
                             <div>
                                 <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4>
-                                <textarea type="text" id="iOS" required className="popup-input" name="question" placeholder={ this.state.question === "" ? "Please write a question before submitting." : {question} } onChange={this.handleChange}/>
+                                <textarea type="text" id="iOS" required className="popup-input" name="question" value={this.state.question} placeholder="Please write a question before submitting." onChange={this.handleChange}/>
                                 <h4>Sincerely, </h4>
-                                <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" placeholder={ this.state.name === "" ? "Please add your name." : {name}} onChange={this.handleChange}/>
+                                <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" placeholder="Please add your name." name="name" value={this.state.name} onChange={this.handleChange}/>
                                 <div className="popup-btns">
                                     <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
                                     <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
@@ -407,7 +423,7 @@ export class QAndAMain extends Component {
                         {newList}
                     </div>
                     :
-                    <h4 className="speakers" style={{textAlign: 'center'}}>No answered questions yet. Check back later!</h4>
+                    <h4 className="speakers" style={{paddingTop: '20px', textAlign: 'center'}}>No answered questions yet. Check back later!</h4>
                 }
             </div>
 

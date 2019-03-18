@@ -146,9 +146,9 @@ export class Header extends Component {
                                     <div className="modal">
                                         <div>
                                             <h4>Dear {this.props.title},</h4>
-                                            <textarea type="text" id="iOS" required className="popup-input" name="question" placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
+                                            <textarea type="text" id="iOS" required className="popup-input" name="question" value={that.props.question} placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
                                             <h4>Sincerely, </h4>
-                                            <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
+                                            <input type="text" style={{height: '20px'}} className="popup-input-small" value={that.props.name} required minLength="4" siz="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
                                             <div className="popup-btns">
                                                 <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
                                                 <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
@@ -240,8 +240,8 @@ export class Header extends Component {
 
     // opens the "are you sure" pop-up modal
     openCheck = () => {
-        const { name, question } = this.state;
-        let errors = this.validate(name, question);
+        const { name, question } = this.props;
+        let errors = this.props.validate(name, question);
         if (errors.name || errors.question) {
             return this.setState({
                 errors: errors
@@ -249,9 +249,7 @@ export class Header extends Component {
         }
         this.setState({ 
             openCheck: true,
-            open: false,
-            name: name,
-            question: question
+            open: false
         })
     }
 
@@ -259,8 +257,8 @@ export class Header extends Component {
     closeCheck = () => {
         const { name, question } = this.state;
         this.setState({ 
-        openCheck: false,
         open: true,
+        openCheck: false,
         name: name,
         question: question
         })
