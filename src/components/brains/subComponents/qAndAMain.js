@@ -103,7 +103,7 @@ export class QAndAMain extends Component {
     openCheck = () => {
       const { name, question } = this.state;
       let errors = this.validate(name, question);
-      if (errors.name || errors.question ) {
+      if (errors.question) {
           return this.setState({
               errors: errors
           })
@@ -260,16 +260,17 @@ export class QAndAMain extends Component {
     }
 
     render () {
-        const style = {
+        const popupStyle = {
             display: 'flex',
             justifyText: 'center',
             flexDirection: 'column',
             alignItems: 'space-between',
-            padding: '30px 40px',
-            width: '70%',
+            padding: '20px 20px',
+            width: '80%',
             border: 'none',
             borderRadius: '10px'
         }
+
         let parkerClasses = "button-primary medium blank";
         let ranaClasses = "button-primary medium blank";
         let micahClasses = "button-primary medium blank";
@@ -360,19 +361,19 @@ export class QAndAMain extends Component {
                         open={this.state.open}
                         closeOnDocumentClick
                         onClose={this.closeModal}
-                        contentStyle={style}
+                        contentStyle={popupStyle}
                         >
                         <div className="modal">
                             <div>
                                 <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4>
-                                <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup-input" : "popup-input-invalid" } name="question" value={this.state.question} placeholder="Please write a question before submitting." onChange={this.handleChange}/>
-                                <h4>Sincerely, </h4>
-                                <input type="text" style={{height: '20px'}} autoComplete="off" className={this.state.errors === undefined || this.state.errors.name === false ? "popup-input-small" : "popup-input-small-invalid" } required minLength="4" size="10" placeholder="Please add your name." name="name" value={this.state.name} onChange={this.handleChange}/>
+                                <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup-input" : "popup-input-invalid" } name="question" value={this.state.question} placeholder="Write your question here..." onChange={this.handleChange}/>
                                 {this.state.errors === undefined ?
                                     <small> </small>
                                 :
-                                    <small className="small-red">Please fill in both fields before submitting.</small>
+                                    <small className="small-red">Please ask a question before submitting.</small>
                                 }
+                                <h4>Sincerely, </h4>
+                                <input type="text" style={{height: '20px'}} autoComplete="off" className="popup-input-small" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>
                                 <div className="popup-btns">
                                     <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
                                     <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
@@ -384,7 +385,7 @@ export class QAndAMain extends Component {
                         open={this.state.openCheck}
                         closeOnDocumentClick
                         onClose={this.closeCheck}
-                        contentStyle={style}
+                        contentStyle={popupStyle}
                         >
                         <div className="modal">
                             <div>
@@ -400,7 +401,7 @@ export class QAndAMain extends Component {
                         open={this.state.confirmationOpen}
                         closeOnDocumentClick
                         onClose={this.closeConfirmation}
-                        contentStyle={style}
+                        contentStyle={popupStyle}
                         >
                         <div className="modal">
                             <div className="popup-response">

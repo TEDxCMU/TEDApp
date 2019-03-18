@@ -26,13 +26,13 @@ export class Header extends Component {
         let that = this;
         let nameBlank = true;
         let questionBlank = true;
-        const style = {
+        const popupStyle = {
             display: 'flex',
             justifyText: 'center',
             flexDirection: 'column',
             alignItems: 'space-between',
-            padding: '30px 40px',
-            width: '70%',
+            padding: '20px 20px',
+            width: '80%',
             border: 'none',
             borderRadius: '10px'
           }
@@ -58,7 +58,7 @@ export class Header extends Component {
                     open={this.state.announcementOpen}
                     closeOnDocumentClick
                     onClose={this.closeAnnouncement}
-                    contentStyle={style}
+                    contentStyle={popupStyle}
                     >
                     <div className="modal">
                         <div>
@@ -141,19 +141,19 @@ export class Header extends Component {
                                     open={this.state.open}
                                     closeOnDocumentClick
                                     onClose={this.closeModal}
-                                    contentStyle={style}
+                                    contentStyle={popupStyle}
                                     >
                                     <div className="modal">
                                         <div>
-                                            <h4>Dear {this.props.title},</h4>
+                                            <h4 style={{marginTop: '5px'}}>Dear {this.props.title},{/* <sup style={{color: 'red'}}>*</sup> */}</h4>
                                             <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup-input" : "popup-input-invalid" } name="question" value={that.props.question} placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
-                                            <h4>Sincerely, </h4>
-                                            <input type="text" style={{height: '20px'}} className={this.state.errors === undefined || this.state.errors.name === false ? "popup-input-small" : "popup-input-small-invalid" } autoComplete="off" value={that.props.name} required minLength="4" size="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={that.props.handleChange}/>
                                             {this.state.errors === undefined ?
                                                 <small> </small>
                                             :
-                                                <small className="small-red">Please fill in both fields before submitting.</small>
-                                            }                                         
+                                                <small className="small-red">Please ask a question before submitting.</small>
+                                            }  
+                                            <h4>Sincerely, </h4>
+                                            <input type="text" style={{height: '20px'}} className="popup-input-small" autoComplete="off" value={that.props.name} required minLength="4" size="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Your name..."} onChange={that.props.handleChange}/>                                       
                                             <div className="popup-btns">
                                                 <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
                                                 <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
@@ -165,7 +165,7 @@ export class Header extends Component {
                                     open={this.state.openCheck}
                                     closeOnDocumentClick
                                     onClose={this.closeCheck}
-                                    contentStyle={style}
+                                    contentStyle={popupStyle}
                                     >
                                     <div className="modal">
                                         <div>
@@ -181,7 +181,7 @@ export class Header extends Component {
                                     open={this.state.confirmationOpen}
                                     closeOnDocumentClick
                                     onClose={this.closeConfirmation}
-                                    contentStyle={style}
+                                    contentStyle={popupStyle}
                                     >
                                     <div className="modal">
                                         <div className="popup-response">
@@ -247,7 +247,7 @@ export class Header extends Component {
     openCheck = () => {
         const { name, question } = this.props;
         let errors = this.props.validate(name, question);
-        if (errors.name || errors.question) {
+        if (errors.question) {
             return this.setState({
                 errors: errors
             })
