@@ -392,7 +392,8 @@ export class QAndAMain extends Component {
                         >
                         <div className="modal">
                             <div>
-                                <h4>Ready to send off?</h4>
+                                <h4>Ready to send off? </h4>
+                                <h6>To prevent spam, you are limited to one question per speaker.</h6>
                                 <div className="popup-btns">
                                     <button className="popup-btn-cancel" onClick={this.closeCheck}>Go Back</button>
                                     <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
