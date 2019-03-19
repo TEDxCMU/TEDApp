@@ -126,6 +126,10 @@
   z-index: 1;
 }
 
+.info-talk-pulse {
+    animation: now-pulse-card 2.5s infinite;
+}
+
 .past {
   content: '';
   position: absolute;
@@ -264,6 +268,27 @@
     box-shadow: 0 0 0 8px rgba(203, 45, 62, 0);
   }
 }
+
+@keyframes now-pulse-card
+{
+  0% {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13), 0 0 0 0px rgba(203, 45, 62, 0.3);
+  }
+  100% {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13), 0 0 0 10px rgba(203, 45, 62, 0);
+  }
+}
+
+@keyframes now-pulse-card-2
+{
+  26% {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13), 0 0 0 0px rgba(203, 45, 62, 0.5);
+  }
+  100% {
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13), 0 0 0 8px rgba(203, 45, 62, 0);
+  }
+}
+
 
 /* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
 

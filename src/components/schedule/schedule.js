@@ -113,6 +113,14 @@ export class Schedule extends Component {
         if (moment().isAfter(moment(event.end, "hh:mm A"))) {
           className = "past";
         }
+
+        let infoTalkStyle = "info-talk";
+        if (className === "now") {
+          infoTalkStyle = "info-talk info-talk-pulse"
+        } else {
+          infoTalkStyle = "info-talk"
+        }
+
         if (event.type !== "static") {
           newList.push(
             <Item key={event.id} id={className === "now" ? "eventNow" : null}>
@@ -121,17 +129,20 @@ export class Schedule extends Component {
                 <span className="event"></span>
                 <span className={className}></span>
                 <span className="bullet-bg"></span>
-                  <div className="info-talk">
-                    <small className="card-arrow">MORE</small>
-                    <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-                    <h4 className="event-title">{event.title}</h4>
-                    <p className="event-description">{event.blurb}</p>
-                    {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
-                      <button className="button-primary"
-                      onClick={() => { this.openModal(allEvents.indexOf(event)) }}>Event Ended</button> 
-                    :
-                      <div></div>
-                    }
+                  <div className={infoTalkStyle}>
+                    <div>
+                      <p className="time"><strong>{event.start}</strong> — {event.end}</p>
+                      <h4 className="event-title">{event.title}</h4>
+                      <p className="event-description">{event.blurb}</p>
+                      <br />
+                      {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+                        <button className="button-primary"
+                        onClick={() => { this.openModal(allEvents.indexOf(event)) }}>Event Ended</button> 
+                      :
+                        <div></div>
+                      }
+                    </div>
+                    <img src={arrow} className="info-arrow" alt="information arrow" />
                   </div>
                 <Link key={event.id} to={{
                   pathname: '/events/'+event.id,
