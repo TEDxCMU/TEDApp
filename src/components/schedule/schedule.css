@@ -252,23 +252,19 @@
 
 
 /* ANIMATIONS */
-@keyframes now-pulse
-{
-  0% {
-    box-shadow: 0.0 0.0 0.0 0.0px rgba(203, 45, 62, 0.3);
-  }
-  100% {
-    box-shadow: 0.0 0.0 0.0 10.0px rgba(203, 45, 62, 0);
-  }
-}
-
 @keyframes now-pulse-2
 {
-  26% {
-    box-shadow: 0.0 0.0 0.0 0.0px rgba(203, 45, 62, 0.5);
+  0%, 35% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.8;
   }
   100% {
-    box-shadow: 0.0 0.0 0.0 8.0px rgba(203, 45, 62, 0);
+    opacity: 0;
+    transform: scale(3);
   }
 }
 
