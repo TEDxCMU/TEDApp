@@ -393,7 +393,7 @@ export class QAndAMain extends Component {
                         <div className="modal">
                             <div>
                                 <h4>Ready to send off? </h4>
-                                <h6>To prevent spam, you are limited to one question per speaker.</h6>
+                                <h6 style={{color: 'black'}}>To prevent spam, you are limited to one question per speaker.</h6>
                                 <div className="popup-btns">
                                     <button className="popup-btn-cancel" onClick={this.closeCheck}>Go Back</button>
                                     <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
@@ -426,7 +426,7 @@ export class QAndAMain extends Component {
                         {newList}
                     </div>
                     :
-                    <h4 className="speakers" style={{paddingTop: '20px', textAlign: 'center'}}>No answered questions yet. Check back later!</h4>
+                    <h4 className="speakers" style={{paddingTop: '20px', textAlign: 'center'}}>{this.state.speakerRef !== undefined ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
                 }
             </div>
 
