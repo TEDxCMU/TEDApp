@@ -110,6 +110,7 @@
   animation: now-pulse 2.5s infinite;
   box-sizing: border-box;
   z-index: 1;
+  -webkit-transform: translateZ(0);
 }
 
 .now::before {
@@ -124,10 +125,12 @@
   animation: now-pulse-2 2.5s infinite;
   box-sizing: border-box;
   z-index: 1;
+  -webkit-transform: translateZ(0);
 }
 
 .info-talk-pulse {
     animation: now-pulse-card 2.5s infinite;
+    -webkit-transform: translateZ(0);
 }
 
 .past {
