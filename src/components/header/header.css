@@ -57,6 +57,10 @@ header .arrow {
     padding: 5px;    
 }
 
+.confirmation-text {
+    text-align: center;
+}
+
 /* ========== QUESTION POPUP ========== */
 
 .modal {

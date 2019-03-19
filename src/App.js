@@ -44,7 +44,7 @@ class App extends Component {
           <Navigation loaded={true} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
           <Switch>
           <Route path="/" exact strict render={this.schedulePage}/>
-          <Route path="/events/:id" exact strict component={EventDetails}/>
+          <Route path="/talks/:id" exact strict component={EventDetails}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
           <Route path="/login" exact strict render={this.loginPage}/>
           <Route path="/ripple" exact strict render={this.RipplePage}/>
@@ -194,7 +194,7 @@ class App extends Component {
     return (
       <div>
         <Header
-          title="Q &amp; A"
+          title="Q&amp;A"
           description="Ask questions and get personalized replies. Answered questions appear here, so check back to see if a speaker replies to you!" />
         <QANDA
         handleScroll={this.handleScroll}

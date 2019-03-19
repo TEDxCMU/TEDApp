@@ -169,7 +169,8 @@ export class Header extends Component {
                                     >
                                     <div className="modal">
                                         <div>
-                                            <h4>Ready to send off?</h4>
+                                            <h4>Ready to send off? </h4>
+                                            <h6 style={{color: 'black'}}>To prevent spam, you are limited to one question per speaker.</h6>
                                             <div className="popup-btns">
                                                 <button className="popup-btn-cancel" onClick={this.closeCheck}>Go Back</button>
                                                 <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
@@ -186,7 +187,7 @@ export class Header extends Component {
                                     <div className="modal">
                                         <div className="popup-response">
                                             <img src={bottle} className="bottle" alt="Bottle" />
-                                            <p>Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
+                                            <p className="confirmation-text">Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
                                             <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
                                         </div>
                                     </div>
@@ -245,8 +246,8 @@ export class Header extends Component {
 
     // opens the "are you sure" pop-up modal
     openCheck = () => {
-        const { name, question } = this.props;
-        let errors = this.props.validate(name, question);
+        const { question } = this.props;
+        let errors = this.props.validate(question);
         if (errors.question) {
             return this.setState({
                 errors: errors
@@ -274,7 +275,7 @@ export class Header extends Component {
     // calls closeModalandOpenConfirmation, which then actually sends the question
     sendQuestion = (e) => {
         e.preventDefault()
-        if (this.props.question.length > 0 && this.props.name.length > 0) {
+        if (this.props.question.length > 0) {
             this.closeModalandOpenConfirmation();
         }
         else {

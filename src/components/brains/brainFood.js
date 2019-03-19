@@ -9,6 +9,7 @@ import Popup from "reactjs-popup";
 import bottle from '../../questionbottle.svg';
 import moment from 'moment';
 import ReactGA from 'react-ga';
+import * as EmailValidator from 'email-validator';
 
 export class BrainFood extends Component {
   constructor() {
@@ -26,6 +27,7 @@ export class BrainFood extends Component {
   }
 
   render () {
+    console.log(this.state.errors !== undefined && this.state.errors.email === true)
     let nameBlank = true;
     const style = {
         display: 'flex',
@@ -69,11 +71,20 @@ export class BrainFood extends Component {
                                 this.setState({city: place});
                                 }}
                             />
+                            {this.state.errors !== undefined && this.state.errors.city === true ?
+                                    <small className="small-red">Please add a city before submitting.</small>
+                                :
+                                    <small></small>
+                            }
                             <h4>Name:</h4>
                             <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={e => {this.handleChange(e)}}/>
                             <h4>Email:</h4>
-                            <input type="text" style={{height: '20px'}} className="popup-input-small" minLength="4" siz="10" name="email" value={this.state.email} placeholder={ nameBlank ? "Please add your email." : "Jane@Doe.com..."} onChange={e => {this.handleChange(e)}}/>
-
+                            <input type="email" style={{height: '20px'}} className={this.state.errors !== undefined && this.state.errors.email === true ? "popup-input-small-invalid" : "popup-input-small"} minLength="4" siz="10" name="email" value={this.state.email} placeholder={ nameBlank ? "Please add your email." : "Jane@Doe.com..."} onChange={e => {this.handleChange(e)}}/>
+                            {this.state.errors !== undefined && this.state.errors.email === true ?
+                                    <small className="small-red">Please enter a valid email before submitting.</small>
+                                :
+                                    <small></small>
+                            }
                             <div className="popup-btns">
                                 <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
                                 <button className="popup-btn-success button-primary" onClick={e => this.sendLocation(e)}>Submit</button>
@@ -90,7 +101,7 @@ export class BrainFood extends Component {
                     <div className="modal">
                         <div className="popup-response">
                             <img src={bottle} className="bottle" alt="Bottle" />
-                            <p>Thank you for telling us more about yourself! Check the Brain Food page later to see the Ripple Effect!</p>
+                            <p className="confirmation-text">Thank you for telling us more about yourself! Check this page later to see the Ripple Effect!</p>
                             <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
                         </div>
                     </div>
@@ -142,8 +153,15 @@ export class BrainFood extends Component {
     }
 
     sendLocation = (e) => {
+        const { city, email } = this.state;
+        let errors = this.validate(city, email);
+        if (errors.city || errors.email) {
+            return this.setState({
+                errors: errors
+            })
+        }
         e.preventDefault()
-        if (this.state.email.length > 0 && this.state.name.length > 0) {
+        if (this.state.email.length > 0) {
             this.closeModalandOpenConfirmation();
         }
         else {
@@ -158,26 +176,23 @@ export class BrainFood extends Component {
         })
     }
 
-    validate = (name, email) => {
+    validate = (city, email) => {
         // true means invalid, so our conditions got reversed
         return {
-          name: name.length === 0,
-          email: email.length === 0,
+          city: city.geometry === undefined,   
+          email: !(EmailValidator.validate(email))
         };
       }
 
 
     sendLocationToDB = () => {
-        const { name, email } = this.state;
-        let errors = this.validate(name, email);
-        if (errors.name || errors.email) {
-            return this.setState({
-                errors: errors
-            })
+        // if (this.state.city.geometry === undefined) {
+        //     return
+        // } 
+        var name = this.state.name;
+        if (name === "")  {
+            name = "anonymous"
         }
-        if (this.state.city === '') {
-            return
-        } 
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
         let that = this;
@@ -185,13 +200,14 @@ export class BrainFood extends Component {
             db.collection("maps").add({
                 lat: this.state.city.geometry.location.lat(this.state.city),
                 lng: this.state.city.geometry.location.lng(this.state.city),
-                name: this.state.name,
+                name: name,
                 email: this.state.email,
-                timeAsked: now
+                timeSent: now
             })
             .then(function() {
                 that.setState({
-                    inDatabase: true
+                    inDatabase: true,
+                    errors: undefined
                 },
                  () => ReactGA.event({
                     category: 'User',
@@ -206,13 +222,14 @@ export class BrainFood extends Component {
             db.collection("maps").doc(this.state.fingerprint).set({
                 lat: this.state.city.geometry.location.lat(this.state.city),
                 lng: this.state.city.geometry.location.lng(this.state.city),
-                name: this.state.name,
+                name: name,
                 email: this.state.email,
-                timeAsked: now
+                timeSent: now
             })
             .then(function() {
                 that.setState({
-                    inDatabase: true
+                    inDatabase: true,
+                    errors: undefined
                 }, () => ReactGA.event({
                     category: 'User',
                     action: 'Create Location with Fingerprint'
@@ -235,7 +252,9 @@ export class BrainFood extends Component {
           if (docSnapshot.exists) {
             mapsRef.onSnapshot((doc) => {
               this.setState({
-                inDatabase: true    
+                inDatabase: true,
+                name: doc.data().name,
+                email: doc.data().email
               })
             });
           }
