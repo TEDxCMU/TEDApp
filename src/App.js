@@ -44,7 +44,7 @@ class App extends Component {
           <Navigation loaded={true} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
           <Switch>
           <Route path="/" exact strict render={this.schedulePage}/>
-          <Route path="/:id" exact strict component={EventDetails}/>
+          <Route path="/talks/:id" exact strict component={EventDetails}/>
           <Route path="/faq" exact strict render={this.faqPage}/>
           <Route path="/login" exact strict render={this.loginPage}/>
           <Route path="/ripple" exact strict render={this.RipplePage}/>

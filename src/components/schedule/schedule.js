@@ -134,7 +134,7 @@ export class Schedule extends Component {
                     }
                   </div>
                 <Link key={event.id} to={{
-                  pathname: event.id,
+                  pathname: "talks/"+event.id,
                   state: {  
                       id: event.id,
                       title: event.title,
@@ -151,7 +151,7 @@ export class Schedule extends Component {
               :
               <div>
                 <Link key={event.id} to={{
-                  pathname: event.id,
+                  pathname: "talks/"+event.id,
                   state: {  
                       id: event.id,
                       title: event.title,
