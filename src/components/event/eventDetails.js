@@ -91,28 +91,31 @@ export class EventDetails extends Component {
         this.setState({ [e.target.name] : e.target.value });        
     }
 
-    validate = (name, question) => {
+    validate = (question) => {
         // true means invalid, so our conditions got reversed
         return {
-          name: name.length === 0,
           question: question.length === 0,
         };
       }
 
     createQuestion = () => {
-        const { name, question } = this.state;
-        let errors = this.validate(name, question);
-        if (errors.name || errors.question) {
+        const question = this.state.question;
+        let errors = this.validate(question);
+        if (errors.question) {
             return this.setState({
                 errors: errors
             })
-        } 
+        }
+        var name = this.state.name;
+        if (name === "")  {
+            name = "anonymous"
+        }
         let now = moment().format('hh:mm A');
         let db = fire.firestore();
         if (localStorage.getItem('fingerprint') === null) {
             db.collection("speakers").doc(this.state.speaker.email).collection("questions").add({
                 question: this.state.question,
-                name: this.state.name,
+                name: name,
                 answer: "",
                 timeAsked: now
             })
@@ -129,7 +132,7 @@ export class EventDetails extends Component {
         else {
             db.collection("speakers").doc(this.state.speaker.email).collection("questions").doc(localStorage.getItem('fingerprint')).set({
                 question: this.state.question,
-                name: this.state.name,
+                name: name,
                 answer: "",
                 timeAsked: now
             })
