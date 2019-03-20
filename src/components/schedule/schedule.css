@@ -122,15 +122,30 @@
   top: 0;
   background-color: var(--tedred);
   border-radius: 50%;
-  animation: now-pulse-2 2.5s infinite;
+  animation: now-pulse-3 2.5s infinite;
+  box-sizing: border-box;
+  z-index: 1;
+  -webkit-transform: translateZ(0);
+}
+
+.now::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: 0;
+  top: 0;
+  background-color: var(--tedred);
+  border-radius: 50%;
+  animation: now-pulse-4 2.5s infinite;
   box-sizing: border-box;
   z-index: 1;
   -webkit-transform: translateZ(0);
 }
 
 .info-talk-pulse {
-    animation: now-pulse-card 2.5s infinite;
-    -webkit-transform: translateZ(0);
+    /* animation: now-pulse-card 2.5s infinite;
+    -webkit-transform: translateZ(0); */
 }
 
 .past {
@@ -252,19 +267,66 @@
 
 
 /* ANIMATIONS */
+@keyframes now-pulse
+{
+  0% {
+    /* width: 0px;
+    height: 0px; */
+    /* transform:scale(2) */
+
+    /* box-shadow: 0.0 0.0 0.0 0.0px rgba(203, 45, 62, 0.3); */
+  }
+  100% {
+    /* transform:scale(1.5) */
+    /* width: 20px;
+    height: 20px; */
+    /* box-shadow: 0.0 0.0 0.0 10.0px rgba(203, 45, 62, 0); */
+  }
+}
+
 @keyframes now-pulse-2
+{
+  26% {
+    width: 0px;
+    height: 0px;
+    /* box-shadow: 0.0 0.0 0.0 0.0px rgba(203, 45, 62, 0.5); */
+  }
+  100% {
+    width: 13px;
+    height: 13px;
+    /* box-shadow: 0.0 0.0 0.0 8.0px rgba(203, 45, 62, 0); */
+  }
+}
+
+@keyframes now-pulse-3
 {
   0%, 35% {
     transform: scale(0);
     opacity: 1;
   }
-  50% {
-    transform: scale(1.5);
-    opacity: 0.8;
+  45% {
+    transform: scale(1.2);
+    opacity: 0.9;
   }
   100% {
     opacity: 0;
     transform: scale(3);
+  }
+}
+
+@keyframes now-pulse-4
+{
+  0%, 35% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  47% {
+    transform: scale(2);
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4);
   }
 }
 
@@ -288,6 +350,37 @@
   }
 }
 
+@keyframes now-pulse-card-3
+{
+  0%, 35% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(1.2);
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+@keyframes now-pulse-card-4
+{
+  0%, 35% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  47% {
+    transform: scale(2);
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
 
 /* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
 
