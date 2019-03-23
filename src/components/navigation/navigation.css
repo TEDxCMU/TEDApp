@@ -44,8 +44,8 @@
 /* Color/shape of close button cross */
 span .bm-cross {
   background: var(--tedwhite);
-  right: 5px;
-  top: 5px;
+  right: 15px;
+  top: 10px;
   height: 30px !important;
   width: 3px !important;
 }
