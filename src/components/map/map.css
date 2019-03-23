@@ -8,7 +8,10 @@
 }
 
 .indoor-map {
-  margin-left: 5%;
+  max-width: 703px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   padding-bottom: 20%;
   width: 90%;
   height: 90;
