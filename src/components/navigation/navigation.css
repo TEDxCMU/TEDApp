@@ -33,19 +33,22 @@
 .bm-cross-button {
   height: 50px !important;
   width: 50px !important;
-  box-shadow: 0;
-  position: static;
   height: 24px;
   width: 36px;
   right: 26px;
   top: 42px;
 }
 
+.bm-cross-button button {
+  top: 20px !important;
+  left: -20px !important;
+}
+
 /* Color/shape of close button cross */
 span .bm-cross {
   background: var(--tedwhite);
-  right: 15px;
-  top: 10px;
+  right: 20px;
+  top: 25px;
   height: 30px !important;
   width: 3px !important;
 }
