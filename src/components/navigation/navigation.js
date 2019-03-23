@@ -57,17 +57,17 @@ export class Navigation extends Component {
                                             
                                         }
                                     </div>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/map" exact activeStyle={{color:'#6EEBFC'}}>
-                                        Map
-                                    </NavLink></li>
                                     <li><NavLink onClick={() => this.closeMenu()} to="/qanda" exact activeStyle={{color:'#6EEBFC'}}>
-                                        Q&amp;A
-                                    </NavLink></li>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6EEBFC'}}>
-                                        FAQs
+                                        Speaker Q&amp;A
                                     </NavLink></li>
                                     <li><NavLink onClick={() => this.closeMenu()} to="/ripple" exact activeStyle={{color:'#6EEBFC'}}>
                                         Ripple
+                                    </NavLink></li>
+                                    <li><NavLink onClick={() => this.closeMenu()} to="/map" exact activeStyle={{color:'#6EEBFC'}}>
+                                        Map
+                                    </NavLink></li>
+                                    <li><NavLink onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6EEBFC'}}>
+                                        FAQs
                                     </NavLink></li>
                                     {this.props.user === null ?
                                         <div></div>
