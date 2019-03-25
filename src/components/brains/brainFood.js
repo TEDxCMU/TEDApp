@@ -193,7 +193,7 @@ export class BrainFood extends Component {
         if (name === "")  {
             name = "anonymous"
         }
-        let now = moment().format('hh:mm A');
+        let now = moment().format('MMMM Do YYYY, h:mm:ss a');
         let db = fire.firestore();
         let that = this;
         if (localStorage.getItem('fingerprint') === null) {

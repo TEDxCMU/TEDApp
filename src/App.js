@@ -274,7 +274,7 @@ class App extends Component {
   }
 
   sendFingerprintToFirestore = (type, id) => {
-    let timeAccessed = moment().format('hh:mm A');
+    let timeAccessed = moment().format('MMMM Do YYYY, h:mm:ss a');
     let db = fire.firestore()
     db.collection("audience").doc(id.toString()).set({
       id, type, timeAccessed

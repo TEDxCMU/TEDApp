@@ -110,7 +110,7 @@ export class EventDetails extends Component {
         if (name === "")  {
             name = "anonymous"
         }
-        let now = moment().format('hh:mm A');
+        let now = moment().format('MMMM Do YYYY, h:mm:ss a');
         let db = fire.firestore();
         if (localStorage.getItem('fingerprint') === null) {
             db.collection("speakers").doc(this.state.speaker.email).collection("questions").add({

@@ -50,6 +50,7 @@ export class Schedule extends Component {
       updateCount: 0,
       watchingForChanges: false,
       announcement: "The conference is currently not in progress. Please check back at another time.",
+      eventEndedAnnouncement: '<div>The conference is now over, thanks for coming! Please leave your feedback at <a class="a-link" href="http://bit.ly/tedxsurvey">bit.ly/tedxsurvey</a></div>',
       isOpen: false,
       scroll: 0,
       headerLink: true,
@@ -75,6 +76,7 @@ export class Schedule extends Component {
   }
 
   render = () => {
+    let eventDate = moment('2019-03-30').format('L');
     if (this.state.allEvents.length === 0) {
       return (
         <div>
@@ -109,6 +111,9 @@ export class Schedule extends Component {
         else if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
           className = "now";
           notification = event.announcement;
+        }
+        else if (eventDate === moment().format('L') && (moment() > moment(this.state.allEvents[this.state.allEvents.length -1].end, "hh:mm A"))) {
+          notification = this.state.eventEndedAnnouncement
         }
         if (moment().isAfter(moment(event.end, "hh:mm A"))) {
           className = "past";

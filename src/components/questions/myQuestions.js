@@ -58,7 +58,7 @@ export class MyQuestions extends Component {
 
   answerQuestion = (id, text, index) => {
     let email = fire.auth().currentUser.email;
-    let now = moment().format('hh:mm A');
+    let now = moment().format('MMMM Do YYYY, h:mm:ss a');
     let db = fire.firestore();
     // need to make an instance of this class so we can access it further down in the function
     let that = this;

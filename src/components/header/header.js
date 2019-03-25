@@ -9,6 +9,7 @@ import './header.css';
 import { SocialIcon } from 'react-social-icons';
 import Popup from "reactjs-popup";
 import fire from '../../fire.js';
+import Parser from 'html-react-parser';
 
 export class Header extends Component {
     constructor (props) {
@@ -90,7 +91,7 @@ export class Header extends Component {
                 {/* The header should be collapsed, so make the description small */}
                 { this.props.link !== undefined && this.props.link === false ?
                     <div>
-                        <h6 onClick={this.openAnnouncement} className="description-small">{this.props.description}</h6>
+                        <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.props.description)}</h6>
                     </div>
                 :
                     <Link key={'home'} to={{
@@ -204,7 +205,7 @@ export class Header extends Component {
                             <div>
                                 {/* This is a normal header, so put the title and description in where they should be */}
                                 <h1 className="title">{this.props.title}</h1>
-                                <h6 onClick={this.openAnnouncement} className="description">{this.props.description}</h6>
+                                <h6 onClick={this.openAnnouncement} className="description">{Parser(this.props.description)}</h6>
                             </div>
                             }
                         </div>
