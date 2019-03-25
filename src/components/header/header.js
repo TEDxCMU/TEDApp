@@ -24,6 +24,7 @@ export class Header extends Component {
     }
 
     render() {
+        console.log(typeof this.props.description)
         let that = this;
         let nameBlank = true;
         let questionBlank = true;
@@ -91,8 +92,15 @@ export class Header extends Component {
                 {/* The header should be collapsed, so make the description small */}
                 { this.props.link !== undefined && this.props.link === false ?
                     <div>
-                        <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.props.description)}</h6>
+                        {this.props.description !== undefined ?
+                            <div>
+                                <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.props.description.toString())}</h6>
+                            </div>
+                            :
+                            <div></div>
+                        }
                     </div>
+
                 :
                     <Link key={'home'} to={{
                         pathname: '/',
@@ -205,7 +213,15 @@ export class Header extends Component {
                             <div>
                                 {/* This is a normal header, so put the title and description in where they should be */}
                                 <h1 className="title">{this.props.title}</h1>
-                                <h6 onClick={this.openAnnouncement} className="description">{Parser(this.props.description)}</h6>
+                                <div>
+                                    {this.props.description !== undefined ?
+                                        <div>
+                                            <h6 onClick={this.openAnnouncement} className="description">{Parser(this.props.description.toString())}</h6>
+                                        </div>
+                                        :
+                                        <div></div>
+                                    }
+                                </div>
                             </div>
                             }
                         </div>
