@@ -23,8 +23,7 @@ export class Header extends Component {
         }
     }
 
-    render() {
-        console.log(typeof this.props.description)
+    render = () => {
         let that = this;
         let nameBlank = true;
         let questionBlank = true;
