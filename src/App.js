@@ -258,6 +258,11 @@ class App extends Component {
     let that = this;
 		fpInstance.get((id)=> {
         localStorage.setItem('fingerprint', id)
+        if (localStorage.getItem('fingerprint') === null) {
+          /** No fingerprint yet */
+          console.log("returning!!!")
+          return
+        }        
         db.collection('audience')
         .doc(localStorage.getItem('fingerprint'))
         .get()
