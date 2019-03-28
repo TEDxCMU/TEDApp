@@ -259,8 +259,7 @@ class App extends Component {
 		fpInstance.get((id)=> {
         localStorage.setItem('fingerprint', id)
         if (localStorage.getItem('fingerprint') === null) {
-          /** No fingerprint yet */
-          console.log("returning!!!")
+          /** No fingerprint found, so return without pushing to DB*/
           return
         }        
         db.collection('audience')
