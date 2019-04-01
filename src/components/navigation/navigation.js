@@ -34,7 +34,6 @@ export class Navigation extends Component {
             }
         };
         return (
-            // Would be dope to change the color of the burger bars based on props passed in from App.js scrolling
             <div>
                 {this.props.loaded ? 
                     <div id="navigation">
@@ -104,15 +103,14 @@ export class Navigation extends Component {
         if (window.location.pathname === "/") {
           return
         }
-        else if (scrollTop > 225 && this.state.burgerColor !== "red") {
-          this.setState({burgerColor: "red",
+        else if (scrollTop > 225 && this.state.burgerColor !== "#e62b1e") {
+          this.setState({burgerColor: "#e62b1e",
                         scroll: window.scrollY})
         }
         else if (scrollTop < 225 && this.state.burgerColor !== "#fff") {
           this.setState({burgerColor: "#fff",
                         scroll: window.scrollY})
         }
-  
     }
     
     componentDidMount = () => {

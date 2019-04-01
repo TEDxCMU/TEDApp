@@ -48,11 +48,15 @@ export class Schedule extends Component {
       canShiftAll: true,
       allEvents: [],
       updateCount: 0,
+      // boolean that triggers firebase listeners after component mounts
       watchingForChanges: false,
+      // default announcement that appears before conference is in session
       announcement: "The conference is currently not in progress. Please check back at another time.",
+      // default announcement that appears after conference is over
       eventEndedAnnouncement: '<div>The conference is now over, thanks for coming! Please leave your feedback at <a class="a-link" href="http://bit.ly/tedxsurvey">bit.ly/tedxsurvey</a></div>',
       isOpen: false,
       scroll: 0,
+      // boolean - if Header should be normal height (true) or collapsed (false)
       headerLink: true,
       headerTitle: "Live Schedule",
       nowDist: 0
@@ -112,7 +116,8 @@ export class Schedule extends Component {
           className = "now";
           notification = event.announcement;
         }
-        else if (eventDate === moment().format('L') && (moment() > moment(this.state.allEvents[this.state.allEvents.length -1].end, "hh:mm A"))) {
+        // when the app is LIVE, uncomment the 2nd line to ensure  
+        else if (eventDate < moment().format('L') && (moment() > moment(this.state.allEvents[0].end, "hh:mm A"))) {
           notification = this.state.eventEndedAnnouncement
         }
         if (moment().isAfter(moment(event.end, "hh:mm A"))) {
@@ -141,8 +146,12 @@ export class Schedule extends Component {
                       <p className="event-description">{event.blurb}</p>
                       <br />
                       {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+                      <div>
+                        {/* <button className="button-primary"
+                        onClick={() => { this.openEndNowModal(allEvents.indexOf(event)) }}>End Now</button>  */}
                         <button className="button-primary"
-                        onClick={() => { this.openModal(allEvents.indexOf(event)) }}>Event Ended</button> 
+                        onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>New End Time</button>
+                      </div>
                       :
                         <div></div>
                       }
@@ -212,9 +221,11 @@ export class Schedule extends Component {
               <small>{event.blurb}</small>
               {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
                 <div>
-                  <button className="button-primary" style={{marginTop: '10px'}} 
-                  onClick={() => { this.openModal(allEvents.indexOf(event)) }}
-                  >Event Ended</button> 
+                  {/* <button className="button-primary" style={{marginTop: '10px'}} 
+                  onClick={() => { this.openEndNowModal(allEvents.indexOf(event)) }}
+                  >End Now</button>  */}
+                  <button className="button-primary"
+                  onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>New End Time</button>
                 </div>
               :
                 <div></div>
@@ -229,9 +240,9 @@ export class Schedule extends Component {
     return (
           <div style={{height: '100%', width: '100%'}}>
             <Popup
-            open={this.state.open}
+            open={this.state.endEventNowOpen}
             closeOnDocumentClick
-            onClose={this.closeModal}
+            onClose={this.closeEndNowModal}
             contentStyle={style}
             >
             <div className="modal">
@@ -240,7 +251,7 @@ export class Schedule extends Component {
                     <div>
                       <h4>Are you sure you want to change the conference start time to {this.state.value.format('hh:mm A')}?</h4>
                       <div className="popup-btns">
-                        <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
+                        <button className="popup-btn-cancel" onClick={this.closeEndNowModal}>Cancel</button>
                         <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftAll(e)}>Confirm</button>
                       </div>
                     </div>
@@ -248,15 +259,34 @@ export class Schedule extends Component {
                     <div>
                       <h4>Are you sure you want to change the end time of "{index === undefined ? "Event Name" : allEvents[index].title}" to {moment().format('hh:mm A')}?</h4>
                       <div className="popup-btns">
-                          <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
+                          <button className="popup-btn-cancel" onClick={this.closeEndNowModal}>Cancel</button>
                           <button className="popup-btn-success button-primary" onClick={
                             e => this.confirmShiftOne(e, index)
-                              // , () => this.shiftEndTime(e, index, moment().format('hh:mm A')))
                             }>Confirm</button>
                       </div>                      
                     </div>
                     }
                 </div>
+            </div>
+            </Popup>
+            <Popup
+            open={this.state.endEventLaterOpen}
+            closeOnDocumentClick
+            onClose={this.closeDelayModal}
+            contentStyle={style}
+            >
+            <div className="modal">
+              <div> New End Time:
+                <TimePicker
+                  defaultValue={this.state.value}
+                  onChange={this.handleValueChange}
+                />
+                <h4>Are you sure you want to change the end time of "{index === undefined ? "Event Name" : allEvents[index].title}" to {this.state.value === null ? moment().format('hh:mm A') : moment(this.state.value).format('hh:mm A')}?</h4>
+                <div className="popup-btns">
+                    <button className="popup-btn-cancel" onClick={this.closeDelayModal}>Cancel</button>
+                    <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftOneWithDelay(e, index, this.state.value)}>Confirm</button>
+                </div>                      
+              </div>
             </div>
             </Popup>
             <div>
@@ -323,37 +353,41 @@ export class Schedule extends Component {
     this.props.askQuestion();
   }
 
-  openConfirmation = (e) => {
-    e.preventDefault()
-    this.setState({confirmationOpen: true})
-  }
 
-  openModal = (index) => {
+  openEndNowModal = (index) => {
     this.setState(
-      { open: true,
+      { endEventNowOpen: true,
         eventNum: index
     })
+  }
+
+  closeEndNowModal = () => {
+    this.setState({ 
+      endEventNowOpen: false,
+      shiftingGlobal: false,
+      eventNum: undefined
+     })
+  }
+
+  openDelayModal = (index) => {
+    this.setState({ 
+      endEventLaterOpen: true,
+      eventNum: index
+    })
+  }
+
+  closeDelayModal = () => {
+    this.setState({ 
+      endEventLaterOpen: false,
+      eventNum: undefined
+     })
   }
 
   openGlobalChangeModal = (e) => {
     e.preventDefault();
     this.setState({
-      open: true,
+      endEventNowOpen: true,
       shiftingGlobal: true
-    })
-  }
-
-  closeModal = () => {
-    this.setState({ 
-      open: false,
-      shiftingGlobal: false
-     })
-  }
-
-  closeModalandOpenConfirmation = () => {
-    this.setState({
-        confirmationOpen: true,
-        open: false
     })
   }
 
@@ -371,7 +405,7 @@ export class Schedule extends Component {
     e.preventDefault();
     this.setState({
       shiftingGlobal: null,
-      open: false
+      endEventNowOpen: false
     }, () => this.shiftAll(this.state.value))
   }
 
@@ -379,8 +413,16 @@ export class Schedule extends Component {
     e.preventDefault();
     this.setState({
       shiftingGlobal: null,
-      open: false
+      endEventNowOpen: false
     }, () => this.shiftEndTime(index, moment().format('hh:mm A')))
+  }
+
+  confirmShiftOneWithDelay = (e, index, time) => {
+    e.preventDefault();
+    this.setState({
+      shiftingGlobal: null,
+      endEventLaterOpen: false
+    }, () => this.shiftEndTime(index, time))
   }
 
   shiftAll = (newStart) => {
@@ -425,13 +467,13 @@ export class Schedule extends Component {
 
   updateFireTimes = (start, newStart, newEnd, index, allElementsLength, allElementsIndex) => {
     const db = fire.firestore();
-    var eventRef = db.collection('detailed itinerary').where("start", "==", start);
+    var eventRef = db.collection('RippleEffect2019Copy').where("start", "==", start);
     eventRef.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let count = localStorage.getItem("updateCount");
             let convertCount = parseInt(count)
             localStorage.setItem("updateCount", convertCount+1)
-            var timeRef = db.collection('detailed itinerary').doc(doc.id);
+            var timeRef = db.collection('RippleEffect2019Copy').doc(doc.id);
             timeRef.update({
               start: newStart,
               end: newEnd
@@ -453,7 +495,7 @@ export class Schedule extends Component {
     this.updateListSelection();
     let that = this;
     const db = fire.firestore();
-    db.collection('detailed itinerary')
+    db.collection('RippleEffect2019Copy')
     .onSnapshot(querySnapshot => {
       querySnapshot.docChanges().forEach(change => {
         if (change.type === 'added') {
@@ -491,6 +533,11 @@ export class Schedule extends Component {
     const db = fire.firestore();
     var wholeData = []
     let that = this;
+    // db.collection("RippleEffect2019Copy").get().then(query => {
+    //   query.forEach (function(doc){
+    //       var promise = db.collection("RippleEffect2019Copy").doc(doc.id).set(doc.data());
+    //   });
+    // });
     db.collection('announcements').doc('announcement').onSnapshot((docSnapshot) => {
       if (docSnapshot.exists) {
         this.setState({
@@ -505,10 +552,10 @@ export class Schedule extends Component {
         })
       }
     });
-    db.collection('detailed itinerary').get().then(snapshot => {
+    db.collection('RippleEffect2019Copy').get().then(snapshot => {
         snapshot.forEach(doc => {
             let id = doc.id;
-            db.collection('detailed itinerary').doc(id).onSnapshot(docSnapshot => {
+            db.collection('RippleEffect2019Copy').doc(id).onSnapshot(docSnapshot => {
               let id = docSnapshot.id;
               let dataCopy = docSnapshot.data()
               let trimmed = id.replace(/ +/g, "");

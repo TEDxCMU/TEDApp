@@ -305,14 +305,9 @@ class App extends Component {
         this.setState({ user: null });
         localStorage.removeItem('userEmail');
         localStorage.removeItem('user');
-
       }
     });
   }
-
-
-  
-
 }
 
 export default App;
