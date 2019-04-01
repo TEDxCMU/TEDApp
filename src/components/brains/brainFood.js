@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import '../../App.css';
 import './brainFood.css';
 import RippleMap from './subComponents/rippleMap.js';
-import QAndAMain from './subComponents/qAndAMain.js';
+import QAndAMain from './subComponents/qAndA.js';
 import fire from '../../fire.js';
 import Autocomplete from 'react-google-autocomplete';
 import Popup from "reactjs-popup";
@@ -27,7 +27,6 @@ export class BrainFood extends Component {
   }
 
   render () {
-    console.log(this.state.errors !== undefined && this.state.errors.email === true)
     let nameBlank = true;
     const style = {
         display: 'flex',
@@ -107,7 +106,7 @@ export class BrainFood extends Component {
                     </div>
                     </Popup>
                 </div>
-                <RippleMap/>
+                <RippleMap db={this.props.db}/>
             </div>
             :
             <QAndAMain
@@ -186,9 +185,6 @@ export class BrainFood extends Component {
 
 
     sendLocationToDB = () => {
-        // if (this.state.city.geometry === undefined) {
-        //     return
-        // } 
         var name = this.state.name;
         if (name === "")  {
             name = "anonymous"
@@ -197,7 +193,7 @@ export class BrainFood extends Component {
         let db = fire.firestore();
         let that = this;
         if (localStorage.getItem('fingerprint') === null) {
-            db.collection("rippleEffect2019").doc('rippleMap').collection('rippleMap').add({
+            db.collection(this.props.db).doc('rippleMap').collection('rippleMap').add({
                 lat: this.state.city.geometry.location.lat(this.state.city),
                 lng: this.state.city.geometry.location.lng(this.state.city),
                 name: name,
@@ -219,7 +215,7 @@ export class BrainFood extends Component {
             });
         }
         else {
-            db.collection("rippleEffect2019").doc('rippleMap').collection('rippleMap').doc(this.state.fingerprint).set({
+            db.collection(this.props.db).doc('rippleMap').collection('rippleMap').doc(this.state.fingerprint).set({
                 lat: this.state.city.geometry.location.lat(this.state.city),
                 lng: this.state.city.geometry.location.lng(this.state.city),
                 name: name,
@@ -246,7 +242,7 @@ export class BrainFood extends Component {
     componentDidMount = () => {
         this.props.isLoaded();
         let db = fire.firestore();
-        const mapsRef = db.collection("rippleEffect2019").doc('rippleMap').collection('rippleMap').doc(localStorage.getItem("fingerprint"))
+        const mapsRef = db.collection(this.props.db).doc('rippleMap').collection('rippleMap').doc(localStorage.getItem("fingerprint"))
         mapsRef.get()
         .then((docSnapshot) => {
           if (docSnapshot.exists) {

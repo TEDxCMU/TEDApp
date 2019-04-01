@@ -153,12 +153,7 @@ export class RippleMap extends Component {
   componentDidMount() {
     const db = fire.firestore();
     var wholeData = []
-    // db.collection("maps").get().then(query => {
-    //   query.forEach (function(doc){
-    //       var promise = db.collection("rippleEffect2019").doc('rippleMap').collection('rippleMap').doc(doc.id).set(doc.data());
-    //   });
-    // });
-    db.collection("rippleEffect2019").doc('rippleMap').collection('rippleMap').onSnapshot( (snapshot) => {
+    db.collection(this.props.db).doc('rippleMap').collection('rippleMap').onSnapshot( (snapshot) => {
       snapshot.forEach(doc => {
         let data = doc.data();
         let newUser = {

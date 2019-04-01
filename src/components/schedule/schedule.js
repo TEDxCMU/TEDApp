@@ -167,6 +167,7 @@ export class Schedule extends Component {
                       speaker: event.speaker.id,
                       related: event.related,
                       announcement: event.announcement,
+                      db: this.props.db
                   }
                 }}/>
               </div>
@@ -184,6 +185,7 @@ export class Schedule extends Component {
                       speaker: event.speaker.id,
                       related: event.related,
                       announcement: event.announcement,
+                      db: this.props.db
                   }
                 }}>
                 {/* THIS IS WHAT PEOPLE SEE FOR SPEAKERS:  */}
@@ -445,13 +447,13 @@ export class Schedule extends Component {
 
   updateFireTimes = (start, newStart, newEnd, index, allElementsLength, allElementsIndex) => {
     const db = fire.firestore();
-    var eventRef = db.collection('rippleEffect2019').doc('itinerary').collection('itinerary').where("start", "==", start);
+    var eventRef = db.collection(this.props.db).doc('itinerary').collection('itinerary').where("start", "==", start);
     eventRef.get().then(function(querySnapshot) {
         querySnapshot.forEach(function(doc) {
             let count = localStorage.getItem("updateCount");
             let convertCount = parseInt(count)
             localStorage.setItem("updateCount", convertCount+1)
-            var timeRef = db.collection('rippleEffect2019').doc('itinerary').collection('itinerary').doc(doc.id);
+            var timeRef = db.collection(this.props.db).doc('itinerary').collection('itinerary').doc(doc.id);
             timeRef.update({
               start: newStart,
               end: newEnd
@@ -473,7 +475,7 @@ export class Schedule extends Component {
     this.updateListSelection();
     let that = this;
     const db = fire.firestore();
-    db.collection('rippleEffect2019').doc('itinerary').collection('itinerary')
+    db.collection(this.props.db).doc('itinerary').collection('itinerary')
     .onSnapshot(querySnapshot => {
       querySnapshot.docChanges().forEach(change => {
         if (change.type === 'added') {
@@ -511,35 +513,10 @@ export class Schedule extends Component {
     const db = fire.firestore();
     var wholeData = []
     let that = this;
-    // db.collection("audience").get().then(query => {
-    //   query.forEach (function(doc){
-    //       console.log("sending doc: ", doc.id)
-    //       var promise = db.collection("rippleEffect2019").doc('audience').collection('audience').doc(doc.id).set(doc.data());
-    //   });
-    // });
-    // db.collection("rippleEffect2019").get().then(query => {
-    //   query.forEach (function(doc){
-    //       var promise = db.collection("rippleEffect2019Copy").doc('itinerary').collection('itinerary').doc(doc.id).set(doc.data());
-    //   });
-    // });
-    // db.collection('announcements').doc('announcement').onSnapshot((docSnapshot) => {
-    //   if (docSnapshot.exists) {
-    //     this.setState({
-    //       announcement: docSnapshot.data().text,
-    //       altAnnouncement: true
-    //     })
-    //   }
-    //   else {
-    //     this.setState({
-    //       announcement: "The conference is currently not in progress. Please check back at another time.",
-    //       altAnnouncement: false
-    //     })
-    //   }
-    // });
-    db.collection('rippleEffect2019').doc('itinerary').collection('itinerary').get().then(snapshot => {
+    db.collection(this.props.db).doc('itinerary').collection('itinerary').get().then(snapshot => {
         snapshot.forEach(doc => {
             let id = doc.id;
-            db.collection('rippleEffect2019').doc('itinerary').collection('itinerary').doc(id).onSnapshot(docSnapshot => {
+            db.collection(this.props.db).doc('itinerary').collection('itinerary').doc(id).onSnapshot(docSnapshot => {
               let id = docSnapshot.id;
               let dataCopy = docSnapshot.data()
               let trimmed = id.replace(/ +/g, "");

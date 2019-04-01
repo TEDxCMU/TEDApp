@@ -9,12 +9,9 @@ import { MyQuestions } from './components/questions/myQuestions.js';
 import { PopUp } from './components/addToHome/addToHome.js';
 import { BrainFood } from './components/brains/brainFood.js';
 import { Map } from './components/map/map.js';
-// import { BrowserRouter as Router} from 'react-router-dom';
 import { Router, Route, Switch} from 'react-router-dom'
-// import Route from 'react-router-dom/Route';
 import fire from './fire.js';
 import Faq from './components/faq/faq';
-import StyleGuide from './components/styleguide';
 import { isAndroid, isIOS } from "react-device-detect";
 import Fingerprint from "fingerprintjs2";
 import error404 from './404.png';
@@ -22,7 +19,7 @@ import error404 from './404.png';
 import Popup from 'react-popup';
 import moment from 'moment';
 import Header from './components/header/header';
-import QANDA from './components/brains/subComponents/qAndAMain';
+import QANDA from './components/brains/subComponents/qAndA';
 
 class App extends Component {
   constructor() {
@@ -32,7 +29,8 @@ class App extends Component {
       allData: [],
       iosPopUp: false,
       chromePopUp: false,
-      loaded: false
+      loaded: false,
+      db: "rippleEffect2019"
     }
   }
 
@@ -87,7 +85,9 @@ class App extends Component {
     <div>
       <Header
         title="404: Not Found"
-        description=  {error}  />
+        description=  {error}  
+        db={this.state.db}
+        />
       <img src={error404} alt="404 Error: Page Not Found" style={{ width: '40vh', height: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto'}}></img>
     </div>
     
@@ -103,6 +103,7 @@ class App extends Component {
           logout={this.logout} 
           isiPhone={this.state.iosPopUp} 
           isAndroid={this.state.chromePopUp}
+          db={this.state.db}
           />
       </div>
     )
@@ -116,7 +117,8 @@ class App extends Component {
             <Schedule
               user={this.state.user}
               isLoaded={this.isLoaded}
-              scroll={window.scrollY} /> 
+              scroll={window.scrollY}
+              db={this.state.db} /> 
           </div>
       </div>
 
@@ -128,10 +130,12 @@ class App extends Component {
       <div>
         <Header
           title="My Questions"
-          description="See what the audience is saying, and give them your two cents!" />
+          description="See what the audience is saying, and give them your two cents!" 
+          db={this.state.db}/>
         <MyQuestions
         user={this.state.user}
-        isLoaded={this.isLoaded} /> 
+        isLoaded={this.isLoaded} 
+        db={this.state.db}/> 
       </div>
     );
   }
@@ -141,10 +145,12 @@ class App extends Component {
       <div>
         <Header
           title="Map"
-          description="Navigate your way to the main event." />
+          description="Navigate your way to the main event." 
+          db={this.state.db}/>
         <Map
         user={this.state.user}
-        isLoaded={this.isLoaded} /> 
+        isLoaded={this.isLoaded} 
+        db={this.state.db}/> 
       </div>
     );
   }
@@ -154,10 +160,12 @@ class App extends Component {
       <div>
         <Header
           title="Event"
+          db={this.state.db}
           />
         <EventDetails
         user={this.state.user}
-        isLoaded={this.isLoaded} />
+        isLoaded={this.isLoaded} 
+        db={this.state.db}/>
       </div>
     );
   }
@@ -167,10 +175,12 @@ class App extends Component {
       <div>
         <Header
           title="FAQ"
-          description="Find answers to your questions on food, parking, or anything in-between." />
+          description="Find answers to your questions on food, parking, or anything in-between." 
+          db={this.state.db}/>
         <Faq
           user={this.state.user}
-          isLoaded={this.isLoaded} /> 
+          isLoaded={this.isLoaded} 
+          db={this.state.db}/> 
       </div>
     );
   }
@@ -180,11 +190,13 @@ class App extends Component {
       <div>
         <Header
           title="Ripple"
-          description="See the reach of this conference and expand the Ripple Effect." />
+          description="See the reach of this conference and expand the Ripple Effect." 
+          db={this.state.db}/>
         <BrainFood
         handleScroll={this.handleScroll}
         user={this.state.user}
         isLoaded={this.isLoaded}
+        db={this.state.db}
         />
       </div>
     );
@@ -195,25 +207,14 @@ class App extends Component {
       <div>
         <Header
           title="Q&amp;A"
-          description="Ask questions and get personalized replies. Answered questions appear here, so check back to see if a speaker replies to you!" />
+          description="Ask questions and get personalized replies. Answered questions appear here, so check back to see if a speaker replies to you!"
+          db={this.state.db} />
         <QANDA
         handleScroll={this.handleScroll}
         user={this.state.user}
         isLoaded={this.isLoaded}
+        db={this.state.db}
         />
-      </div>
-    );
-  }
-
-  styleGuidePage = (props) => {
-    return (
-      <div>
-        <Header
-          title="Style Guide"
-          description="For personal reference." />
-        <StyleGuide
-          user={this.state.user}
-          isLoaded={this.isLoaded} /> 
       </div>
     );
   }
@@ -223,11 +224,13 @@ class App extends Component {
       <div>
         <Header
           title="Login"
-          description="" />
+          description="" 
+          db={this.state.db}/>
         <Login
         user={this.state.user}
         login={this.login}
-        isLoaded={this.isLoaded} />
+        isLoaded={this.isLoaded} 
+        db={this.state.db}/>
       </div>
     );
   }
@@ -235,13 +238,17 @@ class App extends Component {
   isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
   componentDidMount = () => {
-    // localStorage.removeItem("popup")
     let db = fire.firestore()
-    // db.collection("audience").get().then(query => {
-    //   query.forEach (function(doc){
-    //       var promise = db.collection("rippleEffect2019Copy").doc('audience').collection('audience').doc(doc.id).set(doc.data());
+    // let speakers = ['rscarano@andrew.cmu.edu', 'qrz@andrew.cmu.edu', 'ericc2@andrew.cmu.edu', 'sjobalia@andrew.cmu.edu']
+    // for (let speaker in speakers) {
+    //     db.collection("speakers").doc(speakers[speaker]).collection('questions').get().then(query => {
+    //       console.log(query.data())
+    //       // var promise = db.collection("springMiniEvent2019").doc("speakers").collection('speakers').doc(speakers[speaker]).set(query.data())
+    //       query.forEach (function(doc){
+    //           var promise = db.collection("springMiniEvent2019").doc("speakers").collection('speakers').doc(speakers[speaker]).collection('questions').add(doc.data());
+    //       });
     //   });
-    // });
+    // }
     this.authListener();
     let type = "";
     if (isAndroid) {
@@ -267,7 +274,7 @@ class App extends Component {
           /** No fingerprint found, so return without pushing to DB*/
           return
         }        
-        db.collection("rippleEffect2019").doc('audience').collection('audience').doc(localStorage.getItem('fingerprint'))
+        db.collection(this.state.db).doc('audience').collection('audience').doc(localStorage.getItem('fingerprint'))
         .get()
         .then((doc) => {
           if (doc.exists) {
@@ -284,7 +291,7 @@ class App extends Component {
   sendFingerprintToFirestore = (type, id) => {
     let timeAccessed = moment().format('MMMM Do YYYY, h:mm:ss a');
     let db = fire.firestore()
-    db.collection("rippleEffect2019").doc('audience').collection('audience').doc(id.toString()).set({
+    db.collection(this.state.db).doc('audience').collection('audience').doc(id.toString()).set({
       id, type, timeAccessed
     }, () => this.setState({
       fingerprint: id

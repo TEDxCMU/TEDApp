@@ -15,50 +15,14 @@ export class QAndAMain extends Component {
         super();
         this.state = {
             questions: null,
-            speaker: 'pfelterm@andrew.cmu.edu',
             question: '',
             name: '',
+            selectedSpeaker: 0,
             confirmationOpen: false,
             open: false,
-            openCheck: false,
-            speakers: ['pfelterm@andrew.cmu.edu', 'rsen@deloitte.com', 'msr@andrew.cmu.edu', 'dbiya1@gmail.com', 'rob@thephluidproject.com','janjicj@duq.edu', 'jane@forca.com']
+            openCheck: false
         }
         this.componentDidMount = this.componentDidMount.bind(this);
-    }
-
-    toggleParker = () => {
-        this.setState({ speaker: 'pfelterm@andrew.cmu.edu'},
-        () => this.componentDidMount());
-    }
-
-    toggleRana = () => {
-        this.setState({ speaker: 'rsen@deloitte.com'},
-        () => this.componentDidMount());
-    }
-
-    toggleMicah = () => {
-        this.setState({ speaker: 'msr@andrew.cmu.edu'},
-        () => this.componentDidMount());
-    }
-
-    toggleDeepa = () => {
-        this.setState({ speaker: 'dbiya1@gmail.com'},
-        () => this.componentDidMount());
-    }
-
-    toggleRob = () => {
-        this.setState({ speaker: 'rob@thephluidproject.com'},
-        () => this.componentDidMount());
-    }
-
-    toggleDrJ = () => {
-        this.setState({ speaker: 'janjicj@duq.edu'},
-        () => this.componentDidMount());
-    }
-
-    toggleJane = () => {
-        this.setState({ speaker: 'jane@forca.com'},
-        () => this.componentDidMount());
     }
 
     handleChange = (e) => {
@@ -149,13 +113,13 @@ export class QAndAMain extends Component {
         const db = fire.firestore()
         if (localStorage.getItem('fingerprint') === null) {
             return this.setState({
-                asked: false
+                asked: false,
             })
         }
-        db.collection("rippleEffect2019")
+        db.collection(this.props.db)
         .doc('speakers')
         .collection('speakers')
-        .doc(this.state.speaker)
+        .doc(this.state.speakers[this.state.selectedSpeaker].email)
         .collection('questions')
         .doc(localStorage.getItem('fingerprint'))
         .get()
@@ -197,10 +161,10 @@ export class QAndAMain extends Component {
         let db = fire.firestore();
         let that = this;
         if (localStorage.getItem('fingerprint') === null) {
-            db.collection("rippleEffect2019")
+            db.collection(this.props.db)
             .doc('speakers')
             .collection('speakers')
-            .doc(this.state.speaker)
+            .doc(this.state.speakers[this.state.selectedSpeaker].email)
             .collection("questions").add({
                 question: this.state.question,
                 name: name,
@@ -225,10 +189,10 @@ export class QAndAMain extends Component {
             });
         }
         else {
-            db.collection("rippleEffect2019")
+            db.collection(this.props.db)
             .doc('speakers')
             .collection('speakers')
-            .doc(this.state.speaker)
+            .doc(this.state.speakers[this.state.selectedSpeaker].email)
             .collection("questions")
             .doc(localStorage.getItem('fingerprint')).set({
                 question: this.state.question,
@@ -257,10 +221,10 @@ export class QAndAMain extends Component {
     // get speaker info based on which speaker is currently selected
     checkSpeaker = () => {
         const db = fire.firestore();
-        db.collection("rippleEffect2019")
+        db.collection(this.props.db)
         .doc('speakers')
         .collection('speakers')
-        .doc(this.state.speaker)
+        .doc(this.state.speakers[this.state.selectedSpeaker].email)
         .get()
         .then((doc) => {
           if (doc.exists) {
@@ -276,6 +240,13 @@ export class QAndAMain extends Component {
         })
     }
 
+    toggleButtons = (e, index) => {
+        e.preventDefault();
+        this.setState({
+            selectedSpeaker: index
+        }, this.componentDidMount())
+    }
+
     render () {
         const popupStyle = {
             display: 'flex',
@@ -288,13 +259,13 @@ export class QAndAMain extends Component {
             borderRadius: '10px'
         }
 
-        let parkerClasses = "button-primary medium blank";
-        let ranaClasses = "button-primary medium blank";
-        let micahClasses = "button-primary medium blank";
-        let deepaClasses = "button-primary medium blank";
-        let robClasses = "button-primary medium blank";
-        let drJClasses = "button-primary medium blank";
-        let janeClasses = "button-primary medium blank";
+        let speakerButtons = []
+
+        for (let speaker in this.state.speakers) {
+            speakerButtons.push(
+                <button key={speaker} onClick={e => this.toggleButtons(e, speaker)} style={{boxShadow: 'none'}} className={speaker.toString() === this.state.selectedSpeaker.toString() ? "button-primary medium" : "button-primary medium blank"}>{this.state.speakers[speaker].first}</button>
+            )
+        }
         let newList = [];
         if (this.state.questions !== null) {
         this.state.questions.forEach(question => {  
@@ -315,53 +286,11 @@ export class QAndAMain extends Component {
             }  
     
         })
-        if (this.state.speaker === 'pfelterm@andrew.cmu.edu') {
-            parkerClasses = "button-primary medium";
-        } else {
-            parkerClasses += "button-primary medium blank";
-        }
-        if (this.state.speaker === 'rsen@deloitte.com') {
-            ranaClasses = "button-primary medium";
-        } else {
-            ranaClasses += "button-primary medium blank";
-        }
-        if (this.state.speaker === 'msr@andrew.cmu.edu') {
-            micahClasses = "button-primary medium";
-        } else {
-            micahClasses = "button-primary medium blank";
-        }
-        if (this.state.speaker === 'dbiya1@gmail.com') {
-            deepaClasses = "button-primary medium";
-        } else {
-            deepaClasses = "button-primary medium blank";
-        }
-        if (this.state.speaker === 'rob@thephluidproject.com') {
-            robClasses = "button-primary medium";
-        } else {
-            robClasses = "button-primary medium blank";
-        }
-        if (this.state.speaker === 'janjicj@duq.edu') {
-            drJClasses = "button-primary medium";
-        } else {
-            drJClasses = "button-primary medium blank";
-        }
-        if (this.state.speaker === 'jane@forca.com') {
-            janeClasses = "button-primary medium";
-        } else {
-            janeClasses = "button-primary medium blank";
-        }
-
     }
     return (
         <div className="faq">
             <div className="justified">
-                <button onClick={this.toggleParker} style={{boxShadow: 'none'}} className={parkerClasses}>Parker</button>
-                <button onClick={this.toggleRana} style={{boxShadow: 'none'}} className={ranaClasses}>Rana</button>
-                <button onClick={this.toggleMicah} style={{boxShadow: 'none'}} className={micahClasses}>Micah</button>
-                <button onClick={this.toggleDeepa} style={{boxShadow: 'none'}} className={deepaClasses}>Deepa</button>
-                <button onClick={this.toggleRob} style={{boxShadow: 'none'}} className={robClasses}>Rob</button>
-                <button onClick={this.toggleDrJ} style={{boxShadow: 'none'}} className={drJClasses}>Dr. J</button>
-                <button onClick={this.toggleJane} style={{boxShadow: 'none'}} className={janeClasses}>Jane</button>
+                {speakerButtons}
             </div>
             <div className="content">
             {this.state.asked !== undefined ? 
@@ -382,7 +311,11 @@ export class QAndAMain extends Component {
                         >
                         <div className="modal">
                             <div>
-                                <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4>
+                                {this.state.speakerRef !== undefined && this.state.speakerRef !== null ? 
+                                    <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4>
+                                :
+                                    <div></div>
+                                }
                                 <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup-input" : "popup-input-invalid" } name="question" value={this.state.question} placeholder="Write your question here..." onChange={this.handleChange}/>
                                 {this.state.errors === undefined ?
                                     <small> </small>
@@ -440,7 +373,7 @@ export class QAndAMain extends Component {
                         {newList}
                     </div>
                     :
-                    <h4 className="speakers" style={{paddingTop: '20px', textAlign: 'center'}}>{this.state.speakerRef !== undefined ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
+                    <h4 className="speakers" style={{paddingTop: '20px', textAlign: 'center'}}>{this.state.speakerRef !== undefined && this.state.speakerRef !== null ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
                 }
             </div>
 
@@ -455,22 +388,23 @@ export class QAndAMain extends Component {
   componentDidMount = () => {
     window.removeEventListener('scroll', this.props.handleScroll);
     const db = fire.firestore();
-    var wholeData = [];
-    // let that = this;
-    // for (let speaker in this.state.speakers) {
-    //     db.collection("speakers").doc(this.state.speakers[speaker]).collection("questions").get().then(query => {
-    //       query.forEach (function(doc){
-    //           var promise = db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(that.state.speakers[speaker]).collection("questions").doc(doc.id).set(doc.data());
-    //       });
-    //     });  
-    // }
-    // let that = this;
-    // db.collection("speakers").doc(this.state.speaker).collection("questions").get().then(query => {
-    //   query.forEach (function(doc){
-    //       var promise = db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(that.state.speaker).collection("questions").doc(doc.id).set(doc.data());
-    //   });
-    // });    
-    db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(this.state.speaker).collection("questions").get()
+    let speakers = [];
+    db.collection(this.props.db).doc('speakers').collection('speakers').get().then(snapshot => {
+        snapshot.forEach(docSnapshot => {
+            speakers.push(docSnapshot.data())
+        })
+        if (speakers.length === snapshot.size) {
+            this.setState({
+                speakers: speakers
+            }, () => this.getSelectedSpeakerQuestions())
+        }
+    })
+  }
+
+  getSelectedSpeakerQuestions = () => {
+    let db = fire.firestore();
+    let wholeData = [];
+    db.collection(this.props.db).doc('speakers').collection('speakers').doc(this.state.speakers[this.state.selectedSpeaker].email).collection("questions").get()
     .then(snapshot => {
         snapshot.forEach(doc => {
             if (doc.data().answer !== "" ) {
@@ -482,7 +416,8 @@ export class QAndAMain extends Component {
         });
       this.setState(
         {questions: wholeData,
-        confirmationOpen: false}
+        confirmationOpen: false
+        }
         , () => this.checkSpeaker())
     })
   }
