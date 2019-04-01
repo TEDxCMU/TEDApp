@@ -150,7 +150,7 @@ export class Schedule extends Component {
                         {/* <button className="button-primary"
                         onClick={() => { this.openEndNowModal(allEvents.indexOf(event)) }}>End Now</button>  */}
                         <button className="button-primary"
-                        onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>New End Time</button>
+                        onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
                       </div>
                       :
                         <div></div>
@@ -225,7 +225,7 @@ export class Schedule extends Component {
                   onClick={() => { this.openEndNowModal(allEvents.indexOf(event)) }}
                   >End Now</button>  */}
                   <button className="button-primary"
-                  onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>New End Time</button>
+                  onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
                 </div>
               :
                 <div></div>
@@ -305,7 +305,7 @@ export class Schedule extends Component {
                   defaultValue={this.state.value}
                   onChange={this.handleValueChange}
                 />
-                <button className="button-primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Event Start Time</button>
+                <button className="button-primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Conference Start Time</button>
               </div> 
               <div className="timeline-admin">      
                 <Sidebar id="itinerary" pose={this.state.isOpen ? 'enter' : 'exit'}>
