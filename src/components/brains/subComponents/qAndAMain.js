@@ -20,7 +20,8 @@ export class QAndAMain extends Component {
             name: '',
             confirmationOpen: false,
             open: false,
-            openCheck: false
+            openCheck: false,
+            speakers: ['pfelterm@andrew.cmu.edu', 'rsen@deloitte.com', 'msr@andrew.cmu.edu', 'dbiya1@gmail.com', 'rob@thephluidproject.com','janjicj@duq.edu', 'jane@forca.com']
         }
         this.componentDidMount = this.componentDidMount.bind(this);
     }
@@ -151,7 +152,9 @@ export class QAndAMain extends Component {
                 asked: false
             })
         }
-        db.collection('speakers')
+        db.collection("rippleEffect2019")
+        .doc('speakers')
+        .collection('speakers')
         .doc(this.state.speaker)
         .collection('questions')
         .doc(localStorage.getItem('fingerprint'))
@@ -194,7 +197,11 @@ export class QAndAMain extends Component {
         let db = fire.firestore();
         let that = this;
         if (localStorage.getItem('fingerprint') === null) {
-            db.collection("speakers").doc(this.state.speaker).collection("questions").add({
+            db.collection("rippleEffect2019")
+            .doc('speakers')
+            .collection('speakers')
+            .doc(this.state.speaker)
+            .collection("questions").add({
                 question: this.state.question,
                 name: name,
                 answer: "",
@@ -218,7 +225,12 @@ export class QAndAMain extends Component {
             });
         }
         else {
-            db.collection("speakers").doc(this.state.speaker).collection("questions").doc(localStorage.getItem('fingerprint')).set({
+            db.collection("rippleEffect2019")
+            .doc('speakers')
+            .collection('speakers')
+            .doc(this.state.speaker)
+            .collection("questions")
+            .doc(localStorage.getItem('fingerprint')).set({
                 question: this.state.question,
                 name: name,
                 answer: "",
@@ -245,7 +257,9 @@ export class QAndAMain extends Component {
     // get speaker info based on which speaker is currently selected
     checkSpeaker = () => {
         const db = fire.firestore();
-        db.collection('speakers')
+        db.collection("rippleEffect2019")
+        .doc('speakers')
+        .collection('speakers')
         .doc(this.state.speaker)
         .get()
         .then((doc) => {
@@ -442,7 +456,21 @@ export class QAndAMain extends Component {
     window.removeEventListener('scroll', this.props.handleScroll);
     const db = fire.firestore();
     var wholeData = [];
-    db.collection('speakers').doc(this.state.speaker).collection("questions").get()
+    // let that = this;
+    // for (let speaker in this.state.speakers) {
+    //     db.collection("speakers").doc(this.state.speakers[speaker]).collection("questions").get().then(query => {
+    //       query.forEach (function(doc){
+    //           var promise = db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(that.state.speakers[speaker]).collection("questions").doc(doc.id).set(doc.data());
+    //       });
+    //     });  
+    // }
+    // let that = this;
+    // db.collection("speakers").doc(this.state.speaker).collection("questions").get().then(query => {
+    //   query.forEach (function(doc){
+    //       var promise = db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(that.state.speaker).collection("questions").doc(doc.id).set(doc.data());
+    //   });
+    // });    
+    db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(this.state.speaker).collection("questions").get()
     .then(snapshot => {
         snapshot.forEach(doc => {
             if (doc.data().answer !== "" ) {

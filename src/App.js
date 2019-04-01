@@ -236,6 +236,12 @@ class App extends Component {
 
   componentDidMount = () => {
     // localStorage.removeItem("popup")
+    let db = fire.firestore()
+    // db.collection("audience").get().then(query => {
+    //   query.forEach (function(doc){
+    //       var promise = db.collection("rippleEffect2019Copy").doc('audience').collection('audience').doc(doc.id).set(doc.data());
+    //   });
+    // });
     this.authListener();
     let type = "";
     if (isAndroid) {
@@ -253,7 +259,6 @@ class App extends Component {
     if ((!isAndroid) && (!isIOS)) {
       type = "Computer"
     }
-    let db = fire.firestore()
     const fpInstance = new Fingerprint();
     let that = this;
 		fpInstance.get((id)=> {
@@ -262,8 +267,7 @@ class App extends Component {
           /** No fingerprint found, so return without pushing to DB*/
           return
         }        
-        db.collection('audience')
-        .doc(localStorage.getItem('fingerprint'))
+        db.collection("rippleEffect2019").doc('audience').collection('audience').doc(localStorage.getItem('fingerprint'))
         .get()
         .then((doc) => {
           if (doc.exists) {
@@ -280,7 +284,7 @@ class App extends Component {
   sendFingerprintToFirestore = (type, id) => {
     let timeAccessed = moment().format('MMMM Do YYYY, h:mm:ss a');
     let db = fire.firestore()
-    db.collection("audience").doc(id.toString()).set({
+    db.collection("rippleEffect2019").doc('audience').collection('audience').doc(id.toString()).set({
       id, type, timeAccessed
     }, () => this.setState({
       fingerprint: id

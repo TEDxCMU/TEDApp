@@ -197,7 +197,7 @@ export class BrainFood extends Component {
         let db = fire.firestore();
         let that = this;
         if (localStorage.getItem('fingerprint') === null) {
-            db.collection("maps").add({
+            db.collection("rippleEffect2019").doc('rippleMap').collection('rippleMap').add({
                 lat: this.state.city.geometry.location.lat(this.state.city),
                 lng: this.state.city.geometry.location.lng(this.state.city),
                 name: name,
@@ -219,7 +219,7 @@ export class BrainFood extends Component {
             });
         }
         else {
-            db.collection("maps").doc(this.state.fingerprint).set({
+            db.collection("rippleEffect2019").doc('rippleMap').collection('rippleMap').doc(this.state.fingerprint).set({
                 lat: this.state.city.geometry.location.lat(this.state.city),
                 lng: this.state.city.geometry.location.lng(this.state.city),
                 name: name,
@@ -246,7 +246,7 @@ export class BrainFood extends Component {
     componentDidMount = () => {
         this.props.isLoaded();
         let db = fire.firestore();
-        const mapsRef = db.collection("maps").doc(localStorage.getItem("fingerprint"))
+        const mapsRef = db.collection("rippleEffect2019").doc('rippleMap').collection('rippleMap').doc(localStorage.getItem("fingerprint"))
         mapsRef.get()
         .then((docSnapshot) => {
           if (docSnapshot.exists) {

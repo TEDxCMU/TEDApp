@@ -113,7 +113,7 @@ export class EventDetails extends Component {
         let now = moment().format('MMMM Do YYYY, h:mm:ss a');
         let db = fire.firestore();
         if (localStorage.getItem('fingerprint') === null) {
-            db.collection("speakers").doc(this.state.speaker.email).collection("questions").add({
+            db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(this.state.speaker.email).collection("questions").add({
                 question: this.state.question,
                 name: name,
                 answer: "",
@@ -130,7 +130,7 @@ export class EventDetails extends Component {
             });
         }
         else {
-            db.collection("speakers").doc(this.state.speaker.email).collection("questions").doc(localStorage.getItem('fingerprint')).set({
+            db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(this.state.speaker.email).collection("questions").doc(localStorage.getItem('fingerprint')).set({
                 question: this.state.question,
                 name: name,
                 answer: "",
@@ -171,7 +171,7 @@ export class EventDetails extends Component {
                 asked: false
             })
         }
-        db.collection('speakers')
+        db.collection("rippleEffect2019").doc('speakers').collection('speakers')
         .doc(this.state.speaker.email)
         .collection('questions')
         .doc(localStorage.getItem('fingerprint'))
@@ -194,7 +194,7 @@ export class EventDetails extends Component {
     checkSpeaker = () => {
         if (this.props.location.state === undefined) { window.location.href="/" }
         const db = fire.firestore();
-        var speakerRef = db.collection('speakers').doc(this.props.location.state.speaker)
+        var speakerRef = db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(this.props.location.state.speaker)
         speakerRef.get()
         .then(doc => {
           if (!doc.exists) {

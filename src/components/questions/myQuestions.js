@@ -63,7 +63,7 @@ export class MyQuestions extends Component {
     // need to make an instance of this class so we can access it further down in the function
     let that = this;
     let questionsCopy = this.state.questions; 
-    db.collection("speakers").doc(email).collection("questions").doc(id).update({
+    db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(email).collection("questions").doc(id).update({
         answer: text,
         timeAnswered: now
     })
@@ -99,7 +99,7 @@ export class MyQuestions extends Component {
     //   timestampsInSnapshots: true
     // });
     var wholeData = [];
-    db.collection('speakers').doc(userEmail).collection("questions").get()
+    db.collection("rippleEffect2019").doc('speakers').collection('speakers').doc(userEmail).collection("questions").get()
     .then(snapshot => {
         snapshot.forEach(doc => {
             let docCopy = doc.data();
