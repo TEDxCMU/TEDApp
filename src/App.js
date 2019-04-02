@@ -47,36 +47,37 @@ class App extends Component {
         </Router>
       </div>
     }
-
-    return (
-      <div>
-        <Router history={this.props.history}>
-          <div className="App">
-          <Navigation loaded={true} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
-          <Switch>
-          <Route path="/" exact strict render={this.schedulePage}/>
-          <Route path="/talks/:id" exact strict component={EventDetails}/>
-          <Route path="/faq" exact strict render={this.faqPage}/>
-          <Route path="/login" exact strict render={this.loginPage}/>
-          <Route path="/ripple" exact strict render={this.RipplePage}/>
-          <Route path="/qanda" exact strict render={this.QANDAPage}/>
-          <Route path="/questions" exact strict render={this.questionsPage}/>
-          <Route path="/map" exact strict render={this.mapPage}/>
-          <Route component={this.noMatch} />
-          </Switch>
-            <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
-              {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null && localStorage.getItem("fingerprint") !== null ?
-              <PopUp iOS={true} loaded={this.state.loaded}/>
-              :
-              <div align="center"></div>
-              }
+    else {    
+      return (
+        <div>
+          <Router history={this.props.history}>
+            <div className="App">
+            <Navigation loaded={true} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
+            <Switch>
+            <Route path="/" exact strict render={this.schedulePage}/>
+            <Route path="/talks/:id" exact strict component={EventDetails}/>
+            <Route path="/faq" exact strict render={this.faqPage}/>
+            <Route path="/login" exact strict render={this.loginPage}/>
+            <Route path="/ripple" exact strict render={this.RipplePage}/>
+            <Route path="/qanda" exact strict render={this.QANDAPage}/>
+            <Route path="/questions" exact strict render={this.questionsPage}/>
+            <Route path="/map" exact strict render={this.mapPage}/>
+            <Route component={this.noMatch} />
+            </Switch>
+              <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
+                {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null && localStorage.getItem("fingerprint") !== null ?
+                <PopUp iOS={true} loaded={this.state.loaded}/>
+                :
+                <div align="center"></div>
+                }
+              </div>
             </div>
-          </div>
-          
-        </Router>
-        <Popup closeBtn={true} />
-      </div>
-    );
+            
+          </Router>
+          <Popup closeBtn={true} />
+        </div>
+      );
+    }
   }
 
   updateInput = e => {
@@ -256,6 +257,7 @@ class App extends Component {
     db.collection('active').get().then( snapshot => {
       snapshot.forEach(doc => {
         if (doc.data().active) {
+          // set the global reference for the proper database
           this.setState({
             db: doc.id
           }, () => this.assignFingerprint())}

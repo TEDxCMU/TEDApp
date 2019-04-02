@@ -63,11 +63,6 @@ export class Schedule extends Component {
     }
   }
 
-  deleteEvent = (index, e) => {
-    const newList = Object.assign([],this.newList);
-    newList.splice(index, 1);
-    this.setState({newList:newList});
-  }
 
   EventComponent = ({ match }) => {
     const event = this.state.allEvents.find(({ id }) => id === match.params.eventId)
@@ -283,7 +278,7 @@ export class Schedule extends Component {
               link={this.state.headerLink}
               title={this.state.headerTitle}
               description={notification}
-              altAnnouncement={this.state.altAnnouncement}
+              db={this.props.db}
               headerStyle="fixed" />
             </div>
             }
@@ -423,6 +418,13 @@ export class Schedule extends Component {
   }
 
   shiftEndTime = (index, endTime) => {
+    // first delete any alternate announcements from the database
+    let db = fire.firestore();
+    db.collection(this.props.db).doc('announcement').delete().then()
+    .catch(function(error) {
+        console.error("Error removing document: ", error);
+    });
+  
     if (this.state.allEvents.length === index + 1) return;
     let eventNum = index;
     let newEnd = endTime;
@@ -441,24 +443,25 @@ export class Schedule extends Component {
       let end = moment(allElements[i].end, 'hh:mm A').add(duration, 'minutes');
       let shiftedStart = start.format('hh:mm A');
       let shiftedEnd = end.format('hh:mm A');
-      this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd, i, allElements.length, index)
+      this.updateFireTimes(allElements[i].start, shiftedStart, shiftedEnd)
     }
   }
 
-  updateFireTimes = (start, newStart, newEnd, index, allElementsLength, allElementsIndex) => {
+  updateFireTimes = (start, newStart, newEnd) => {
+    let that = this;
     const db = fire.firestore();
     var eventRef = db.collection(this.props.db).doc('itinerary').collection('itinerary').where("start", "==", start);
     eventRef.get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            let count = localStorage.getItem("updateCount");
-            let convertCount = parseInt(count)
-            localStorage.setItem("updateCount", convertCount+1)
-            var timeRef = db.collection(this.props.db).doc('itinerary').collection('itinerary').doc(doc.id);
-            timeRef.update({
-              start: newStart,
-              end: newEnd
-            })
-        });
+      querySnapshot.forEach(function(doc) {
+          let count = localStorage.getItem("updateCount");
+          let convertCount = parseInt(count)
+          localStorage.setItem("updateCount", convertCount+1)
+          var timeRef = db.collection(that.props.db).doc('itinerary').collection('itinerary').doc(doc.id);
+          timeRef.update({
+            start: newStart,
+            end: newEnd
+          })
+      });
     })
   }
 

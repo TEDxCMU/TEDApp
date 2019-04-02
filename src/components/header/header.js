@@ -63,13 +63,13 @@ export class Header extends Component {
                     >
                     <div className="modal">
                         <div>
-                            { this.props.altAnnouncement !== null && this.props.altAnnouncement ?
+                            { this.state.altAnnouncement !== undefined ?
                                 <div>   
                                     <h4>Change or delete custom announcement:</h4>
                                     <div className="popup-btns">
                                         <button className="popup-btn-success button-primary" onClick={e => this.deleteAnnouncement(e)}>Delete</button>
                                     </div>
-                                    <textarea type="text" id="iOS" required className="popup-input" name="announcement" placeholder={ "Make a new custom announcement."} onChange={e => this.handleChange(e)}/>
+                                    <textarea type="text" id="iOS" required className="popup-input" name="announcement" value={this.state.announcement} placeholder={ "Make a new custom announcement."} onChange={e => this.handleChange(e)}/>
                                     <div className="popup-btns">
                                         <button className="popup-btn-success button-primary" onClick={e => this.updateAnnouncement(e)}>Update</button>
                                     </div>
@@ -91,9 +91,16 @@ export class Header extends Component {
                 {/* The header should be collapsed, so make the description small */}
                 { this.props.link !== undefined && this.props.link === false ?
                     <div>
-                        {this.props.description !== undefined ?
+                        {this.props.description !== undefined && this.state.altAnnouncement === undefined?
                             <div>
                                 <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.props.description.toString())}</h6>
+                            </div>
+                            :
+                            <div></div>
+                        }
+                        {this.props.description !== undefined && this.state.altAnnouncement !== undefined?
+                            <div>
+                                <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.state.altAnnouncement.toString())}</h6>
                             </div>
                             :
                             <div></div>
@@ -213,11 +220,18 @@ export class Header extends Component {
                                 {/* This is a normal header, so put the title and description in where they should be */}
                                 <h1 className="title">{this.props.title}</h1>
                                 <div>
-                                    {this.props.description !== undefined ?
+                                    {this.props.description !== undefined && this.state.altAnnouncement === undefined ?
                                         <div>
                                             <h6 onClick={this.openAnnouncement} className="description">{Parser(this.props.description.toString())}</h6>
                                         </div>
                                         :
+                                        <div></div>
+                                    }
+                                    {this.props.description !== undefined && this.state.altAnnouncement !== undefined ? 
+                                        <div>
+                                            <h6 onClick={this.openAnnouncement} className="description">{Parser(this.state.altAnnouncement.toString())}</h6>
+                                        </div>
+                                    :
                                         <div></div>
                                     }
                                 </div>
@@ -231,6 +245,9 @@ export class Header extends Component {
         );        
     }
     
+    componentDidMount = () => {
+        this.getAnnouncement();
+    }
 
     // default handleChange for React forms
     handleChange = (e) => {
@@ -334,10 +351,10 @@ export class Header extends Component {
         e.preventDefault();
         let that = this;
         let db = fire.firestore();
-        db.collection('announcements').doc('announcement').delete().then(function() {
+        db.collection(this.props.db).doc('announcement').delete().then(function() {
             that.setState({
                 announcementOpen: false
-            })
+            }, () => that.componentDidMount())
         }).catch(function(error) {
             console.error("Error removing document: ", error);
         });
@@ -351,13 +368,13 @@ export class Header extends Component {
         e.preventDefault();
         let that = this;
         let db = fire.firestore();
-        db.collection('announcements').doc('announcement').update({
+        db.collection(this.props.db).doc('announcement').update({
             text: this.state.announcement
         })
         .then(function() {
             that.setState({
                 announcementOpen: false
-            })
+            }, () => that.componentDidMount())
         })
         .catch(function(error) {
             // The document probably doesn't exist.
@@ -370,13 +387,33 @@ export class Header extends Component {
         e.preventDefault();
         let that = this;
         let db = fire.firestore();
-        db.collection('announcements').doc('announcement').set({text: this.state.announcement}).then(
+        db.collection(this.props.db).doc('announcement').set({text: this.state.announcement}).then(
             that.setState({
                 announcementOpen: false
-            })
+            }, () => that.componentDidMount())
         )
         .catch(
             console.log("Error creating announcement!")
+        )
+    }
+
+    getAnnouncement = () => {
+        let that = this;
+        let db = fire.firestore();
+        db.collection(this.props.db).doc('announcement').get().then(
+            doc => {
+                if (doc.exists) {
+                    that.setState({
+                        altAnnouncement: doc.data().text,
+                        announcement: doc.data().text
+                    })
+                }
+                else {
+                    that.setState({
+                        altAnnouncement: undefined
+                    })
+                } 
+            }
         )
     }
 
