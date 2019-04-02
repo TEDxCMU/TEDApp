@@ -400,6 +400,9 @@ export class Header extends Component {
     getAnnouncement = () => {
         let that = this;
         let db = fire.firestore();
+        if (this.props.db === undefined) {
+            return
+        }
         db.collection(this.props.db).doc('announcement').get().then(
             doc => {
                 if (doc.exists) {

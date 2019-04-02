@@ -47,7 +47,7 @@ class App extends Component {
         </Router>
       </div>
     }
-    else {    
+    else if (this.state.db !== undefined) {    
       return (
         <div>
           <Router history={this.props.history}>
@@ -255,20 +255,29 @@ class App extends Component {
   componentDidMount = () => {
     let db = fire.firestore()
     let inactiveCount = 0;
+    let activeCount = 0;
+    let possibleDBs = [];
     db.collection('active').get().then( snapshot => {
       snapshot.forEach(doc => {
         if (doc.data().active) {
-          // set the global reference for the proper database
-          this.setState({
-            db: doc.id
-          }, () => this.getEventDate())}
+          // push possible DB references to the array
+          possibleDBs.push(doc.id)
+          activeCount++
+        }
         else if (doc.data().active === false) {
           inactiveCount++
         }
+        // if all of the databases are inactive, send an error message
         if (snapshot.size === inactiveCount) {
           this.setState({
             noActiveEvents: true
           })
+        }
+        if ((activeCount + inactiveCount) === snapshot.size) {
+          // since there are multiple active databases, choose the first one
+          this.setState({
+            db: possibleDBs[0]
+          }, () => this.getEventDate())
         }
       })
     })
