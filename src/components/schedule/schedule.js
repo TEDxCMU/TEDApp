@@ -364,8 +364,6 @@ export class Schedule extends Component {
      })
   }
 
-
-
   updateInput = e => {
     this.setState({
       [e.target.name]: e.target.value

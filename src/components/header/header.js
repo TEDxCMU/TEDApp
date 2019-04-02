@@ -255,7 +255,7 @@ export class Header extends Component {
     }
     
     // code for ask speaker question popup  
-    //this fires when the user closes the bottle popup - unfortunately can't run this when they click send
+    // this fires when the user closes the bottle popup - unfortunately can't run this when they click send
     closeConfirmation = () => {
         this.props.close();
     }

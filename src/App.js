@@ -208,7 +208,6 @@ class App extends Component {
           description="See the reach of this conference and expand the Ripple Effect." 
           db={this.state.db}/>
         <BrainFood
-        handleScroll={this.handleScroll}
         user={this.state.user}
         isLoaded={this.isLoaded}
         db={this.state.db}
@@ -225,7 +224,6 @@ class App extends Component {
           description="Ask questions and get personalized replies. Answered questions appear here, so check back to see if a speaker replies to you!"
           db={this.state.db} />
         <QANDA
-        handleScroll={this.handleScroll}
         user={this.state.user}
         isLoaded={this.isLoaded}
         db={this.state.db}
