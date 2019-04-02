@@ -273,7 +273,7 @@ class App extends Component {
             noActiveEvents: true
           })
         }
-        if ((activeCount + inactiveCount) === snapshot.size) {
+        if ((activeCount + inactiveCount) === snapshot.size && activeCount > 0) {
           // since there are multiple active databases, choose the first one
           this.setState({
             db: possibleDBs[0]
