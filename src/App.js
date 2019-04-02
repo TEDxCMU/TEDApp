@@ -29,12 +29,25 @@ class App extends Component {
       allData: [],
       iosPopUp: false,
       chromePopUp: false,
-      loaded: false,
-      db: "rippleEffect2019"
+      loaded: false
     }
   }
 
   render() {
+    if (this.state.db === undefined && this.state.noActiveEvents === undefined) {
+      return <div></div>
+    }
+    else if (this.state.db === undefined && this.state.noActiveEvents === true) {
+      return <div>
+        <Router history={this.props.history}>
+          <Header
+            title="Sorry!"
+            description="There are currently no events scheduled in the system. Please check back later." 
+            db={this.state.db}/>
+        </Router>
+      </div>
+    }
+
     return (
       <div>
         <Router history={this.props.history}>
@@ -239,16 +252,27 @@ class App extends Component {
 
   componentDidMount = () => {
     let db = fire.firestore()
-    // let speakers = ['rscarano@andrew.cmu.edu', 'qrz@andrew.cmu.edu', 'ericc2@andrew.cmu.edu', 'sjobalia@andrew.cmu.edu']
-    // for (let speaker in speakers) {
-    //     db.collection("speakers").doc(speakers[speaker]).collection('questions').get().then(query => {
-    //       console.log(query.data())
-    //       // var promise = db.collection("springMiniEvent2019").doc("speakers").collection('speakers').doc(speakers[speaker]).set(query.data())
-    //       query.forEach (function(doc){
-    //           var promise = db.collection("springMiniEvent2019").doc("speakers").collection('speakers').doc(speakers[speaker]).collection('questions').add(doc.data());
-    //       });
-    //   });
-    // }
+    let inactiveCount = 0;
+    db.collection('active').get().then( snapshot => {
+      snapshot.forEach(doc => {
+        if (doc.data().active) {
+          this.setState({
+            db: doc.id
+          }, () => this.assignFingerprint())}
+        else if (doc.data().active === false) {
+          inactiveCount++
+        }
+        if (snapshot.size === inactiveCount) {
+          this.setState({
+            noActiveEvents: true
+          })
+        }
+      })
+    })
+  }
+
+  assignFingerprint = () => {
+    let db = fire.firestore();
     this.authListener();
     let type = "";
     if (isAndroid) {
