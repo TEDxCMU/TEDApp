@@ -132,7 +132,8 @@ class App extends Component {
               user={this.state.user}
               isLoaded={this.isLoaded}
               scroll={window.scrollY}
-              db={this.state.db} /> 
+              db={this.state.db} 
+              eventDate={this.state.eventDate}/> 
           </div>
       </div>
 
@@ -260,7 +261,7 @@ class App extends Component {
           // set the global reference for the proper database
           this.setState({
             db: doc.id
-          }, () => this.assignFingerprint())}
+          }, () => this.getEventDate())}
         else if (doc.data().active === false) {
           inactiveCount++
         }
@@ -270,6 +271,18 @@ class App extends Component {
           })
         }
       })
+    })
+  }
+
+  getEventDate = () => {
+    let db = fire.firestore();
+    db.collection(this.state.db).doc('eventDate').get().then(doc => {
+      if (doc.exists) {
+        var formattedDate = moment.unix(doc.data().date.seconds).format("YYYY-MM-DD");
+        this.setState({
+          eventDate: formattedDate
+        }, () => this.assignFingerprint())
+      }
     })
   }
 

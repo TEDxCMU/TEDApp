@@ -75,7 +75,7 @@ export class Schedule extends Component {
   }
 
   render = () => {
-    let eventDate = moment('2019-03-30').format('L');
+    let eventDate = moment(this.props.eventDate).format('L')
     if (this.state.allEvents.length === 0) {
       return (
         <div>
