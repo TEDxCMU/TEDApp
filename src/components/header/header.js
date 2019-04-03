@@ -325,9 +325,9 @@ export class Header extends Component {
         }, () => this.props.askQuestion())
     }
 
-    // opens announcement modifier popup, only works if user signed in is Admin (dijour@cmu.edu)
+    // opens announcement modifier popup, only works if user signed in is Admin
     openAnnouncement = () => {
-        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+        if (this.props.isAdmin !== true) {
             return
         }
         this.setState({ announcementOpen: true })
@@ -336,7 +336,7 @@ export class Header extends Component {
 
     // closes announcement modal
     closeAnnouncement = () => {
-        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+        if (this.props.isAdmin !== true) {
             return
         }
         this.setState({ announcementOpen: false })
@@ -345,7 +345,7 @@ export class Header extends Component {
 
     // removes the custom announcement from the DB and closes the announcement modal
     deleteAnnouncement = (e) => {
-        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+        if (this.props.isAdmin !== true) {
             return
         }
         e.preventDefault();
@@ -362,7 +362,7 @@ export class Header extends Component {
     
     // update announcement in the DB and then closes popup
     updateAnnouncement = (e) => {
-        if (localStorage.getItem("userEmail") !== "dijour@cmu.edu") {
+        if (this.props.isAdmin !== true) {
             return
         }
         e.preventDefault();

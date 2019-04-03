@@ -17,7 +17,7 @@ export class Login extends Component {
 
     render() {
       if (this.state.redirect === true) {
-        if (this.state.email === "dijour@cmu.edu") {
+        if (this.props.isAdmin !== true) {
           return <Redirect to='/'/>
         }
         // speaker login, redirect them to the myQuestions page

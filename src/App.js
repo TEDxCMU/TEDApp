@@ -52,7 +52,7 @@ class App extends Component {
         <div>
           <Router history={this.props.history}>
             <div className="App">
-            <Navigation loaded={true} user={this.state.user} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
+            <Navigation loaded={true} user={this.state.user} isAdmin={this.state.isAdmin} burgerColor={this.state.burgerColor} logout={this.logout} isiPhone={this.state.iosPopUp} isAndroid={this.state.chromePopUp}/>
             <Switch>
             <Route path="/" exact strict render={this.schedulePage}/>
             <Route path="/talks/:id" exact strict component={EventDetails}/>
@@ -60,7 +60,12 @@ class App extends Component {
             <Route path="/login" exact strict render={this.loginPage}/>
             <Route path="/ripple" exact strict render={this.RipplePage}/>
             <Route path="/qanda" exact strict render={this.QANDAPage}/>
-            <Route path="/questions" exact strict render={this.questionsPage}/>
+            {this.state.user !== null && this.state.isAdmin !== true ?
+              <Route path="/questions" exact strict render={this.questionsPage}/>
+            :
+              <div></div>
+            }
+            {/* <Route path="/questions" exact strict render={this.questionsPage}/> */}
             <Route path="/map" exact strict render={this.mapPage}/>
             <Route component={this.noMatch} />
             </Switch>
@@ -100,8 +105,7 @@ class App extends Component {
       <Header
         title="404: Not Found"
         description=  {error}  
-        db={this.state.db}
-        />
+        db={this.state.db} />
       <img src={error404} alt="404 Error: Page Not Found" style={{ width: '40vh', height: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto'}}></img>
     </div>
     
@@ -118,7 +122,7 @@ class App extends Component {
           isiPhone={this.state.iosPopUp} 
           isAndroid={this.state.chromePopUp}
           db={this.state.db}
-          />
+          isAdmin={this.state.isAdmin} />
       </div>
     )
   }
@@ -133,6 +137,7 @@ class App extends Component {
               isLoaded={this.isLoaded}
               scroll={window.scrollY}
               db={this.state.db} 
+              isAdmin={this.state.isAdmin}
               eventDate={this.state.eventDate}/> 
           </div>
       </div>
@@ -146,11 +151,13 @@ class App extends Component {
         <Header
           title="My Questions"
           description="See what the audience is saying, and give them your two cents!" 
-          db={this.state.db}/>
+          isAdmin={this.state.isAdmin}
+          db={this.state.db} />
         <MyQuestions
         user={this.state.user}
-        isLoaded={this.isLoaded} 
-        db={this.state.db}/> 
+        isLoaded={this.isLoaded}
+        isAdmin={this.state.isAdmin} 
+        db={this.state.db} /> 
       </div>
     );
   }
@@ -161,11 +168,13 @@ class App extends Component {
         <Header
           title="Map"
           description="Navigate your way to the main event." 
-          db={this.state.db}/>
+          isAdmin={this.state.isAdmin}
+          db={this.state.db} />
         <Map
         user={this.state.user}
-        isLoaded={this.isLoaded} 
-        db={this.state.db}/> 
+        isLoaded={this.isLoaded}
+        isAdmin={this.state.isAdmin} 
+        db={this.state.db} /> 
       </div>
     );
   }
@@ -176,11 +185,12 @@ class App extends Component {
         <Header
           title="Event"
           db={this.state.db}
-          />
+          isAdmin={this.state.isAdmin} />
         <EventDetails
         user={this.state.user}
-        isLoaded={this.isLoaded} 
-        db={this.state.db}/>
+        isLoaded={this.isLoaded}
+        isAdmin={this.state.isAdmin} 
+        db={this.state.db} />
       </div>
     );
   }
@@ -191,11 +201,13 @@ class App extends Component {
         <Header
           title="FAQ"
           description="Find answers to your questions on food, parking, or anything in-between." 
-          db={this.state.db}/>
+          db={this.state.db}
+          isAdmin={this.state.isAdmin} />
         <Faq
           user={this.state.user}
           isLoaded={this.isLoaded} 
-          db={this.state.db}/> 
+          isAdmin={this.state.isAdmin}
+          db={this.state.db} /> 
       </div>
     );
   }
@@ -206,12 +218,13 @@ class App extends Component {
         <Header
           title="Ripple"
           description="See the reach of this conference and expand the Ripple Effect." 
-          db={this.state.db}/>
+          db={this.state.db}
+          isAdmin={this.state.isAdmin} />
         <BrainFood
         user={this.state.user}
         isLoaded={this.isLoaded}
         db={this.state.db}
-        />
+        isAdmin={this.state.isAdmin} />
       </div>
     );
   }
@@ -222,12 +235,13 @@ class App extends Component {
         <Header
           title="Q&amp;A"
           description="Ask questions and get personalized replies. Answered questions appear here, so check back to see if a speaker replies to you!"
-          db={this.state.db} />
+          db={this.state.db} 
+          isAdmin={this.state.isAdmin} />
         <QANDA
         user={this.state.user}
         isLoaded={this.isLoaded}
         db={this.state.db}
-        />
+        isAdmin={this.state.isAdmin} />
       </div>
     );
   }
@@ -238,12 +252,14 @@ class App extends Component {
         <Header
           title="Login"
           description="" 
-          db={this.state.db}/>
+          isAdmin={this.state.isAdmin}
+          db={this.state.db} />
         <Login
         user={this.state.user}
         login={this.login}
         isLoaded={this.isLoaded} 
-        db={this.state.db}/>
+        isAdmin={this.state.isAdmin}
+        db={this.state.db} />
       </div>
     );
   }
@@ -355,7 +371,7 @@ class App extends Component {
   authListener() {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.setState({ user });
+        this.setState({ user }, () => this.getAdmins());
         localStorage.setItem('user', user);
         localStorage.setItem('userEmail', user.email);
       } else {
@@ -365,6 +381,22 @@ class App extends Component {
       }
     });
   }
+
+  // gets ID of all allowed admins and check if the current user is an admin
+  getAdmins = () => {
+    let db = fire.firestore();
+    db.collection('admins').get().then(snapshot => {
+      snapshot.forEach(docSnapshot => {
+        if (docSnapshot.id === this.state.user.email) {
+          this.setState({
+            isAdmin: true
+          })
+        }
+        
+      })
+    })
+  }
+
 }
 
 export default App;

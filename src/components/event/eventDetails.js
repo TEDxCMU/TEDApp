@@ -54,6 +54,8 @@ export class EventDetails extends Component {
                     close={this.closeConfirmationPopup}
                     errors={this.state.errors}
                     validate={this.validate}
+                    db={self.db}
+                    isAdmin={self.isAdmin}
                     />
                     <div className="event-details">
                         { self.speaker !== undefined ?
@@ -80,7 +82,7 @@ export class EventDetails extends Component {
                 </div>
                 :
                 <div>
-                    <Header/>
+                    <Header db={self.db} isAdmin={self.isAdmin} />
                 </div>
                 }
                 </div>
@@ -199,7 +201,6 @@ export class EventDetails extends Component {
 
     checkSpeaker = () => {
         if (this.props.location.state === undefined) { 
-            console.log("couldn't find ya")
             window.location.href="/" 
         }
         const db = fire.firestore();

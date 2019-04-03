@@ -129,7 +129,7 @@ export class Schedule extends Component {
         if (event.type !== "static") {
           newList.push(
             <Item key={event.id} id={className === "now" ? "eventNow" : null}>
-              {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+              {this.props.isAdmin ? 
               <div>
                 <span className="event"></span>
                 <span className={className}></span>
@@ -140,7 +140,7 @@ export class Schedule extends Component {
                       <h4 className="event-title">{event.title}</h4>
                       <p className="event-description">{event.blurb}</p>
                       <br />
-                      {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+                      {this.props.isAdmin  ? 
                       <div>
                         <button className="button-primary" onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
                       </div>
@@ -162,7 +162,8 @@ export class Schedule extends Component {
                       speaker: event.speaker.id,
                       related: event.related,
                       announcement: event.announcement,
-                      db: this.props.db
+                      db: this.props.db,
+                      isAdmin: this.props.isAdmin
                   }
                 }}/>
               </div>
@@ -180,7 +181,8 @@ export class Schedule extends Component {
                       speaker: event.speaker.id,
                       related: event.related,
                       announcement: event.announcement,
-                      db: this.props.db
+                      db: this.props.db,
+                      isAdmin: this.props.isAdmin
                   }
                 }}>
                 {/* THIS IS WHAT PEOPLE SEE FOR SPEAKERS:  */}
@@ -213,7 +215,7 @@ export class Schedule extends Component {
               <p className="time"><strong>{event.start}</strong> — {event.end}</p>
               <h5 className="event-title">{event.title}</h5>
               <small>{event.blurb}</small>
-              {localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+              {this.props.isAdmin  ? 
                 <div>
                   <button className="button-primary"
                   onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
@@ -279,16 +281,16 @@ export class Schedule extends Component {
               title={this.state.headerTitle}
               description={notification}
               db={this.props.db}
+              isAdmin={this.props.isAdmin}
               headerStyle="fixed" />
             </div>
             }
-            {localStorage.getItem("canShiftGlobalStartTime") === null && localStorage.getItem("userEmail") === "dijour@cmu.edu" ? 
+            {localStorage.getItem("canShiftGlobalStartTime") === null && this.props.isAdmin  ? 
             <div>
             <div className="new-event-time">
                 <TimePicker
                   defaultValue={this.state.value}
-                  onChange={this.handleValueChange}
-                />
+                  onChange={this.handleValueChange} />
                 <button className="button-primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Conference Start Time</button>
               </div> 
               <div className="timeline-admin">      

@@ -23,7 +23,7 @@ export class Navigation extends Component {
       }
 
     toggleMenu () {
-    this.setState({menuOpen: !this.state.menuOpen})
+        this.setState({menuOpen: !this.state.menuOpen})
     }
 
     render() {
@@ -47,7 +47,7 @@ export class Navigation extends Component {
                                         Home
                                     </NavLink></li>
                                     <div>
-                                        {this.props.user !== null && localStorage.getItem("userEmail") !== "dijour@cmu.edu" ?
+                                        {this.props.user !== null && this.props.isAdmin !== true ?
                                             <NavLink onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6EEBFC'}}>
                                                 My Questions
                                             </NavLink>
