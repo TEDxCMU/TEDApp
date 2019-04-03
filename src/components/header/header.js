@@ -260,13 +260,6 @@ export class Header extends Component {
         this.props.close();
     }
 
-
-    openConfirmation = (e) => {
-        e.preventDefault()
-        this.setState({confirmationOpen: true})
-    }
-
-
     // opens the pop-up modal
     openModal = () => {
         this.setState({ open: true })

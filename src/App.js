@@ -264,6 +264,8 @@ class App extends Component {
     );
   }
 
+  // checks if the web app is being run in a browser, or as an installed app. 
+  // if the web app is installed, don't show a pop-up inviting users to install it!
   isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
   componentDidMount = () => {
@@ -297,6 +299,7 @@ class App extends Component {
     })
   }
 
+  // checks the database for the corresponding event's timestamp to see when the date of the event is
   getEventDate = () => {
     let db = fire.firestore();
     db.collection(this.state.db).doc('eventDate').get().then(doc => {
@@ -309,6 +312,11 @@ class App extends Component {
     })
   }
 
+  // does a few things:
+  // 1. starts a listener on user authentication that will listen for changes to user states
+  // 2. determines what type of device this is and if an install-to-device pop-up should be launched
+  // 3. determines if the unique fingerprint of this device exists, and if it does, is it in the database
+  // 4. if the device has a unique ID and is not in the database, calls a function to add it to the database
   assignFingerprint = () => {
     let db = fire.firestore();
     this.authListener();
@@ -319,13 +327,13 @@ class App extends Component {
         chromePopUp: isAndroid,
       })
     }
-    if (isIOS && !this.isInStandaloneMode()) {
+    else if (isIOS && !this.isInStandaloneMode()) {
       type = "iPhone"
       this.setState({
         iosPopUp: isIOS,
       })
     }
-    if ((!isAndroid) && (!isIOS)) {
+    else if ((!isAndroid) && (!isIOS)) {
       type = "Computer"
     }
     const fpInstance = new Fingerprint();
@@ -340,7 +348,7 @@ class App extends Component {
         .get()
         .then((doc) => {
           if (doc.exists) {
-            /** Doc exists, so the username is not available */
+            /** Doc exists, so this unique device has visited the page before */
             return
           }
           else {
@@ -350,6 +358,8 @@ class App extends Component {
     });
   }
 
+  // only run if this is the first time the unique device has accessed the web-app
+  // adds the device type, ID, and time accessed to the 'audience' collection of the active event
   sendFingerprintToFirestore = (type, id) => {
     let timeAccessed = moment().format('MMMM Do YYYY, h:mm:ss a');
     let db = fire.firestore()
@@ -361,6 +371,7 @@ class App extends Component {
   }
 
 
+  // self explanatory ;)
   logout = () => {
     auth.signOut()
       .then(() => {
@@ -368,6 +379,8 @@ class App extends Component {
       });
   }
 
+  // any time the user logs in or logs out, update the state and local storage to reflect the change
+  // also calls a function to authenticate admins, if necessary
   authListener() {
     fire.auth().onAuthStateChanged((user) => {
       if (user) {
@@ -392,7 +405,6 @@ class App extends Component {
             isAdmin: true
           })
         }
-        
       })
     })
   }
