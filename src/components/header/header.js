@@ -384,6 +384,9 @@ export class Header extends Component {
 
     // creates a brand new announcement, if one does not exist already, and then closes the popup
     createAnnouncement = (e) => {
+        if (this.props.isAdmin !== true) {
+            return
+        }
         e.preventDefault();
         let that = this;
         let db = fire.firestore();

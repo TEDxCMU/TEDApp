@@ -98,6 +98,8 @@ export class Navigation extends Component {
         window.removeEventListener('scroll', this.handleScroll);
     }
   
+    // If the window is scrolled more than 225 vertical pixels from the top (tested and proven value), the burger menu button 
+    // color will become TED-red (#e62b1e). If it is less  than 225 pixels from the top, the burger menu button will be white. 
     handleScroll = () => {
         let scrollTop = window.scrollY;
         if (window.location.pathname === "/") {
