@@ -26,7 +26,8 @@ export class RippleMap extends Component {
       center: [0,20],
       zoom: 1,
       users: [],
-      isOpen: false
+      isOpen: false,
+      touchError: false
     }
     this.handleZoomIn = this.handleZoomIn.bind(this)
     this.handleZoomOut = this.handleZoomOut.bind(this)
@@ -76,7 +77,7 @@ export class RippleMap extends Component {
               x: spring(this.state.center[0], {stiffness: 210, damping: 20}),
               y: spring(this.state.center[1], {stiffness: 210, damping: 20}),
             }}
-            >
+          >
             {({zoom,x,y}) => (
               <ComposableMap
               projectionConfig={{

@@ -47,7 +47,7 @@ class App extends Component {
         </Router>
       </div>
     }
-    else if (this.state.db !== undefined) {    
+    else if (this.state.db !== undefined) {  
       return (
         <div>
           <Router history={this.props.history}>
@@ -60,13 +60,13 @@ class App extends Component {
             <Route path="/login" exact strict render={this.loginPage}/>
             <Route path="/ripple" exact strict render={this.RipplePage}/>
             <Route path="/qanda" exact strict render={this.QANDAPage}/>
+            <Route path="/map" exact strict render={this.mapPage}/>
             {this.state.user !== null && this.state.isAdmin !== true ?
               <Route path="/questions" exact strict render={this.questionsPage}/>
             :
               <div></div>
             }
             {/* <Route path="/questions" exact strict render={this.questionsPage}/> */}
-            <Route path="/map" exact strict render={this.mapPage}/>
             <Route component={this.noMatch} />
             </Switch>
               <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
@@ -77,7 +77,6 @@ class App extends Component {
                 }
               </div>
             </div>
-            
           </Router>
           <Popup closeBtn={true} />
         </div>
@@ -163,6 +162,7 @@ class App extends Component {
   }
 
   mapPage = (props) => {
+    console.log("hello")
     return (
       <div>
         <Header

@@ -4,7 +4,6 @@ import map from'./cuc.png';
 
 export class Map extends Component {
     state = {
-      showContent: false
     }
   
       render() {
