@@ -14,7 +14,6 @@ import Popup from "reactjs-popup";
 import posed from 'react-pose';
 import { networkOnly } from 'sw-toolbox';
 
-
 const Item = posed.li({
   enter: { y: 0, x: 0, opacity: 1, 
     transition: {

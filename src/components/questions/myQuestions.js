@@ -11,9 +11,9 @@ export class MyQuestions extends Component {
     constructor() {
       super();
       this.state = {
-        answers: new Array(500),
-        questions: new Array(500),
-        id: null,
+        // answers: new Array(500),
+        // questions: new Array(500),
+        // id: null,
         redirectHome: false
       }
       this.componentDidMount = this.componentDidMount.bind(this);
@@ -23,6 +23,9 @@ export class MyQuestions extends Component {
     render() {
       if (this.state.redirectHome) {
         return <Redirect to="/"/>
+      }
+      if (this.state.questions === undefined) {
+        return <div></div>
       }
       let newList = [];
       this.state.questions.forEach(question => {    

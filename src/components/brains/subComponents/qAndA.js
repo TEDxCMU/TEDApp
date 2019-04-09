@@ -109,6 +109,7 @@ export class QAndAMain extends Component {
         }
     }
 
+    // check if the currently fingerprinted user has asked a question to the currently selected speaker
     checkIfAsked = () => {
         const db = fire.firestore()
         if (localStorage.getItem('fingerprint') === null) {
