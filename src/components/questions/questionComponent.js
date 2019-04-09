@@ -7,8 +7,7 @@ import Dropdown from '../dropdown/dropdown';
 export class QuestionComponent extends Component {
     constructor() {
       super();
-      this.state = {
-      }
+      this.state = {}
     }
 
     
@@ -33,8 +32,7 @@ export class QuestionComponent extends Component {
                 </form>
             </Dropdown>
         </div>
-    );
-  }
+    )}
 
     handleChange = (e) => {
       this.setState({ [e.target.name] : e.target.value });
