@@ -264,10 +264,8 @@ class App extends Component {
     );
   }
 
-  // checks if the web app is being run in a browser, or as an installed app. 
-  // if the web app is installed, don't show a pop-up inviting users to install it!
-  isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
-
+  // runs before component renders
+  // checks the firestore db to figure out which, if any, conferences are active
   componentDidMount = () => {
     let db = fire.firestore()
     let inactiveCount = 0;
@@ -311,6 +309,10 @@ class App extends Component {
       }
     })
   }
+
+  // checks if the web app is being run in a browser, or as an installed app. 
+  // if the web app is installed, don't show a pop-up inviting users to install it!
+  isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
 
   // does a few things:
   // 1. starts a listener on user authentication that will listen for changes to user states

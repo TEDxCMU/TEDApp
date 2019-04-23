@@ -11,9 +11,6 @@ export class MyQuestions extends Component {
     constructor() {
       super();
       this.state = {
-        // answers: new Array(500),
-        // questions: new Array(500),
-        // id: null,
         redirectHome: false
       }
       this.componentDidMount = this.componentDidMount.bind(this);

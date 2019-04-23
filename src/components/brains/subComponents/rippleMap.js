@@ -15,7 +15,6 @@ import fire from '../../../fire.js';
 
 const wrapperStyles = {
   width: "100%",
-  // maxWidth: 980,
   margin: "0 auto",
 }
 
@@ -58,9 +57,7 @@ export class RippleMap extends Component {
   }
   render() {
     if (this.state.users === undefined) {
-      return (
-        <div></div>
-      )
+      return (<div></div>)
     } 
     return (
       <div style={wrapperStyles}>
@@ -182,7 +179,6 @@ export class RippleMap extends Component {
       }, 2000);
     }
   }
-
 }
 
 export default RippleMap;
