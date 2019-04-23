@@ -10,19 +10,9 @@ export class Dropdown extends Component {
 
   toggleShow = () => {
     const doesShow = this.state.showContent;
-    if (this.state.className === "closed") {
-      this.setState(
-        { showContent: !doesShow
-        }
-      );
-    }
-    else {
-      this.setState(
-        { showContent: !doesShow
-        }
-      );
-    }
-
+    this.setState({
+      showContent: !doesShow
+    });
   };
 
     render() {

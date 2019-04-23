@@ -67,7 +67,7 @@ export class QAndAMain extends Component {
     // opens the "are you sure" pop-up modal
     openCheck = () => {
       const { question, name } = this.state;
-      let errors = this.validate(question);
+      let errors = this.validateQuestion(question);
       if (errors.question) {
           return this.setState({
               errors: errors
@@ -139,7 +139,7 @@ export class QAndAMain extends Component {
         })
     }
 
-    validate = (question) => {
+    validateQuestion = (question) => {
         // true means invalid, so our conditions got reversed
         return {
           question: question.length === 0,
@@ -148,7 +148,7 @@ export class QAndAMain extends Component {
 
     createQuestion = () => {
         const question = this.state.question;
-        let errors = this.validate(question);
+        let errors = this.validateQuestion(question);
         if (errors.question) {
             return this.setState({
                 errors: errors

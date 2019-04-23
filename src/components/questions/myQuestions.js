@@ -19,7 +19,6 @@ export class MyQuestions extends Component {
       this.componentDidMount = this.componentDidMount.bind(this);
     }
 
-
     render() {
       if (this.state.redirectHome) {
         return <Redirect to="/"/>
@@ -27,10 +26,11 @@ export class MyQuestions extends Component {
       if (this.state.questions === undefined) {
         return <div></div>
       }
+
       let newList = [];
       this.state.questions.forEach(question => {    
           let index = this.state.questions.indexOf(question);
-          newList.push (
+          newList.push(
               <QuestionComponent
                   key={question.id}
                   index={index}
@@ -44,7 +44,7 @@ export class MyQuestions extends Component {
                   name={question.name}
                   close={this.state.close}>
               </QuestionComponent> 
-          ) 
+          );
       })
 
     return (
@@ -52,7 +52,7 @@ export class MyQuestions extends Component {
           {fire.auth().currentUser !== null ?
             <div style={{textAlign: 'center'}}>Account: {fire.auth().currentUser.email}</div>
           :
-            <div></div>
+            null
           }
           {newList}
       </div>
@@ -86,21 +86,19 @@ export class MyQuestions extends Component {
   setClose = (index) => {
     this.setState({
       close: index
-    }, () => this.componentDidMount())
+    }, () => this.componentDidMount());
   }
 
   componentDidMount = () => {
     if (fire.auth().currentUser === null || localStorage.getItem('userEmail') === null) {
       this.setState({
         redirectHome: true
-      })
+      });
       return;
     }
     let userEmail = localStorage.getItem('userEmail');
     const db = fire.firestore();
-    // db.settings({
-    //   timestampsInSnapshots: true
-    // });
+
     var wholeData = [];
     db.collection(this.props.db).doc('speakers').collection('speakers').doc(userEmail).collection("questions").get()
     .then(snapshot => {
@@ -113,14 +111,10 @@ export class MyQuestions extends Component {
             docCopy.answered = false;
             wholeData.push(docCopy)
         });
-        // let questions = Array(wholeData.length)
       this.setState(
-        {questions: wholeData}, () => this.props.isLoaded()
-      )
-    })
+        { questions: wholeData }, () => this.props.isLoaded()
+      );
+    });
   }
-
-
-      
 }
 export default MyQuestions;

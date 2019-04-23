@@ -21,7 +21,7 @@ export class BrainFood extends Component {
         city: '',
         fingerprint: localStorage.getItem('fingerprint'),
         inDatabase: null,
-        key: "AIzaSyDcMQLOO-WbqT-IopP9CmBzkmCBzoG67fQ"
+        key: "AIzaSyDcMQLOO-WbqT-IopP9CmBzkmCBzoG67fQ" // database key
 
     }
   }
@@ -40,10 +40,6 @@ export class BrainFood extends Component {
     }
     return (
         <div>
-            {/* <div className="pageSelect">
-                <button id="left" className={this.state.page === 0 ? "selected" : "unselected"} onClick={e => this.switchPage(e, 0)}>Interact</button>
-                <button id="right" className={this.state.page === 1 ? "selected" : "unselected"} onClick={e => this.switchPage(e, 1)}>Q & A</button>
-            </div> */}
             {this.state.page === 0 ? 
             <div className="mapPage">
                 <h1 style={{width: '90%'}}>A Global Ripple Effect</h1>
@@ -51,8 +47,7 @@ export class BrainFood extends Component {
                     { this.state.inDatabase !== null ?
                         <h6><button onClick={() => this.openModal()} className="question-btn question-pos" style={{position: 'static', margin: '0'}}> {this.state.inDatabase === true ? "Change Your City": "Ripple"}</button></h6>
                     :
-                    // <h6><button className="question-btn question-pos" style={{position: 'static', margin: '0', width: '80%'}}></button></h6>
-                        <div></div>
+                        null
                     }
                     <Popup
                     open={this.state.open}
@@ -73,7 +68,7 @@ export class BrainFood extends Component {
                             {this.state.errors !== undefined && this.state.errors.city === true ?
                                     <small className="small-red">Please add a city before submitting.</small>
                                 :
-                                    <small></small>
+                                    null
                             }
                             <h4>Name:</h4>
                             <input type="text" style={{height: '20px'}} className="popup-input-small" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={ nameBlank ? "Please add your name." : "Jane Doe..."} onChange={e => {this.handleChange(e)}}/>
@@ -82,7 +77,7 @@ export class BrainFood extends Component {
                             {this.state.errors !== undefined && this.state.errors.email === true ?
                                     <small className="small-red">Please enter a valid email before submitting.</small>
                                 :
-                                    <small></small>
+                                    null
                             }
                             <div className="popup-btns">
                                 <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
@@ -122,7 +117,7 @@ export class BrainFood extends Component {
         this.setState({ [e.target.name] : e.target.value });        
     }
 
-    // code to deal with location question popup  
+    // CODE TO DEAL WITH LOCATION QUESTION POPUP  
 
     //this fires when the user closes the bottle popup - unfortunately can't run this when they click send
     closeConfirmation = () => {
@@ -132,57 +127,47 @@ export class BrainFood extends Component {
     }
 
     openConfirmation = (e) => {
-        e.preventDefault()
-        this.setState({confirmationOpen: true})
+        e.preventDefault();
+        this.setState({confirmationOpen: true});
     }
 
     openModal = () => {
-        this.setState({ open: true })
+        this.setState({ open: true });
     }
 
     closeModal = () => {
-        this.setState({ open: false })
+        this.setState({ open: false });
     }
 
     closeModalandOpenConfirmation = () => {
         this.setState({
             confirmationOpen: true,
             open: false
-        }, () => this.sendLocationToDB())
+        }, () => this.sendLocationToDB());
     }
 
     sendLocation = (e) => {
         const { city, email } = this.state;
-        let errors = this.validate(city, email);
+        let errors = this.validateUser(city, email);
         if (errors.city || errors.email) {
             return this.setState({
                 errors: errors
-            })
+            });
         }
         e.preventDefault()
         if (this.state.email.length > 0) {
             this.closeModalandOpenConfirmation();
         }
-        else {
-            return;
-        }
+        return;
     }
 
-
-    switchPage = (e, num) => {
-        this.setState({
-            page: num
-        })
-    }
-
-    validate = (city, email) => {
+    validateUser = (city, email) => {
         // true means invalid, so our conditions got reversed
         return {
           city: city.geometry === undefined,   
           email: !(EmailValidator.validate(email))
         };
-      }
-
+    }
 
     sendLocationToDB = () => {
         var name = this.state.name;
@@ -235,9 +220,7 @@ export class BrainFood extends Component {
                 console.error("Error writing document: ", error);
             });
         }
-
     }
-
 
     componentDidMount = () => {
         this.props.isLoaded();
@@ -251,17 +234,16 @@ export class BrainFood extends Component {
                 inDatabase: true,
                 name: doc.data().name,
                 email: doc.data().email
-              })
+              });
             });
           }
           else {
             this.setState({
                 inDatabase: false    
-              })
+              });
           }
       });
     }
-
 }
   
 export default BrainFood;
