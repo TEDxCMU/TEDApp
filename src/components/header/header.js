@@ -55,58 +55,10 @@ export class Header extends Component {
         }
         return (
             <header className={headerStyle}>
-                <Popup
-                    open={this.state.announcementOpen}
-                    closeOnDocumentClick
-                    onClose={this.closeAnnouncement}
-                    contentStyle={popupStyle}
-                    >
-                    <div className="modal">
-                        <div>
-                            { this.state.altAnnouncement !== undefined ?
-                                <div>   
-                                    <h4>Change or delete custom announcement:</h4>
-                                    <div className="popup-btns">
-                                        <button className="popup-btn-success button-primary" onClick={e => this.deleteAnnouncement(e)}>Delete</button>
-                                    </div>
-                                    <textarea type="text" id="iOS" required className="popup-input" name="announcement" value={this.state.announcement} placeholder={ "Make a new custom announcement."} onChange={e => this.handleChange(e)}/>
-                                    <div className="popup-btns">
-                                        <button className="popup-btn-success button-primary" onClick={e => this.updateAnnouncement(e)}>Update</button>
-                                    </div>
-                                </div>
-                            :
-                                <div>
-                                <h4>Create custom announcement</h4>
-                                <textarea type="text" id="iOS" required className="popup-input" name="announcement" placeholder={ "Make it bold, keep it short!"} onChange={e => this.handleChange(e)}/>
-                                <div className="popup-btns">
-                                    <button className="popup-btn-cancel" onClick={this.closeAnnouncement}>Cancel</button>
-                                    <button className="popup-btn-success button-primary" onClick={e => this.createAnnouncement(e)}>Confirm</button>
-                                </div>                      
-                                </div>
-                            }
-
-                        </div>
-                    </div>
-                </Popup>
+                {this.editEventAnnouncementPopup(popupStyle)}
                 {/* The header should be collapsed, so make the description small */}
                 { this.props.link !== undefined && this.props.link === false ?
-                    <div>
-                        {this.props.description !== undefined && this.state.altAnnouncement === undefined?
-                            <div>
-                                <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.props.description.toString())}</h6>
-                            </div>
-                            :
-                            <div></div>
-                        }
-                        {this.props.description !== undefined && this.state.altAnnouncement !== undefined?
-                            <div>
-                                <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.state.altAnnouncement.toString())}</h6>
-                            </div>
-                            :
-                            <div></div>
-                        }
-                    </div>
-
+                    this.collapsedHomeHeader()
                 :
                     <Link key={'home'} to={{
                         pathname: '/',
@@ -118,126 +70,9 @@ export class Header extends Component {
                 }
                 <div className="header-content">
                     {this.props.speaker === true ?
-                        <div className="speaker-header">
-                            { this.props.image !== undefined ?
-                                <div className="image-container">
-                                    <div className="image-border">
-                                        <img className="image" alt="speaker" src={this.props.image}></img>
-                                    </div>
-                                </div>
-                            :
-                                <div></div>
-                            }
-                            <br />
-                            <h1>{this.props.title}</h1>
-                            { this.props.tag !== undefined ?
-                                <div>
-                                    <h6 className="description-tag">{this.props.tag}</h6>
-                                </div>
-                            :
-                                <div></div>
-                            }
-                            { this.props.twitter !== undefined ?
-                                <div className="twitter-icon">
-                                    <SocialIcon network="twitter" rel="noopener noreferrer" url={this.props.twitter} taget="_blank" fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
-                                </div>
-                            :
-                                <div></div>
-                            }
-                            { this.props.asked === true ?
-                                // prevent user from asking multiple questions, if we have their device fingerprint on file
-                                <div className="question-btn-container">
-                                    <h6><button className="question-btn question-pos-asked">Asked</button></h6>
-                                </div>
-                            :
-                                <div className="question-btn-container">
-                                    <h6><button onClick={() => this.openModal()} className="question-btn question-pos">Ask Question</button></h6>
-                                    <Popup
-                                    open={this.state.open}
-                                    closeOnDocumentClick
-                                    onClose={this.closeModal}
-                                    contentStyle={popupStyle}
-                                    >
-                                    <div className="modal">
-                                        <div>
-                                            <h4 style={{marginTop: '5px'}}>Dear {this.props.title},{/* <sup style={{color: 'red'}}>*</sup> */}</h4>
-                                            <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup-input" : "popup-input-invalid" } name="question" value={that.props.question} placeholder={ questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange}/>
-                                            {this.state.errors === undefined ?
-                                                <small> </small>
-                                            :
-                                                <small className="small-red">Please ask a question before submitting.</small>
-                                            }  
-                                            <h4>Sincerely, </h4>
-                                            <input type="text" style={{height: '20px'}} className="popup-input-small" autoComplete="off" value={that.props.name} required minLength="4" size="10" name="name" placeholder={ nameBlank ? "Please add your name." : "Your name..."} onChange={that.props.handleChange}/>                                       
-                                            <div className="popup-btns">
-                                                <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
-                                                <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </Popup>
-                                    <Popup
-                                    open={this.state.openCheck}
-                                    closeOnDocumentClick
-                                    onClose={this.closeCheck}
-                                    contentStyle={popupStyle}
-                                    >
-                                    <div className="modal">
-                                        <div>
-                                            <h4>Ready to send off? </h4>
-                                            <h6 style={{color: 'black'}}>To prevent spam, you are limited to one question per speaker.</h6>
-                                            <div className="popup-btns">
-                                                <button className="popup-btn-cancel" onClick={this.closeCheck}>Go Back</button>
-                                                <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    </Popup>
-                                    <Popup
-                                    open={this.state.confirmationOpen}
-                                    closeOnDocumentClick
-                                    onClose={this.closeConfirmation}
-                                    contentStyle={popupStyle}
-                                    >
-                                    <div className="modal">
-                                        <div className="popup-response">
-                                            <img src={bottle} className="bottle" alt="Bottle" />
-                                            <p className="confirmation-text">Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
-                                            <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
-                                        </div>
-                                    </div>
-                                    </Popup>
-                                </div>
-                            }
-
-                        </div>
+                        this.speakerHeader(popupStyle, that, questionBlank, nameBlank)
                         :
-                        <div>
-                            {this.props.link === false ?
-                            <div></div>
-                            :
-                            <div>
-                                {/* This is a normal header, so put the title and description in where they should be */}
-                                <h1 className="title">{this.props.title}</h1>
-                                <div>
-                                    {this.props.description !== undefined && this.state.altAnnouncement === undefined ?
-                                        <div>
-                                            <h6 onClick={this.openAnnouncement} className="description">{Parser(this.props.description.toString())}</h6>
-                                        </div>
-                                        :
-                                        <div></div>
-                                    }
-                                    {this.props.description !== undefined && this.state.altAnnouncement !== undefined ? 
-                                        <div>
-                                            <h6 onClick={this.openAnnouncement} className="description">{Parser(this.state.altAnnouncement.toString())}</h6>
-                                        </div>
-                                    :
-                                        <div></div>
-                                    }
-                                </div>
-                            </div>
-                            }
-                        </div>
+                        this.regularHeader()
                     }
                 </div>
                 <div className="bottom-space"></div>
@@ -417,6 +252,180 @@ export class Header extends Component {
     }
 
     
+
+    successAskQuestionPopup = (popupStyle) => {
+        return (
+            <Popup open={this.state.confirmationOpen} closeOnDocumentClick onClose={this.closeConfirmation} contentStyle={popupStyle}>
+                <div className="modal">
+                    <div className="popup-response">
+                        <img src={bottle} className="bottle" alt="Bottle" />
+                        <p className="confirmation-text">Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
+                        <button className="popup-button-success button-primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
+                    </div>
+                </div>
+            </Popup>
+        )
+    }
+
+    confirmAskQuestionPopup = (popupStyle) => {
+        return (
+            <Popup open={this.state.openCheck} closeOnDocumentClick onClose={this.closeCheck} contentStyle={popupStyle}>
+                <div className="modal">
+                    <div>
+                        <h4>Ready to send off?</h4>
+                        <h6 style={{ color: 'black' }}>To prevent spam, you are limited to one question per speaker.</h6>
+                        <div className="popup-btns">
+                            <button className="popup-btn-cancel" onClick={this.closeCheck}>Go Back</button>
+                            <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
+                        </div>
+                    </div>
+                </div>
+            </Popup>
+        )
+    }
+
+    askQuestionPopup = (popupStyle, that, questionBlank, nameBlank) => {
+        return (
+            <Popup open={this.state.open} closeOnDocumentClick onClose={this.closeModal} contentStyle={popupStyle}>
+                <div className="modal">
+                    <div>
+                        <h4 style={{ marginTop: '5px' }}>Dear {this.props.title},</h4>
+                        <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup-input" : "popup-input-invalid"} name="question" value={that.props.question} placeholder={questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange} />
+                        {this.state.errors === undefined ?
+                            <small> </small>
+                            :
+                            <small className="small-red">Please ask a question before submitting.</small>}
+                        <h4>Sincerely, </h4>
+                        <input type="text" style={{ height: '20px' }} className="popup-input-small" autoComplete="off" value={that.props.name} required minLength="4" size="10" name="name" placeholder={nameBlank ? "Please add your name." : "Your name..."} onChange={that.props.handleChange} />
+                        <div className="popup-btns">
+                            <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
+                            <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </Popup>
+        )
+    }
+
+    editEventAnnouncementPopup = (popupStyle) => {
+        return (
+        <Popup open={this.state.announcementOpen} closeOnDocumentClick onClose={this.closeAnnouncement} contentStyle={popupStyle}>
+                <div className="modal">
+                    <div>
+                        {this.state.altAnnouncement !== undefined ?
+                            <div>
+                                <h4>Change or delete custom announcement:</h4>
+                                <div className="popup-btns">
+                                    <button className="popup-btn-success button-primary" onClick={e => this.deleteAnnouncement(e)}>Delete</button>
+                                </div>
+                                <textarea type="text" id="iOS" required className="popup-input" name="announcement" value={this.state.announcement} placeholder={"Make a new custom announcement."} onChange={e => this.handleChange(e)} />
+                                <div className="popup-btns">
+                                    <button className="popup-btn-success button-primary" onClick={e => this.updateAnnouncement(e)}>Update</button>
+                                </div>
+                            </div>
+                            :
+                            <div>
+                                <h4>Create custom announcement</h4>
+                                <textarea type="text" id="iOS" required className="popup-input" name="announcement" placeholder={"Make it bold, keep it short!"} onChange={e => this.handleChange(e)} />
+                                <div className="popup-btns">
+                                    <button className="popup-btn-cancel" onClick={this.closeAnnouncement}>Cancel</button>
+                                    <button className="popup-btn-success button-primary" onClick={e => this.createAnnouncement(e)}>Confirm</button>
+                                </div>
+                            </div>}
+                    </div>
+                </div>
+            </Popup>
+        )
+    }
+
+    regularHeader = () => {
+        return (
+            <div>
+                {this.props.link === false ?
+                    <div></div>
+                    :
+                    <div>
+
+                        <h1 className="title">{this.props.title}</h1>
+                        <div>
+                            {this.props.description !== undefined && this.state.altAnnouncement === undefined ?
+                                <div>
+                                    <h6 onClick={this.openAnnouncement} className="description">{Parser(this.props.description.toString())}</h6>
+                                </div>
+                                :
+                                <div></div>}
+                            {this.props.description !== undefined && this.state.altAnnouncement !== undefined ?
+                                <div>
+                                    <h6 onClick={this.openAnnouncement} className="description">{Parser(this.state.altAnnouncement.toString())}</h6>
+                                </div>
+                                :
+                                <div></div>}
+                        </div>
+                    </div>}
+            </div>
+        )
+    }
+
+    speakerHeader = (popupStyle, that, questionBlank, nameBlank) => {
+        return (
+            <div className="speaker-header">
+                {this.props.image !== undefined ?
+                    <div className="image-container">
+                        <div className="image-border">
+                            <img className="image" alt="speaker" src={this.props.image}></img>
+                        </div>
+                    </div>
+                    :
+                    <div></div>}
+                <br />
+                <h1>{this.props.title}</h1>
+                {this.props.tag !== undefined ?
+                    <div>
+                        <h6 className="description-tag">{this.props.tag}</h6>
+                    </div>
+                    :
+                    <div></div>}
+                {this.props.twitter !== undefined ?
+                    <div className="twitter-icon">
+                        <SocialIcon network="twitter" rel="noopener noreferrer" url={this.props.twitter} taget="_blank" fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
+                    </div>
+                    :
+                    <div></div>}
+                {this.props.asked === true ?
+                    // prevent user from asking multiple questions, if we have their device fingerprint on file
+                    <div className="question-btn-container">
+                        <h6><button className="question-btn question-pos-asked">Asked</button></h6>
+                    </div>
+                    :
+                    <div className="question-btn-container">
+                        <h6><button onClick={() => this.openModal()} className="question-btn question-pos">Ask Question</button></h6>
+                        {this.askQuestionPopup(popupStyle, that, questionBlank, nameBlank)}
+                        {this.confirmAskQuestionPopup(popupStyle)}
+                        {this.successAskQuestionPopup(popupStyle)}
+                    </div>}
+            </div>
+        )
+    }
+
+    collapsedHomeHeader = () => {
+        return (
+            <div>
+                {this.props.description !== undefined && this.state.altAnnouncement === undefined ?
+                    <div>
+                        <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.props.description.toString())}</h6>
+                    </div>
+                    :
+                    <div></div>}
+
+                {this.props.description !== undefined && this.state.altAnnouncement !== undefined ?
+                    <div>
+                        <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.state.altAnnouncement.toString())}</h6>
+                    </div>
+                    :
+                    <div></div>}
+            </div>
+        )
+    }
 };
 
 export default Header;

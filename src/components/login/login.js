@@ -33,11 +33,7 @@ export class Login extends Component {
                 <label>Password:</label>
                 <input className={this.state.found ? '' : 'invalid' } type="password" name="password" autoComplete="password" value={this.state.password} onChange={this.handleChange}/>
                 <br />
-                {this.state.found === true ?
-                <small> </small>
-                :
-                <small className="small-red">Could not find an account with that email/password.</small>
-                }
+                {this.state.found === true ? null : <small className="small-red">Could not find an account with that email/password.</small>}
                 <br />
                 <button className="button-primary" type="submit" onClick={this.login}>TED Log In</button>
             </form>            

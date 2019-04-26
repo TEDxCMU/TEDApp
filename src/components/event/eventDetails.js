@@ -24,71 +24,77 @@ export class EventDetails extends Component {
         if (self.props !== undefined) {
             for (let video in self.props.related) {
                 videos.push(
-                    <div key={video} style={{maxWidth: '100%'}}>
-                        <div style={{ position: "relative", height: "0", paddingBottom: "56.25%"}}>
-                            <iframe src={self.props.related[video]} title={self.props.related[video]} style={{position: 'absolute', left: '0', top: '0', width: '100%', height: '100%'}} frameBorder="0" scrolling="no" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}>
-                            </iframe>
-                        </div>
-                        <br></br>
-                    </div>
+                    this.makeVideoListElement(video, self)
                 )
             }      
         }
+        return (
+            <div>    
+            { this.state.asked !== undefined ? 
+            <div>
+                <Header
+                title={self.speaker.first + ' ' + self.speaker.last} 
+                image={self.speaker.image}
+                email={self.speaker.email}
+                twitter={self.speaker.twitter}
+                tag={self.speaker.tag}
+                speaker={true}
+                asked={this.state.asked}
+                askQuestion={this.createQuestion}
+                handleChange={this.handleChange}
+                question={this.state.question}
+                name={this.state.name}
+                close={this.closeConfirmationPopup}
+                errors={this.state.errors}
+                validate={this.validate}
+                db={self.db}
+                isAdmin={self.isAdmin}
+                />
+                {this.eventDetailsRender(self, videos)}
+            </div>
+            :
+            <div>
+                <Header db={self.db} isAdmin={self.isAdmin} />
+            </div>
+            }
+            </div>
+        ); 
+    }
 
-            return (
-                <div>    
-                { this.state.asked !== undefined ? 
-                <div>
-                    <Header
-                    title={self.speaker.first + ' ' + self.speaker.last} 
-                    image={self.speaker.image}
-                    email={self.speaker.email}
-                    twitter={self.speaker.twitter}
-                    tag={self.speaker.tag}
-                    speaker={true}
-                    asked={this.state.asked}
-                    askQuestion={this.createQuestion}
-                    handleChange={this.handleChange}
-                    question={this.state.question}
-                    name={this.state.name}
-                    close={this.closeConfirmationPopup}
-                    errors={this.state.errors}
-                    validate={this.validate}
-                    db={self.db}
-                    isAdmin={self.isAdmin}
-                    />
-                    <div className="event-details">
-                        { self.speaker !== undefined ?
-                        <div className="info-container">
-                            <p className="talk">TEDxCMU Talk</p>
-                            
-                            <h6 className="talk-title">{self.props.title}</h6>
-                            <p>{self.props.description}</p>
+    //Render Functions
+    eventDetailsRender = (self, videos) => {
+        return <div className="event-details">
+            {self.speaker !== undefined ?
+                <div className="info-container">
+                    <p className="talk">TEDxCMU Talk</p>
 
-                            <h6 className="bio">Speaker Bio</h6>
-                            <p>{self.speaker.bio}</p>
+                    <h6 className="talk-title">{self.props.title}</h6>
+                    <p>{self.props.description}</p>
 
-                            <h6 className="talk-title">Related TED Talks</h6>
-                            <div className="videos">
-                                {videos}
-                            </div>
+                    <h6 className="bio">Speaker Bio</h6>
+                    <p>{self.speaker.bio}</p>
 
-
-                        </div>
-                        :
-                        <div></div>
-                        }
+                    <h6 className="talk-title">Related TED Talks</h6>
+                    <div className="videos">
+                        {videos}
                     </div>
                 </div>
                 :
-                <div>
-                    <Header db={self.db} isAdmin={self.isAdmin} />
-                </div>
-                }
-                </div>
-              ); 
-        }
+                <div></div>}
+        </div>;
+    }
 
+    makeVideoListElement = (video, self) => {
+        return <div key={video} style={{ maxWidth: '100%' }}>
+            <div style={{ position: "relative", height: "0", paddingBottom: "56.25%" }}>
+                <iframe src={self.props.related[video]} title={self.props.related[video]} style={{ position: 'absolute', left: '0', top: '0', width: '100%', height: '100%' }} frameBorder="0" scrolling="no" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}>
+                </iframe>
+            </div>
+            <br></br>
+        </div>;
+    }
+
+    //Regular Functions
     handleChange = (e) => {
         this.setState({ [e.target.name] : e.target.value });        
     }
@@ -217,7 +223,6 @@ export class EventDetails extends Component {
         .catch(err => {
         });
     }
-
   }
   
 export default EventDetails;

@@ -22,9 +22,9 @@ export class QuestionComponent extends Component {
                         <p>FROM: {name}</p>
                         <textarea className="popup-input" type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
                         {this.props.answered === true ? 
-                        <div>
-                            <button type="button" className="button-sent full-width">Answered</button>
-                        </div>     
+                            <div>
+                                <button type="button" className="button-sent full-width">Answered</button>
+                            </div>     
                         :
                             <button type="button" style={{marginTop: '2rem', marginBottom: '10px'}} className="button-primary full-width" onClick={(e) => this.closeAndSend(e)}>{this.props.answerInDB ? "Re-Submit" : "Answer"}</button> 
                         }           

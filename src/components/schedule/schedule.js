@@ -139,7 +139,7 @@ export class Schedule extends Component {
                       <h4 className="event-title">{event.title}</h4>
                       <p className="event-description">{event.blurb}</p>
                       <br />
-                      {this.props.isAdmin  ? 
+                      {this.props.isAdmin ? 
                       <div>
                         <button className="button-primary" onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
                       </div>
@@ -149,22 +149,6 @@ export class Schedule extends Component {
                     </div>
                     <img src={arrow} className="info-arrow" alt="information arrow" />
                   </div>
-                <Link key={event.id} to={{
-                  pathname: "talks/"+event.id,
-                  state: {  
-                      id: event.id,
-                      title: event.title,
-                      start: event.start,
-                      end: event.end,
-                      description: event.description,
-                      blurb: event.blurb,
-                      speaker: event.speaker.id,
-                      related: event.related,
-                      announcement: event.announcement,
-                      db: this.props.db,
-                      isAdmin: this.props.isAdmin
-                  }
-                }}/>
               </div>
               :
               <div>
@@ -206,106 +190,61 @@ export class Schedule extends Component {
       else {
       // Change bullet color here, time, and the info in a timeline event
       newList.push(
-        <Item key={event.id} id={className === "now" ? "eventNow" : null}>
-            <span className="event-static"></span>
-            <span className={className}></span>
-            <span className="bullet-bg"></span>
-            <div className="info-static">
-              <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-              <h5 className="event-title">{event.title}</h5>
-              <small>{event.blurb}</small>
-              {this.props.isAdmin  ? 
-                <div>
-                  <button className="button-primary"
-                  onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
-                </div>
-              :
-                <div></div>
-              }
-            </div>
-        </Item>
-      )}
+          <Item key={event.id} id={className === "now" ? "eventNow" : null}>
+              <span className="event-static"></span>
+              <span className={className}></span>
+              <span className="bullet-bg"></span>
+              <div className="info-static">
+                <p className="time"><strong>{event.start}</strong> — {event.end}</p>
+                <h5 className="event-title">{event.title}</h5>
+                <small>{event.blurb}</small>
+                {this.props.isAdmin  ? 
+                  <div>
+                    <button className="button-primary"
+                    onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
+                  </div>
+                :
+                  <div></div>
+                }
+              </div>
+          </Item>
+        )
+      }
     })
     let allEvents = this.state.allEvents;
     let index = this.state.eventNum;
     if (newList.length > 0) {
     return (
-          <div style={{height: '100%', width: '100%'}}>
-            <Popup
-            open={this.state.endAllOpen}
-            closeOnDocumentClick
-            onClose={this.closeGlobalChangeModal}
-            contentStyle={style}
-            >
-            <div className="modal">
-                <div>
-                    { this.state.shiftingGlobal !== null && this.state.shiftingGlobal === true ? 
-                    <div>
-                      <h4>Are you sure you want to change the conference start time to {this.state.value.format('hh:mm A')}?</h4>
-                      <div className="popup-btns">
-                        <button className="popup-btn-cancel" onClick={this.closeGlobalChangeModal}>Cancel</button>
-                        <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftAll(e)}>Confirm</button>
-                      </div>
-                    </div>
-                    :
-                    <div>                    
-                    </div>
-                    }
-                </div>
-            </div>
-            </Popup>
-            <Popup
-            open={this.state.endEventLaterOpen}
-            closeOnDocumentClick
-            onClose={this.closeDelayModal}
-            contentStyle={style}
-            >
-            <div className="modal">
-              <div> New End Time:
-                <TimePicker
-                  defaultValue={this.state.value}
-                  onChange={this.handleValueChange}
-                />
-                <h4>Are you sure you want to change the end time of "{index === undefined ? "Event Name" : allEvents[index].title}" to {this.state.value === null ? moment().format('hh:mm A') : moment(this.state.value).format('hh:mm A')}?</h4>
-                <div className="popup-btns">
-                    <button className="popup-btn-cancel" onClick={this.closeDelayModal}>Cancel</button>
-                    <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftOneWithDelay(e, index, this.state.value)}>Confirm</button>
-                </div>                      
-              </div>
-            </div>
-            </Popup>
+        <div style={{height: '100%', width: '100%'}}>
+          {this.globalTimeChangePopup(style)}
+          {this.singleEventTimeChangePopup(style, index, allEvents)}
+          <div>
+            <Header
+            link={this.state.headerLink}
+            title={this.state.headerTitle}
+            description={notification}
+            db={this.props.db}
+            isAdmin={this.props.isAdmin}
+            headerStyle="fixed" />
+          </div>
+          { localStorage.getItem("canShiftGlobalStartTime") === null && this.props.isAdmin  ? 
             <div>
-              <Header
-              link={this.state.headerLink}
-              title={this.state.headerTitle}
-              description={notification}
-              db={this.props.db}
-              isAdmin={this.props.isAdmin}
-              headerStyle="fixed" />
-            </div>
-            }
-            {localStorage.getItem("canShiftGlobalStartTime") === null && this.props.isAdmin  ? 
-            <div>
-            <div className="new-event-time">
+              <div className="new-event-time">
                 <TimePicker
                   defaultValue={this.state.value}
                   onChange={this.handleValueChange} />
                 <button className="button-primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Conference Start Time</button>
               </div> 
               <div className="timeline-admin">      
-                <Sidebar id="itinerary" pose={this.state.isOpen ? 'enter' : 'exit'}>
-                  {newList} 
-                </Sidebar>
+                {this.sideBar(newList)}
               </div>
             </div>
-            :
+          :
             <div className="timeline">      
-                <Sidebar id="itinerary" pose={this.state.isOpen ? 'enter' : 'exit'}>
-                  {newList} 
-                </Sidebar>
+              {this.sideBar(newList)}
             </div>
-            }
-          </div>
+          }
+        </div>
     );
     }
   }
@@ -566,6 +505,60 @@ export class Schedule extends Component {
     }
   }
 
+
+  globalTimeChangePopup= (style) => {
+    return (
+      <Popup open={this.state.endAllOpen} closeOnDocumentClick onClose={this.closeGlobalChangeModal} contentStyle={style}>
+        <div className="modal">
+          {this.state.shiftingGlobal !== null && this.state.shiftingGlobal === true ?
+            <div>
+              <h4>Are you sure you want to change the conference start time to {this.state.value.format('hh:mm A')}?</h4>
+              <div className="popup-btns">
+                <button className="popup-btn-cancel" onClick={this.closeGlobalChangeModal}>Cancel</button>
+                <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftAll(e)}>Confirm</button>
+              </div>
+            </div>
+            :
+            null}
+        </div>
+      </Popup>
+    )
+  }
+
+  singleEventTimeChangePopup = (style, index, allEvents) => {
+    return (
+      <Popup
+        open={this.state.endEventLaterOpen}
+        closeOnDocumentClick
+        onClose={this.closeDelayModal}
+        contentStyle={style}
+        >
+        <div className="modal">
+          <div> New End Time:
+            <TimePicker
+              defaultValue={this.state.value}
+              onChange={this.handleValueChange}
+            />
+            <h4>Are you sure you want to change the end time of "{index === undefined ? "Event Name" : allEvents[index].title}" to {this.state.value === null ? moment().format('hh:mm A') : moment(this.state.value).format('hh:mm A')}?</h4>
+            <div className="popup-btns">
+                <button className="popup-btn-cancel" onClick={this.closeDelayModal}>Cancel</button>
+                <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftOneWithDelay(e, index, this.state.value)}>Confirm</button>
+            </div>                      
+          </div>
+        </div>
+      </Popup>
+    )
+
+  }
+
+
+  sideBar = (newList) => {
+    return (
+      <Sidebar id="itinerary" pose={this.state.isOpen ? 'enter' : 'exit'}>
+        {newList}
+      </Sidebar>
+    )
+  }
 }
 
 export default Schedule;
