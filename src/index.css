@@ -1,46 +1,30 @@
-/* *
-* Sources/Aids:
-* -----------------------------
-* styleshout.com (Kard v1.0 Main Stylesheet, 03-01-2016)
-* Typography (font-size: 16px; line-height: 1.2; scale: 1.275): https://www.gridlover.net/try
-* Link effect: https://codemyui.com/theoutline-squiggle-link-hover-effect/
-*
-* Organization:
-* -----------------------------
-* 01. Imports
-* 02. CSS Variables
-* 03. Reset stylesheet
-* 04. General style & overrides
-* 05. Forms (TBD)
-* 06. Buttons
-* 07. List styling
-* 08. Components (separate CSS files)
-* 09. Responsive styles
-* -----------------------------
-**/
-
-/* ---------- 01. START IMPORTS ---------- */
+/*------------------------------------*\
+  # IMPORTS
+\*------------------------------------*/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700');
-/* ---------- 01. END IMPORTS ---------- */
 
-/* ---------- 02. START CSS VARIABLES ---------- */
+
+/*------------------------------------*\
+  # CSS VARIABLES
+\*------------------------------------*/
 :root {
-  --tedblack: #000;
-  --tedgrey: #4e4e4e;
-  --tedlightgrey: #aaa;
-  --tedbggrey: #FCFCFC;
-  --tedoffwhite: #f8f8f8;
-  --tedwhite: #fff;
-  --tedblue: #6EEBFC;
-  --tedred: #e62b1e;
-  --tedredhover: #cb2d3e;
-  --tedredgradient: linear-gradient(180deg, #CB2D3E 0%, #EF473A 100%);
-  --tedredgradient45: linear-gradient(315deg, #CB2D3E 0%, #EF473A 100%);
+  --black: #000;
+  --grey: #4e4e4e;
+  --lightgrey: #aaa;
+  --bggrey: #fcfcfc;
+  --offwhite: #f8f8f8;
+  --white: #fff;
+  --lightblue: #6eebfc;
+  --red: #e62b1e;
+  --redhover: #cb2d3e;
+  --redgradient: linear-gradient(180deg, #cb2d3e 0%, #ef473a 100%);
+  --redgradient45: linear-gradient(315deg, #cb2d3e 0%, #ef473a 100%);
   --opaque: rgba(0, 0, 0, 0.3);
 }
-/* ------------- 02. END CSS VARIABLES ------------ */
 
-/* ---------- 03. START RESET STYLESHEET ---------- */
+/*------------------------------------*\
+  # RESET
+\*------------------------------------*/
 * {
     margin: 0;
     padding: 0;
@@ -48,29 +32,28 @@
     outline: 0;
 }
 
-html, .root {
+html,
+.root {
   font-size: 16px;
   line-height: 19px;
   scroll-behavior: smooth;
 }
 
-body, .article {
+body,
+.article {
   font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
   line-height: 1.1875rem;
-  background-color: var(--tedredhover);
+  background-color: var(--redhover);
   z-index: -20;
 }
 
-
-/* THIS IS A GIGANTIC HACK, DO NOT REUSE CODE 
-UNLESS YOU KNOW WHAT IT DOES */
-
-body:before{
+/* THIS CODE HACKS STATUS BAR BACKGROUND ON MOBILE, DO NOT REUSE */
+body:before {
   content: "";
   top: 0;
   left: 0;
-  background: var(--tedbggrey);
+  background: var(--bggrey);
   /* position:-webkit-sticky; */
   z-index: -2;
   width: 100vw;
@@ -82,8 +65,7 @@ body:after {
   content: "";
   top: -300px;
   left: 0;
-  background: var(--tedredhover);
-  /* position:-webkit-sticky; */
+  background: var(--redhover);
   z-index: 10;
   width: 100vw;
   height: 300px;
@@ -95,9 +77,7 @@ footer,header,hgroup,menu,nav,section {
     display: block;
 }
 
-nav ul {
-    list-style: none;
-}
+nav ul { list-style: none; }
 
 a {
     vertical-align: baseline;
@@ -105,32 +85,31 @@ a {
 }
 
 mark {
-    background-color: var(--tedred);
-    color: var(--tedblack); 
+    background-color: var(--red);
+    color: var(--black); 
     font-style: italic;
     font-weight: bold;
 }
 
-del {
-    text-decoration: line-through;
-}
+del { text-decoration: line-through; }
 
 hr {
     display: block;
     height: 1px;
     border: 0;   
-    border-top: 1px solid var(--tedgrey);
+    border-top: 1px solid var(--grey);
 }
 
-input, select {
+input,
+select {
     vertical-align: middle;
 }
-/* ----- 03. END RESET STYLESHEET ----- */
 
-/* ----- 04. START GENERAL STYLES & OVERRIDES ----- */
-
+/*------------------------------------*\
+  # TYPOGRAPHY
+\*------------------------------------*/
 h1, h2, h3, h4, h5, h6 {
-  color: var(--tedblack);
+  color: var(--black);
   text-rendering: optimizeLegibility;
 }
 
@@ -171,12 +150,12 @@ h6, .h6 {
   margin-top: 1.1875rem;
   margin-bottom: 1.1875rem;
   font-weight: 400;
-  color: var(--tedgrey);
+  color: var(--grey);
 }
 
 p {
   font-size: 1rem;
-  color: var(--tedgrey);
+  color: var(--grey);
   margin-bottom: 1.3rem;
   line-height: 1.4rem;
 }
@@ -202,59 +181,36 @@ sub, sup {
   vertical-align: baseline;
 }
 
-sup {
-  top: -0.5em;
-}
+sup { top: -0.5em; }
 
-sub {
-  bottom: -0.25em;
-}
+sub { bottom: -0.25em; }
 
 a {
-  color: var(--tedred);
+  color: var(--red);
   text-decoration: none;
 }
 
-p a {
-  color: var(--tedgrey);
-  text-decoration: none;
-  background: var(--tedredgradient);
-	background-position: 0 100%;
-	background-repeat: repeat-x;
-	background-size: 3px 3px;
-}
-
-p a:hover {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='#e62b1e' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
-  background-position: 0 100%;
-  background-size: auto 5px;
-  background-repeat: repeat-x;
-}
-
-/* --- MISCELLANEOUS STYLING --- */
 small {
   font-size: 0.7em;
   line-height: inherit;
 }
 
-del {
-  text-decoration: line-through;
-}
+del { text-decoration: line-through; }
 
 code {
   font-size: 1.1rem;
   margin: 0 .3rem;
   padding: .3rem .6rem;
   white-space: nowrap;
-  background: var(--tedoffwhite);
-  border: 1px solid var(--tedoffwhite);
+  background: var(--offwhite);
+  border: 1px solid var(--offwhite);
   border-radius: 3px;
 }
 
 /* BLOCKQUOTE STYLING */
 blockquote {
   padding: 1rem;
-  border-left: 7px solid var(--tedgrey);
+  border-left: 7px solid var(--grey);
 }
 
 blockquote p {
@@ -265,29 +221,21 @@ blockquote p {
 blockquote::before {
   content: open-quote;
   font-size: 4rem;
-  color: var(--tedgrey);
+  color: var(--grey);
   line-height: 0.3em;
   margin-right: 0.25em;
   vertical-align: -0.5em;
 }
 
 cite {
-  color: var(--tedgrey);
+  color: var(--grey);
   display: block;
   padding: 0;
   text-align: right;
   font-style: italic;
 }
 
-cite::before {
-  content: '— ';
-}
-
-/* DEFINITION LIST STYLING */
-
-/* dl {
-  margin: 20px;
-} */
+cite::before { content: '— '; }
 
 dt {
   font-weight: bold;
@@ -295,22 +243,16 @@ dt {
 }
 
 dd {
-  color: var(--tedgrey);
+  color: var(--grey);
   line-height: 1.4;
 }
 
+/*------------------------------------*\
+  # FORMS
+\*------------------------------------*/
+form { margin: 20px; }
 
-/* ---------- 04. END GENERAL STYLES & OVERRIDES ---------- */
-
-/* ---------- 05. START FORM STYLING ---------- */
-
-form {
-  margin: 20px;
-}
-
-fieldset {
-  border: none;
-}
+fieldset { border: none; }
 
 input[type="email"],
 input[type="number"],
@@ -326,12 +268,12 @@ select {
   padding: 1.5em 0.5em;
   border: none;
   outline: none;
-  color: var(--tedgrey);
+  color: var(--grey);
   font-size: 1em;
   line-height: 1em;
   width: 100%;
   background: transparent;
-  border: 1px solid #e9ebec;
+  border: 1px solid var(--offwhite);
   transition: all 0.3s ease-in-out;
   box-sizing: border-box;
 }
@@ -350,14 +292,12 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-	color: var(--tedblack);
-  border: 1px solid var(--tedlightgrey);
+	color: var(--black);
+  border: 1px solid var(--lightgrey);
   box-sizing: border-box;
 }
 
-.focus-highlight {
-  border-bottom: 1px solid var(--tedred);
-}
+.focus-highlight { border-bottom: 1px solid var(--red); }
 
 label, legend {
   text-transform: uppercase;
@@ -365,31 +305,31 @@ label, legend {
   font-size: 1rem;
   margin-top: 1rem;
 	margin-bottom: .6rem;
-	color: var(--tedblack);
+	color: var(--black);
 	display: block;
 }
+
 input[type="checkbox"], input[type="radio"] {
 	display: inline;
 }
+
 label > .label-text {
 	display: inline-block;
 	margin-left: 1rem;
 	line-height: inherit;
 }
+
 label > input[type="checkbox"], label > input[type="radio"] {
 	margin: 0;
 	position: relative;
 	top: .15rem;
 }
 
-.placeholder {
-	color: var(--tedlightgrey) !important;
-}
+.placeholder { color: var(--lightgrey) !important; }
 
-/* ---------- 05. END FORM STYLING ---------- */
-
-/* ---------- 06. START BUTTON STYLING ---------- */
-
+/*------------------------------------*\
+  # BUTTONS
+\*------------------------------------*/
 button,
 input[type="submit"],
 input[type="reset"],
@@ -410,7 +350,7 @@ input[type="button"] {
   margin: 0 .3rem 1.2rem 0;
   min-width: 80px;
   letter-spacing: .05rem;
-  background: var(--tedwhite);
+  background: var(--white);
 }
 
 form button,
@@ -428,8 +368,8 @@ button:focus,
 input[type="submit"]:focus,
 input[type="reset"]:focus,
 input[type="button"]:focus {
-	background: var(--tedoffwhite);
-	color: var(--tedblack);
+	background: var(--offwhite);
+	color: var(--black);
 	outline: 0;
 }
 
@@ -437,8 +377,8 @@ button.button-primary,
 input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
-	background: var(--tedredgradient45);
-  color: var(--tedwhite);
+	background: var(--redgradient45);
+  color: var(--white);
   transition: all 0.5s ease-in-out;
   box-shadow: 0 2px 10px 0 var(--opaque);
 }
@@ -447,8 +387,8 @@ button.button-sent,
 input[type="submit"].button-primary,
 input[type="reset"].button-primary,
 input[type="button"].button-primary {
-	background: var(--tedoffwhite);
-  color: var(--tedblack);
+	background: var(--offwhite);
+  color: var(--black);
   transition: all 0.5s ease-in-out;
   box-shadow: 0 2px 10px 0 var(--opaque);
 }
@@ -461,7 +401,7 @@ button.button-primary:focus,
 input[type="submit"].button-primary:focus,
 input[type="reset"].button-primary:focus,
 input[type="button"].button-primary:focus {
-  background: var(--tedredgradient45);
+  background: var(--redgradient45);
   transition: all 0.5s ease-in-out;
 }
 
@@ -483,9 +423,9 @@ button.large {
 	padding: 0em 2rem;
 }
 button.stroke {
-  background: var(--tedwhite);
-  color: var(--tedblack);
-	border: 3px solid var(--tedblack);
+  background: var(--white);
+  color: var(--black);
+	border: 3px solid var(--black);
 	line-height: 2.375rem;
 }
 button.stroke.medium {
@@ -495,8 +435,8 @@ button.stroke.large {
 	line-height: 2rem;
 }
 button.stroke:hover {
-	border: 3px solid var(--tedred);
-	color: var(--tedred);
+	border: 3px solid var(--red);
+	color: var(--red);
 }
 button::-moz-focus-inner, input::-moz-focus-inner {
 	border: 0;
@@ -505,31 +445,27 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 button.blank {
   background: none;
-  color: var(--tedred);
-  border: 1px solid var(--tedred);
+  color: var(--red);
+  border: 1px solid var(--red);
   border-radius: 3px;
   box-sizing: border-box;
   /* transition: all 0.5s ease-in-out; */
 }
 
 button.blank:hover {
-  color: var(--tedredhover);
-  border: 1px solid var(--tedredhover);
+  color: var(--redhover);
+  border: 1px solid var(--redhover);
   background: none;
 }
 
 button.blank:focus {
   transition: all 0.5s ease-in-out;
-  background: var(--tedredgradient45);
+  background: var(--redgradient45);
 }
 
-/* ---------- 06. END BUTTON STYLING ---------- */
-
-/* ---------- 07. START LIST STYLING ---------- */
-
-/* ---------- 07. END LIST STYLING ---------- */
-
-/* ---------- 08. START TABLE STYLING ---------- */
+/*------------------------------------*\
+  # TABLES
+\*------------------------------------*/
 table {
   border-collapse: collapse;
   width: 100%;
@@ -538,48 +474,24 @@ table {
 }
 
 th, td {
-text-align: left;
-padding: 8px;
+  text-align: left;
+  padding: 8px;
 }
 
 th {
-background-color: var(--tedgrey);
-color: white;
+  background-color: var(--grey);
+  color: var(--white);
 }
 
 td {
-background-color: var(--tedoffwhite);
+  background-color: var(--offwhite);
 }
 
 .table-container {
-overflow-x: auto;
-padding: 20px;
+  overflow-x: auto;
+  padding: 20px;
 }
-/* ---------- 08. END TABLE STYLING ---------- */
-
-/* ---------- 09. START RESPONSIVE STYLING ---------- */
-
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px) {
-    /* content */
-  } 
-  
-  /* Medium devices (landscape tablets, 768px and up) */
-  @media only screen and (min-width: 768px) {
-    /* content */
-  }
-  
-  /* Large devices (laptops/desktops, 992px and up) */
-  @media only screen and (min-width: 992px) {
-    /* content */
-  } 
-  
-  /* Extra large devices (large laptops and desktops, 1200px and up) */
-  @media only screen and (min-width: 1200px) {
-      /* content */
-  }
-/* ---------- 09. END RESPONSIVE STYLING ---------- */
 
 #arrow {
-  fill: var(--tedwhite);
+  fill: var(--white);
 }

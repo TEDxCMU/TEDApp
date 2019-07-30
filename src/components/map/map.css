@@ -1,9 +1,8 @@
 .mainPage {
-    display: flex;
-    flex-direction: column;
-    /* align-items: center; */
-    justify-content: center;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
 
 }
 
@@ -18,17 +17,14 @@
 }
 
 .map {
-    width: 90%;
-    height: 450px;
-    border: 0;
-    margin-left: 5%;
-    position: relative;
+  width: 90%;
+  height: 450px;
+  border: 0;
+  margin-left: 5%;
+  position: relative;
 }
 
-.sectionTitle {
-    margin-left: 20px;
-}
-
+.sectionTitle { margin-left: 20px; }
 
 /* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
 

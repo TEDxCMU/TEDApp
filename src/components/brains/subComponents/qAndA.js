@@ -37,12 +37,10 @@ export class QAndAMain extends Component {
         })
     }
 
-
     openConfirmation = (e) => {
         e.preventDefault()
         this.setState({confirmationOpen: true})
     }
-
 
     // opens the pop-up modal
     openModal = () => {

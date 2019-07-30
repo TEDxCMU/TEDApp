@@ -1,8 +1,3 @@
-.App {
-  margin: 0;
-  padding: 0;
-}
-
 .mm-popup {
   display: none;
 }
@@ -46,8 +41,8 @@
       width: 100%;
       height: 120px;
       border-radius: 3px;
-      background: #fff;
-      border: 1px solid #e9ebec;
+      background: var(--white);
+      border: 1px solid var(--offwhite);
       outline: none;
       -moz-box-sizing: border-box !important;
       -webkit-box-sizing: border-box !important;
@@ -58,7 +53,7 @@
   }
 
   .mm-popup__input:focus {
-    border: 1px solid #e9ebec;
+    border: 1px solid var(--offwhite);
   }
 
   .mm-popup__btn {
@@ -83,13 +78,13 @@
   }
 
   .mm-popup__btn--success {
-      background-color: var(--tedred);
-      border-color: var(--tedred);
-      color: #fff;
+      background-color: var(--red);
+      border-color: var(--red);
+      color: var(--white);
   }
 
   .mm-popup__btn--danger {
-      background-color: #fff;
+      background-color: var(--white);
       border-color: #c5545c;
       color: rgba(0,0,0,0);
   }
@@ -101,10 +96,10 @@
       left: 50%;
       margin-left: -250px;
       margin-top: -100px;
-      background: #fff;
+      background: var(--white);
       box-shadow: 0px 5px 20px 0px rgba(126,137,140,0.20);
       border-radius: 5px;
-      border: 1px solid #B8C8CC;
+      border: 1px solid var(--grey);
       overflow: hidden;
       z-index: 1001;
   }
@@ -126,8 +121,8 @@
           padding: 20px;
           line-height: 1.4;
           font-size: 14px;
-          color: var(--tedgrey);
-          background: #fff;
+          color: var(--grey);
+          background: var(--white);
           position: relative;
           z-index: 2;
       }

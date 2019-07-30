@@ -1,5 +1,5 @@
 #navigation {
-    background: var(--tedredgradient);
+    background: var(--redgradient);
 }
 
 #navigation a {
@@ -12,7 +12,7 @@
 }
 
 #navigation a:hover {
-  color: var(--tedblue);
+  color: var(--lightblue);
 }
 
 /* Position and sizing of burger button */
@@ -26,7 +26,7 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: var(--tedred);
+  background: var(--red);
 }
 
 /* Position and sizing of clickable cross button */
@@ -46,7 +46,7 @@
 
 /* Color/shape of close button cross */
 span .bm-cross {
-  background: var(--tedwhite);
+  background: var(--white);
   right: 20px;
   top: 25px;
   height: 30px !important;
@@ -63,7 +63,7 @@ span .bm-cross {
 
 /* General sidebar styles */
 .bm-menu {
-  background: var(--tedredgradient);
+  background: var(--redgradient);
   padding: 0;
   font-size: 1.4rem;
   width: 100%;
@@ -89,17 +89,9 @@ span .bm-cross {
 .bm-item-list {
   display: flex;
   justify-content: center !important;
-  color: var(--tedwhite);
+  color: var(--white);
   padding: 0.8em;
   text-align: center !important;
   position: relative;
   box-sizing: border-box;
 }
-
-/* Styling of overlay */
-/* .bm-overlay {
-  background: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: 0;
-  left: 0;
-} */

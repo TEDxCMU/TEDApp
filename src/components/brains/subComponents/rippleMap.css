@@ -4,22 +4,17 @@ body {
     height: 100vh;
   }
   
-#root {
-    height: 100%;
-}
+#root { height: 100%; }
   
-.map {
-    height: 100%;
-}
+.map { height: 100%; }
 
 .message-form {
     z-index: 999;
     position: absolute;
     top: 10px;
     right: 10px;
-    background-color: white
+    background-color: var(--white);
   }
-
 
 @keyframes shadow-pulse
 {
@@ -32,14 +27,14 @@ body {
 }
 
 circle {
-  stroke: var(--tedred); 
-  fill: var(--tedred);
+  stroke: var(--red); 
+  fill: var(--red);
   stroke-width: 2px;
   stroke-opacity: 1;
 }
 
 .pulse {
-  fill: white;
+  fill: var(--white);
   fill-opacity: 0;
   animation-duration: 2s;
   animation-name: pulse;

@@ -6,22 +6,21 @@
 }
 
 .info-container {
-/* margin-top: 250px; */
-padding: 20px;
+  padding: 20px;
 }
 
 .talk {
-color: var(--tedlightgrey);
+  color: var(--lightgrey);
 }
 
 .talk-title {
-margin-top: 20px;
-color: var(--tedred);
+  margin-top: 20px;
+  color: var(--red);
 }
 
 .bio {
-margin-top: 50px;
-color: var(--tedblack);
+  margin-top: 50px;
+  color: var(--black);
 }
 
 

@@ -185,7 +185,7 @@ export class BrainFood extends Component {
                 <div>
                     <h2>And where are you from?</h2>
                     <h4>City:</h4>
-                    <Autocomplete style={{ paddingLeft: '12px', padding: '1em 0', boxSizing: 'border-box !important', height: '20px', color: 'var(--tedgrey)', fontFamily: 'Open Sans, sans-serif', fontSize: '1em', lineHeight: '1em', width: '100%', background: "transparent", border: '1px solid #e9ebec' }} onPlaceSelected={(place) => {
+                    <Autocomplete style={{ paddingLeft: '12px', padding: '1em 0', boxSizing: 'border-box !important', height: '20px', color: 'var(--grey)', fontFamily: 'Open Sans, sans-serif', fontSize: '1em', lineHeight: '1em', width: '100%', background: "transparent", border: '1px solid #e9ebec' }} onPlaceSelected={(place) => {
                         this.setState({ city: place });
                     } } />
                     {this.state.errors !== undefined && this.state.errors.city === true ?

@@ -31,7 +31,7 @@
   display: block;
   width: 0;
   height: 100%;
-  border: 1px solid var(--tedlightgrey);
+  border: 1px solid var(--lightgrey);
   position: absolute;
   left: -2rem;
 }
@@ -41,7 +41,7 @@
   display: block;
   width: 0;
   height: 100%;
-  border: 1px solid var(--tedlightgrey);
+  border: 1px solid var(--lightgrey);
   position: absolute;
   left: -2rem;
 }
@@ -59,7 +59,7 @@
   display: block;
   width: 0;
   height: 100%;
-  border: 1px solid var(--tedlightgrey);
+  border: 1px solid var(--lightgrey);
   position: absolute;
   top: 0;
   left: -2rem;
@@ -77,7 +77,7 @@
   height: 10px;
   left: calc(-2rem - 4px);
   top: calc(50% - 4px);
-  background-color: var(--tedred);
+  background-color: var(--red);
   border-radius: 50%;
   box-sizing: border-box;
   z-index: 1;
@@ -90,12 +90,11 @@
   height: 18px;
   left: calc(-2rem - 13px);
   top: calc(50% - 13px);
-  background-color: var(--tedbggrey);
+  background-color: var(--bggrey);
   border-radius: 50%;
-  border: 5px solid var(--tedbggrey);
+  border: 5px solid var(--bggrey);
   z-index: 0;
 }
-
 
 /* static timeline styles */
 .now {
@@ -105,7 +104,7 @@
   height: 10px;
   left: calc(-2rem - 4px);
   top: calc(50% - 4px);
-  background-color: var(--tedred);
+  background-color: var(--red);
   border-radius: 50%;
   animation: now-pulse 2.5s infinite;
   box-sizing: border-box;
@@ -120,7 +119,7 @@
   height: 10px;
   left: 0;
   top: 0;
-  background-color: var(--tedred);
+  background-color: var(--red);
   border-radius: 50%;
   animation: now-pulse-3 2.5s infinite;
   box-sizing: border-box;
@@ -135,17 +134,12 @@
   height: 10px;
   left: 0;
   top: 0;
-  background-color: var(--tedred);
+  background-color: var(--red);
   border-radius: 50%;
   animation: now-pulse-4 2.5s infinite;
   box-sizing: border-box;
   z-index: 1;
   -webkit-transform: translateZ(0);
-}
-
-.info-talk-pulse {
-    /* animation: now-pulse-card 2.5s infinite;
-    -webkit-transform: translateZ(0); */
 }
 
 .past {
@@ -160,7 +154,6 @@
   box-sizing: border-box;
   z-index: 1;
 }
- 
 
 /* Use this instead of bullet class if occurred  */
 .event-ended::before {
@@ -168,7 +161,7 @@
   display: block;
   width: 0;
   height: 100%;
-  border: 1px solid var(--tedred);
+  border: 1px solid var(--red);
   position: absolute;
   top: 0;
   left: -2rem;
@@ -177,7 +170,7 @@
 .info-static {
   margin: 1rem 0 2rem;
   padding: 10px 20px;
-  border-color: var(--tedred);
+  border-color: var(--red);
   border-width: 1px;
   /* border: 1px solid #ECECEC; */
   box-sizing: border-box;
@@ -188,7 +181,7 @@
   margin: 2rem 0;
   padding: 10px 20px;
   cursor: pointer;
-  background: var(--tedwhite);
+  background: var(--white);
   border: 1px solid #F5F5F5;
   box-sizing: border-box;
   box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13);
@@ -207,7 +200,7 @@
 }
 
 .info-arrow {
-  color: var(--tedlightgrey);
+  color: var(--lightgrey);
   padding: 0 15px 0 10px;
   margin: 0;
   position: absolute;
@@ -226,7 +219,7 @@
 
 .time {
   font-size: 0.9rem;
-  color: var(--tedred);
+  color: var(--red);
   margin-bottom: 0;
 }
 
@@ -243,8 +236,6 @@
   vertical-align: middle;
   position: relative;
   top: 5px;
-  /* padding-right: 5px; */
-  /* padding: 0 0 1rem; */
   height: 1.2rem;
   width: 1.2rem;
   margin: 0;
@@ -265,25 +256,7 @@
 }
 /* END LOGIN MODE STYLES */
 
-
 /* ANIMATIONS */
-@keyframes now-pulse
-{
-  0% {
-    /* width: 0px;
-    height: 0px; */
-    /* transform:scale(2) */
-
-    /* box-shadow: 0.0 0.0 0.0 0.0px rgba(203, 45, 62, 0.3); */
-  }
-  100% {
-    /* transform:scale(1.5) */
-    /* width: 20px;
-    height: 20px; */
-    /* box-shadow: 0.0 0.0 0.0 10.0px rgba(203, 45, 62, 0); */
-  }
-}
-
 @keyframes now-pulse-2
 {
   26% {
@@ -445,5 +418,5 @@
   .timeline-admin {
     margin-left: 15%;
     margin-right: 12%;
+  }
 }
-} 

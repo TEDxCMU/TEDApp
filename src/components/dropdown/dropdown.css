@@ -1,7 +1,7 @@
 .dropdown {
     border-radius: 3px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    background-color: var(--tedwhite);
+    background-color: var(--white);
     position: relative;
     margin: 20px 0;
 }
@@ -23,7 +23,6 @@
     position: absolute;
     right: 2rem;
 }
-
 
 .question-title {
     position: relative;
@@ -47,7 +46,7 @@
 }
 
 .label:hover, .label:active, .label:focus {
-    background-color: var(--tedoffwhite);
+    background-color: var(--offwhite);
 }
 
 .content {
@@ -71,8 +70,6 @@ iframe {
     width:100%;
     height:100%;
 }
-
-/* END NEW CODE */
 
 .dropdown-closed {
     text-align: left;

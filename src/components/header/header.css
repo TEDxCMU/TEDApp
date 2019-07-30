@@ -9,7 +9,7 @@ header {
 }
 
 .a-link {
-    color: white;
+    color: var(--white);
     text-decoration: underline;
 }
 
@@ -55,10 +55,10 @@ header .arrow {
 
 .popup-content {
     position: relative;
-    background: rgb(255, 255, 255);
+    background: var(--white);
     width: 80%;
     margin: auto;
-    border: 1px solid rgb(187, 187, 187);
+    border: 1px solid var(--grey);
     padding: 5px;    
 }
 
@@ -102,7 +102,7 @@ header .arrow {
     box-sizing: border-box !important;
     font-size: 17px;
     padding: 12px;
-    color: var(--tedgrey);
+    color: var(--grey);
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -116,9 +116,9 @@ header .arrow {
     box-sizing: border-box !important;
     font-size: 17px;
     padding: 12px;
-    color: var(--tedbggrey);
+    color: var(--bggrey);
     font-family: 'Open Sans', sans-serif;
-    border: 2px solid var(--tedred) !important;
+    border: 2px solid var(--red) !important;
   }
 
 .popup-input-small {
@@ -147,7 +147,7 @@ header .arrow {
     padding-left: 12px !important;
     color: #808080;    
     font-family: 'Open Sans', sans-serif;
-    border: 2px solid var(--tedred) !important;
+    border: 2px solid var(--red) !important;
 }
 
 .popup-response {
@@ -160,8 +160,7 @@ header .arrow {
 /* ========== END QUESTION POPUP ========== */
 
 header h1, header h6 {
-    color: var(--tedwhite);
-    /* font-weight: normal; */
+    color: var(--white);
 }
 
 header .title {
@@ -272,9 +271,9 @@ header .title {
     font-weight: bold;
     text-transform: uppercase;
     text-decoration: none;
-    color: var(--tedredhover);
+    color: var(--redhover);
     cursor: pointer;
-    background-color: var(--tedwhite);
+    background-color: var(--white);
 	border-radius: 66px;
     padding: 16px 40px;
     box-shadow: 0px 2px 24px rgba(203, 45, 62, 0.35);
@@ -282,13 +281,8 @@ header .title {
 }
 
 .question-btn:hover {
-	background-color: var(--tedbggrey);
+	background-color: var(--bggrey);
 }
-
-.popup {
-    background-color: red;
-}
-
 
 @media only screen and (max-width: 600px) {
     /* content */
@@ -332,7 +326,7 @@ header .title {
 @media only screen and (min-width: 992px) {
     header {
         position: relative;
-        background: var(--tedredgradient);
+        background: var(--redgradient);
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.09);
         border-radius:0%;
     }

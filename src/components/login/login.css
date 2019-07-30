@@ -5,21 +5,13 @@
     text-align: left;
 }
 
-.login form {
-  width: 75%;
-}
+.login form { width: 75%; }
 
-.shake {
-  animation: shake 1s;
-}
+.shake { animation: shake 1s; }
 
-.invalid {
-  border: 2px solid var(--tedred) !important;
-}
+.invalid { border: 2px solid var(--red) !important; }
 
-.small-red {
-  color: var(--tedred);
-}
+.small-red { color: var(--red); }
 
 @keyframes shake {
   0% {
@@ -42,13 +34,11 @@
 .showErrorMessage {
   font-size: 1em;
   padding-top: 8px;
-  color: var(--tedred);
+  color: var(--red);
   transition: opacity 1s;
 }
 
-.hideErrorMessage {
-  opacity: 0;
-}
+.hideErrorMessage { opacity: 0; }
 
 @media only screen and (max-width: 600px) {
     .login {
