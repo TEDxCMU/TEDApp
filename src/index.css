@@ -1,12 +1,17 @@
-/*------------------------------------*\
-  # IMPORTS
-\*------------------------------------*/
+/* CSS General Styles Sheet
+ *
+ * Imports, CSS Variables, Reset, Typography,
+ * Buttons, Forms, Tables
+------------------------------------*/
+
+
+/* IMPORTS
+------------------------------------*/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700');
 
 
-/*------------------------------------*\
-  # CSS VARIABLES
-\*------------------------------------*/
+/* CSS VARIABLES
+------------------------------------*/
 :root {
   --black: #000;
   --grey: #4e4e4e;
@@ -22,29 +27,22 @@
   --opaque: rgba(0, 0, 0, 0.3);
 }
 
-/*------------------------------------*\
-  # RESET
-\*------------------------------------*/
+
+/* RESET
+------------------------------------*/
 * {
     margin: 0;
     padding: 0;
     border: 0;
-    outline: 0;
+    outline: none;
 }
 
 html,
-.root {
+body {
   font-size: 16px;
-  line-height: 19px;
   scroll-behavior: smooth;
-}
-
-body,
-.article {
   font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
   line-height: 1.1875rem;
-  background-color: var(--redhover);
   z-index: -20;
 }
 
@@ -54,7 +52,6 @@ body:before {
   top: 0;
   left: 0;
   background: var(--bggrey);
-  /* position:-webkit-sticky; */
   z-index: -2;
   width: 100vw;
   height: 100vh;
@@ -105,9 +102,14 @@ select {
     vertical-align: middle;
 }
 
-/*------------------------------------*\
-  # TYPOGRAPHY
-\*------------------------------------*/
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+
+/* TYPOGRAPHY
+------------------------------------*/
 h1, h2, h3, h4, h5, h6 {
   color: var(--black);
   text-rendering: optimizeLegibility;
@@ -119,29 +121,33 @@ h1, .h1 {
   margin-top: 1.1875rem;
   margin-bottom: 1.1875rem;
 }
+
 h2, .h2 {
   font-size: 1.625rem;
   line-height: 2.375rem;
   margin-top: 1.1875rem;
   margin-bottom: 1.1875rem;
 }
+
 h3, .h3 {
   font-size: 1.25rem;
   line-height: 2.375rem;
   margin-top: 1.1875rem;
-  margin-bottom: 0rem;
+  margin-bottom: 0;
 }
+
 h4, .h4 {
   font-size: 1rem;
   line-height: 1.1875rem;
   margin-top: 1.1875rem;
-  margin-bottom: 0rem;
+  margin-bottom: 0;
 }
+
 h5, .h5 {
   font-size: 1rem;
   line-height: 1.1875rem;
   margin-top: 1.1875rem;
-  margin-bottom: 0rem;
+  margin-bottom: 0;
 }
 
 h6, .h6 {
@@ -161,15 +167,10 @@ p {
 }
 
 p, ul, ol, pre, table, blockquote {
-  margin-top: 0rem;
+  margin-top: 0em;
   margin-bottom: 1.1875rem;
 }
-ul ul, ol ol, ul ol, ol ul {
-  margin-top: 0rem;
-  margin-bottom: 0rem;
-}
 
-/* Let's make sure all's aligned */
 hr, .hr {
   border: 1px solid;
   margin: -1px 0;
@@ -180,10 +181,6 @@ sub, sup {
   position: relative;
   vertical-align: baseline;
 }
-
-sup { top: -0.5em; }
-
-sub { bottom: -0.25em; }
 
 a {
   color: var(--red);
@@ -198,7 +195,6 @@ small {
 del { text-decoration: line-through; }
 
 code {
-  font-size: 1.1rem;
   margin: 0 .3rem;
   padding: .3rem .6rem;
   white-space: nowrap;
@@ -247,12 +243,12 @@ dd {
   line-height: 1.4;
 }
 
-/*------------------------------------*\
-  # FORMS
-\*------------------------------------*/
-form { margin: 20px; }
 
+/* FORMS
+------------------------------------*/
 fieldset { border: none; }
+textarea { min-height: 5em; }
+input { font-size: 1rem; }
 
 input[type="email"],
 input[type="number"],
@@ -264,23 +260,14 @@ input[type="password"],
 textarea,
 select {
   display: block;
-  height: 1em;
-  padding: 1.5em 0.5em;
-  border: none;
-  outline: none;
+  padding: 1em;
   color: var(--grey);
-  font-size: 1em;
   line-height: 1em;
   width: 100%;
   background: transparent;
-  border: 1px solid var(--offwhite);
+  border: 1px solid var(--lightgrey);
   transition: all 0.3s ease-in-out;
   box-sizing: border-box;
-}
-
-textarea {
-  font-size: 1em;
-	min-height: 5em;
 }
 
 input[type="email"]:focus,
@@ -297,175 +284,90 @@ select:focus {
   box-sizing: border-box;
 }
 
-.focus-highlight { border-bottom: 1px solid var(--red); }
-
-label, legend {
+label,
+legend {
+  color: var(--black);
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 1rem;
   margin-top: 1rem;
 	margin-bottom: .6rem;
-	color: var(--black);
 	display: block;
 }
 
-input[type="checkbox"], input[type="radio"] {
+input[type="checkbox"],
+input[type="radio"] {
 	display: inline;
 }
 
-label > .label-text {
-	display: inline-block;
-	margin-left: 1rem;
-	line-height: inherit;
-}
+.placeholder { color: var(--lightgrey); }
+.focus-highlight { border-bottom: 1px solid var(--red); }
 
-label > input[type="checkbox"], label > input[type="radio"] {
-	margin: 0;
-	position: relative;
-	top: .15rem;
-}
 
-.placeholder { color: var(--lightgrey) !important; }
+/* BUTTONS
+------------------------------------*/
 
-/*------------------------------------*\
-  # BUTTONS
-\*------------------------------------*/
-button,
-input[type="submit"],
-input[type="reset"],
-input[type="button"] {
-  font-weight: 600;
+.btn {
   font-size: 1rem;
   text-transform: uppercase;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
-  border: none;
   border-radius: 3px;
   text-align: center;
   white-space: nowrap;
-  transition: all 0.3s ease-in-out;
-  height: 3rem;
-  padding: 0 3rem;
-  margin: 0 .3rem 1.2rem 0;
-  min-width: 80px;
   letter-spacing: .05rem;
-  background: var(--white);
+  padding: 1rem;
+  margin: 0.2rem;
 }
 
-form button,
-form input[type="submit"],
-form input[type="reset"],
-form input[type="button"] {
-  margin-top: 20px;
+.btn-full {
+  width: 100%;
+  padding: 1rem 2rem;
 }
 
-button:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover,
-input[type="button"]:hover,
-button:focus,
-input[type="submit"]:focus,
-input[type="reset"]:focus,
-input[type="button"]:focus {
-	background: var(--offwhite);
-	color: var(--black);
-	outline: 0;
-}
-
-button.button-primary,
-input[type="submit"].button-primary,
-input[type="reset"].button-primary,
-input[type="button"].button-primary {
-	background: var(--redgradient45);
+/* red gradient button */
+.btn--primary {
   color: var(--white);
-  transition: all 0.5s ease-in-out;
-  box-shadow: 0 2px 10px 0 var(--opaque);
-}
-
-button.button-sent,
-input[type="submit"].button-primary,
-input[type="reset"].button-primary,
-input[type="button"].button-primary {
-	background: var(--offwhite);
-  color: var(--black);
-  transition: all 0.5s ease-in-out;
-  box-shadow: 0 2px 10px 0 var(--opaque);
-}
-
-button.button-primary:hover,
-input[type="submit"].button-primary:hover,
-input[type="reset"].button-primary:hover,
-input[type="button"].button-primary:hover,
-button.button-primary:focus,
-input[type="submit"].button-primary:focus,
-input[type="reset"].button-primary:focus,
-input[type="button"].button-primary:focus {
   background: var(--redgradient45);
-  transition: all 0.5s ease-in-out;
+  box-shadow: 0 2px 10px 0 var(--opaque);
+  transition: all 300ms ease-in-out;
 }
 
-button.full-width {
-	width: 100%;
-  height: 4rem;
-	line-height: 4rem;
-	padding: 0em 2rem;
-}
-
-button.medium {
-	height: 3rem;
-	line-height: 3rem;
-	padding: 0 1.1rem;
-}
-button.large {
-	height: 4rem;
-	line-height: 4rem;
-	padding: 0em 2rem;
-}
-button.stroke {
-  background: var(--white);
+/* white button */
+.btn--secondary {
   color: var(--black);
-	border: 3px solid var(--black);
-	line-height: 2.375rem;
-}
-button.stroke.medium {
-	line-height: 2rem;
-}
-button.stroke.large {
-	line-height: 2rem;
-}
-button.stroke:hover {
-	border: 3px solid var(--red);
-	color: var(--red);
-}
-button::-moz-focus-inner, input::-moz-focus-inner {
-	border: 0;
-	padding: 0;
+  background: var(--offwhite);
+  box-shadow: 0 2px 10px 0 var(--opaque);
+  transition: all 300ms ease-in-out;
 }
 
-button.blank {
-  background: none;
+/* red outline btn */
+.btn--tertiary {
   color: var(--red);
+  background: transparent;
   border: 1px solid var(--red);
-  border-radius: 3px;
-  box-sizing: border-box;
-  /* transition: all 0.5s ease-in-out; */
 }
 
-button.blank:hover {
+.btn--tertiary:hover {
   color: var(--redhover);
   border: 1px solid var(--redhover);
   background: none;
 }
 
-button.blank:focus {
-  transition: all 0.5s ease-in-out;
+.btn--tertiary:focus {
   background: var(--redgradient45);
+  
 }
 
-/*------------------------------------*\
-  # TABLES
-\*------------------------------------*/
+/* black outline button */
+.btn--outline {
+  color: var(--black);
+  background: var(--white);
+	border: 3px solid var(--black);
+}
+
+/* TABLES
+------------------------------------*/
 table {
   border-collapse: collapse;
   width: 100%;
@@ -494,4 +396,23 @@ td {
 
 #arrow {
   fill: var(--white);
+}
+
+
+/* UTILITIES
+------------------------------------*/
+
+/* TEXT */
+.bold { font-weight: 600; }
+.italicize { font-style: italic; }
+.underline { text-decoration: underline; }
+
+.no-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
 }

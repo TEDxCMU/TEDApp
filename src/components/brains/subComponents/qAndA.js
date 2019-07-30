@@ -262,7 +262,7 @@ export class QAndAMain extends Component {
 
         for (let speaker in this.state.speakers) {
             speakerButtons.push(
-                <button key={speaker} onClick={e => this.toggleButtons(e, speaker)} style={{boxShadow: 'none'}} className={speaker.toString() === this.state.selectedSpeaker.toString() ? "button-primary medium" : "button-primary medium blank"}>{this.state.speakers[speaker].first}</button>
+                <button key={speaker} onClick={e => this.toggleButtons(e, speaker)} style={{boxShadow: 'none'}} className={speaker.toString() === this.state.selectedSpeaker.toString() ? "btn btn--primary" : "btn btn--tertiary"}>{this.state.speakers[speaker].first}</button>
             )
         }
         let newList = [];
@@ -282,7 +282,7 @@ export class QAndAMain extends Component {
                 </Dropdown>
                 </div>
             )
-            }  
+            }
     
         })
     }
