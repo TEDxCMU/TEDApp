@@ -509,13 +509,13 @@ export class Schedule extends Component {
   globalTimeChangePopup= (style) => {
     return (
       <Popup open={this.state.endAllOpen} closeOnDocumentClick onClose={this.closeGlobalChangeModal} contentStyle={style}>
-        <div className="modal">
+        <div className="popup">
           {this.state.shiftingGlobal !== null && this.state.shiftingGlobal === true ?
             <div>
               <h4>Are you sure you want to change the conference start time to {this.state.value.format('hh:mm A')}?</h4>
-              <div className="popup-btns">
-                <button className="popup-btn-cancel" onClick={this.closeGlobalChangeModal}>Cancel</button>
-                <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftAll(e)}>Confirm</button>
+              <div className="popup__btn-group">
+                <button className="btn btn-full btn--cancel" onClick={this.closeGlobalChangeModal}>Cancel</button>
+                <button className="btn btn-full btn--primary" onClick={e => this.confirmShiftAll(e)}>Confirm</button>
               </div>
             </div>
             :
@@ -533,16 +533,16 @@ export class Schedule extends Component {
         onClose={this.closeDelayModal}
         contentStyle={style}
         >
-        <div className="modal">
+        <div className="popup">
           <div> New End Time:
             <TimePicker
               defaultValue={this.state.value}
               onChange={this.handleValueChange}
             />
             <h4>Are you sure you want to change the end time of "{index === undefined ? "Event Name" : allEvents[index].title}" to {this.state.value === null ? moment().format('hh:mm A') : moment(this.state.value).format('hh:mm A')}?</h4>
-            <div className="popup-btns">
-                <button className="popup-btn-cancel" onClick={this.closeDelayModal}>Cancel</button>
-                <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftOneWithDelay(e, index, this.state.value)}>Confirm</button>
+            <div className="popup__btn-group">
+                <button className="btn btn-full btn--cancel" onClick={this.closeDelayModal}>Cancel</button>
+                <button className="btn btn-full btn--primary" onClick={e => this.confirmShiftOneWithDelay(e, index, this.state.value)}>Confirm</button>
             </div>                      
           </div>
         </div>

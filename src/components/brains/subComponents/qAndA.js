@@ -308,14 +308,14 @@ export class QAndAMain extends Component {
                         onClose={this.closeModal}
                         contentStyle={popupStyle}
                         >
-                        <div className="modal">
+                        <div className="popup">
                             <div>
                                 {this.state.speakerRef !== undefined && this.state.speakerRef !== null ? 
                                     <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4>
                                 :
                                     <div></div>
                                 }
-                                <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup-input" : "popup-input-invalid" } name="question" value={this.state.question} placeholder="Write your question here..." onChange={this.handleChange}/>
+                                <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup__input" : "popup__input popup__input--invalid" } name="question" value={this.state.question} placeholder="Write your question here..." onChange={this.handleChange}/>
                                 {this.state.errors === undefined ?
                                     <small> </small>
                                 :
@@ -323,9 +323,9 @@ export class QAndAMain extends Component {
                                 }
                                 <h4>Sincerely, </h4>
                                 <input type="text" style={{height: '20px'}} autoComplete="off" className="popup-input-small" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>
-                                <div className="popup-btns">
-                                    <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
-                                    <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
+                                <div className="popup__btn-group">
+                                    <button className="btn btn-full btn--cancel" onClick={this.closeModal}>Cancel</button>
+                                    <button className="btn btn-full btn--primary" onClick={this.openCheck}>Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -336,13 +336,13 @@ export class QAndAMain extends Component {
                         onClose={this.closeCheck}
                         contentStyle={popupStyle}
                         >
-                        <div className="modal">
+                        <div className="popup">
                             <div>
                                 <h4>Ready to send off? </h4>
                                 <h6 style={{color: 'black'}}>To prevent spam, you are limited to one question per speaker.</h6>
-                                <div className="popup-btns">
-                                    <button className="popup-btn-cancel" onClick={this.closeCheck}>Go Back</button>
-                                    <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
+                                <div className="popup__btn-group">
+                                    <button className="btn btn-full btn--cancel" onClick={this.closeCheck}>Go Back</button>
+                                    <button className="btn btn-full btn--primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
                                 </div>
                             </div>
                         </div>
@@ -353,11 +353,11 @@ export class QAndAMain extends Component {
                         onClose={this.closeConfirmation}
                         contentStyle={popupStyle}
                         >
-                        <div className="modal">
-                            <div className="popup-response">
+                        <div className="popup">
+                            <div className="popup__response">
                                 <img src={bottle} className="bottle" alt="Bottle" />
                                 <p className="confirmation-text">Thank you for asking a question! Please check back on the Q &amp; A page later.</p>
-                                <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
+                                <button className="btn btn-full btn--primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
                             </div>
                         </div>
                         </Popup>

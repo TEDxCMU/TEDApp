@@ -305,7 +305,6 @@ input[type="radio"] {
 
 /* BUTTONS
 ------------------------------------*/
-
 .btn {
   font-size: 1rem;
   text-transform: uppercase;
@@ -318,6 +317,8 @@ input[type="radio"] {
   letter-spacing: .05rem;
   padding: 1rem;
   margin: 0.2rem;
+
+  transition: all 300ms ease-in-out;
 }
 
 .btn-full {
@@ -356,7 +357,6 @@ input[type="radio"] {
 
 .btn--tertiary:focus {
   background: var(--redgradient45);
-  
 }
 
 /* black outline button */
@@ -392,10 +392,6 @@ td {
 .table-container {
   overflow-x: auto;
   padding: 20px;
-}
-
-#arrow {
-  fill: var(--white);
 }
 
 

@@ -34,6 +34,14 @@ class App extends Component {
   }
 
   render() {
+    let popupStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'flex-end',
+      justifyContent: 'flex-end',
+      width: '100%'
+    }
+
     if (this.state.db === undefined && this.state.noActiveEvents === undefined) {
       return <div></div>
     }
@@ -69,11 +77,11 @@ class App extends Component {
             {/* <Route path="/questions" exact strict render={this.questionsPage}/> */}
             <Route component={this.noMatch} />
             </Switch>
-              <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
+              <div style={popupStyle}> 
                 {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null && localStorage.getItem("fingerprint") !== null ?
                 <PopUp iOS={true} loaded={this.state.loaded}/>
                 :
-                <div align="center"></div>
+                null
                 }
               </div>
             </div>

@@ -1,11 +1,3 @@
-body {
-    margin: 0px;
-    width: 100vw;
-    height: 100vh;
-  }
-  
-#root { height: 100%; }
-  
 .map { height: 100%; }
 
 .message-form {
@@ -18,11 +10,8 @@ body {
 
 .content {
     display: flex;
-    /* justify-content: center;
-    align-items: center; */
     flex-direction: column;
 }
-
 
 header h1 {
     display: inline-block;
@@ -32,11 +21,6 @@ header h1 {
 }
 
 .cancel { margin-right: 0px; }
-
-textarea {
-    min-height: 2.5em;
-    font-family: 'Open Sans', sans-serif;
-}
 
 header .logo {
     left: 26px;
@@ -67,32 +51,19 @@ header .arrow {
 
 /* ========== QUESTION POPUP ========== */
 
-.modal {
+.popup {
     display: flex;
     flex-direction: column;
     border: none;
     border-radius: 10px;
 }
 
-.popup-btns {
+.popup__btn-group {
     display: flex;
     justify-content: space-between;
 }
 
-.popup-btn-cancel {
-    text-align: center;
-    margin-top: 20px;
-    border-radius: 24px;
-    background-color: var(--offwhite);
-}
-
-.popup-btn-success {
-    text-align: center;
-    margin-top: 20px;
-    border-radius: 24px;
-}
-
-.popup-response {
+.popup__response {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -224,15 +195,9 @@ header .title {
         padding-top:  0px;
     }
 
-    .popup-btns {
+    .popup__btn-group {
         display: flex;
         flex-direction: column;
-    }
-    
-    .popup-btn-cancel, .popup-btn-success {
-        margin-bottom: 0;
-        width: 100%;
-        
     }
 } 
 

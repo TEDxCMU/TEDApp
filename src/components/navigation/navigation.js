@@ -73,7 +73,7 @@ export class Navigation extends Component {
                                         :
                                         <div>
                                             <li>
-                                                <button className="full-width button-primary" onClick={this.props.logout}>Log Out</button> 
+                                                <button className="btn btn-full button--primary" onClick={this.props.logout}>Log Out</button> 
                                             </li>
                                         </div>
                                     }
