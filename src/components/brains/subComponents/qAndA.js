@@ -291,7 +291,7 @@ export class QAndAMain extends Component {
             <div className="justified">
                 {speakerButtons}
             </div>
-            <div className="content">
+            <div className="qanda-container">
             {this.state.asked !== undefined ? 
                 <div>
                 { this.state.asked === true ?
