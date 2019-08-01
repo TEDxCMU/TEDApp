@@ -35,7 +35,7 @@ export class Login extends Component {
                 <br />
                 {this.state.found === true ? null : <small className="small-red">Could not find an account with that email/password.</small>}
                 <br />
-                <button className="button-primary" type="submit" onClick={this.login}>TED Log In</button>
+                <button className="btn btn--primary" type="submit" onClick={this.login}>TED Log In</button>
             </form>            
         </div>
       );

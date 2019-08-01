@@ -1,11 +1,11 @@
-#popup-bg {
+.home-popup {
     position: fixed;
     bottom: 0;
     display: inline-block;
     padding: 5px;
 	z-index: 9999;
     text-align: center;
-    background: #2b2b2b;
+    background: #222;
     background-size: cover;
     width: 100%;
     box-sizing: border-box;
@@ -14,14 +14,14 @@
     margin: 0;
 }
 
-#popup-content h5, #popup-content p {
+.popup-content h5, .popup-content p {
     line-height: 1rem;
     color: var(--white);
 }
 
-#popup-content h5 { font-size: 1.5rem; }
+.popup-content h5 { font-size: 1.5rem; }
 
-#popup-content p {
+.popup-content p {
     padding: 0;
     margin: 10px 10px 15px;
     font-size: 0.8rem;

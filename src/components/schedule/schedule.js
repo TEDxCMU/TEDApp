@@ -141,7 +141,7 @@ export class Schedule extends Component {
                       <br />
                       {this.props.isAdmin ? 
                       <div>
-                        <button className="button-primary" onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
+                        <button className="btn btn--primary" onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
                       </div>
                       :
                         <div></div>
@@ -200,7 +200,7 @@ export class Schedule extends Component {
                 <small>{event.blurb}</small>
                 {this.props.isAdmin  ? 
                   <div>
-                    <button className="button-primary"
+                    <button className="btn btn--primary"
                     onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
                   </div>
                 :
@@ -233,7 +233,7 @@ export class Schedule extends Component {
                 <TimePicker
                   defaultValue={this.state.value}
                   onChange={this.handleValueChange} />
-                <button className="button-primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Conference Start Time</button>
+                <button className="btn btn--primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Conference Start Time</button>
               </div> 
               <div className="timeline-admin">      
                 {this.sideBar(newList)}

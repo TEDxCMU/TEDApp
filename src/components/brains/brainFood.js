@@ -37,7 +37,7 @@ export class BrainFood extends Component {
     return (
         <div className="mapPage">
             <h1 style={{width: '90%'}}>A Global Ripple Effect</h1>
-            <div className="question-btn-container">
+            <div>
                 {this.addLocationButton()}
                 {this.locationInputPopup(style)}
                 {this.locationConfirmationPopup(style)}
@@ -185,7 +185,7 @@ export class BrainFood extends Component {
             padding: '1em 0',
             boxSizing: 'border-box !important',
             height: '20px',
-            color: 'var(--grey)',
+            color: 'var(--grey-20)',
             fontFamily: 'Open Sans, sans-serif',
             fontSize: '1em',
             lineHeight: '1em',
@@ -207,7 +207,7 @@ export class BrainFood extends Component {
                         :
                         null}
                     <h4>Name:</h4>
-                    <input type="text" style={{ height: '20px' }} className="popup-input-small" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={"Please add your name."} onChange={e => { this.handleChange(e); } } />
+                    <input type="text" style={{ height: '20px' }} className="popup__input popup__input__sm" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={"Please add your name."} onChange={e => { this.handleChange(e); } } />
                     <h4>Email:</h4>
                     <input type="email" style={{ height: '20px' }} className={this.state.errors !== undefined && this.state.errors.email === true ? "popup__input popup__input--sm-invalid" : "popup__input popup__input--sm"} minLength="4" siz="10" name="email" value={this.state.email} placeholder={"Please add your email."} onChange={e => { this.handleChange(e); } } />
                     {this.state.errors !== undefined && this.state.errors.email === true ?
@@ -225,7 +225,7 @@ export class BrainFood extends Component {
 
     addLocationButton() {
         return this.state.inDatabase !== null ?
-            <h6><button onClick={() => this.openModal()} className="question-btn question-pos" style={{ position: 'static', margin: '0' }}> {this.state.inDatabase === true ? "Change Your City" : "Ripple"}</button></h6>
+            <h6><button onClick={() => this.openModal()} className="btn q-btn" style={{margin: '0' }}> {this.state.inDatabase === true ? "Change Your City" : "Ripple"}</button></h6>
             :
             null;
     }
@@ -236,7 +236,7 @@ export class BrainFood extends Component {
                 <div className="popup__response">
                     <img src={bottle} className="bottle" alt="Bottle" />
                     <p className="confirmation-text">Thank you for telling us more about yourself! Check this page later to see the Ripple Effect!</p>
-                    <button className="popup-button-success button-primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
+                    <button className="btn btn--primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
                 </div>
             </div>
         </Popup>;

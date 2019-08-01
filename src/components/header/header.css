@@ -5,7 +5,6 @@ header {
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 2;
-    /* margin-bottom: 200px; */
 }
 
 .a-link {
@@ -18,15 +17,6 @@ header h1 {
     margin: 0;
     padding: 0;
     vertical-align: middle;
-}
-
-.cancel {
-    margin-right: 0px;
-}
-
-textarea {
-    min-height: 2.5em;
-    font-family: 'Open Sans', sans-serif;
 }
 
 header .logo {
@@ -45,22 +35,7 @@ header .arrow {
     height: 40px;
 }
 
-#iOS {
-    -webkit-user-select:text; 
-}
-
-.iOS {
-    -webkit-user-select:text;
-}
-
-.popup-content {
-    position: relative;
-    background: var(--white);
-    width: 80%;
-    margin: auto;
-    border: 1px solid var(--grey);
-    padding: 5px;    
-}
+#iOS, .iOS { -webkit-user-select:text; }
 
 .confirmation-text {
     text-align: center;
@@ -78,6 +53,7 @@ header .arrow {
 .popup__btn-group {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 .popup__input {
@@ -85,11 +61,9 @@ header .arrow {
     width: 100%;
     border-radius: 3px;
     padding: 12px;
-    color: var(--grey);
-
+    color: var(--grey-20);
     margin-top: 10px;
     padding: 12px;
-    height: 150px;
     box-sizing: border-box !important;
 }
 
@@ -102,13 +76,13 @@ header .arrow {
 .popup__input--sm {
     height: 20px;
     padding-left: 12px !important;
-    color: var(--grey);    
+    color: var(--grey-20);    
 }
 
 .popup__input--sm-invalid {
     height: 20px;
     padding-left: 12px !important;
-    color: var(--grey);    
+    color: var(--grey-20);    
     border: 2px solid var(--red) !important;
 }
 
@@ -210,40 +184,6 @@ header .title {
 
 .sticky-header.short {
     height: 150px;
-}
-
-.question-btn-container {
-    position: relative;
-}
-
-.question-pos {
-    left: 50%;
-    margin-left: -94.735px;
-}
-
-.question-pos-asked {
-    left: 50%;
-    margin-left: -64.5px;
-}
-
-.question-btn {
-    position: absolute;
-    top: 12px;
-    font-size: 13px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--redhover);
-    cursor: pointer;
-    background-color: var(--white);
-	border-radius: 66px;
-    padding: 16px 40px;
-    box-shadow: 0px 2px 24px rgba(203, 45, 62, 0.35);
-    margin-bottom: -20px;
-}
-
-.question-btn:hover {
-	background-color: var(--bggrey);
 }
 
 @media only screen and (max-width: 600px) {

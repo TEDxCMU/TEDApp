@@ -296,12 +296,10 @@ export class QAndAMain extends Component {
                 <div>
                 { this.state.asked === true ?
                     // prevent user from asking multiple questions, if we have their device fingerprint on file
-                    <div className="questi0n-btn-container">
-                        <h6><button className="questi0n-btn question-pos-asked">Asked</button></h6>
-                    </div>
+                    <button className="btn q-btn">Asked</button>
                 :
-                    <div className="questi0n-btn-container">
-                        <h6><button onClick={() => this.openModal()} className="questi0n-btn question-pos">Ask Question</button></h6>
+                    <div>
+                        <button onClick={() => this.openModal()} className="btn q-btn">Ask Question</button>
                         <Popup
                         open={this.state.open}
                         closeOnDocumentClick
@@ -322,7 +320,7 @@ export class QAndAMain extends Component {
                                     <small className="small-red">Please ask a question before submitting.</small>
                                 }
                                 <h4>Sincerely, </h4>
-                                <input type="text" style={{height: '20px'}} autoComplete="off" className="popup-input-small" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>
+                                <input type="text" style={{height: '20px'}} autoComplete="off" className="popup__input popup__input__sm" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>
                                 <div className="popup__btn-group">
                                     <button className="btn btn-full btn--cancel" onClick={this.closeModal}>Cancel</button>
                                     <button className="btn btn-full btn--primary" onClick={this.openCheck}>Submit</button>
@@ -339,7 +337,7 @@ export class QAndAMain extends Component {
                         <div className="popup">
                             <div>
                                 <h4>Ready to send off? </h4>
-                                <h6 style={{color: 'black'}}>To prevent spam, you are limited to one question per speaker.</h6>
+                                <h6>To prevent spam, you are limited to one question per speaker.</h6>
                                 <div className="popup__btn-group">
                                     <button className="btn btn-full btn--cancel" onClick={this.closeCheck}>Go Back</button>
                                     <button className="btn btn-full btn--primary" onClick={e => this.sendQuestion(e)}>Confirm</button>

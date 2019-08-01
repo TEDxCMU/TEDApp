@@ -13,14 +13,12 @@
     flex-direction: column;
 }
 
-header h1 {
+header > h1 {
     display: inline-block;
     margin: 0;
     padding: 0;
     vertical-align: middle;
 }
-
-.cancel { margin-right: 0px; }
 
 header .logo {
     left: 26px;
@@ -38,39 +36,7 @@ header .arrow {
     height: 40px;
 }
 
-#iOS, .iOS { -webkit-user-select: text;  }
-
-.popup-content {
-    position: relative;
-    background: var(--white);
-    width: 90%;
-    margin: auto;
-    border: 1px solid var(--grey);
-    padding: 5px;    
-}
-
-/* ========== QUESTION POPUP ========== */
-
-.popup {
-    display: flex;
-    flex-direction: column;
-    border: none;
-    border-radius: 10px;
-}
-
-.popup__btn-group {
-    display: flex;
-    justify-content: space-between;
-}
-
-.popup__response {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* ========== END QUESTION POPUP ========== */
+#iOS, .iOS { -webkit-user-select: text; }
 
 header h1, header h6 {
     color: var(--white);
@@ -154,40 +120,6 @@ header .title {
 
 .sticky-header.short {
     height: 150px;
-}
-
-.questi0n-btn-container {
-    position: relative;
-}
-
-.question-pos {
-    left: 50%;
-    margin-left: -94.735px;
-}
-
-.question-pos-asked {
-    left: 50%;
-    margin-left: -64.5px;
-}
-
-.questi0n-btn {
-    position: absolute;
-    top: 12px;
-    font-size: 13px;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-decoration: none;
-    color: var(--redhover);
-    cursor: pointer;
-    background-color: var(--white);
-	border-radius: 66px;
-    padding: 16px 40px;
-    box-shadow: 0px 2px 24px rgba(203, 45, 62, 0.35);
-    margin-top: -40px;
-}
-
-.questi0n-btn:hover {
-	background-color: var(--bggrey);
 }
 
 @media only screen and (max-width: 600px) {

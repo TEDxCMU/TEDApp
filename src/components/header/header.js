@@ -257,7 +257,7 @@ export class Header extends Component {
                     <div className="popup__response">
                         <img src={bottle} className="bottle" alt="Bottle" />
                         <p className="confirmation-text">Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
-                        <button className="popup-button-success button-primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
+                        <button className="btn btn--primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
                     </div>
                 </div>
             </Popup>
@@ -270,7 +270,7 @@ export class Header extends Component {
                 <div className="popup">
                     <div>
                         <h4>Ready to send off?</h4>
-                        <h6 style={{ color: 'black' }}>To prevent spam, you are limited to one question per speaker.</h6>
+                        <h6>To prevent spam, you are limited to one question per speaker.</h6>
                         <div className="popup__btn-group">
                             <button className="btn btn-full btn--cancel" onClick={this.closeCheck}>Go Back</button>
                             <button className="btn btn-full btn--primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
@@ -390,12 +390,12 @@ export class Header extends Component {
                     <div></div>}
                 {this.props.asked === true ?
                     // prevent user from asking multiple questions, if we have their device fingerprint on file
-                    <div className="question-btn-container">
-                        <h6><button className="question-btn question-pos-asked">Asked</button></h6>
+                    <div>
+                        <button className="q-btn">Asked</button>
                     </div>
                     :
-                    <div className="question-btn-container">
-                        <h6><button onClick={() => this.openModal()} className="question-btn question-pos">Ask Question</button></h6>
+                    <div>
+                        <button onClick={() => this.openModal()} className="btn q-btn">Ask Question</button>
                         {this.askQuestionPopup(popupStyle, that, questionBlank, nameBlank)}
                         {this.confirmAskQuestionPopup(popupStyle)}
                         {this.successAskQuestionPopup(popupStyle)}
