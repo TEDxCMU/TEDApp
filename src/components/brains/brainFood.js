@@ -235,7 +235,7 @@ export class BrainFood extends Component {
             <div className="popup">
                 <div className="popup__response">
                     <img src={bottle} className="bottle" alt="Bottle" />
-                    <p className="confirmation-text">Thank you for telling us more about yourself! Check this page later to see the Ripple Effect!</p>
+                    <p className="text-center">Thank you for telling us more about yourself! Check this page later to see the Ripple Effect!</p>
                     <button className="btn btn--primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
                 </div>
             </div>

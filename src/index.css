@@ -32,6 +32,12 @@
   --redgradient: linear-gradient(180deg, #cb2d3e 0%, #ef473a 100%);
   --redgradient45: linear-gradient(315deg, #cb2d3e 0%, #ef473a 100%);
   --opaque: rgba(0, 0, 0, 0.3);
+
+  --space-0: 0;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 2rem;
+  --space-4: 4rem;
 }
 
 /* RESET
@@ -423,10 +429,17 @@ td {
 /* UTILITIES
 ------------------------------------*/
 
-/* TEXT */
+/* TYPOGRAPHY */
 .bold { font-weight: 600; }
 .italicize { font-style: italic; }
 .underline { text-decoration: underline; }
+.text-center { text-align: center; }
+.rel-container { position: relative; }
+
+.link-white {
+  color: var(--white);
+  text-decoration: underline;
+}
 
 .no-select {
     -webkit-touch-callout: none; /* iOS Safari */
@@ -437,3 +450,10 @@ td {
               user-select: none; /* Non-prefixed version, currently
                                     supported by Chrome and Opera */
 }
+
+/* SPACING */
+.sp-8  { margin-top: 8x; }
+.sp-16 { margin-top: 16px; }
+.sp-32 { margin-top: 32px; }
+.sp-64 { margin-top: 64px; }
+.sp-96 { margin-top: 96px; }

@@ -37,15 +37,15 @@ export class Header extends Component {
             borderRadius: '10px'
           }
 
-        let headerStyle = "sticky";
+        let headerStyle = "header-container";
         if (this.props.headerStyle === "fixed") {
             if (this.props.link === false) {
-                headerStyle = "sticky-header short"
+                headerStyle = "header-container--sticky header-container--sticky-short"
             } else {
-                headerStyle = "sticky-header"
+                headerStyle = "header-container--sticky"
             }
         } else {
-            headerStyle = "sticky";
+            headerStyle = "header-container";
         }
 
         if (this.props.errors !== undefined) {
@@ -64,17 +64,17 @@ export class Header extends Component {
                         state: {  
                         }
                         }}>
-                    <img src={this.props.image === undefined ? logo : back} className={this.props.image === undefined ? "logo" : "arrow"} alt="TEDxCMU"></img>
+                    <img src={this.props.image === undefined ? logo : back} className={this.props.image === undefined ? "header__back header__back--logo" : "header__back header__back--arrow"} alt="TEDxCMU"></img>
                     </Link>   
                 }
-                <div className="header-content">
+                <div className="header__content">
                     {this.props.speaker === true ?
                         this.speakerHeader(popupStyle, that, questionBlank, nameBlank)
                         :
                         this.regularHeader()
                     }
                 </div>
-                <div className="bottom-space"></div>
+                <div className="sp-16"></div>
             </header>
         );        
     }
@@ -256,7 +256,7 @@ export class Header extends Component {
                 <div className="popup">
                     <div className="popup__response">
                         <img src={bottle} className="bottle" alt="Bottle" />
-                        <p className="confirmation-text">Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
+                        <p className="text-center">Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
                         <button className="btn btn--primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
                     </div>
                 </div>
@@ -286,7 +286,7 @@ export class Header extends Component {
             <Popup open={this.state.open} closeOnDocumentClick onClose={this.closeModal} contentStyle={popupStyle}>
                 <div className="popup">
                     <div>
-                        <h4 style={{ marginTop: '5px' }}>Dear {this.props.title},</h4>
+                        <h4>Dear {this.props.title},</h4>
                         <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup__input" : "popup__input popup__input--invalid"} name="question" value={that.props.question} placeholder={questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange} />
                         {this.state.errors === undefined ?
                             <small> </small>
@@ -339,24 +339,21 @@ export class Header extends Component {
         return (
             <div>
                 {this.props.link === false ?
-                    <div></div>
+                    null
                     :
                     <div>
-
-                        <h1 className="title">{this.props.title}</h1>
+                        <h1 className="header__title">{this.props.title}</h1>
                         <div>
                             {this.props.description !== undefined && this.state.altAnnouncement === undefined ?
-                                <div>
-                                    <h6 onClick={this.openAnnouncement} className="description">{Parser(this.props.description.toString())}</h6>
-                                </div>
+                                <h6 onClick={this.openAnnouncement} className="header__desc">{Parser(this.props.description.toString())}</h6>
                                 :
-                                <div></div>}
+                                null
+                                }
                             {this.props.description !== undefined && this.state.altAnnouncement !== undefined ?
-                                <div>
-                                    <h6 onClick={this.openAnnouncement} className="description">{Parser(this.state.altAnnouncement.toString())}</h6>
-                                </div>
+                                <h6 onClick={this.openAnnouncement} className="header__desc">{Parser(this.state.altAnnouncement.toString())}</h6>
                                 :
-                                <div></div>}
+                                null
+                                }
                         </div>
                     </div>}
             </div>
@@ -365,20 +362,19 @@ export class Header extends Component {
 
     speakerHeader = (popupStyle, that, questionBlank, nameBlank) => {
         return (
-            <div className="speaker-header">
+            <div className="header__profile">
                 {this.props.image !== undefined ?
-                    <div className="image-container">
-                        <div className="image-border">
-                            <img className="image" alt="speaker" src={this.props.image}></img>
-                        </div>
+                    <div className="rel-container">
+                        <div className="header__profile__img--border"></div>
+                        <img className="header__profile__img" alt="speaker" src={this.props.image}></img>
                     </div>
                     :
-                    <div></div>}
+                    null}
                 <br />
-                <h1>{this.props.title}</h1>
+                <h1 className="header__title">{this.props.title}</h1>
                 {this.props.tag !== undefined ?
                     <div>
-                        <h6 className="description-tag">{this.props.tag}</h6>
+                        <h6 className="header__desc text-center">{this.props.tag}</h6>
                     </div>
                     :
                     <div></div>}
@@ -409,14 +405,14 @@ export class Header extends Component {
             <div>
                 {this.props.description !== undefined && this.state.altAnnouncement === undefined ?
                     <div>
-                        <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.props.description.toString())}</h6>
+                        <h6 onClick={this.openAnnouncement} className="header__desc header__desc--collapsed">{Parser(this.props.description.toString())}</h6>
                     </div>
                     :
                     <div></div>}
 
                 {this.props.description !== undefined && this.state.altAnnouncement !== undefined ?
                     <div>
-                        <h6 onClick={this.openAnnouncement} className="description-small">{Parser(this.state.altAnnouncement.toString())}</h6>
+                        <h6 onClick={this.openAnnouncement} className="header__desc header__desc--collapsed">{Parser(this.state.altAnnouncement.toString())}</h6>
                     </div>
                     :
                     <div></div>}

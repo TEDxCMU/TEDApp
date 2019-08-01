@@ -1,47 +1,88 @@
+/* HEADER
+------------------------------------*/
+
 header {
     position: relative;
-    background-color: rgba(0,0,0,0);
     background-image: url(../../header-bg.svg);
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 2;
 }
 
-.a-link {
+/* Sticky header container variants are for schedule page */
+.header-container {
+    top: 0;
+    width: 100%;
+}
+
+.header-container--sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 300px;
+    transition: height 0.3s;
+}
+
+.header-container--sticky-short {
+    height: 150px;
+}
+
+.header__title {
     color: var(--white);
-    text-decoration: underline;
+    line-height: 2em;
 }
 
-header h1 {
-    display: inline-block;
-    margin: 0;
-    padding: 0;
-    vertical-align: middle;
+.header__desc {
+    color: var(--white);
+    padding-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 20px;
 }
 
-header .logo {
+.header__desc--collapsed {
+    width: 70%;
+    padding: 20px 5% 20px 25px;
+}
+
+.header__back {
     left: 26px;
     top: 36px;
     position: absolute;
     z-index: 1;
-    max-width: 60px;
 }
 
-header .arrow {
-    left: 26px;
-    top: 36px;
+.header__back--logo { max-width: 60px; }
+.header__back--arrow { height: 40px; }
+
+.header__content { padding: 100px 26px 16px 26px; }
+.header__profile {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header__profile__img {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 10px solid rgba(255,255,255,0.1);
+}
+
+.header__profile__img--border::before {
+    content: '';
     position: absolute;
-    z-index: 1;
-    height: 40px;
+    top: -15px;
+    left: -15px;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.06);
 }
 
-#iOS, .iOS { -webkit-user-select:text; }
-
-.confirmation-text {
-    text-align: center;
-}
-
-/* ========== QUESTION POPUP ========== */
+/* QUESTIONS POPUP
+------------------------------------*/
 
 .popup {
     display: flex;
@@ -93,99 +134,10 @@ header .arrow {
     align-items: center;
 }
 
-/* ========== END QUESTION POPUP ========== */
+/* MISCESLLANEOUS */
+#iOS { -webkit-user-select: text; }
 
-header h1, header h6 {
-    color: var(--white);
-}
-
-header .title {
-    margin-top: 100px;
-    line-height: 2em;
-}
-
-.header-content {
-    padding: 0 26px 15px 26px;
-    -webkit-transition: -webkit-transform .5s linear;
-}
-
-.header-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-}
-
-.description {
-    padding-top: 0;
-    margin-bottom: 0;
-    padding-bottom: 20px;
-}
-
-.description-tag {
-    padding-top: 0;
-    margin-bottom: 0;
-    padding-bottom: 20px;
-    text-align: center;
-}
-
-.description-small {
-    width: 70%;
-    padding: 20px 5% 20px 25px;
-}
-
-.bottom-space {
-    margin-bottom: 15px;
-}
-
-.image-container {
-    margin-top: 100px;
-    position: relative;
-}
-
-.image {
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    border-radius: 50%;
-    border: 10px solid rgba(255,255,255,0.1);
-}
-
-.image-border::before {
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.06);
-}
-
-.speaker-header {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: center;
-}
-
-.sticky {
-    top: 0;
-    width: 100%;
-}
-
-.sticky-header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    height: 300px;
-    transition: height 0.3s;
-}
-
-.sticky-header.short {
-    height: 150px;
-}
-
+/* RESPONSIVE STYLING */
 @media only screen and (max-width: 600px) {
     /* content */
     .mm-popup__box__footer {
@@ -200,7 +152,7 @@ header .title {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    .description {
+    .header__desc {
         padding-bottom: 30px;
     }
     .mm-popup__box__footer {
@@ -210,7 +162,7 @@ header .title {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    .description {
+    .header__desc {
         padding-bottom: 40px;
     }
     .mm-popup__box__footer {
@@ -221,13 +173,12 @@ header .title {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     header {
-        position: relative;
         background: var(--redgradient);
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.09);
-        border-radius:0%;
+        border-radius: 0;
     }
 
-    .description {
+    .header__desc {
         padding-bottom: 25px;
     }
     

@@ -354,7 +354,7 @@ export class QAndAMain extends Component {
                         <div className="popup">
                             <div className="popup__response">
                                 <img src={bottle} className="bottle" alt="Bottle" />
-                                <p className="confirmation-text">Thank you for asking a question! Please check back on the Q &amp; A page later.</p>
+                                <p className="text-center">Thank you for asking a question! Please check back on the Q &amp; A page later.</p>
                                 <button className="btn btn-full btn--primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
                             </div>
                         </div>
