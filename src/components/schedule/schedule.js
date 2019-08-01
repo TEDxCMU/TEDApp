@@ -52,7 +52,7 @@ export class Schedule extends Component {
       // default announcement that appears before conference is in session
       announcement: "The conference is currently not in progress. Please check back at another time.",
       // default announcement that appears after conference is over
-      eventEndedAnnouncement: '<div>The conference is now over, thanks for coming! Please leave your feedback at <a class="a-link" href="http://bit.ly/tedxsurvey">bit.ly/tedxsurvey</a></div>',
+      eventEndedAnnouncement: 'The conference is now over, thanks for coming! Please leave your feedback at <a class="link-white" href="http://bit.ly/tedxsurvey">bit.ly/tedxsurvey</a>',
       isOpen: false,
       scroll: 0,
       // boolean - if Header should be normal height (true) or collapsed (false)

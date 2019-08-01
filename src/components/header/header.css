@@ -1,6 +1,5 @@
 /* HEADER
 ------------------------------------*/
-
 header {
     position: relative;
     background-image: url(../../header-bg.svg);
@@ -83,7 +82,6 @@ header {
 
 /* QUESTIONS POPUP
 ------------------------------------*/
-
 .popup {
     display: flex;
     flex-direction: column;
@@ -139,11 +137,6 @@ header {
 
 /* RESPONSIVE STYLING */
 @media only screen and (max-width: 600px) {
-    /* content */
-    .mm-popup__box__footer {
-        padding-top:  0px;
-    }
-
     .popup__btn-group {
         display: flex;
         flex-direction: column;
@@ -155,18 +148,12 @@ header {
     .header__desc {
         padding-bottom: 30px;
     }
-    .mm-popup__box__footer {
-        padding-top: 0px;
-    }
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .header__desc {
         padding-bottom: 40px;
-    }
-    .mm-popup__box__footer {
-        padding-top: 15px;
     }
 }
 
@@ -180,10 +167,6 @@ header {
 
     .header__desc {
         padding-bottom: 25px;
-    }
-    
-    .mm-popup__box__footer {
-        padding-top: 20px;
     }
 } 
 
