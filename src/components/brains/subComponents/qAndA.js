@@ -287,11 +287,12 @@ export class QAndAMain extends Component {
         })
     }
     return (
-        <div className="faq">
-            <div className="justified">
+        <div className="qanda">
+            <div className="qanda__btn-group">
                 {speakerButtons}
             </div>
-            <div className="qanda-container">
+
+            <div className="qanda__content">
             {this.state.asked !== undefined ? 
                 <div>
                 { this.state.asked === true ?
@@ -317,7 +318,7 @@ export class QAndAMain extends Component {
                                 {this.state.errors === undefined ?
                                     <small> </small>
                                 :
-                                    <small className="small-red">Please ask a question before submitting.</small>
+                                    <small className="c-red">Please ask a question before submitting.</small>
                                 }
                                 <h4>Sincerely, </h4>
                                 <input type="text" style={{height: '20px'}} autoComplete="off" className="popup__input popup__input__sm" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>

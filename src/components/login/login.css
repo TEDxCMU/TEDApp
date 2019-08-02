@@ -3,59 +3,25 @@
     justify-content: center;
     margin: auto;
     text-align: left;
+    margin-top: 30px;
 }
 
-.login form { width: 75%; }
+.login__form { width: 75%; }
 
-.shake { animation: shake 1s; }
-
-.invalid { border: 2px solid var(--red) !important; }
-
-.small-red { color: var(--red); }
-
-@keyframes shake {
-  0% {
-    left: 0px;
-  }
-  20% {
-    left: 8px;
-  }
-  40% {
-    left: -4px;
-  }
-  60% {
-    left: 4px;
-  }
-  100% {
-    left: 0px;
-  }
+.login__input--invalid {
+  border: 2px solid var(--red);
 }
-
-.showErrorMessage {
-  font-size: 1em;
-  padding-top: 8px;
-  color: var(--red);
-  transition: opacity 1s;
-}
-
-.hideErrorMessage { opacity: 0; }
-
-@media only screen and (max-width: 600px) {
-    .login {
-      margin-top: 30px;
-    }
-  } 
   
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px) {
-    .login {
-      margin-top: 40px;
-    }
-  } 
-  
-  /* Medium devices (landscape tablets, 768px and up) */
-  @media only screen and (min-width: 768px) {
-    .login {
-        margin-top: 50px;
-    }
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .login {
+    margin-top: 40px;
   }
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .login {
+      margin-top: 50px;
+  }
+}

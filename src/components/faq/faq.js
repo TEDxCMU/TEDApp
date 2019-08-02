@@ -98,26 +98,26 @@ export class Faq extends Component {
             </div>
         );
 
-        let generalClasses = "btn button--tertiary";
-        let ticketsClasses = "btn button--tertiary";
-        let volunteerClasses = "btn button--tertiary";
+        let generalClasses = "btn btn--tertiary";
+        let ticketsClasses = "btn btn--tertiary";
+        let volunteerClasses = "btn btn--tertiary";
 
         if (this.state.displayItems[0] === 0) {
-            generalClasses = "btn button--primary";
+            generalClasses = "btn btn--primary";
         } else {
-            generalClasses += "btn button--tertiary";
+            generalClasses += "btn btn--tertiary";
         }
 
         if (this.state.displayItems[0] === 3) {
-            ticketsClasses = "btn button--primary";
+            ticketsClasses = "btn btn--primary";
         } else {
-            ticketsClasses += "btn button--tertiary";
+            ticketsClasses += "btn btn--tertiary";
         }
 
         if (this.state.displayItems[0] === 8) {
-            volunteerClasses = "btn button--primary";
+            volunteerClasses = "btn btn--primary";
         } else {
-            volunteerClasses = "btn button--tertiary";
+            volunteerClasses = "btn btn--tertiary";
         }
 
 
@@ -125,9 +125,9 @@ export class Faq extends Component {
         return (
             <div className="faq">
                 <div className="justified">
-                    <button onClick={this.toggleGeneral} className={generalClasses}>General</button>
-                    <button onClick={this.toggleTickets} className={ticketsClasses}>Tickets</button>
-                    <button onClick={this.toggleVolunteer} className={volunteerClasses}>Volunteers</button>
+                    <button className="btn btn--primary" onClick={this.toggleGeneral} className={generalClasses}>General</button>
+                    <button className="btn btn--primary" onClick={this.toggleTickets} className={ticketsClasses}>Tickets</button>
+                    <button className="btn btn--primary" onClick={this.toggleVolunteer} className={volunteerClasses}>Volunteers</button>
                 </div>
 
                 {content}

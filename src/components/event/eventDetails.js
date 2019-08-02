@@ -63,19 +63,19 @@ export class EventDetails extends Component {
 
     //Render Functions
     eventDetailsRender = (self, videos) => {
-        return <div className="event-details">
+        return <div className="speaker">
             {self.speaker !== undefined ?
-                <div className="info-container">
-                    <p className="talk">TEDxCMU Talk</p>
+                <div className="speaker__info">
+                    <p className="c-lightgrey">TEDxCMU Talk</p>
 
-                    <h6 className="talk-title">{self.props.title}</h6>
+                    <h6 className="speaker__talk-title">{self.props.title}</h6>
                     <p>{self.props.description}</p>
 
-                    <h6 className="bio">Speaker Bio</h6>
+                    <h6 className="speaker__bio">Speaker Bio</h6>
                     <p>{self.speaker.bio}</p>
 
-                    <h6 className="talk-title">Related TED Talks</h6>
-                    <div className="videos">
+                    <h6 className="speaker__talk-title">Related TED Talks</h6>
+                    <div className="speaker__related">
                         {videos}
                     </div>
                 </div>

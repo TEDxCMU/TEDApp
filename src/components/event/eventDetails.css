@@ -1,11 +1,12 @@
-.event-details {
+.speaker {
   display: flex;
   justify-content: center;
   margin: auto;
+  margin-top: 30px;
   text-align: left;
 }
 
-.info-container {
+.speaker__info {
   padding: 20px;
 }
 
@@ -13,39 +14,17 @@
   color: var(--lightgrey);
 }
 
-.talk-title {
+.speaker__talk-title {
   margin-top: 20px;
   color: var(--red);
 }
 
-.bio {
+.speaker__bio {
   margin-top: 50px;
   color: var(--black);
 }
 
-
-/* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
-@media only screen and (max-width: 600px) {
-  .event-details {
-    margin-top: 30px;
-  }
-} 
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  .event-details {
-     margin-top: 30px;
-  }
-} 
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  .event-details {
-      margin-top: 30px;
-  }
-}
-
-.videos {
+.speaker__related {
   display: flex;
   flex-direction: column;
   justify-content: center;
