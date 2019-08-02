@@ -72,7 +72,7 @@ class App extends Component {
             {this.state.user !== null && this.state.isAdmin !== true ?
               <Route path="/questions" exact strict render={this.questionsPage}/>
             :
-              <div></div>
+              null
             }
             {/* <Route path="/questions" exact strict render={this.questionsPage}/> */}
             <Route component={this.noMatch} />

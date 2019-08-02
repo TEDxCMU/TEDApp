@@ -52,8 +52,7 @@ export class Navigation extends Component {
                                                 My Questions
                                             </NavLink>
                                         :
-                                            <div></div>
-                                            
+                                            null
                                         }
                                     </div>
                                     <li><NavLink onClick={() => this.closeMenu()} to="/qanda" exact activeStyle={{color:'#6EEBFC'}}>
@@ -69,7 +68,7 @@ export class Navigation extends Component {
                                         FAQs
                                     </NavLink></li>
                                     {this.props.user === null ?
-                                        <div></div>
+                                        null
                                         :
                                         <div>
                                             <li>
@@ -82,7 +81,7 @@ export class Navigation extends Component {
                         </Menu>
                     </div>
                 :
-                    <div></div>
+                    null
                 }
             </div>
         );        

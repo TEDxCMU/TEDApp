@@ -433,7 +433,7 @@ td {
 .italicize { font-style: italic; }
 .underline { text-decoration: underline; }
 .text-center { text-align: center; }
-.rel-container { position: relative; }
+.relative { position: relative; }
 
 .link-white {
   color: var(--white);
@@ -540,15 +540,6 @@ td {
 .pl4 { padding-left:   var(--space-4) }
 .py4 { padding-top:    var(--space-4); padding-bottom: var(--space-4) }
 .px4 { padding-left:   var(--space-4); padding-right:  var(--space-4) }
-
-
-
-
-
-
-
-
-
 
 /* SPACING */
 .sp-8  { margin-top: 8x; }

@@ -364,7 +364,7 @@ export class Header extends Component {
         return (
             <div className="header__profile">
                 {this.props.image !== undefined ?
-                    <div className="rel-container">
+                    <div className="relative">
                         <div className="header__profile__img--border"></div>
                         <img className="header__profile__img" alt="speaker" src={this.props.image}></img>
                     </div>
@@ -377,13 +377,13 @@ export class Header extends Component {
                         <h6 className="header__desc text-center">{this.props.tag}</h6>
                     </div>
                     :
-                    <div></div>}
+                    null}
                 {this.props.twitter !== undefined ?
                     <div className="twitter-icon">
                         <SocialIcon network="twitter" rel="noopener noreferrer" url={this.props.twitter} taget="_blank" fgColor="#ffffff" bgColor="rgba(0,0,0,0)" />
                     </div>
                     :
-                    <div></div>}
+                    null}
                 {this.props.asked === true ?
                     // prevent user from asking multiple questions, if we have their device fingerprint on file
                     <div>
@@ -408,14 +408,14 @@ export class Header extends Component {
                         <h6 onClick={this.openAnnouncement} className="header__desc header__desc--collapsed">{Parser(this.props.description.toString())}</h6>
                     </div>
                     :
-                    <div></div>}
+                    null}
 
                 {this.props.description !== undefined && this.state.altAnnouncement !== undefined ?
                     <div>
                         <h6 onClick={this.openAnnouncement} className="header__desc header__desc--collapsed">{Parser(this.state.altAnnouncement.toString())}</h6>
                     </div>
                     :
-                    <div></div>}
+                    null}
             </div>
         )
     }

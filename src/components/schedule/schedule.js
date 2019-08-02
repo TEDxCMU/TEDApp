@@ -144,7 +144,7 @@ export class Schedule extends Component {
                         <button className="btn btn--primary" onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
                       </div>
                       :
-                        <div></div>
+                        null
                       }
                     </div>
                     <img src={arrow} className="info-arrow" alt="information arrow" />
@@ -204,7 +204,7 @@ export class Schedule extends Component {
                     onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
                   </div>
                 :
-                  <div></div>
+                  null
                 }
               </div>
           </Item>

@@ -80,7 +80,7 @@ export class EventDetails extends Component {
                     </div>
                 </div>
                 :
-                <div></div>}
+                null}
         </div>;
     }
 

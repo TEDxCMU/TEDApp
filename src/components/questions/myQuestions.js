@@ -21,7 +21,7 @@ export class MyQuestions extends Component {
         return <Redirect to="/"/>
       }
       if (this.state.questions === undefined) {
-        return <div></div>
+        return null
       }
 
       let newList = [];

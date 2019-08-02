@@ -311,7 +311,7 @@ export class QAndAMain extends Component {
                                 {this.state.speakerRef !== undefined && this.state.speakerRef !== null ? 
                                     <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4>
                                 :
-                                    <div></div>
+                                    null
                                 }
                                 <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup__input" : "popup__input popup__input--invalid" } name="question" value={this.state.question} placeholder="Write your question here..." onChange={this.handleChange}/>
                                 {this.state.errors === undefined ?
@@ -363,7 +363,7 @@ export class QAndAMain extends Component {
                 }
                 </div>
             :
-                <div></div>
+                null
             }
                 {this.state.questions !== null && this.state.questions.length > 0 ?
                     <div className="speakers">
