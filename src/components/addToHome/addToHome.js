@@ -18,14 +18,14 @@ export class PopUp extends Component {
             <div className={closed ? 'closed' : ''} style={{width: "100%"}}>
                 { this.props.iOS && this.props.loaded ? 
                     <div className="home-popup">
-                        <div className="popup-content">
-                            <div className="closeModal" onClick={(e) => {this.closeModal(e)}}>X</div>
+                        <div className="home-popup__close" onClick={(e) => {this.closeModal(e)}}>X</div>
+                        <div className="home-popup__content">
                             <p><strong>Install TEDxCMU</strong> for quick and easy access when you're on the go.</p>
-                            <p>Tap <img src={require('./downloadIcon.png')} className="download-icon" alt="download icon" title="download icon" /> and then "Add to Homescreen."</p>
+                            <p>Tap <img src={require('./downloadIcon.png')} className="i-download" alt="download icon" title="download icon" /> and then "Add to Homescreen."</p>
                         </div>
                     </div>
                 :
-                <div></div>
+                null
                 }
             </div>
         );

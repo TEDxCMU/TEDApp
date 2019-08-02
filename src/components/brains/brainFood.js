@@ -35,7 +35,7 @@ export class BrainFood extends Component {
         borderRadius: '10px'
     }
     return (
-        <div className="mapPage">
+        <div className="ripple-map-container">
             <h1 style={{width: '90%'}}>A Global Ripple Effect</h1>
             <div>
                 {this.addLocationButton()}

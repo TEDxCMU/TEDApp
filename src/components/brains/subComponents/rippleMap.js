@@ -125,8 +125,8 @@ export class RippleMap extends Component {
                         marker={city}
                         onClick={this.handleCityClick}
                         >
-                          <circle cx = {0} cy = {0} r = {8}></circle>
-                          <circle className = "pulse" cx = {0} cy = {0} r = {11}></circle>
+                          <circle className="ripple" cx = {0} cy = {0} r = {8}></circle>
+                          <circle className = "ripple pulse" cx = {0} cy = {0} r = {11}></circle>
                       </Marker>
                     ))}
                   </Markers>

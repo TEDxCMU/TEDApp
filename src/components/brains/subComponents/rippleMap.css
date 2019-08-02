@@ -1,5 +1,4 @@
-
-circle {
+.ripple {
   stroke: var(--red); 
   fill: var(--red);
   stroke-width: 2px;
@@ -14,6 +13,7 @@ circle {
   animation-iteration-count: infinite;
 }
 
+/* Pulses on map */
 @keyframes pulse {
   from {
     stroke-width: 3px;
