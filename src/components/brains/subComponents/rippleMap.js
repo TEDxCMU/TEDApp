@@ -135,15 +135,17 @@ export class RippleMap extends Component {
             )}
           </Motion>
         </div>
-        <button onClick={this.handleZoomIn}>
-          { "Zoom in" }
-        </button>
-        <button onClick={this.handleZoomOut}>
-          { "Zoom out" }
-        </button>
-        <button onClick={this.handleReset}>
-          { "Reset" }
-        </button>
+        <div>
+          <button className="btn btn--secondary" onClick={this.handleZoomIn}>
+            { "Zoom in" }
+          </button>
+          <button className="btn btn--secondary" onClick={this.handleZoomOut}>
+            { "Zoom out" }
+          </button>
+          <button className="btn btn--secondary" onClick={this.handleReset}>
+            { "Reset" }
+          </button>
+        </div>
       </div>
     )
   }
