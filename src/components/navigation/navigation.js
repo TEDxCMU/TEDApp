@@ -36,14 +36,14 @@ export class Navigation extends Component {
         return (
             <div>
                 {this.props.loaded ? 
-                    <div className="navigation">
+                    <div className="nav">
                         <Menu noOverlay right 
                             isOpen={this.state.menuOpen}
                             onStateChange={(state) => this.handleStateChange(state)}
                             styles={burgerBarStyle}>
                             <div>
                                 <ul>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/" exact activeStyle={{color:'#6eebfc'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/" exact activeStyle={{color:'#6eebfc'}}>
                                         Home
                                     </NavLink></li>
                                     <div>
@@ -55,16 +55,16 @@ export class Navigation extends Component {
                                             null
                                         }
                                     </div>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/qanda" exact activeStyle={{color:'#6eebfc'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/qanda" exact activeStyle={{color:'#6eebfc'}}>
                                         Speaker Q&amp;A
                                     </NavLink></li>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/ripple" exact activeStyle={{color:'#6eebfc'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/ripple" exact activeStyle={{color:'#6eebfc'}}>
                                         Ripple
                                     </NavLink></li>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/map" exact activeStyle={{color:'#6eebfc'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/map" exact activeStyle={{color:'#6eebfc'}}>
                                         Map
                                     </NavLink></li>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6eebfc'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6eebfc'}}>
                                         FAQs
                                     </NavLink></li>
                                     {this.props.user === null ?

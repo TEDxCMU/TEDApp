@@ -16,6 +16,7 @@ export class QuestionComponent extends Component {
         return (
             <div className="speaker">
                 <Dropdown question={question} open={this.state.open} answered={this.props.answered} check={this.props.answerInDB}>
+                    {/* The questions-form class was a 5px margin, now DNE */}
                     <form className="questions-form">
                         <label style={{marginTop: '0'}}>Question:</label>
                         <p>"{question}"</p>

@@ -1,8 +1,8 @@
-.navigation {
+.nav {
     background: var(--redgradient);
 }
 
-.navigation a {
+.nav__link {
   color: var(--white);
   float: left;
   text-align: center;
@@ -11,7 +11,7 @@
   transition: color 0.3s ease-out;
 }
 
-.navigation a:hover {
+.nav__link:hover {
   color: var(--lightblue);
 }
 
@@ -45,7 +45,7 @@
 }
 
 /* Color/shape of close button cross */
-span .bm-cross {
+.bm-cross {
   background: var(--white);
   right: 20px;
   top: 25px;

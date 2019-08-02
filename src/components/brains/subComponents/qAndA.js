@@ -272,6 +272,7 @@ export class QAndAMain extends Component {
             newList.push (
                 <div className="speaker" key={Math.random()}>
                 <Dropdown question={question.question}>
+                    {/* The questions-form class was a 5px margin, now DNE */}
                     <form className="questions-form">
                         <label style={{marginTop: '0'}}>Question:</label>
                         <p>"{question.question}"</p>
