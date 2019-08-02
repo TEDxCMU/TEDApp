@@ -124,7 +124,7 @@ export class Faq extends Component {
 
         return (
             <div className="faq">
-                <div className="justified">
+                <div className="faq__btn-group">
                     <button className="btn btn--primary" onClick={this.toggleGeneral} className={generalClasses}>General</button>
                     <button className="btn btn--primary" onClick={this.toggleTickets} className={ticketsClasses}>Tickets</button>
                     <button className="btn btn--primary" onClick={this.toggleVolunteer} className={volunteerClasses}>Volunteers</button>

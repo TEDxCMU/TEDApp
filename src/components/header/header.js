@@ -291,7 +291,7 @@ export class Header extends Component {
                         {this.state.errors === undefined ?
                             <small> </small>
                             :
-                            <small className="c-red">Please ask a question before submitting.</small>}
+                            <small className="text-red">Please ask a question before submitting.</small>}
                         <h4>Sincerely, </h4>
                         <input type="text" className="popup__input popup__input__sm" autoComplete="off" value={that.props.name} required minLength="4" size="10" name="name" placeholder={nameBlank ? "Please add your name." : "Your name..."} onChange={that.props.handleChange} />
                         <div className="popup__btn-group">

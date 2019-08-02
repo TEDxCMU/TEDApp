@@ -434,15 +434,16 @@ td {
 .italicize { font-style: italic; }
 .underline { text-decoration: underline; }
 .text-center { text-align: center; }
-.relative { position: relative; }
+
+.text-lightgrey { color: var(--lightgrey); }
+.text-red { color: var(--red); }
 
 .link-white {
   color: var(--white);
   text-decoration: underline;
 }
 
-.c-lightgrey { color: var(--lightgrey); }
-.c-red { color: var(--red); }
+.relative { position: relative; }
 
 .no-select {
     -webkit-touch-callout: none; /* iOS Safari */

@@ -203,7 +203,7 @@ export class BrainFood extends Component {
                         this.setState({ city: place });
                     } } />
                     {this.state.errors !== undefined && this.state.errors.city === true ?
-                        <small className="c-red">Please add a city before submitting.</small>
+                        <small className="text-red">Please add a city before submitting.</small>
                         :
                         null}
                     <h4>Name:</h4>
@@ -211,7 +211,7 @@ export class BrainFood extends Component {
                     <h4>Email:</h4>
                     <input type="email" style={{ height: '20px' }} className={this.state.errors !== undefined && this.state.errors.email === true ? "popup__input popup__input--sm-invalid" : "popup__input popup__input--sm"} minLength="4" siz="10" name="email" value={this.state.email} placeholder={"Please add your email."} onChange={e => { this.handleChange(e); } } />
                     {this.state.errors !== undefined && this.state.errors.email === true ?
-                        <small className="c-red">Please enter a valid email before submitting.</small>
+                        <small className="text-red">Please enter a valid email before submitting.</small>
                         :
                         null}
                     <div className="popup__btn-group">

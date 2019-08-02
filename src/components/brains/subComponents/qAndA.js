@@ -318,7 +318,7 @@ export class QAndAMain extends Component {
                                 {this.state.errors === undefined ?
                                     <small> </small>
                                 :
-                                    <small className="c-red">Please ask a question before submitting.</small>
+                                    <small className="text-red">Please ask a question before submitting.</small>
                                 }
                                 <h4>Sincerely, </h4>
                                 <input type="text" style={{height: '20px'}} autoComplete="off" className="popup__input popup__input__sm" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>

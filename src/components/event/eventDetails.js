@@ -66,7 +66,7 @@ export class EventDetails extends Component {
         return <div className="speaker">
             {self.speaker !== undefined ?
                 <div className="speaker__info">
-                    <p className="c-lightgrey">TEDxCMU Talk</p>
+                    <p className="text-lightgrey">TEDxCMU Talk</p>
 
                     <h6 className="speaker__talk-title">{self.props.title}</h6>
                     <p>{self.props.description}</p>
