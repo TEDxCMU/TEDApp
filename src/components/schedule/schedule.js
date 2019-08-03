@@ -133,7 +133,7 @@ export class Schedule extends Component {
               <div>
                 <span className="event"></span>
                 <span className={className}></span>
-                <span className="bullet-bg"></span>
+                <span className="bullet__bg"></span>
                 <div className={infoTalkStyle}>
                   <div>
                       <p className="timeline__event__time"><strong>{event.start}</strong> — {event.end}</p>
@@ -172,7 +172,7 @@ export class Schedule extends Component {
                 {/* THIS IS WHAT PEOPLE SEE FOR SPEAKERS:  */}
                   <span className="event"></span>
                   <span className={className}></span>
-                  <span className="bullet-bg"></span>
+                  <span className="bullet__bg"></span>
                     <div className="event-card event-card--clickable">
                       <div className="event-card__content">
                         <p className="timeline__event__time"><strong>{event.start}</strong> — {event.end}</p>
@@ -194,7 +194,7 @@ export class Schedule extends Component {
           <Item className="timeline__event" key={event.id} id={className === "bullet__now" ? "eventNow" : null}>
               <span className="event-static"></span>
               <span className={className}></span>
-              <span className="bullet-bg"></span>
+              <span className="bullet__bg"></span>
               <div className="event-card event-card--static">
                 <p className="timeline__event__time"><strong>{event.start}</strong> — {event.end}</p>
                 <h5 className="timeline__event__title">{event.title}</h5>

@@ -140,7 +140,7 @@
   z-index: 1;
 }
 
-.bullet-bg {
+.bullet__bg {
   content: '';
   position: absolute;
   width: 18px;
