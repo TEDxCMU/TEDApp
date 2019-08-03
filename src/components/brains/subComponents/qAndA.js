@@ -270,7 +270,7 @@ export class QAndAMain extends Component {
         this.state.questions.forEach(question => {  
             if (question.answer.length > 0 ) {
             newList.push (
-                <div className="speaker" key={Math.random()}>
+                <div key={Math.random()}>
                 <Dropdown question={question.question}>
                     {/* The questions-form class was a 5px margin, now DNE */}
                     <form className="questions-form">
@@ -368,11 +368,11 @@ export class QAndAMain extends Component {
                 null
             }
                 {this.state.questions !== null && this.state.questions.length > 0 ?
-                    <div className="speakers">
+                    <div>
                         {newList}
                     </div>
                     :
-                    <h4 className="speakers" style={{paddingTop: '20px', textAlign: 'center'}}>{this.state.speakerRef !== undefined && this.state.speakerRef !== null ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
+                    <h4 style={{paddingTop: '20px', textAlign: 'center'}}>{this.state.speakerRef !== undefined && this.state.speakerRef !== null ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
                 }
             </div>
 
