@@ -1,7 +1,7 @@
 /* timeline */
 .timeline-container {
   margin-top: 320px;
-  padding: 10% 4% 10% calc(3% + 2rem + 4px);
+  padding: 10% 4% 10% calc(4% + 2rem + 4px);
 }
 
 .timeline-container__admin {
@@ -126,20 +126,6 @@
   top: 5px;
 }
 
-/* static timeline styles */
-.bullet-static {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  left: calc(-2rem - 4px);
-  top: calc(50% - 4px);
-  background-color: var(--red);
-  border-radius: 50%;
-  box-sizing: border-box;
-  z-index: 1;
-}
-
 .bullet__bg {
   content: '';
   position: absolute;
@@ -177,7 +163,7 @@
   top: 0;
   background-color: var(--red);
   border-radius: 50%;
-  animation: now-pulse-3 2.5s infinite;
+  animation: now-pulse-1 2.5s infinite;
   box-sizing: border-box;
   z-index: 1;
 }
@@ -191,7 +177,20 @@
   top: 0;
   background-color: var(--red);
   border-radius: 50%;
-  animation: now-pulse-4 2.5s infinite;
+  animation: now-pulse-2 2.5s infinite;
+  box-sizing: border-box;
+  z-index: 1;
+}
+
+.bullet__upcoming {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: calc(-2rem - 4px);
+  top: calc(50% - 4px);
+  background-color: var(--red);
+  border-radius: 50%;
   box-sizing: border-box;
   z-index: 1;
 }
@@ -209,90 +208,23 @@
   z-index: 1;
 }
 
-/* ANIMATIONS */
+@keyframes now-pulse-1
+{
+  0%, 35% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(1.2);
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
 @keyframes now-pulse-2
-{
-  26% {
-    width: 0px;
-    height: 0px;
-    /* box-shadow: 0.0 0.0 0.0 0.0px rgba(203, 45, 62, 0.5); */
-  }
-  100% {
-    width: 13px;
-    height: 13px;
-    /* box-shadow: 0.0 0.0 0.0 8.0px rgba(203, 45, 62, 0); */
-  }
-}
-
-@keyframes now-pulse-3
-{
-  0%, 35% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  45% {
-    transform: scale(1.2);
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(3);
-  }
-}
-
-@keyframes now-pulse-4
-{
-  0%, 35% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  47% {
-    transform: scale(2);
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(4);
-  }
-}
-
-@keyframes now-pulse-card
-{
-  0% {
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13), 0 0 0 0px rgba(203, 45, 62, 0.3);
-  }
-  100% {
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13), 0 0 0 10px rgba(203, 45, 62, 0);
-  }
-}
-
-@keyframes now-pulse-card-2
-{
-  26% {
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13), 0 0 0 0px rgba(203, 45, 62, 0.5);
-  }
-  100% {
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13), 0 0 0 8px rgba(203, 45, 62, 0);
-  }
-}
-
-@keyframes now-pulse-card-3
-{
-  0%, 35% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  45% {
-    transform: scale(1.2);
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 0;
-    transform: scale(3);
-  }
-}
-
-@keyframes now-pulse-card-4
 {
   0%, 35% {
     transform: scale(0);

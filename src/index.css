@@ -381,9 +381,9 @@ legend {
 
 .q-btn {
   position: relative;
-  margin-top: 0;
-  bottom: -36px;
   font-size: 0.7rem;
+  bottom: -36px;
+  /* margin-bottom: 36px; */
   font-weight: 600;
   color: var(--redhover);
   background-color: var(--white);

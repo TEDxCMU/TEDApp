@@ -103,7 +103,7 @@ export class Schedule extends Component {
     let notification = this.state.announcement;
     this.state.allEvents.forEach(event => {
         //mark event as either being in the past, happening right now, or being in the future if it is just static
-        let className = "bullet-static";
+        let className = "bullet__upcoming";
         if (this.state.altAnnouncement) {
           notification = this.state.announcement;
         }
