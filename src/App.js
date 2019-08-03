@@ -14,6 +14,7 @@ import fire from './fire.js';
 import Faq from './components/faq/faq';
 import { isAndroid, isIOS } from "react-device-detect";
 import Fingerprint from "fingerprintjs2";
+
 import error404 from './404.png';
 
 import Popup from 'react-popup';
