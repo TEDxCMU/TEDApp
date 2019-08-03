@@ -365,8 +365,8 @@ export class Header extends Component {
             <div className="header__profile">
                 {this.props.image !== undefined ?
                     <div className="relative">
-                        <div className="header__profile__img--border"></div>
-                        <img className="header__profile__img" alt="speaker" src={this.props.image}></img>
+                        <div className="header__img--border"></div>
+                        <img className="header__img" alt="speaker" src={this.props.image}></img>
                     </div>
                     :
                     null}

@@ -136,9 +136,9 @@ export class Schedule extends Component {
                 <span className="bullet__bg"></span>
                 <div className={infoTalkStyle}>
                   <div>
-                      <p className="timeline__event__time"><strong>{event.start}</strong> — {event.end}</p>
-                      <h4 className="timeline__event__title">{event.title}</h4>
-                      <p className="timeline__event__description">{event.blurb}</p>
+                      <p className="event__time"><strong>{event.start}</strong> — {event.end}</p>
+                      <h4 className="event__title">{event.title}</h4>
+                      <p className="event__desc">{event.blurb}</p>
                       <br />
                       {this.props.isAdmin ? 
                       <div>
@@ -175,10 +175,10 @@ export class Schedule extends Component {
                   <span className="bullet__bg"></span>
                     <div className="event-card event-card--clickable">
                       <div className="event-card__content">
-                        <p className="timeline__event__time"><strong>{event.start}</strong> — {event.end}</p>
-                        <h4 className="timeline__event__title">{event.blurb}</h4>
+                        <p className="event__time"><strong>{event.start}</strong> — {event.end}</p>
+                        <h4 className="event__title">{event.blurb}</h4>
                         <img src={event.image !== undefined || networkOnly ? event.image : placeholder} className="event-card__img" alt="speaker" />
-                        <p className="timeline__event__description">{event.title}</p>
+                        <p className="event__desc">{event.title}</p>
                       </div>
                       <img src={arrow} className="event-card__arrow" alt="information arrow" />
                     </div>
@@ -192,12 +192,11 @@ export class Schedule extends Component {
       // Change bullet color here, time, and the info in a timeline event
       newList.push(
           <Item className="timeline__event" key={event.id} id={className === "bullet__now" ? "eventNow" : null}>
-              <span className="event-static"></span>
               <span className={className}></span>
               <span className="bullet__bg"></span>
               <div className="event-card event-card--static">
-                <p className="timeline__event__time"><strong>{event.start}</strong> — {event.end}</p>
-                <h5 className="timeline__event__title">{event.title}</h5>
+                <p className="event__time"><strong>{event.start}</strong> — {event.end}</p>
+                <h5 className="event__title">{event.title}</h5>
                 <small>{event.blurb}</small>
                 {this.props.isAdmin  ? 
                   <div>

@@ -15,7 +15,7 @@ export class PopUp extends Component {
         const closed = this.state.closed;
         
         return (
-            <div className={closed ? 'closed' : ''} style={{width: "100%"}}>
+            <div className={closed ? 'home-popup__closed' : ''} style={{width: "100%"}}>
                 { this.props.iOS && this.props.loaded ? 
                     <div className="home-popup">
                         <div className="home-popup__close" onClick={(e) => {this.closeModal(e)}}>X</div>

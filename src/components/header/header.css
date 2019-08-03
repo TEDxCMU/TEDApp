@@ -61,7 +61,7 @@ header {
     align-items: center;
 }
 
-.header__profile__img {
+.header__img {
     width: 100px;
     height: 100px;
     overflow: hidden;
@@ -69,7 +69,7 @@ header {
     border: 10px solid rgba(255,255,255,0.1);
 }
 
-.header__profile__img--border::before {
+.header__img--border::before {
     content: '';
     position: absolute;
     top: -15px;

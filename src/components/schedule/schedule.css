@@ -37,17 +37,17 @@
   width: 90%;
 }
 
-.timeline__event__title {
+.event__title {
   margin: 0;
 }
 
-.timeline__event__time {
+.event__time {
   font-size: 0.9rem;
   color: var(--red);
   margin-bottom: 0;
 }
 
-.timeline__event__description {
+.event__desc {
   font-size: 0.9rem;
   float: left;
   top: 5px;
@@ -108,22 +108,6 @@
   margin: 0;
   float: left;
   border-radius: 50%;
-}
-
-/* bullets */
-.event-static::before {
-  content: "";
-  display: block;
-  width: 0;
-  height: 100%;
-  border: 1px solid var(--lightgrey);
-  position: absolute;
-  top: 0;
-  left: -2rem;
-}
-
-.event-static:first-child::before {
-  top: 5px;
 }
 
 .bullet__bg {

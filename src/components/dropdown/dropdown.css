@@ -42,7 +42,7 @@
     right: 2rem;
 }
 
-.dropdown__label__text {
+.dropdown__text {
     position: relative;
     margin-right: 4rem;
     text-overflow: ellipsis;
@@ -50,7 +50,7 @@
     overflow: hidden;
 }
 
-.dropdown__label__text--open {
+.dropdown__text--open {
     position: relative;
     margin-right: 4rem;
 }
