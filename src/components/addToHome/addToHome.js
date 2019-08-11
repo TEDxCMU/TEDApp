@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import '../../App.css';
 import './addToHome.css';
-import './downloadIcon.png';
+import downloadIcon from './downloadIcon.png';
 
 export class PopUp extends Component {
     constructor(props) {
@@ -15,13 +15,13 @@ export class PopUp extends Component {
         const closed = this.state.closed;
         
         return (
-            <div className={closed ? 'home-popup__closed' : ''} style={{width: "100%"}}>
+            <div className={closed ? 'home-popup__closed' : ''}>
                 { this.props.iOS && this.props.loaded ? 
                     <div className="home-popup">
                         <div className="home-popup__close" onClick={(e) => {this.closeModal(e)}}>X</div>
                         <div className="home-popup__content">
                             <p><strong>Install TEDxCMU</strong> for quick and easy access when you're on the go.</p>
-                            <p>Tap <img src={require('./downloadIcon.png')} className="i-download" alt="download icon" title="download icon" /> and then "Add to Homescreen."</p>
+                            <p>Tap <img src={downloadIcon} className="i-download" alt="download icon" title="download icon" /> and then "Add to Homescreen."</p>
                         </div>
                     </div>
                 :

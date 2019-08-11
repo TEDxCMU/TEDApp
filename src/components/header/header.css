@@ -103,7 +103,6 @@ header {
     color: var(--grey-20);
     margin-top: 10px;
     padding: 12px;
-    box-sizing: border-box !important;
 }
 
 .popup__input--invalid {

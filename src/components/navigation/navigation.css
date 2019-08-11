@@ -56,7 +56,6 @@
 .bm-menu-wrap {
   position: absolute;
   top: 0;
-  box-sizing: border-box;
   width: 100% !important;
   background-color: rgba(0,0,0,0.1);
 }
@@ -93,5 +92,4 @@
   padding: 0.8em;
   text-align: center !important;
   position: relative;
-  box-sizing: border-box;
 }

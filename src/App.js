@@ -78,7 +78,7 @@ class App extends Component {
             {/* <Route path="/questions" exact strict render={this.questionsPage}/> */}
             <Route component={this.noMatch} />
             </Switch>
-              <div style={popupStyle}> 
+              <div>
                 {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null && localStorage.getItem("fingerprint") !== null ?
                 <PopUp iOS={true} loaded={this.state.loaded}/>
                 :
