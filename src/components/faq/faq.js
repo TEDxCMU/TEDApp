@@ -129,7 +129,6 @@ export class Faq extends Component {
                     <button className="btn btn--primary" onClick={this.toggleTickets} className={ticketsClasses}>Tickets</button>
                     <button className="btn btn--primary" onClick={this.toggleVolunteer} className={volunteerClasses}>Volunteers</button>
                 </div>
-
                 {content}
             </div>
         );

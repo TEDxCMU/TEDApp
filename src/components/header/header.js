@@ -289,7 +289,7 @@ export class Header extends Component {
                         <h4>Dear {this.props.title},</h4>
                         <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup__input" : "popup__input popup__input--invalid"} name="question" value={that.props.question} placeholder={questionBlank ? "Please write a question before submitting." : "Write your question here..."} onChange={that.props.handleChange} />
                         {this.state.errors === undefined ?
-                            <small> </small>
+                            null
                             :
                             <small className="text-red">Please ask a question before submitting.</small>}
                         <h4>Sincerely, </h4>
@@ -408,14 +408,16 @@ export class Header extends Component {
                         <h6 onClick={this.openAnnouncement} className="header__desc header__desc--collapsed">{Parser(this.props.description.toString())}</h6>
                     </div>
                     :
-                    null}
+                    null
+                    }
 
                 {this.props.description !== undefined && this.state.altAnnouncement !== undefined ?
                     <div>
                         <h6 onClick={this.openAnnouncement} className="header__desc header__desc--collapsed">{Parser(this.state.altAnnouncement.toString())}</h6>
                     </div>
                     :
-                    null}
+                    null
+                    }
             </div>
         )
     }

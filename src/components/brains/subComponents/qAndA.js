@@ -205,7 +205,7 @@ export class QAndAMain extends Component {
                     question: '',
                     open: false,
                     openCheck: false
-                }, () =>                 
+                }, () =>
                 ReactGA.event({
                     category: 'User',
                     action: 'Create Question with Fingerprint on Q&A Page'
@@ -310,14 +310,10 @@ export class QAndAMain extends Component {
                         >
                         <div className="popup">
                             <div>
-                                {this.state.speakerRef !== undefined && this.state.speakerRef !== null ? 
-                                    <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4>
-                                :
-                                    null
-                                }
+                                { this.state.speakerRef && <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4> }
                                 <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup__input" : "popup__input popup__input--invalid" } name="question" value={this.state.question} placeholder="Write your question here..." onChange={this.handleChange}/>
-                                {this.state.errors === undefined ?
-                                    <small> </small>
+                                { !this.state.errors === undefined ?
+                                    null
                                 :
                                     <small className="text-red">Please ask a question before submitting.</small>
                                 }

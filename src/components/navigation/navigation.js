@@ -67,14 +67,12 @@ export class Navigation extends Component {
                                     <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6eebfc'}}>
                                         FAQs
                                     </NavLink></li>
-                                    {this.props.user === null ?
-                                        null
-                                        :
-                                        <div>
+                                    {this.props.user !== null &&
+                                        (<div>
                                             <li>
                                                 <button className="btn btn-full button--primary" onClick={this.props.logout}>Log Out</button> 
                                             </li>
-                                        </div>
+                                        </div>)
                                     }
                                 </ul>
                             </div>

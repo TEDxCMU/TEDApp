@@ -29,11 +29,7 @@ export class Dropdown extends Component {
         <div className="dropdown">
             <div onClick={this.toggleShow} className="dropdown__label">
                 <h6 className={this.state.showContent ? "dropdown__text--open" : "dropdown__text"}>{this.props.question}</h6>
-                {this.props.check ? 
-                  <img className="dropdown__checkmark" src={check} alt="checkmark"></img>
-                :
-                  null
-                }
+                {this.props.check && <img className="dropdown__checkmark" src={check} alt="checkmark"></img> }
                 <h4 className="dropdown__toggle">{this.state.showContent ? "-" : "+"}</h4>
             </div>
             {content}

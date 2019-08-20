@@ -140,12 +140,10 @@ export class Schedule extends Component {
                       <h4 className="event__title">{event.title}</h4>
                       <p className="event__desc">{event.blurb}</p>
                       <br />
-                      {this.props.isAdmin ? 
-                      <div>
+                      { this.props.isAdmin && 
+                      (<div>
                         <button className="btn btn--primary" onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
-                      </div>
-                      :
-                        null
+                      </div>)
                       }
                   </div>
                   <img src={arrow} className="event-card__arrow" alt="information arrow" />
@@ -198,13 +196,11 @@ export class Schedule extends Component {
                 <p className="event__time"><strong>{event.start}</strong> — {event.end}</p>
                 <h5 className="event__title">{event.title}</h5>
                 <small>{event.blurb}</small>
-                {this.props.isAdmin  ? 
-                  <div>
+                {this.props.isAdmin && 
+                  (<div>
                     <button className="btn btn--primary"
                     onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
-                  </div>
-                :
-                  null
+                  </div>)
                 }
               </div>
           </Item>

@@ -46,11 +46,7 @@ export class MyQuestions extends Component {
 
     return (
       <div>
-          {fire.auth().currentUser !== null ?
-            <div className="text-center">Account: {fire.auth().currentUser.email}</div>
-          :
-            null
-          }
+          {fire.auth().currentUser !== null && <div className="text-center">Account: {fire.auth().currentUser.email}</div> }
           {newList}
       </div>
     );
