@@ -257,7 +257,7 @@ export class Header extends Component {
                     <div className="popup__response">
                         <img src={bottle} className="bottle" alt="Bottle" />
                         <p className="text-center">Thank you for asking a question! Please check back on the Q&amp;A page later.</p>
-                        <button className="btn btn--primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
+                        <button className="btn btn-full btn-rounded btn--primary" onClick={this.closeConfirmation}>Ok</button>
                     </div>
                 </div>
             </Popup>

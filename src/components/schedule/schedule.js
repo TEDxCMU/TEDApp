@@ -77,7 +77,7 @@ export class Schedule extends Component {
     let eventDate = moment(this.props.eventDate).format('L')
     if (this.state.allEvents.length === 0) {
       return (
-        <div>
+        <div className="schedule-container">
           <BounceLoader
             sizeUnit={"px"}
             size={150}
@@ -215,7 +215,7 @@ export class Schedule extends Component {
     let index = this.state.eventNum;
     if (newList.length > 0) {
     return (
-        <div style={{height: '100%', width: '100%'}}>
+        <div className="schedule-container">
           {this.globalTimeChangePopup(style)}
           {this.singleEventTimeChangePopup(style, index, allEvents)}
           <div>

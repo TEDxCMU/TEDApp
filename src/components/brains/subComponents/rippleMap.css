@@ -13,6 +13,23 @@
   animation-iteration-count: infinite;
 }
 
+.map-container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.composable-map {
+  width: 100%;
+  height: auto;
+}
+
+.map__controls {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 12px;
+}
+
 /* Pulses on map */
 @keyframes pulse {
   from {

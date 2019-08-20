@@ -36,7 +36,7 @@ export class BrainFood extends Component {
     }
     return (
         <div className="ripple-map-container">
-            <h1 style={{width: '90%'}}>A Global Ripple Effect</h1>
+            <h1 className="ripple-title">A Global Ripple Effect</h1>
             <div>
                 {this.addLocationButton()}
                 {this.locationInputPopup(style)}
@@ -180,18 +180,19 @@ export class BrainFood extends Component {
     }
 
     locationInputPopup = (style) => {
+        // must exist for now because autocomplete location input doesn't inherit any styling like others
         let autocompleteStyle = {
-            addingLeft: '12px',
-            padding: '1em 0',
-            boxSizing: 'border-box !important',
-            height: '20px',
+            display: 'block',
+            width: '100%',
+            borderRadius: '3px',
+            padding: '1em',
             color: 'var(--grey-20)',
-            fontFamily: 'Open Sans, sans-serif',
+            marginTop: '10px',
+            height: '20px',
             fontSize: '1em',
             lineHeight: '1em',
-            width: '100%',
             background: "transparent", 
-            border: '1px solid #e9ebec'
+            border: '1px solid var(--lightgrey)'
         }
 
         return <Popup open={this.state.open} closeOnDocumentClick onClose={this.closeModal} contentStyle={style}>
@@ -199,6 +200,7 @@ export class BrainFood extends Component {
                 <div>
                     <h2>And where are you from?</h2>
                     <h4>City:</h4>
+                    {/* This autocomplete input doesn't inherit any input styling like the other two... need to fix */}
                     <Autocomplete style={autocompleteStyle} onPlaceSelected={(place) => {
                         this.setState({ city: place });
                     } } />
@@ -207,16 +209,16 @@ export class BrainFood extends Component {
                         :
                         null}
                     <h4>Name:</h4>
-                    <input type="text" style={{ height: '20px' }} className="popup__input popup__input__sm" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={"Please add your name."} onChange={e => { this.handleChange(e); } } />
+                    <input type="text"className="popup__input popup__input--sm" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={"Please add your name"} onChange={e => { this.handleChange(e); } } />
                     <h4>Email:</h4>
-                    <input type="email" style={{ height: '20px' }} className={this.state.errors !== undefined && this.state.errors.email === true ? "popup__input popup__input--sm-invalid" : "popup__input popup__input--sm"} minLength="4" siz="10" name="email" value={this.state.email} placeholder={"Please add your email."} onChange={e => { this.handleChange(e); } } />
+                    <input type="email" className={this.state.errors !== undefined && this.state.errors.email === true ? "popup__input popup__input--sm-invalid" : "popup__input popup__input--sm"} minLength="4" siz="10" name="email" value={this.state.email} placeholder={"Please add your email"} onChange={e => { this.handleChange(e); } } />
                     {this.state.errors !== undefined && this.state.errors.email === true ?
                         <small className="text-red">Please enter a valid email before submitting.</small>
                         :
                         null}
                     <div className="popup__btn-group">
-                        <button className="btn btn-full btn--cancel" onClick={this.closeModal}>Cancel</button>
-                        <button className="btn btn-full btn--primary" onClick={e => this.sendLocation(e)}>Submit</button>
+                        <button className="btn btn-full btn-rounded btn--cancel" onClick={this.closeModal}>Cancel</button>
+                        <button className="btn btn-full btn-rounded btn--primary" onClick={e => this.sendLocation(e)}>Submit</button>
                     </div>
                 </div>
             </div>
@@ -225,7 +227,7 @@ export class BrainFood extends Component {
 
     addLocationButton() {
         return this.state.inDatabase !== null ?
-            <h6><button onClick={() => this.openModal()} className="btn q-btn" style={{margin: '0' }}> {this.state.inDatabase === true ? "Change Your City" : "Ripple"}</button></h6>
+            <h6><button onClick={() => this.openModal()} className="btn q-btn"> {this.state.inDatabase === true ? "Change Your City" : "Ripple"}</button></h6>
             :
             null;
     }
@@ -236,7 +238,7 @@ export class BrainFood extends Component {
                 <div className="popup__response">
                     <img src={bottle} className="bottle" alt="Bottle" />
                     <p className="text-center">Thank you for telling us more about yourself! Check this page later to see the Ripple Effect!</p>
-                    <button className="btn btn--primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
+                    <button className="btn btn-full btn-rounded btn--primary" onClick={this.closeConfirmation}>Ok</button>
                 </div>
             </div>
         </Popup>;

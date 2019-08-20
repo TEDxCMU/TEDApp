@@ -29,3 +29,24 @@
   flex-direction: column;
   justify-content: center;
 }
+
+/* The responsive YT video CSS is listed on mult online sources */
+.video-container {
+  max-width: 100%;
+}
+
+.video {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+  margin-bottom: 20px;
+}
+
+.video iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}

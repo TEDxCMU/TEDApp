@@ -85,12 +85,10 @@ export class EventDetails extends Component {
     }
 
     makeVideoListElement = (video, self) => {
-        return <div key={video} style={{ maxWidth: '100%' }}>
-            <div style={{ position: "relative", height: "0", paddingBottom: "56.25%" }}>
-                <iframe src={self.props.related[video]} title={self.props.related[video]} style={{ position: 'absolute', left: '0', top: '0', width: '100%', height: '100%' }} frameBorder="0" scrolling="no" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}>
-                </iframe>
+        return <div key={video} className="video-container">
+            <div className="video">
+                <iframe className="video__frame" src={self.props.related[video]} title={self.props.related[video]} frameBorder="0" scrolling="no" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}></iframe>
             </div>
-            <br></br>
         </div>;
     }
 

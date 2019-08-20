@@ -18,7 +18,7 @@ export class QuestionComponent extends Component {
                 <Dropdown question={question} open={this.state.open} answered={this.props.answered} check={this.props.answerInDB}>
                     {/* The questions-form class was a 5px margin, now DNE */}
                     <form className="questions-form">
-                        <label style={{marginTop: '0'}}>Question:</label>
+                        <label className="mt0">Question:</label>
                         <p>"{question}"</p>
                         <p>FROM: {name}</p>
                         <textarea className="popup__input" type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>

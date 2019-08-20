@@ -17,8 +17,8 @@ header {
 .header-container--sticky {
     position: fixed;
     top: 0;
-    width: 100%;
     height: 300px;
+    width: 100%;
     transition: height 0.3s;
 }
 
@@ -113,14 +113,12 @@ header {
 
 .popup__input--sm {
     height: 20px;
-    padding-left: 12px !important;
-    color: var(--grey-20);    
+    padding-left: 12px !important; 
 }
 
 .popup__input--sm-invalid {
     height: 20px;
     padding-left: 12px !important;
-    color: var(--grey-20);    
     border: 2px solid var(--red) !important;
 }
 

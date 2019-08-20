@@ -1,3 +1,8 @@
+.schedule-container {
+  width: 100vw;
+  height: 100vh;
+}
+
 /* timeline */
 .timeline-container {
   margin-top: 320px;
@@ -112,13 +117,12 @@
 .bullet__bg {
   content: '';
   position: absolute;
-  width: 18px;
-  height: 18px;
-  left: calc(-2rem - 13px);
-  top: calc(50% - 13px);
+  width: 24px;
+  height: 24px;
+  left: calc(-2rem - 12px);
+  top: calc(50% - 11px);
   background-color: var(--bggrey);
   border-radius: 50%;
-  border: 5px solid var(--bggrey);
   z-index: 0;
 }
 

@@ -14,3 +14,7 @@
     align-items: center;
     flex-wrap: wrap;
 }
+
+.qanda__message--empty {
+    text-align: center;
+}

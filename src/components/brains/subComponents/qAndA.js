@@ -262,7 +262,7 @@ export class QAndAMain extends Component {
 
         for (let speaker in this.state.speakers) {
             speakerButtons.push(
-                <button key={speaker} onClick={e => this.toggleButtons(e, speaker)} style={{boxShadow: 'none'}} className={speaker.toString() === this.state.selectedSpeaker.toString() ? "btn btn--primary" : "btn btn--tertiary"}>{this.state.speakers[speaker].first}</button>
+                <button key={speaker} onClick={e => this.toggleButtons(e, speaker)} className={speaker.toString() === this.state.selectedSpeaker.toString() ? "btn btn--primary" : "btn btn--tertiary"}>{this.state.speakers[speaker].first}</button>
             )
         }
         let newList = [];
@@ -274,9 +274,9 @@ export class QAndAMain extends Component {
                 <Dropdown question={question.question}>
                     {/* The questions-form class was a 5px margin, now DNE */}
                     <form className="questions-form">
-                        <label style={{marginTop: '0'}}>Question:</label>
+                        <label>Question:</label>
                         <p>"{question.question}"</p>
-                        <label style={{marginTop: '0'}}>FROM: {question.name}</label>
+                        <label>FROM: {question.name}</label>
                         <p>Answer: </p>
                         <p>"{question.answer}"</p>
                     </form>
@@ -322,7 +322,7 @@ export class QAndAMain extends Component {
                                     <small className="text-red">Please ask a question before submitting.</small>
                                 }
                                 <h4>Sincerely, </h4>
-                                <input type="text" style={{height: '20px'}} autoComplete="off" className="popup__input popup__input__sm" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>
+                                <input type="text" autoComplete="off" className="popup__input popup__input__sm" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>
                                 <div className="popup__btn-group">
                                     <button className="btn btn-full btn--cancel" onClick={this.closeModal}>Cancel</button>
                                     <button className="btn btn-full btn--primary" onClick={this.openCheck}>Submit</button>
@@ -357,7 +357,7 @@ export class QAndAMain extends Component {
                             <div className="popup__response">
                                 <img src={bottle} className="bottle" alt="Bottle" />
                                 <p className="text-center">Thank you for asking a question! Please check back on the Q &amp; A page later.</p>
-                                <button className="btn btn-full btn--primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
+                                <button className="btn btn-full btn-rounded btn--primary" onClick={this.closeConfirmation}>Ok</button>
                             </div>
                         </div>
                         </Popup>
@@ -372,7 +372,7 @@ export class QAndAMain extends Component {
                         {newList}
                     </div>
                     :
-                    <h4 style={{paddingTop: '20px', textAlign: 'center'}}>{this.state.speakerRef !== undefined && this.state.speakerRef !== null ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
+                    <h4 className="qanda__message--empty">{this.state.speakerRef !== undefined && this.state.speakerRef !== null ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
                 }
             </div>
 

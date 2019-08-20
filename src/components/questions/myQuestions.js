@@ -47,7 +47,7 @@ export class MyQuestions extends Component {
     return (
       <div>
           {fire.auth().currentUser !== null ?
-            <div style={{textAlign: 'center'}}>Account: {fire.auth().currentUser.email}</div>
+            <div className="text-center">Account: {fire.auth().currentUser.email}</div>
           :
             null
           }
