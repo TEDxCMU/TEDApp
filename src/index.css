@@ -382,8 +382,6 @@ legend {
 .q-btn {
   position: relative;
   font-size: 0.7rem;
-  bottom: -36px;
-  margin-bottom: 36px;
   font-weight: 600;
   color: var(--redhover);
   background-color: var(--white);
@@ -394,6 +392,10 @@ legend {
 
 .q-btn:hover {
   background-color: var(--bggrey);
+}
+
+.q-btn--primary {
+  bottom: -36px;
 }
 
 

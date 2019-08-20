@@ -371,10 +371,10 @@ export class Header extends Component {
                     :
                     null}
                 <br />
-                <h1 className="header__title">{this.props.title}</h1>
+                <h1 className="header__title header__title--speaker">{this.props.title}</h1>
                 {this.props.tag !== undefined ?
                     <div>
-                        <h6 className="header__desc text-center">{this.props.tag}</h6>
+                        <h6 className="header__desc header__desc--speaker text-center">{this.props.tag}</h6>
                     </div>
                     :
                     null}
@@ -391,7 +391,7 @@ export class Header extends Component {
                     </div>
                     :
                     <div>
-                        <button onClick={() => this.openModal()} className="btn q-btn">Ask Question</button>
+                        <button onClick={() => this.openModal()} className="btn q-btn q-btn--primary">Ask Question</button>
                         {this.askQuestionPopup(popupStyle, that, questionBlank, nameBlank)}
                         {this.confirmAskQuestionPopup(popupStyle)}
                         {this.successAskQuestionPopup(popupStyle)}

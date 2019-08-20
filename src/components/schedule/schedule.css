@@ -5,12 +5,8 @@
 
 /* timeline */
 .timeline-container {
-  margin-top: 320px;
+  margin-top: 270px;
   padding: 10% 4% 10% calc(4% + 2rem + 4px);
-}
-
-.timeline-container__admin {
-  margin-top: 0;
 }
 
 .timeline {
@@ -220,4 +216,16 @@
     opacity: 0;
     transform: scale(4);
   }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .timeline-container {
+    margin-top: 240px;
+  }
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  /* content */
 }

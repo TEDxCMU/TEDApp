@@ -219,8 +219,8 @@ export class BrainFood extends Component {
                         null
                     }
                     <div className="popup__btn-group">
-                        <button className="btn btn-full btn-rounded btn--cancel" onClick={this.closeModal}>Cancel</button>
-                        <button className="btn btn-full btn-rounded btn--primary" onClick={e => this.sendLocation(e)}>Submit</button>
+                        <button className="btn btn-full btn--cancel" onClick={this.closeModal}>Cancel</button>
+                        <button className="btn btn-full btn--primary" onClick={e => this.sendLocation(e)}>Submit</button>
                     </div>
                 </div>
             </div>

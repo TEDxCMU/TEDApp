@@ -272,8 +272,7 @@ export class QAndAMain extends Component {
             newList.push (
                 <div key={Math.random()}>
                 <Dropdown question={question.question}>
-                    {/* The questions-form class was a 5px margin, now DNE */}
-                    <form className="questions-form">
+                    <form>
                         <label>Question:</label>
                         <p>"{question.question}"</p>
                         <label>FROM: {question.name}</label>
@@ -300,7 +299,7 @@ export class QAndAMain extends Component {
                     // prevent user from asking multiple questions, if we have their device fingerprint on file
                     <button className="btn q-btn">Asked</button>
                 :
-                    <div>
+                    <div className="text-center mt2">
                         <button onClick={() => this.openModal()} className="btn q-btn">Ask Question</button>
                         <Popup
                         open={this.state.open}

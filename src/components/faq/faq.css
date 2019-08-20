@@ -10,6 +10,11 @@
     flex-wrap: wrap;
 }
 
+/* btn group spacing */
+.faq__btn-group > * {
+    margin: 4px;
+}
+
 /* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
 
 /* Medium devices (landscape tablets, 768px and up) */

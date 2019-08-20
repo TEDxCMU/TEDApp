@@ -17,7 +17,7 @@ header {
 .header-container--sticky {
     position: fixed;
     top: 0;
-    height: 300px;
+    height: 296px;
     width: 100%;
     transition: height 0.3s;
 }
@@ -31,11 +31,19 @@ header {
     line-height: 2em;
 }
 
+.header__title--speaker {
+    margin: 0;
+}
+
 .header__desc {
     color: var(--white);
     padding-top: 0;
     margin-bottom: 0;
     padding-bottom: 20px;
+}
+
+.header__desc--speaker {
+    padding-bottom: 0;
 }
 
 .header__desc--collapsed {
@@ -53,7 +61,10 @@ header {
 .header__back--logo { max-width: 60px; }
 .header__back--arrow { height: 40px; }
 
-.header__content { padding: 100px 26px 16px 26px; }
+.header__content {
+    padding: 100px 26px 16px 26px;
+}
+
 .header__profile {
     display: flex;
     justify-content: flex-end;
@@ -74,8 +85,8 @@ header {
     position: absolute;
     top: -15px;
     left: -15px;
-    width: 150px;
-    height: 150px;
+    width: 130px;
+    height: 130px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.06);
 }
@@ -93,6 +104,11 @@ header {
     display: flex;
     justify-content: space-between;
     margin-top: 20px;
+}
+
+/* btn group spacing */
+.popup__btn-group > * {
+    margin: 4px;
 }
 
 .popup__input {
@@ -160,6 +176,14 @@ header {
         background: var(--redgradient);
         box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.09);
         border-radius: 0;
+    }
+
+    .header-container--sticky {
+        height: 275px;
+    }
+
+    .header-container--sticky-short {
+        height: 120px;
     }
 
     .header__desc {

@@ -6,6 +6,7 @@
 .qanda__content {
     display: flex;
     flex-direction: column;
+    width: 100%;
 }
 
 .qanda__btn-group {
@@ -13,6 +14,11 @@
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+}
+
+/* btn group spacing */
+.qanda__btn-group > * {
+    margin: 4px;
 }
 
 .qanda__message--empty {
