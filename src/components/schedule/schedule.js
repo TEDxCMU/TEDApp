@@ -77,7 +77,7 @@ export class Schedule extends Component {
     let eventDate = moment(this.props.eventDate).format('L')
     if (this.state.allEvents.length === 0) {
       return (
-        <div className="schedule-container">
+        <div className="loader">
           <BounceLoader
             sizeUnit={"px"}
             size={150}

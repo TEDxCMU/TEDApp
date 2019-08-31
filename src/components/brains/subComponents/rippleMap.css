@@ -23,12 +23,18 @@
   height: auto;
 }
 
-.map__controls {
+.map__btn-group {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  margin: 12px;
+  flex-wrap: wrap;
 }
+
+/* btn group spacing */
+.map__btn-group > * {
+  margin: 4px;
+}
+
 
 /* Pulses on map */
 @keyframes pulse {

@@ -127,7 +127,7 @@ export class RippleMap extends Component {
             )}
           </Motion>
         </div>
-        <div className="map__controls">
+        <div className="map__btn-group">
           <button className="btn btn--primary" onClick={this.handleZoomIn}>
             { "Zoom in" }
           </button>
