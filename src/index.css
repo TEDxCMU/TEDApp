@@ -1,89 +1,81 @@
-/* *
-* Sources/Aids:
-* -----------------------------
-* styleshout.com (Kard v1.0 Main Stylesheet, 03-01-2016)
-* Typography (font-size: 16px; line-height: 1.2; scale: 1.275): https://www.gridlover.net/try
-* Link effect: https://codemyui.com/theoutline-squiggle-link-hover-effect/
-*
-* Organization:
-* -----------------------------
-* 01. Imports
-* 02. CSS Variables
-* 03. Reset stylesheet
-* 04. General style & overrides
-* 05. Forms (TBD)
-* 06. Buttons
-* 07. List styling
-* 08. Components (separate CSS files)
-* 09. Responsive styles
-* -----------------------------
-**/
+/* CSS General Styles Sheet
+ *
+ * Imports, CSS Variables, Reset, Typography,
+ * Buttons, Forms, Tables
+------------------------------------*/
 
-/* ---------- 01. START IMPORTS ---------- */
+
+/* IMPORTS
+------------------------------------*/
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700');
-/* ---------- 01. END IMPORTS ---------- */
 
-/* ---------- 02. START CSS VARIABLES ---------- */
+
+/* CSS VARIABLES
+------------------------------------*/
 :root {
-  --tedblack: #000;
-  --tedgrey: #4e4e4e;
-  --tedlightgrey: #aaa;
-  --tedbggrey: #FCFCFC;
-  --tedoffwhite: #f8f8f8;
-  --tedwhite: #fff;
-  --tedblue: #6EEBFC;
-  --tedred: #e62b1e;
-  --tedredhover: #cb2d3e;
-  --tedredgradient: linear-gradient(180deg, #CB2D3E 0%, #EF473A 100%);
-  --tedredgradient45: linear-gradient(315deg, #CB2D3E 0%, #EF473A 100%);
-  --opaque: rgba(0, 0, 0, 0.3);
-}
-/* ------------- 02. END CSS VARIABLES ------------ */
+  --black: #000;
+  --grey-0: #111;
+  --grey-20: #333;
+  --grey-40: #666;
+  --grey-60: #999;
+  --grey-80: #ccc;
+  --grey-100: #eee;
+  --bggrey: #fcfcfc;
+  --offwhite: #f8f8f8;
+  --white: #fff;
 
-/* ---------- 03. START RESET STYLESHEET ---------- */
+  --red: #e62b1e;
+  --redhover: #cb2d3e;
+  --redgradient: linear-gradient(180deg, #cb2d3e 0%, #ef473a 100%);
+  --redgradient45: linear-gradient(315deg, #cb2d3e 0%, #ef473a 100%);
+  --opaque: rgba(0, 0, 0, 0.3);
+
+
+  --grey: #4e4e4e;
+  --lightgrey: #aaa;
+  --lightblue: #6eebfc;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 2rem;
+  --space-4: 4rem;
+}
+
+/* RESET
+------------------------------------*/
 * {
     margin: 0;
     padding: 0;
     border: 0;
-    outline: 0;
+    outline: none;
+    box-sizing: border-box;
 }
 
-html, .root {
+html,
+body {
   font-size: 16px;
-  line-height: 19px;
   scroll-behavior: smooth;
-}
-
-body, .article {
   font-family: 'Open Sans', sans-serif;
-  font-size: 1rem;
   line-height: 1.1875rem;
-  background-color: var(--tedredhover);
   z-index: -20;
 }
 
-
-/* THIS IS A GIGANTIC HACK, DO NOT REUSE CODE 
-UNLESS YOU KNOW WHAT IT DOES */
-
-body:before{
+/* THIS CODE HACKS STATUS BAR BACKGROUND ON MOBILE, DO NOT REUSE */
+body::before {
   content: "";
   top: 0;
   left: 0;
-  background: var(--tedbggrey);
-  /* position:-webkit-sticky; */
+  background: var(--bggrey);
   z-index: -2;
   width: 100vw;
   height: 100vh;
   position: fixed;
 }
 
-body:after {
+body::after {
   content: "";
   top: -300px;
   left: 0;
-  background: var(--tedredhover);
-  /* position:-webkit-sticky; */
+  background: var(--redhover);
   z-index: 10;
   width: 100vw;
   height: 300px;
@@ -95,9 +87,7 @@ footer,header,hgroup,menu,nav,section {
     display: block;
 }
 
-nav ul {
-    list-style: none;
-}
+nav ul { list-style: none; }
 
 a {
     vertical-align: baseline;
@@ -105,32 +95,36 @@ a {
 }
 
 mark {
-    background-color: var(--tedred);
-    color: var(--tedblack); 
+    background-color: var(--red);
+    color: var(--black); 
     font-style: italic;
     font-weight: bold;
 }
 
-del {
-    text-decoration: line-through;
-}
+del { text-decoration: line-through; }
 
 hr {
     display: block;
     height: 1px;
     border: 0;   
-    border-top: 1px solid var(--tedgrey);
+    border-top: 1px solid var(--grey-20);
 }
 
-input, select {
+input,
+select {
     vertical-align: middle;
 }
-/* ----- 03. END RESET STYLESHEET ----- */
 
-/* ----- 04. START GENERAL STYLES & OVERRIDES ----- */
+img {
+  max-width: 100%;
+  height: auto;
+}
 
+
+/* TYPOGRAPHY
+------------------------------------*/
 h1, h2, h3, h4, h5, h6 {
-  color: var(--tedblack);
+  color: var(--black);
   text-rendering: optimizeLegibility;
 }
 
@@ -140,29 +134,33 @@ h1, .h1 {
   margin-top: 1.1875rem;
   margin-bottom: 1.1875rem;
 }
+
 h2, .h2 {
   font-size: 1.625rem;
   line-height: 2.375rem;
   margin-top: 1.1875rem;
   margin-bottom: 1.1875rem;
 }
+
 h3, .h3 {
   font-size: 1.25rem;
   line-height: 2.375rem;
   margin-top: 1.1875rem;
-  margin-bottom: 0rem;
+  margin-bottom: 0;
 }
+
 h4, .h4 {
   font-size: 1rem;
   line-height: 1.1875rem;
   margin-top: 1.1875rem;
-  margin-bottom: 0rem;
+  margin-bottom: 0;
 }
+
 h5, .h5 {
   font-size: 1rem;
   line-height: 1.1875rem;
   margin-top: 1.1875rem;
-  margin-bottom: 0rem;
+  margin-bottom: 0;
 }
 
 h6, .h6 {
@@ -171,26 +169,20 @@ h6, .h6 {
   margin-top: 1.1875rem;
   margin-bottom: 1.1875rem;
   font-weight: 400;
-  color: var(--tedgrey);
 }
 
 p {
   font-size: 1rem;
-  color: var(--tedgrey);
+  color: var(--grey-20);
   margin-bottom: 1.3rem;
   line-height: 1.4rem;
 }
 
 p, ul, ol, pre, table, blockquote {
-  margin-top: 0rem;
+  margin-top: 0;
   margin-bottom: 1.1875rem;
 }
-ul ul, ol ol, ul ol, ol ul {
-  margin-top: 0rem;
-  margin-bottom: 0rem;
-}
 
-/* Let's make sure all's aligned */
 hr, .hr {
   border: 1px solid;
   margin: -1px 0;
@@ -202,62 +194,34 @@ sub, sup {
   vertical-align: baseline;
 }
 
-sup {
-  top: -0.5em;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
 a {
-  color: var(--tedred);
+  color: var(--red);
   text-decoration: none;
 }
 
-p a {
-  color: var(--tedgrey);
-  text-decoration: none;
-  background: var(--tedredgradient);
-	background-position: 0 100%;
-	background-repeat: repeat-x;
-	background-size: 3px 3px;
-}
-
-p a:hover {
-  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg id='squiggle-link' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:ev='http://www.w3.org/2001/xml-events' viewBox='0 0 20 4'%3E%3Cstyle type='text/css'%3E.squiggle{animation:shift .3s linear infinite;}@keyframes shift {from {transform:translateX(0);}to {transform:translateX(-20px);}}%3C/style%3E%3Cpath fill='none' stroke='#e62b1e' stroke-width='2' class='squiggle' d='M0,3.5 c 5,0,5,-3,10,-3 s 5,3,10,3 c 5,0,5,-3,10,-3 s 5,3,10,3'/%3E%3C/svg%3E");
-  background-position: 0 100%;
-  background-size: auto 5px;
-  background-repeat: repeat-x;
-}
-
-/* --- MISCELLANEOUS STYLING --- */
 small {
-  font-size: 0.7em;
+  font-size: 0.7rem;
   line-height: inherit;
 }
 
-del {
-  text-decoration: line-through;
-}
+del { text-decoration: line-through; }
 
 code {
-  font-size: 1.1rem;
   margin: 0 .3rem;
   padding: .3rem .6rem;
   white-space: nowrap;
-  background: var(--tedoffwhite);
-  border: 1px solid var(--tedoffwhite);
+  background: var(--offwhite);
+  border: 1px solid var(--offwhite);
   border-radius: 3px;
 }
 
 /* BLOCKQUOTE STYLING */
 blockquote {
   padding: 1rem;
-  border-left: 7px solid var(--tedgrey);
+  border-left: 7px solid var(--grey-20);
 }
 
-blockquote p {
+blockquote > p {
   font-style: italic;
   line-height: 1.6;
 }
@@ -265,29 +229,21 @@ blockquote p {
 blockquote::before {
   content: open-quote;
   font-size: 4rem;
-  color: var(--tedgrey);
-  line-height: 0.3em;
-  margin-right: 0.25em;
-  vertical-align: -0.5em;
+  color: var(--grey-20);
+  line-height: 0.3rem;
+  margin-right: 0.25rem;
+  vertical-align: -0.5rem;
 }
 
 cite {
-  color: var(--tedgrey);
+  color: var(--grey-20);
   display: block;
   padding: 0;
   text-align: right;
   font-style: italic;
 }
 
-cite::before {
-  content: '— ';
-}
-
-/* DEFINITION LIST STYLING */
-
-/* dl {
-  margin: 20px;
-} */
+cite::before { content: '— '; }
 
 dt {
   font-weight: bold;
@@ -295,22 +251,15 @@ dt {
 }
 
 dd {
-  color: var(--tedgrey);
+  color: var(--grey-20);
   line-height: 1.4;
 }
 
 
-/* ---------- 04. END GENERAL STYLES & OVERRIDES ---------- */
-
-/* ---------- 05. START FORM STYLING ---------- */
-
-form {
-  margin: 20px;
-}
-
-fieldset {
-  border: none;
-}
+/* FORMS
+------------------------------------*/
+fieldset { border: none; }
+textarea { min-height: 5rem; }
 
 input[type="email"],
 input[type="number"],
@@ -321,24 +270,13 @@ input[type="url"],
 input[type="password"],
 textarea,
 select {
+  font-size: 1rem;
   display: block;
-  height: 1em;
-  padding: 1.5em 0.5em;
-  border: none;
-  outline: none;
-  color: var(--tedgrey);
-  font-size: 1em;
-  line-height: 1em;
+  padding: 1rem;
+  color: var(--grey-20);
   width: 100%;
-  background: transparent;
-  border: 1px solid #e9ebec;
+  border: 1px solid var(--lightgrey);
   transition: all 0.3s ease-in-out;
-  box-sizing: border-box;
-}
-
-textarea {
-  font-size: 1em;
-	min-height: 5em;
 }
 
 input[type="email"]:focus,
@@ -350,186 +288,119 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 textarea:focus,
 select:focus {
-	color: var(--tedblack);
-  border: 1px solid var(--tedlightgrey);
-  box-sizing: border-box;
+	color: var(--black);
+  border: 1px solid var(--grey-20);
 }
 
-.focus-highlight {
-  border-bottom: 1px solid var(--tedred);
-}
-
-label, legend {
+label,
+legend {
+  color: var(--black);
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 1rem;
   margin-top: 1rem;
 	margin-bottom: .6rem;
-	color: var(--tedblack);
 	display: block;
 }
-input[type="checkbox"], input[type="radio"] {
-	display: inline;
-}
-label > .label-text {
-	display: inline-block;
-	margin-left: 1rem;
-	line-height: inherit;
-}
-label > input[type="checkbox"], label > input[type="radio"] {
-	margin: 0;
-	position: relative;
-	top: .15rem;
-}
 
-.placeholder {
-	color: var(--tedlightgrey) !important;
-}
+.placeholder { color: var(--lightgrey); }
+.focus-highlight { border-bottom: 1px solid var(--red); }
 
-/* ---------- 05. END FORM STYLING ---------- */
 
-/* ---------- 06. START BUTTON STYLING ---------- */
-
-button,
-input[type="submit"],
-input[type="reset"],
-input[type="button"] {
-  font-weight: 600;
+/* BUTTONS
+------------------------------------*/
+.btn {
   font-size: 1rem;
   text-transform: uppercase;
   text-decoration: none;
   display: inline-block;
   cursor: pointer;
-  border: none;
   border-radius: 3px;
   text-align: center;
   white-space: nowrap;
-  transition: all 0.3s ease-in-out;
-  height: 3rem;
-  padding: 0 3rem;
-  margin: 0 .3rem 1.2rem 0;
-  min-width: 80px;
   letter-spacing: .05rem;
-  background: var(--tedwhite);
+  padding: 1rem;
+  font-weight: 600;
+  transition: all 300ms ease-in-out;
 }
 
-form button,
-form input[type="submit"],
-form input[type="reset"],
-form input[type="button"] {
-  margin-top: 20px;
+.btn-full {
+  width: 100%;
+  padding: 1rem 2rem;
 }
 
-button:hover,
-input[type="submit"]:hover,
-input[type="reset"]:hover,
-input[type="button"]:hover,
-button:focus,
-input[type="submit"]:focus,
-input[type="reset"]:focus,
-input[type="button"]:focus {
-	background: var(--tedoffwhite);
-	color: var(--tedblack);
-	outline: 0;
+.btn-rounded { border-radius: 24px; }
+
+/* red gradient button */
+.btn--primary {
+  color: var(--white);
+  background: var(--redgradient45);
+  /* box-shadow: 0 2px 10px 0 var(--opaque); */
+  transition: all 300ms ease-in-out;
 }
 
-button.button-primary,
-input[type="submit"].button-primary,
-input[type="reset"].button-primary,
-input[type="button"].button-primary {
-	background: var(--tedredgradient45);
-  color: var(--tedwhite);
-  transition: all 0.5s ease-in-out;
+/* white button */
+.btn--secondary {
+  color: var(--black);
+  background: var(--offwhite);
   box-shadow: 0 2px 10px 0 var(--opaque);
+  transition: all 300ms ease-in-out;
 }
 
-button.button-sent,
-input[type="submit"].button-primary,
-input[type="reset"].button-primary,
-input[type="button"].button-primary {
-	background: var(--tedoffwhite);
-  color: var(--tedblack);
-  transition: all 0.5s ease-in-out;
-  box-shadow: 0 2px 10px 0 var(--opaque);
+/* red outline btn */
+.btn--tertiary {
+  color: var(--red);
+  background: transparent;
+  border: 1px solid var(--red);
 }
 
-button.button-primary:hover,
-input[type="submit"].button-primary:hover,
-input[type="reset"].button-primary:hover,
-input[type="button"].button-primary:hover,
-button.button-primary:focus,
-input[type="submit"].button-primary:focus,
-input[type="reset"].button-primary:focus,
-input[type="button"].button-primary:focus {
-  background: var(--tedredgradient45);
-  transition: all 0.5s ease-in-out;
-}
-
-button.full-width {
-	width: 100%;
-  height: 4rem;
-	line-height: 4rem;
-	padding: 0em 2rem;
-}
-
-button.medium {
-	height: 3rem;
-	line-height: 3rem;
-	padding: 0 1.1rem;
-}
-button.large {
-	height: 4rem;
-	line-height: 4rem;
-	padding: 0em 2rem;
-}
-button.stroke {
-  background: var(--tedwhite);
-  color: var(--tedblack);
-	border: 3px solid var(--tedblack);
-	line-height: 2.375rem;
-}
-button.stroke.medium {
-	line-height: 2rem;
-}
-button.stroke.large {
-	line-height: 2rem;
-}
-button.stroke:hover {
-	border: 3px solid var(--tedred);
-	color: var(--tedred);
-}
-button::-moz-focus-inner, input::-moz-focus-inner {
-	border: 0;
-	padding: 0;
-}
-
-button.blank {
-  background: none;
-  color: var(--tedred);
-  border: 1px solid var(--tedred);
-  border-radius: 3px;
-  box-sizing: border-box;
-  /* transition: all 0.5s ease-in-out; */
-}
-
-button.blank:hover {
-  color: var(--tedredhover);
-  border: 1px solid var(--tedredhover);
+.btn--tertiary:hover {
+  color: var(--redhover);
+  border: 1px solid var(--redhover);
   background: none;
 }
 
-button.blank:focus {
-  transition: all 0.5s ease-in-out;
-  background: var(--tedredgradient45);
+.btn--tertiary:focus {
+  background: var(--redgradient45);
 }
 
-/* ---------- 06. END BUTTON STYLING ---------- */
+/* black outline button */
+.btn--outline {
+  color: var(--black);
+  background-color: var(--white);
+	border: 3px solid var(--black);
+}
 
-/* ---------- 07. START LIST STYLING ---------- */
+.btn--cancel {
+  background-color: var(--lightgrey);
+  color: var(--black);
+}
 
-/* ---------- 07. END LIST STYLING ---------- */
+.btn--cancel:hover {
+  background-color: var(--grey-20);
+}
 
-/* ---------- 08. START TABLE STYLING ---------- */
+.q-btn {
+  position: relative;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--redhover);
+  background-color: var(--white);
+  border-radius: 66px;
+  padding: 16px 40px;
+  box-shadow: 0px 2px 24px rgba(203, 45, 62, 0.35);
+}
+
+.q-btn:hover {
+  background-color: var(--bggrey);
+}
+
+.q-btn--primary {
+  bottom: -36px;
+}
+
+
+/* TABLES
+------------------------------------*/
 table {
   border-collapse: collapse;
   width: 100%;
@@ -538,48 +409,148 @@ table {
 }
 
 th, td {
-text-align: left;
-padding: 8px;
+  text-align: left;
+  padding: 8px;
 }
 
 th {
-background-color: var(--tedgrey);
-color: white;
+  background-color: var(--grey-20);
+  color: var(--white);
 }
 
 td {
-background-color: var(--tedoffwhite);
+  background-color: var(--offwhite);
 }
 
 .table-container {
-overflow-x: auto;
-padding: 20px;
+  overflow-x: auto;
+  padding: 20px;
 }
-/* ---------- 08. END TABLE STYLING ---------- */
 
-/* ---------- 09. START RESPONSIVE STYLING ---------- */
 
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px) {
-    /* content */
-  } 
-  
-  /* Medium devices (landscape tablets, 768px and up) */
-  @media only screen and (min-width: 768px) {
-    /* content */
-  }
-  
-  /* Large devices (laptops/desktops, 992px and up) */
-  @media only screen and (min-width: 992px) {
-    /* content */
-  } 
-  
-  /* Extra large devices (large laptops and desktops, 1200px and up) */
-  @media only screen and (min-width: 1200px) {
-      /* content */
-  }
-/* ---------- 09. END RESPONSIVE STYLING ---------- */
+/* UTILITIES
+------------------------------------*/
 
-#arrow {
-  fill: var(--tedwhite);
+/* TYPOGRAPHY */
+.bold { font-weight: 600; }
+.italicize { font-style: italic; }
+.underline { text-decoration: underline; }
+.text-center { text-align: center; }
+
+.text-lightgrey { color: var(--lightgrey); }
+.text-red { color: var(--red); }
+
+.link-white {
+  color: var(--white);
+  text-decoration: underline;
 }
+
+.relative { position: relative; }
+
+.no-select {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+}
+
+/* MARGIN UTILITIES */
+.m0  { margin:        0 }
+.mt0 { margin-top:    0 }
+.mr0 { margin-right:  0 }
+.mb0 { margin-bottom: 0 }
+.ml0 { margin-left:   0 }
+.mx0 { margin-left:   0; margin-right:  0 }
+.my0 { margin-top:    0; margin-bottom: 0 }
+
+.m1  { margin:        var(--space-1) }
+.mt1 { margin-top:    var(--space-1) }
+.mr1 { margin-right:  var(--space-1) }
+.mb1 { margin-bottom: var(--space-1) }
+.ml1 { margin-left:   var(--space-1) }
+.mx1 { margin-left:   var(--space-1); margin-right:  var(--space-1) }
+.my1 { margin-top:    var(--space-1); margin-bottom: var(--space-1) }
+
+.m2  { margin:        var(--space-2) }
+.mt2 { margin-top:    var(--space-2) }
+.mr2 { margin-right:  var(--space-2) }
+.mb2 { margin-bottom: var(--space-2) }
+.ml2 { margin-left:   var(--space-2) }
+.mx2 { margin-left:   var(--space-2); margin-right:  var(--space-2) }
+.my2 { margin-top:    var(--space-2); margin-bottom: var(--space-2) }
+
+.m3  { margin:        var(--space-3) }
+.mt3 { margin-top:    var(--space-3) }
+.mr3 { margin-right:  var(--space-3) }
+.mb3 { margin-bottom: var(--space-3) }
+.ml3 { margin-left:   var(--space-3) }
+.mx3 { margin-left:   var(--space-3); margin-right:  var(--space-3) }
+.my3 { margin-top:    var(--space-3); margin-bottom: var(--space-3) }
+
+.m4  { margin:        var(--space-4) }
+.mt4 { margin-top:    var(--space-4) }
+.mr4 { margin-right:  var(--space-4) }
+.mb4 { margin-bottom: var(--space-4) }
+.ml4 { margin-left:   var(--space-4) }
+.mx4 { margin-left:   var(--space-4); margin-right:  var(--space-4) }
+.my4 { margin-top:    var(--space-4); margin-bottom: var(--space-4) }
+
+.mxn1 { margin-left: -var(--space-1); margin-right: -var(--space-1); }
+.mxn2 { margin-left: -var(--space-2); margin-right: -var(--space-2); }
+.mxn3 { margin-left: -var(--space-3); margin-right: -var(--space-3); }
+.mxn4 { margin-left: -var(--space-4); margin-right: -var(--space-4); }
+
+.ml-auto { margin-left: auto }
+.mr-auto { margin-right: auto }
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* PADDING UTILITIES */
+.p0  { padding: 0 }
+.pt0 { padding-top: 0 }
+.pr0 { padding-right: 0 }
+.pb0 { padding-bottom: 0 }
+.pl0 { padding-left: 0 }
+.px0 { padding-left: 0; padding-right:  0 }
+.py0 { padding-top: 0;  padding-bottom: 0 }
+
+.p1  { padding:        var(--space-1) }
+.pt1 { padding-top:    var(--space-1) }
+.pr1 { padding-right:  var(--space-1) }
+.pb1 { padding-bottom: var(--space-1) }
+.pl1 { padding-left:   var(--space-1) }
+.py1 { padding-top:    var(--space-1); padding-bottom: var(--space-1) }
+.px1 { padding-left:   var(--space-1); padding-right:  var(--space-1) }
+
+.p2  { padding:        var(--space-2) }
+.pt2 { padding-top:    var(--space-2) }
+.pr2 { padding-right:  var(--space-2) }
+.pb2 { padding-bottom: var(--space-2) }
+.pl2 { padding-left:   var(--space-2) }
+.py2 { padding-top:    var(--space-2); padding-bottom: var(--space-2) }
+.px2 { padding-left:   var(--space-2); padding-right:  var(--space-2) }
+
+.p3  { padding:        var(--space-3) }
+.pt3 { padding-top:    var(--space-3) }
+.pr3 { padding-right:  var(--space-3) }
+.pb3 { padding-bottom: var(--space-3) }
+.pl3 { padding-left:   var(--space-3) }
+.py3 { padding-top:    var(--space-3); padding-bottom: var(--space-3) }
+.px3 { padding-left:   var(--space-3); padding-right:  var(--space-3) }
+
+.p4  { padding:        var(--space-4) }
+.pt4 { padding-top:    var(--space-4) }
+.pr4 { padding-right:  var(--space-4) }
+.pb4 { padding-bottom: var(--space-4) }
+.pl4 { padding-left:   var(--space-4) }
+.py4 { padding-top:    var(--space-4); padding-bottom: var(--space-4) }
+.px4 { padding-left:   var(--space-4); padding-right:  var(--space-4) }
+
+/* SPACING */
+.sp-8  { margin-top: 8x; }
+.sp-16 { margin-top: 16px; }
+.sp-32 { margin-top: 32px; }
+.sp-64 { margin-top: 64px; }
+.sp-96 { margin-top: 96px; }

@@ -16,17 +16,15 @@ export class QuestionComponent extends Component {
         return (
             <div className="speaker">
                 <Dropdown question={question} open={this.state.open} answered={this.props.answered} check={this.props.answerInDB}>
-                    <form className="questions-form">
-                        <label style={{marginTop: '0'}}>Question:</label>
+                    <form>
+                        <label className="mt0">Question:</label>
                         <p>"{question}"</p>
                         <p>FROM: {name}</p>
-                        <textarea className="popup-input" type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
+                        <textarea className="popup__input" type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
                         {this.props.answered === true ? 
-                            <div>
-                                <button type="button" className="button-sent full-width">Answered</button>
-                            </div>     
+                            <button type="button" className="btn btn-full btn--secondary">Answered</button>  
                         :
-                            <button type="button" style={{marginTop: '2rem', marginBottom: '10px'}} className="button-primary full-width" onClick={(e) => this.closeAndSend(e)}>{this.props.answerInDB ? "Re-Submit" : "Answer"}</button> 
+                            <button type="button" className="btn btn-full btn--primary" onClick={(e) => this.closeAndSend(e)}>{this.props.answerInDB ? "Re-Submit" : "Answer"}</button> 
                         }           
                     </form>
                 </Dropdown>

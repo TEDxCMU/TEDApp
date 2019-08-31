@@ -1,76 +1,52 @@
-.event-details {
+.speaker {
   display: flex;
   justify-content: center;
   margin: auto;
+  margin-top: 30px;
   text-align: left;
 }
 
-.info-container {
-/* margin-top: 250px; */
-padding: 20px;
+.speaker__info {
+  padding: 20px;
 }
 
 .talk {
-color: var(--tedlightgrey);
+  color: var(--lightgrey);
 }
 
-.talk-title {
-margin-top: 20px;
-color: var(--tedred);
+.speaker__talk-title {
+  margin-top: 20px;
+  color: var(--red);
 }
 
-.bio {
-margin-top: 50px;
-color: var(--tedblack);
+.speaker__bio {
+  margin-top: 50px;
+  color: var(--black);
 }
 
-
-/* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
-@media only screen and (max-width: 600px) {
-  .event-details {
-    margin-top: 30px;
-  }
-} 
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  .event-details {
-     margin-top: 30px;
-  }
-} 
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  .event-details {
-      margin-top: 30px;
-  }
-}
-
-@media (max-width: 420px) {
-
-  .mm-popup__box__footer__left-space {
-      float: none;
-  }
-
-  .mm-popup__box__footer__right-space {
-      float: none;
-  }
-
-  .mm-popup__box__footer {
-      padding-top: 30px;
-  }
-
-  .mm-popup__box__footer .mm-popup__btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      margin-top: 10px;
-      margin-left: 0px;
-  }
-}
-
-.videos {
+.speaker__related {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+/* The responsive YT video CSS is listed on mult online sources */
+.video-container {
+  max-width: 100%;
+}
+
+.video {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+  margin-bottom: 20px;
+}
+
+.video iframe {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
 }

@@ -1,15 +1,10 @@
-<svg id="header-svg" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1241 824" preserveAspectRatio="none">
+<svg id="header-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1241 824" preserveAspectRatio="none">
     <defs>
-        <style>.cls-1{fill:url(#linear-gradient);}</style>
         <linearGradient id="linear-gradient" x1="620.5" y1="824" x2="620.5" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stop-color="#ef473a"/>
-            <stop offset="0.97" stop-color="#cb2d3e"/>
+            <stop offset="0" stop-color="#ef473a"/><stop offset=".97" stop-color="#cb2d3e"/>
         </linearGradient>
     </defs>
-        <title>Header Background</title>
-        <g id="layer2" data-name="Layer 2">
-            <g id="layer1" data-name="Layer 1">
-                <path class="cls-1" d="M0,0H1241V747.42S1003.35,824,620.5,824,0,747.42,0,747.42Z"/>
-            </g>
-        </g>
+    <g id="header-svg__path" data-name="header-svg__path">
+        <path d="M0 0h1241v747.42S1003.35 824 620.5 824 0 747.42 0 747.42z" fill="url(#linear-gradient)" id="layer1" data-name="Layer 1"/>
+    </g>
 </svg>

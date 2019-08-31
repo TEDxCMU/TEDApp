@@ -1,54 +1,10 @@
-#left {
-    width: 45%;
-    text-align: center;
-    box-sizing: border-box;
-    border-radius: 25px 0px 0px 25px;
-}
-
-#right {
-    width: 45%;
-    text-align: center;
-    box-sizing: border-box;
-    border-radius: 0px 25px 25px 0px;
-}
-
-#left:hover {
-    background: var(--tedred);
-    color: white;
-}
-
-#right:hover {
-    background: var(--tedred);
-    color: white;
-}
-
-.mapPage {
+.ripple-map-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center; 
 }
 
-.selected {
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border: 4px solid var(--tedred);
-    background: var(--tedred);
-    color: white;
-}
-
-.unselected {
-    border: 2px solid var(--tedred);
-    background: white;
-    color: var(--tedred);
-}
-
-.pageSelect {
-    display: flex;
-    justify-content: center;
-}
-
-.submitLocation {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.ripple-title {
+    width: 90%;
 }

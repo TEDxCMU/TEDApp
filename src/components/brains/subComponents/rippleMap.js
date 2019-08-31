@@ -13,11 +13,6 @@ import '../../../App.css';
 import './rippleMap.css';
 import fire from '../../../fire.js';
 
-const wrapperStyles = {
-  width: "100%",
-  margin: "0 auto",
-}
-
 export class RippleMap extends Component {
   constructor() {
     super()
@@ -60,7 +55,7 @@ export class RippleMap extends Component {
       return (<div></div>)
     } 
     return (
-      <div style={wrapperStyles}>
+      <div className="map-container">
         <h5>{this.state.cityClicked === undefined ? "Click on the dots!" : ("Rippler: " + this.state.cityClicked)}</h5>
         <div onTouchStart={e => this.touchWarning(e)}>
           <Motion
@@ -82,10 +77,7 @@ export class RippleMap extends Component {
               }}
                 width={980}
                 height={551}
-                style={{
-                  width: "100%",
-                  height: "auto",
-                }}
+                className="composable-map"
                 >
                 <ZoomableGroup center={[x,y]} zoom={zoom}>
                   <Geographies geography={map}>
@@ -125,8 +117,8 @@ export class RippleMap extends Component {
                         marker={city}
                         onClick={this.handleCityClick}
                         >
-                          <circle cx = {0} cy = {0} r = {8}></circle>
-                          <circle className = "pulse" cx = {0} cy = {0} r = {11}></circle>
+                          <circle className="ripple" cx = {0} cy = {0} r = {8}></circle>
+                          <circle className = "ripple pulse" cx = {0} cy = {0} r = {11}></circle>
                       </Marker>
                     ))}
                   </Markers>
@@ -135,15 +127,17 @@ export class RippleMap extends Component {
             )}
           </Motion>
         </div>
-        <button onClick={this.handleZoomIn}>
-          { "Zoom in" }
-        </button>
-        <button onClick={this.handleZoomOut}>
-          { "Zoom out" }
-        </button>
-        <button onClick={this.handleReset}>
-          { "Reset" }
-        </button>
+        <div className="map__btn-group">
+          <button className="btn btn--primary" onClick={this.handleZoomIn}>
+            { "Zoom in" }
+          </button>
+          <button className="btn btn--primary" onClick={this.handleZoomOut}>
+            { "Zoom out" }
+          </button>
+          <button className="btn btn--primary" onClick={this.handleReset}>
+            { "Reset" }
+          </button>
+        </div>
       </div>
     )
   }

@@ -14,6 +14,7 @@ import fire from './fire.js';
 import Faq from './components/faq/faq';
 import { isAndroid, isIOS } from "react-device-detect";
 import Fingerprint from "fingerprintjs2";
+
 import error404 from './404.png';
 
 import Popup from 'react-popup';
@@ -64,16 +65,15 @@ class App extends Component {
             {this.state.user !== null && this.state.isAdmin !== true ?
               <Route path="/questions" exact strict render={this.questionsPage}/>
             :
-              <div></div>
+              null
             }
-            {/* <Route path="/questions" exact strict render={this.questionsPage}/> */}
             <Route component={this.noMatch} />
             </Switch>
-              <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
+              <div>
                 {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null && localStorage.getItem("fingerprint") !== null ?
                 <PopUp iOS={true} loaded={this.state.loaded}/>
                 :
-                <div align="center"></div>
+                null
                 }
               </div>
             </div>
@@ -105,7 +105,7 @@ class App extends Component {
         title="404: Not Found"
         description=  {error}  
         db={this.state.db} />
-      <img src={error404} alt="404 Error: Page Not Found" style={{ width: '40vh', height: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto'}}></img>
+      <img src={error404} alt="404 Error: Page Not Found" className="page-error"></img>
     </div>
     
     )
@@ -129,16 +129,13 @@ class App extends Component {
   schedulePage = (props) => {
     return (
       <div> 
-          {/* now the main app div will be 100% of the total screen real estate, which means the popup appears at the bottom */}
-          <div style= {{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <Schedule
-              user={this.state.user}
-              isLoaded={this.isLoaded}
-              scroll={window.scrollY}
-              db={this.state.db} 
-              isAdmin={this.state.isAdmin}
-              eventDate={this.state.eventDate}/> 
-          </div>
+        <Schedule
+          user={this.state.user}
+          isLoaded={this.isLoaded}
+          scroll={window.scrollY}
+          db={this.state.db} 
+          isAdmin={this.state.isAdmin}
+          eventDate={this.state.eventDate}/> 
       </div>
 
     );
