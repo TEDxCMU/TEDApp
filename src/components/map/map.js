@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './map.css';
+import './map.scss';
 import map from'./cuc.png';
 
 export class Map extends Component {

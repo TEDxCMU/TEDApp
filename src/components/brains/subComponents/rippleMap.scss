@@ -1,12 +1,12 @@
 .ripple {
-  stroke: var(--red); 
-  fill: var(--red);
+  stroke: $red; 
+  fill: $red;
   stroke-width: 2px;
   stroke-opacity: 1;
 }
 
 .pulse {
-  fill: var(--white);
+  fill: $white;
   fill-opacity: 0;
   animation-duration: 2s;
   animation-name: pulse;

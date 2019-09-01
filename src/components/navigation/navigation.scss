@@ -1,9 +1,9 @@
 .nav {
-    background: var(--redgradient);
+    background: $redgradient;
 }
 
 .nav__link {
-  color: var(--white);
+  color: $white;
   float: left;
   text-align: center;
   padding: 20px 0;
@@ -12,7 +12,7 @@
 }
 
 .nav__link:hover {
-  color: var(--lightblue);
+  color: $rippleblue;
 }
 
 /* Position and sizing of burger button */
@@ -26,7 +26,7 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: var(--red);
+  background: $red;
 }
 
 /* Position and sizing of clickable cross button */
@@ -46,7 +46,7 @@
 
 /* Color/shape of close button cross */
 .bm-cross {
-  background: var(--white);
+  background: $white;
   right: 20px;
   top: 25px;
   height: 30px !important;
@@ -62,7 +62,7 @@
 
 /* General sidebar styles */
 .bm-menu {
-  background: var(--redgradient);
+  background: $redgradient;
   padding: 0;
   font-size: 1.4rem;
   width: 100%;
@@ -88,7 +88,7 @@
 .bm-item-list {
   display: flex;
   justify-content: center !important;
-  color: var(--white);
+  color: $white;
   padding: 0.8em;
   text-align: center !important;
   position: relative;

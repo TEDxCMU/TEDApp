@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../../App.css';
-import './schedule.css';
+import '../../App.scss';
+import './schedule.scss';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import fire from '../../fire.js';

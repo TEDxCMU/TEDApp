@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../../App.css';
-import './faq.css';
+import '../../App.scss';
+import './faq.scss';
 import Dropdown from '../dropdown/dropdown';
 import Parser from 'html-react-parser';
 

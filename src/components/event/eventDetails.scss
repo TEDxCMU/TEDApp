@@ -11,17 +11,17 @@
 }
 
 .talk {
-  color: var(--lightgrey);
+  color: $grey-70;
 }
 
 .speaker__talk-title {
   margin-top: 20px;
-  color: var(--red);
+  color: $red;
 }
 
 .speaker__bio {
   margin-top: 50px;
-  color: var(--black);
+  color: $black;
 }
 
 .speaker__related {

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../../App.css';
-import './addToHome.css';
+import '../../App.scss';
+import './addToHome.scss';
 import downloadIcon from './downloadIcon.png';
 
 export class PopUp extends Component {

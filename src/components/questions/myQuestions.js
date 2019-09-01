@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'rc-time-picker/assets/index.css';
-import '../../App.css';
-import '../questions/myQuestions.css';
+import '../../App.scss';
+import '../questions/myQuestions.scss';
 import fire from '../../fire.js';
 import QuestionComponent from './questionComponent.js'
 import moment from 'moment';

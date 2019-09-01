@@ -5,7 +5,7 @@
 .dropdown {
     border-radius: 3px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    background-color: var(--white);
+    background-color: $white;
     position: relative;
     margin: 20px 0;
 }
@@ -21,7 +21,7 @@
 .dropdown__label:hover,
 .dropdown__label:active,
 .dropdown__label:focus {
-    background-color: var(--offwhite);
+    background-color: $offwhite;
 }
 
 .dropdown__toggle {

@@ -5,15 +5,14 @@
     padding: 10px;
 	z-index: 9999;
     text-align: center;
-    background: var(--grey-20);
+    background: $grey-20;
     background-size: cover;
     width: 100%;
     box-shadow: 0px 0px 19px rgba(0, 0, 0, 0.4);
     border-radius: 7px 7px 0 0;
     margin: 0;
-
     line-height: 1rem;
-    color: var(--white);
+    color: $white;
 }
 
 .home-popup__content {
@@ -22,7 +21,7 @@
 }
 
 .home-popup__content > p {
-    color: var(--white);
+    color: $white;
 }
 
 .home-popup__close {
@@ -30,7 +29,7 @@
     font-size: 1.5rem;
     margin-top: 10px;
     margin-right: 10px;
-    color: var(--white);
+    color: $white;
     cursor: pointer;
 }
 
@@ -44,16 +43,9 @@
     margin: 0;
 }
 
-.home-popup__closed {
-    /* width: 100%; */
-    animation: close 0.5s;
-}
+.home-popup__closed { animation: close 0.5s; }
 
 @keyframes close {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }

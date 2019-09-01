@@ -9,8 +9,8 @@ import {
 } from "react-simple-maps";
 import { Motion, spring } from "react-motion";
 import map from '../static/world-110m.json';
-import '../../../App.css';
-import './rippleMap.css';
+import '../../../App.scss';
+import './rippleMap.scss';
 import fire from '../../../fire.js';
 
 export class RippleMap extends Component {

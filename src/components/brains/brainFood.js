@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../../App.css';
-import './brainFood.css';
+import '../../App.scss';
+import './brainFood.scss';
 import RippleMap from './subComponents/rippleMap.js';
 import fire from '../../fire.js';
 import Autocomplete from 'react-google-autocomplete';
@@ -186,13 +186,13 @@ export class BrainFood extends Component {
             width: '100%',
             borderRadius: '3px',
             padding: '1em',
-            color: 'var(--grey-20)',
+            color: '$grey-20',
             marginTop: '10px',
             height: '20px',
             fontSize: '1em',
             lineHeight: '1em',
             background: "transparent", 
-            border: '1px solid var(--lightgrey)'
+            border: '1px solid $grey-70'
         }
 
         return <Popup open={this.state.open} closeOnDocumentClick onClose={this.closeModal} contentStyle={style}>

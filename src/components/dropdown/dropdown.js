@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../../App.css';
-import './dropdown.css';
+import '../../App.scss';
+import './dropdown.scss';
 import check from '../../check.svg'
 
 export class Dropdown extends Component {
