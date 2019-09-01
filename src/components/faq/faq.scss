@@ -1,3 +1,5 @@
+@import '../../sass/variables';
+
 .faq {
     width: 90%;
     margin: 20px auto;
@@ -19,7 +21,5 @@
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .faq {
-      margin-top: 30px;
-  }
+  .faq { margin-top: 30px; }
 }
