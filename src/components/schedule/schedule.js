@@ -229,7 +229,7 @@ export class Schedule extends Component {
                   onChange={this.handleValueChange} />
                 <button className="btn btn--primary" onClick={e => this.openGlobalChangeModal(e)}>New Conference Start Time</button>
               </div> 
-              <div className="timeline-container mt0"> {/* admin timeline */}   
+              <div className="timeline-container timeline-container--admin"> {/* admin timeline */}   
                 {this.sideBar(newList)}
               </div>
             </div>
