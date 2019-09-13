@@ -24,49 +24,52 @@
   position: relative;
   margin: 20px;
   transition: all 1s linear;
+
+  // the schedule line
+  &::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+    border: 1px solid $grey-70;
+    position: absolute;
+    left: -2rem;
+  }
+
+  &__timepicker {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 320px auto auto;
+    width: 90%;
+  }
 }
 
-.timeline::before {
-  content: "";
-  display: block;
-  width: 0;
-  height: 100%;
-  border: 1px solid $grey-70;
-  position: absolute;
-  left: -2rem;
-}
-
-.timeline__event {
+.event {
   position: relative;
+
+  &__title {
+    margin: 0;
+  }
+
+  &__time {
+    font-size: 0.9rem;
+    color: $red;
+    margin-bottom: 0;
+  }
+
+  &__desc {
+    font-size: 0.9rem;
+    float: left;
+    top: 5px;
+    vertical-align: middle;  
+    position: relative;
+    padding-left: 5px;
+    margin-bottom: 5px;
+  }
+
 }
 
-.timeline__timepicker {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 320px auto auto;
-  width: 90%;
-}
-
-.event__title {
-  margin: 0;
-}
-
-.event__time {
-  font-size: 0.9rem;
-  color: $red;
-  margin-bottom: 0;
-}
-
-.event__desc {
-  font-size: 0.9rem;
-  float: left;
-  top: 5px;
-  vertical-align: middle;  
-  position: relative;
-  padding-left: 5px;
-  margin-bottom: 5px;
-}
 
 /* event cards */
 .event-card {
@@ -144,32 +147,32 @@
   border-radius: 50%;
   animation: now-pulse 2.5s infinite;
   z-index: 1;
-}
 
-.bullet__now::before {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  left: 0;
-  top: 0;
-  background-color: $red;
-  border-radius: 50%;
-  animation: now-pulse-1 2.5s infinite;
-  z-index: 1;
-}
+  &::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 0;
+    top: 0;
+    background-color: $red;
+    border-radius: 50%;
+    animation: now-pulse-1 2.5s infinite;
+    z-index: 1;
+  }
 
-.bullet__now::after {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  left: 0;
-  top: 0;
-  background-color: $red;
-  border-radius: 50%;
-  animation: now-pulse-2 2.5s infinite;
-  z-index: 1;
+  &::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 0;
+    top: 0;
+    background-color: $red;
+    border-radius: 50%;
+    animation: now-pulse-2 2.5s infinite;
+    z-index: 1;
+  }
 }
 
 .bullet__upcoming {

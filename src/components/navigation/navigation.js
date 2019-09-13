@@ -48,7 +48,7 @@ export class Navigation extends Component {
                                     </NavLink></li>
                                     <div>
                                         {this.props.user !== null && this.props.isAdmin !== true ?
-                                            <NavLink onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6eebfc'}}>
+                                            <NavLink className="nav__link" onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6eebfc'}}>
                                                 My Questions
                                             </NavLink>
                                         :

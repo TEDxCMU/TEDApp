@@ -15,24 +15,35 @@
     margin: 0;
     line-height: 1rem;
     color: $white;
+
+    // elements
+    &__content {
+        margin: 10px 10px 15px;
+        font-size: 0.8rem;
+
+        & > p {
+            color: $white;
+        }
+    }
+
+    // modifiers
+    &--active {
+        text-align: right;
+        font-size: 1.5rem;
+        margin-top: 10px;
+        margin-right: 10px;
+        color: $white;
+        cursor: pointer;
+    }
+
+    &--inactive {
+        animation: close 0.5s;
+    }
 }
 
-.home-popup__content {
-    margin: 10px 10px 15px;
-    font-size: 0.8rem;
-}
-
-.home-popup__content > p {
-    color: $white;
-}
-
-.home-popup__close {
-    text-align: right;
-    font-size: 1.5rem;
-    margin-top: 10px;
-    margin-right: 10px;
-    color: $white;
-    cursor: pointer;
+@keyframes close {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
 }
 
 .i-download {
@@ -43,11 +54,4 @@
     height: 1.2rem;
     width: 1.2rem;
     margin: 0;
-}
-
-.home-popup__closed { animation: close 0.5s; }
-
-@keyframes close {
-    0% { opacity: 1; }
-    100% { opacity: 0; }
 }

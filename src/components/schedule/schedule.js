@@ -121,17 +121,16 @@ export class Schedule extends Component {
 
         let infoTalkStyle = "event-card event-card--clickable";
         if (className === "bullet__now") {
-          infoTalkStyle = "event-card event-card--clickable nfo-talk-pulse"
+          infoTalkStyle = "event-card event-card--clickable"
         } else {
           infoTalkStyle = "event-card event-card--clickable"
         }
 
         if (event.type !== "static") {
           newList.push(
-            <Item className="timeline__event" key={event.id} id={className === "bullet__now" ? "eventNow" : null}>
+            <Item className="event" key={event.id} id={className === "bullet__now" ? "eventNow" : null}>
               {this.props.isAdmin ? 
               <div>
-                <span className="event"></span>
                 <span className={className}></span>
                 <span className="bullet__bg"></span>
                 <div className={infoTalkStyle}>
@@ -168,7 +167,6 @@ export class Schedule extends Component {
                   }
                 }}>
                 {/* THIS IS WHAT PEOPLE SEE FOR SPEAKERS:  */}
-                  <span className="event"></span>
                   <span className={className}></span>
                   <span className="bullet__bg"></span>
                     <div className="event-card event-card--clickable">
@@ -189,7 +187,7 @@ export class Schedule extends Component {
       else {
       // Change bullet color here, time, and the info in a timeline event
       newList.push(
-          <Item className="timeline__event" key={event.id} id={className === "bullet__now" ? "eventNow" : null}>
+          <Item className="event" key={event.id} id={className === "bullet__now" ? "eventNow" : null}>
               <span className={className}></span>
               <span className="bullet__bg"></span>
               <div className="event-card event-card--static">
