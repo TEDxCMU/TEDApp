@@ -20,6 +20,7 @@ import Popup from 'react-popup';
 import moment from 'moment';
 import Header from './components/header/header';
 import QANDA from './components/brains/subComponents/qAndA';
+import Draw from './components/draw/draw';
 
 class App extends Component {
   constructor() {
@@ -61,6 +62,7 @@ class App extends Component {
             <Route path="/ripple" exact strict render={this.RipplePage}/>
             <Route path="/qanda" exact strict render={this.QANDAPage}/>
             <Route path="/map" exact strict render={this.mapPage}/>
+            <Route path="/draw" exact strict render={this.drawPage}/>
             {this.state.user !== null && this.state.isAdmin !== true ?
               <Route path="/questions" exact strict render={this.questionsPage}/>
             :
@@ -221,6 +223,23 @@ class App extends Component {
           db={this.state.db}
           isAdmin={this.state.isAdmin} />
         <BrainFood
+        user={this.state.user}
+        isLoaded={this.isLoaded}
+        db={this.state.db}
+        isAdmin={this.state.isAdmin} />
+      </div>
+    );
+  }
+
+  drawPage = () => {
+    return (
+      <div>
+        <Header
+          title="Pixel Pen"
+          description="Get creative. Draw live and see it in real time."
+          db={this.state.db} 
+          isAdmin={this.state.isAdmin} />
+        <Draw
         user={this.state.user}
         isLoaded={this.isLoaded}
         db={this.state.db}
