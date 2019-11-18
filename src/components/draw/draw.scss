@@ -1,0 +1,27 @@
+// body {
+//     font: 14px "Century Gothic", Futura, sans-serif;
+//     margin: 20px;
+// }
+
+.drawArea {
+    display: flex;
+    width: 95%;
+    height: 80vh;
+    margin: 20px;
+    border: 1px solid black;
+    float: left;
+    cursor: crosshair;
+}
+
+.path {
+    fill: none;
+    stroke-width: 1px;
+    stroke: black;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+}
+
+.drawing {
+    width: 100%;
+    height: 100%;
+}
