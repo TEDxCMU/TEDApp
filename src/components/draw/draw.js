@@ -1,100 +1,19 @@
 import React, {useState, useEffect, useRef} from 'react';
 import '../../App.css';
-import './draw.scss';
-import {List, Map} from 'immutable'
+import styles from './draw.scss';
+import {List, Map} from 'immutable';
+import fire from '../../fire';
+import moment from 'moment';
+import ReactGA from 'react-ga';
 
-// const Draw = (props) => {
-//     const [renderedCards, setRenderedCards] = useState([])
-//     const [isDrawing, setIsDrawing] = useState(false)
-//     const [lines, setLines] = useState([])
-//     const drawRef = useRef("drawArea");
-
-//     useEffect(() => {
-//         // preliminary code thanks to: https://codepen.io/philipp-spiess/pen/WpQpGr
-//         document.addEventListener("mouseup", handleMouseUp);
-//     }, [])
-
-//     const handleMouseDown = (mouseEvent) => {
-//         if (mouseEvent.button != 0) {
-//           return;
-//         }
-    
-//         const point = relativeCoordinatesForEvent(mouseEvent);
-    
-//         let oldLines = lines;
-//         oldLines.push(point)
-//         setLines(oldLines)
-//         setIsDrawing(true)
-//     }
-
-//     const handleMouseMove = (mouseEvent) => {
-//         if (isDrawing) {
-//           return;
-//         }
-    
-//         const point = relativeCoordinatesForEvent(mouseEvent);
-        
-//         let oldLines = lines;
-//         oldLines[-1].push(point)
-//         setLines(oldLines)
-
-//         // this.setState(prevState =>  ({
-//         //   lines: prevState.lines.updateIn([prevState.lines.size - 1], line => line.push(point))
-//         // }));
-//       }
-
-//     const handleMouseUp = () => {
-//         setIsDrawing(false);
-//     }
-    
-//     const relativeCoordinatesForEvent = (mouseEvent) => {
-//         const boundingRect = this.refs.drawArea.getBoundingClientRect();
-//         return new Map({
-//           x: mouseEvent.clientX - boundingRect.left,
-//           y: mouseEvent.clientY - boundingRect.top,
-//         });
-//     }
-
-//     const Drawing = ({ lines }) => {
-//         return (
-//           <svg className="drawing">
-//             {lines.map((line, index) => (
-//               <DrawingLine key={index} line={line} />
-//             ))}
-//           </svg>
-//         );
-//     }
-      
-//     const DrawingLine = ({ line }) => {
-//         const pathData = "M " +
-//           line
-//             .map(p => {
-//               return `${p.get('x')} ${p.get('y')}`;
-//             })
-//             .join(" L ");
-      
-//         return <path className="path" d={pathData} />;
-//     }
-
-//     return(
-//         <div
-//             className="drawArea"
-//             ref={drawRef}
-//             onMouseDown={handleMouseDown}
-//             onMouseMove={handleMouseMove}
-//         >
-//             <Drawing lines={lines} />
-//         </div>
-//         // <div>Hello</div>
-//     )
-// }
-
+// preliminary code thanks to: https://codepen.io/philipp-spiess/pen/WpQpGr
 class Draw extends React.Component {
     constructor() {
       super();
   
       this.state = {
         lines: new List(),
+        undoList: new List(),
         isDrawing: false
       };
   
@@ -112,7 +31,7 @@ class Draw extends React.Component {
     }
   
     handleMouseDown(mouseEvent) {
-      if (mouseEvent.button != 0) {
+      if (mouseEvent.button !== 0) {
         return;
       }
   
@@ -132,8 +51,8 @@ class Draw extends React.Component {
       const point = this.relativeCoordinatesForEvent(mouseEvent);
       
       this.setState(prevState =>  ({
-        lines: prevState.lines.updateIn([prevState.lines.size - 1], line => line.push(point))
-      }), () => this.state.lines && console.log(this.state.lines.get(0).get(0)));
+        lines: prevState.lines.updateIn([prevState.lines.size-1], line => line.push(point))
+      }), () => this.state.lines && console.log(this.state.lines.get(0).get(0).get('x')));
     }
   
     handleMouseUp() {
@@ -147,18 +66,119 @@ class Draw extends React.Component {
         y: mouseEvent.clientY - boundingRect.top,
       });
     }
-  
+
+    undo = () => {
+        if (this.state.lines.size === 0) {
+            return
+        }
+        this.setState(prevState => ({
+            undoList: this.state.undoList.push(this.state.lines.last()),
+            lines: this.state.lines.slice(0, this.state.lines.size-2)
+          }), () => console.log(this.state.lines, this.state.undoList));
+    }
+
+    redo = () => {
+        if (this.state.undoList.size === 0) {
+            return
+        }
+        this.setState(prevState => ({
+            lines: this.state.lines.push(this.state.undoList.pop()),
+            undoList: this.state.undoList.slice(0, this.state.size-2)
+          }), () => console.log(this.state.lines, this.state.undoList));
+    }
+
+    clear = () => {
+        if (this.state.lines.size === 0) {
+            return
+        }
+        this.setState(prevState => ({
+            undoList: this.state.lines,
+            lines: new List()
+          }), () => console.log(this.state.lines, this.state.undoList));
+    }
+
+    submit = () => {
+        if (this.state.lines.size === 0) {
+            return
+        }
+        const lines = this.state.lines;
+        var name = this.state.name;
+        if (name === "")  {
+            name = "anonymous"
+        }
+        let now = moment().format('MMMM Do YYYY, h:mm:ss a');
+        let db = fire.firestore();
+        let that = this;
+        if (localStorage.getItem('fingerprint') === null) {
+            db.collection(this.props.db)
+            .doc('speakers')
+            .collection('speakers')
+            .doc(this.state.speakers[this.state.selectedSpeaker].email)
+            .collection("questions").add({
+                question: this.state.question,
+                name: name,
+                answer: "",
+                timeAsked: now
+            })
+            .then(function() {
+                that.setState({
+                    lines: new List(),
+                    undoList: new List(),
+                    isDrawing: false
+                }, () =>                 
+                ReactGA.event({
+                    category: 'User',
+                    action: 'Upload drawing without Fingerprint on Draw Page'
+                }, () => this.componentDidMount()))
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+        }
+        else {
+            db.collection(this.props.db)
+            .doc('speakers')
+            .collection('speakers')
+            .doc(this.state.speakers[this.state.selectedSpeaker].email)
+            .collection("questions")
+            .doc(localStorage.getItem('fingerprint')).set({
+                question: this.state.question,
+                name: name,
+                answer: "",
+                timeAsked: now
+            })
+            .then(function() {
+                that.setState({
+                    name: '',
+                }, () =>                 
+                ReactGA.event({
+                    category: 'User',
+                    action: 'Upload drawing without Fingerprint on Draw Page'
+                }, () => this.componentDidMount()))
+            })
+            .catch(function(error) {
+                console.error("Error writing document: ", error);
+            });
+        }
+    }
+
     render() {
-      return (
-        <div
-          className="drawArea"
-          ref="drawArea"
-          onMouseDown={this.handleMouseDown}
-          onMouseMove={this.handleMouseMove}
-        >
-          <Drawing lines={this.state.lines} />
-        </div>
-      );
+        return (
+            <div>
+                <div
+                    className="drawArea"
+                    ref="drawArea"
+                    onMouseDown={this.handleMouseDown}
+                    onMouseMove={this.handleMouseMove}
+                >
+                    <Drawing lines={this.state.lines} />
+                    <button className={styles.button} onClick={e => this.undo(e)}>Undo</button>
+                    <button className={styles.button} onClick={e => this.redo(e)}>Redo</button>
+                    <button className={styles.button} onClick={e => this.clear(e)}>Clear</button>
+                </div>
+                <button>Submit</button>
+            </div>
+        );
     }
   }
   
