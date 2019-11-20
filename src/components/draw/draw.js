@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react';
 import '../../App.css';
-import styles from './draw.scss';
+import styles from './draw.module.scss';
 import {List, Map} from 'immutable';
 import fire from '../../fire';
 import moment from 'moment';
 import ReactGA from 'react-ga';
+import { SketchPicker } from 'react-color'
 
 // preliminary code thanks to: https://codepen.io/philipp-spiess/pen/WpQpGr
 class Draw extends React.Component {
@@ -16,6 +17,11 @@ class Draw extends React.Component {
         undoList: new List(),
         isDrawing: false,
         targetBoard: null,
+        color: null,
+        top_left_color: null,
+        top_right_color: null,
+        bottom_right_color: null,
+        bottom_left_color: null,
         targetBoardMap: {
           '0': this.updateTopLeft,
           '1': this.updateTopRight,
@@ -185,7 +191,14 @@ class Draw extends React.Component {
       db.collection(this.props.db)
       .doc('draw')
       .onSnapshot(function(doc) {
+          let topDisplay = doc.data().top_left;
+          let bottomDisplay = doc.data().bottom_left;
+          Array.prototype.push.apply(bottomDisplay, doc.data().bottom_right)
+          Array.prototype.push.apply(topDisplay, doc.data().top_right)
+          Array.prototype.push.apply(topDisplay, bottomDisplay)
           that.setState({
+          left_board: [...doc.data().top_left],
+          total_board: topDisplay,
           bottom_left_time: moment(doc.data().bottom_left_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().bottom_left_time) : moment(),
           bottom_right_time: moment(doc.data().bottom_right_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().bottom_right_time) : moment(),
           top_left_time: moment(doc.data().top_left_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().top_left_time) : moment(),
@@ -197,7 +210,7 @@ class Draw extends React.Component {
     setLatestBoard = () => {
       let times = [this.state.top_left_time, this.state.top_right_time, this.state.bottom_right_time, this.state.bottom_left_time]
 
-      console.log(times)
+      console.log(this.state)
 
       let minDate = moment.min(times)
 
@@ -216,19 +229,23 @@ class Draw extends React.Component {
         return (
             <div>
                 <div
-                    className="drawArea"
+                    className={styles.drawArea}
                     ref="drawArea"
                     onMouseDown={this.handleMouseDown}
                     onTouchStart={this.handleMouseDown}
                     onMouseMove={this.handleMouseMove}
                     onTouchMove={this.handleMouseMove}
                 >
-                    <Drawing lines={this.state.lines} />
-                    <button className={styles.button} onClick={e => this.undo(e)}>Undo</button>
-                    <button className={styles.button} onClick={e => this.redo(e)}>Redo</button>
-                    <button className={styles.button} onClick={e => this.clear(e)}>Clear</button>
+                    <Drawing lines={this.state.lines}>
+                      <button className={styles.button} onClick={e => this.undo(e)}>Undo</button>
+                      <button className={styles.button} onClick={e => this.redo(e)}>Redo</button>
+                      <button className={styles.button} onClick={e => this.clear(e)}>Clear</button>
+                    </Drawing>
                 </div>
                 <button onClick={e => this.submit(e)}>Submit</button>
+                <div className={styles.drawArea} ref="drawSum">
+                  <TotalDrawing lines={this.state.total_board}/>
+                </div>
             </div>
         );
     }
@@ -236,12 +253,34 @@ class Draw extends React.Component {
   
   function Drawing({ lines }) {
     return (
-      <svg className="drawing">
+      <svg className={styles.drawing}>
         {lines.map((line, index) => (
           <DrawingLine key={index} line={line} />
         ))}
       </svg>
     );
+  }
+
+  function TotalDrawing({ lines }) {
+    if (!lines) {
+      return <div>Nothing to see here folks!</div>
+    }
+    let pathData = 'M '
+    for (let i in lines) {
+      if (i !== lines.length -1 && lines[i]['x'] && lines[i]['y']) {
+        pathData += `${lines[i]['x']} ${lines[i]['y']} L `
+      }
+      else if (i === lines.length - 1) {
+        pathData += `${lines[i]['x']} ${lines[i]['y']}`
+      }
+    }
+    console.log(pathData)
+    return (
+      <svg className={styles.drawing}>
+        <path className={styles.path} d={pathData}/>;
+      </svg>
+    )
+
   }
   
   function DrawingLine({ line }) {
@@ -252,7 +291,14 @@ class Draw extends React.Component {
         })
         .join(" L ");
   
-    return <path className="path" d={pathData} />;
+        console.log(pathData)
+    return <path className={styles.path} d={pathData} />;
+  }
+
+  function DrawingOldLines({ line }) {
+    const pathData = `M${line['x']} ${line['y']}L `
+
+    return <path className={styles.path} d={pathData} />;
   }
     
 export default Draw;
