@@ -155,15 +155,29 @@ class Draw extends React.Component {
         if (this.state.lines.size === 0 || this.state.targetBoard === null) {
             return
         }
-        let lines = this.state.lines;
-        lines = lines.toJS().flat()
+        let allLines = this.state.lines;
+        // convert to object with nested arrays so firebase can store it properly
+        allLines = allLines.toJS()
+
+        let lineContainers = []
+        for (let line in allLines) {
+          let container = {
+            lines: allLines[line]
+          }
+          lineContainers.push(container)
+          // container.color = allLines[line][0][2] //get color of first SVG path
+          // container.
+        }
+        // lines = lines.toJS().flat()
         let that = this;
-        console.log(lines)
+
         const target = this.state.targetBoard
 
         let db = fire.firestore();
 
-        target(db, lines, that)
+        console.log(lineContainers)
+
+        target(db, lineContainers, that)
     }
 
     cleanUp = () => {
@@ -187,21 +201,22 @@ class Draw extends React.Component {
       .doc('draw')
       .onSnapshot(function(doc) {
           //combine coordinate data from all 4 boards into 1
+          console.log(doc.data().top_left)
           let topDisplay = doc.data().top_left;
           let bottomDisplay = doc.data().bottom_left;
           Array.prototype.push.apply(topDisplay, doc.data().top_right)
           Array.prototype.push.apply(bottomDisplay, doc.data().bottom_right)
           Array.prototype.push.apply(topDisplay, bottomDisplay)
 
+          console.log(topDisplay)
           //update local state with DB counterparts
           that.setState({
-          left_board: [...doc.data().top_left],
-          total_board: topDisplay,
-          bottom_left_time: moment(doc.data().bottom_left_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().bottom_left_time) : moment(),
-          bottom_right_time: moment(doc.data().bottom_right_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().bottom_right_time) : moment(),
-          top_left_time: moment(doc.data().top_left_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().top_left_time) : moment(),
-          top_right_time: moment(doc.data().top_right_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().top_right_time) : moment()
-        }, () => that.setLatestBoard());
+            total_board: topDisplay,
+            bottom_left_time: moment(doc.data().bottom_left_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().bottom_left_time) : moment(),
+            bottom_right_time: moment(doc.data().bottom_right_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().bottom_right_time) : moment(),
+            top_left_time: moment(doc.data().top_left_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().top_left_time) : moment(),
+            top_right_time: moment(doc.data().top_right_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().top_right_time) : moment()
+          }, () => that.setLatestBoard());
       });
     }
 
@@ -209,6 +224,9 @@ class Draw extends React.Component {
       let times = [this.state.top_left_time, this.state.top_right_time, this.state.bottom_right_time, this.state.bottom_left_time]
       let minDate = moment.min(times)
       let minDateIndex = times.indexOf(minDate).toString()
+
+      console.log('the next board to update is: ', minDateIndex)
+      console.log('the total board is: ', this.state.total_board)
 
       this.setState({
         targetBoard: this.state.targetBoardMap[minDateIndex]
