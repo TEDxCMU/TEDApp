@@ -14,7 +14,14 @@ class Draw extends React.Component {
       this.state = {
         lines: new List(),
         undoList: new List(),
-        isDrawing: false
+        isDrawing: false,
+        targetBoard: null,
+        targetBoardMap: {
+          '0': this.updateTopLeft,
+          '1': this.updateTopRight,
+          '2': this.updateBottomRight,
+          '3': this.updateBottomLeft
+        } 
       };
   
       this.handleMouseDown = this.handleMouseDown.bind(this);
@@ -24,10 +31,12 @@ class Draw extends React.Component {
   
     componentDidMount() {
       document.addEventListener("mouseup", this.handleMouseUp);
+      document.addEventListener("touchend", this.handleMouseUp);
     }
   
     componentWillUnmount() {
       document.removeEventListener("mouseup", this.handleMouseUp);
+      document.removeEventListener("touchend", this.handleMouseUp);
     }
   
     handleMouseDown(mouseEvent) {
@@ -97,69 +106,110 @@ class Draw extends React.Component {
           }), () => console.log(this.state.lines, this.state.undoList));
     }
 
+    updateTopLeft = (db, lines, that) => {
+      db.collection(this.props.db)
+      .doc('draw').update({
+        'top_left': lines
+      }).then(
+        db.collection(this.props.db).doc('draw').update({
+          'top_left_time': moment().format('MMMM DD YYYY, h:mm:ss a')
+        }).then(that.cleanUp())
+      )
+    }
+
+    updateTopRight = (db, lines, that) => {
+      db.collection(this.props.db)
+      .doc('draw').update({
+        'top_right': lines
+      }).then(
+        db.collection(this.props.db).doc('draw').update({
+          'top_right_time': moment().format('MMMM DD YYYY, h:mm:ss a')
+        }).then(that.cleanUp())
+      )
+    }
+
+    updateBottomRight = (db, lines, that) => {
+      db.collection(this.props.db)
+      .doc('draw').update({
+        'bottom_right': lines
+      }).then(
+        db.collection(this.props.db).doc('draw').update({
+          'bottom_right_time': moment().format('MMMM DD YYYY, h:mm:ss a')
+        }).then(that.cleanUp())
+      )
+    }
+
+    updateBottomLeft = (db, lines, that) => {
+      db.collection(this.props.db)
+      .doc('draw').update({
+        'bottom_left': lines
+      }).then(
+        db.collection(this.props.db).doc('draw').update({
+          'bottom_left_time': moment().format('MMMM DD YYYY, h:mm:ss a')
+        }).then(that.cleanUp())
+      )
+    }
+
     submit = () => {
-        if (this.state.lines.size === 0) {
+        if (this.state.lines.size === 0 || this.state.targetBoard === null) {
             return
         }
-        const lines = this.state.lines;
-        var name = this.state.name;
-        if (name === "")  {
-            name = "anonymous"
-        }
-        let now = moment().format('MMMM Do YYYY, h:mm:ss a');
-        let db = fire.firestore();
+        let lines = this.state.lines;
+        lines = lines.toJS().flat()
         let that = this;
-        if (localStorage.getItem('fingerprint') === null) {
-            db.collection(this.props.db)
-            .doc('speakers')
-            .collection('speakers')
-            .doc(this.state.speakers[this.state.selectedSpeaker].email)
-            .collection("questions").add({
-                question: this.state.question,
-                name: name,
-                answer: "",
-                timeAsked: now
-            })
-            .then(function() {
-                that.setState({
-                    lines: new List(),
-                    undoList: new List(),
-                    isDrawing: false
-                }, () =>                 
-                ReactGA.event({
-                    category: 'User',
-                    action: 'Upload drawing without Fingerprint on Draw Page'
-                }, () => this.componentDidMount()))
-            })
-            .catch(function(error) {
-                console.error("Error writing document: ", error);
-            });
-        }
-        else {
-            db.collection(this.props.db)
-            .doc('speakers')
-            .collection('speakers')
-            .doc(this.state.speakers[this.state.selectedSpeaker].email)
-            .collection("questions")
-            .doc(localStorage.getItem('fingerprint')).set({
-                question: this.state.question,
-                name: name,
-                answer: "",
-                timeAsked: now
-            })
-            .then(function() {
-                that.setState({
-                    name: '',
-                }, () =>                 
-                ReactGA.event({
-                    category: 'User',
-                    action: 'Upload drawing without Fingerprint on Draw Page'
-                }, () => this.componentDidMount()))
-            })
-            .catch(function(error) {
-                console.error("Error writing document: ", error);
-            });
-        }
+        console.log(lines)
+        const target = this.state.targetBoard
+
+        let db = fire.firestore();
+
+        target(db, lines, that)
+    }
+
+    cleanUp = () => {
+      this.setState({
+          lines: new List(),
+          undoList: new List(),
+          isDrawing: false,
+          targetBoard: null,
+          submitted: true
+      }, () =>                 
+      ReactGA.event({
+          category: 'User',
+          action: 'Upload drawing without Fingerprint on Draw Page'
+      }, () => this.componentDidMount()))
+    }
+
+    loadBoardTimes = () => {
+      let db = fire.firestore();
+      let that = this;
+      db.collection(this.props.db)
+      .doc('draw')
+      .onSnapshot(function(doc) {
+          that.setState({
+          bottom_left_time: moment(doc.data().bottom_left_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().bottom_left_time) : moment(),
+          bottom_right_time: moment(doc.data().bottom_right_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().bottom_right_time) : moment(),
+          top_left_time: moment(doc.data().top_left_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().top_left_time) : moment(),
+          top_right_time: moment(doc.data().top_right_time).format('MMMM DD YYYY, h:mm:ss a')._isValid ? moment(doc.data().top_right_time) : moment()
+        }, () => that.setLatestBoard());
+      });
+    }
+
+    setLatestBoard = () => {
+      let times = [this.state.top_left_time, this.state.top_right_time, this.state.bottom_right_time, this.state.bottom_left_time]
+
+      console.log(times)
+
+      let minDate = moment.min(times)
+
+      let minDateIndex = times.indexOf(minDate).toString()
+
+      this.setState({
+        targetBoard: this.state.targetBoardMap[minDateIndex]
+      }, () => console.log(minDateIndex))
+    }
+
+    componentDidMount = () => {
+      this.loadBoardTimes();
     }
 
     render() {
@@ -169,14 +219,16 @@ class Draw extends React.Component {
                     className="drawArea"
                     ref="drawArea"
                     onMouseDown={this.handleMouseDown}
+                    onTouchStart={this.handleMouseDown}
                     onMouseMove={this.handleMouseMove}
+                    onTouchMove={this.handleMouseMove}
                 >
                     <Drawing lines={this.state.lines} />
                     <button className={styles.button} onClick={e => this.undo(e)}>Undo</button>
                     <button className={styles.button} onClick={e => this.redo(e)}>Redo</button>
                     <button className={styles.button} onClick={e => this.clear(e)}>Clear</button>
                 </div>
-                <button>Submit</button>
+                <button onClick={e => this.submit(e)}>Submit</button>
             </div>
         );
     }

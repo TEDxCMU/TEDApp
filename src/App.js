@@ -382,7 +382,7 @@ class App extends Component {
   // only run if this is the first time the unique device has accessed the web-app
   // adds the device type, ID, and time accessed to the 'audience' collection of the active event
   sendFingerprintToFirestore = (type, id) => {
-    let timeAccessed = moment().format('MMMM Do YYYY, h:mm:ss a');
+    let timeAccessed = moment().format('MMMM DD YYYY, h:mm:ss a');
     let db = fire.firestore()
     db.collection(this.state.db).doc('audience').collection('audience').doc(id.toString()).set({
       id, type, timeAccessed
