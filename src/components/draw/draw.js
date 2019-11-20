@@ -5,7 +5,7 @@ import {List, Map} from 'immutable';
 import fire from '../../fire';
 import moment from 'moment';
 import ReactGA from 'react-ga';
-import { SketchPicker } from 'react-color'
+import { HuePicker } from 'react-color'
 
 // preliminary code thanks to: https://codepen.io/philipp-spiess/pen/WpQpGr
 class Draw extends React.Component {
@@ -17,7 +17,7 @@ class Draw extends React.Component {
         undoList: new List(),
         isDrawing: false,
         targetBoard: null,
-        color: null,
+        draw_color: '#000000',
         top_left_color: null,
         top_right_color: null,
         bottom_right_color: null,
@@ -29,23 +29,15 @@ class Draw extends React.Component {
           '3': this.updateBottomLeft
         } 
       };
-  
-      this.handleMouseDown = this.handleMouseDown.bind(this);
-      this.handleMouseMove = this.handleMouseMove.bind(this);
-      this.handleMouseUp = this.handleMouseUp.bind(this);
-    }
-  
-    componentDidMount() {
-      document.addEventListener("mouseup", this.handleMouseUp);
-      document.addEventListener("touchend", this.handleMouseUp);
     }
   
     componentWillUnmount() {
       document.removeEventListener("mouseup", this.handleMouseUp);
-      document.removeEventListener("touchend", this.handleMouseUp);
+      // document.removeEventListener("touchend", this.handleMouseUp);
     }
   
-    handleMouseDown(mouseEvent) {
+    handleMouseDown = (mouseEvent) => {
+      console.log('mouse down')
       if (mouseEvent.button !== 0) {
         return;
       }
@@ -58,7 +50,9 @@ class Draw extends React.Component {
       }));
     }
   
-    handleMouseMove(mouseEvent) {
+    handleMouseMove = (mouseEvent) => {
+      console.log('mouse moved')
+
       if (!this.state.isDrawing) {
         return;
       }
@@ -70,7 +64,8 @@ class Draw extends React.Component {
       }), () => this.state.lines && console.log(this.state.lines.get(0).get(0).get('x')));
     }
   
-    handleMouseUp() {
+    handleMouseUp = () => {
+      console.log("mouse up")
       this.setState({ isDrawing: false });
     }
   
@@ -191,11 +186,14 @@ class Draw extends React.Component {
       db.collection(this.props.db)
       .doc('draw')
       .onSnapshot(function(doc) {
+          //combine coordinate data from all 4 boards into 1
           let topDisplay = doc.data().top_left;
           let bottomDisplay = doc.data().bottom_left;
-          Array.prototype.push.apply(bottomDisplay, doc.data().bottom_right)
           Array.prototype.push.apply(topDisplay, doc.data().top_right)
+          Array.prototype.push.apply(bottomDisplay, doc.data().bottom_right)
           Array.prototype.push.apply(topDisplay, bottomDisplay)
+
+          //update local state with DB counterparts
           that.setState({
           left_board: [...doc.data().top_left],
           total_board: topDisplay,
@@ -209,20 +207,21 @@ class Draw extends React.Component {
 
     setLatestBoard = () => {
       let times = [this.state.top_left_time, this.state.top_right_time, this.state.bottom_right_time, this.state.bottom_left_time]
-
-      console.log(this.state)
-
       let minDate = moment.min(times)
-
       let minDateIndex = times.indexOf(minDate).toString()
 
       this.setState({
         targetBoard: this.state.targetBoardMap[minDateIndex]
-      }, () => console.log(minDateIndex))
+      })
     }
+
+    handleColorPick = (color) => {
+      this.setState({ draw_color: color.hex });
+    };
 
     componentDidMount = () => {
       this.loadBoardTimes();
+      document.addEventListener("mouseup", this.handleMouseUp);
     }
 
     render() {
@@ -232,17 +231,18 @@ class Draw extends React.Component {
                     className={styles.drawArea}
                     ref="drawArea"
                     onMouseDown={this.handleMouseDown}
-                    onTouchStart={this.handleMouseDown}
+                    // onTouchStart={this.handleMouseDown}
                     onMouseMove={this.handleMouseMove}
-                    onTouchMove={this.handleMouseMove}
+                    // onTouchMove={this.handleMouseMove}
                 >
-                    <Drawing lines={this.state.lines}>
+                    <Drawing lines={this.state.lines} color={this.state.draw_color}>
                       <button className={styles.button} onClick={e => this.undo(e)}>Undo</button>
                       <button className={styles.button} onClick={e => this.redo(e)}>Redo</button>
                       <button className={styles.button} onClick={e => this.clear(e)}>Clear</button>
                     </Drawing>
                 </div>
                 <button onClick={e => this.submit(e)}>Submit</button>
+                <HuePicker color={this.state.draw_color} onChange={this.handleColorPick}/>
                 <div className={styles.drawArea} ref="drawSum">
                   <TotalDrawing lines={this.state.total_board}/>
                 </div>
@@ -251,11 +251,11 @@ class Draw extends React.Component {
     }
   }
   
-  function Drawing({ lines }) {
+  function Drawing({ lines, color } ) {
     return (
       <svg className={styles.drawing}>
         {lines.map((line, index) => (
-          <DrawingLine key={index} line={line} />
+          <DrawingLine key={index} line={line} color={color}/>
         ))}
       </svg>
     );
@@ -265,40 +265,32 @@ class Draw extends React.Component {
     if (!lines) {
       return <div>Nothing to see here folks!</div>
     }
-    let pathData = 'M '
+    let pathData = 'M ';
     for (let i in lines) {
       if (i !== lines.length -1 && lines[i]['x'] && lines[i]['y']) {
-        pathData += `${lines[i]['x']} ${lines[i]['y']} L `
+        pathData += `${lines[i]['x']} ${lines[i]['y']} L `;
       }
       else if (i === lines.length - 1) {
-        pathData += `${lines[i]['x']} ${lines[i]['y']}`
+        pathData += `${lines[i]['x']} ${lines[i]['y']}`;
+        break;
       }
     }
-    console.log(pathData)
     return (
       <svg className={styles.drawing}>
         <path className={styles.path} d={pathData}/>;
       </svg>
     )
-
   }
   
-  function DrawingLine({ line }) {
+  function DrawingLine({ line, color}) {
     const pathData = "M " +
       line
         .map(p => {
           return `${p.get('x')} ${p.get('y')}`;
         })
         .join(" L ");
-  
-        console.log(pathData)
-    return <path className={styles.path} d={pathData} />;
-  }
 
-  function DrawingOldLines({ line }) {
-    const pathData = `M${line['x']} ${line['y']}L `
-
-    return <path className={styles.path} d={pathData} />;
+    return <path className={styles.path} d={pathData} style={{'stroke': `${color}`}}/>;
   }
     
 export default Draw;
