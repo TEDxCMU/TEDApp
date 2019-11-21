@@ -283,6 +283,17 @@ class Draw extends React.Component {
     if (!lines) {
       return <div>Nothing to see here folks!</div>
     }
+
+    console.log(lines)
+    return (
+      <svg className={styles.drawing}>
+        {lines.map((line, index) => (
+          <StoredDrawingLine key={index} line={line}/>
+        ))}
+      </svg>
+    );
+
+
     let pathData = 'M ';
     for (let i in lines) {
       if (i !== lines.length -1 && lines[i]['x'] && lines[i]['y']) {
@@ -305,6 +316,21 @@ class Draw extends React.Component {
       line
         .map(p => {
           return `${p.get('x')} ${p.get('y')}`;
+        })
+        .join(" L ");
+
+    return <path className={styles.path} d={pathData} style={{'stroke': `${color}`}}/>;
+  }
+
+  function StoredDrawingLine({ line, color}) {
+    if (!line.lines) {
+      return <path/>
+    }
+    const pathData = "M " +
+      line.lines
+        .map(p => {
+          console.log(p)
+          return `${p['x']} ${p['y']}`;
         })
         .join(" L ");
 
