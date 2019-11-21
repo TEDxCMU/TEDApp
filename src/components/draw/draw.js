@@ -17,6 +17,8 @@ class Draw extends React.Component {
         undoList: new List(),
         isDrawing: false,
         targetBoard: null,
+        windowHeight: window.innerHeight,
+        windowWidth: window.innerWidth,
         strokeWidth: 5,
         draw_color: '#000000',
         top_left_color: null,
@@ -36,9 +38,7 @@ class Draw extends React.Component {
       if (mouseEvent.button !== 0) {
         return;
       }
-  
       const point = this.relativeCoordinatesForEvent(mouseEvent);
-  
       this.setState(prevState => ({
         lines: prevState.lines.push(new List([point])),
         isDrawing: true
@@ -49,9 +49,7 @@ class Draw extends React.Component {
       if (!this.state.isDrawing) {
         return;
       }
-  
       const point = this.relativeCoordinatesForEvent(mouseEvent);
-      
       this.setState(prevState =>  ({
         lines: prevState.lines.updateIn([prevState.lines.size-1], line => line.push(point))
       }), () => this.state.lines && console.log(this.state.lines.get(0).get(0).get('x')));
@@ -71,33 +69,33 @@ class Draw extends React.Component {
     }
 
     undo = () => {
-        if (this.state.lines.size === 0) {
-            return
-        }
-        this.setState(prevState => ({
-            undoList: this.state.undoList.push(this.state.lines.last()),
-            lines: this.state.lines.slice(0, this.state.lines.size-2)
-          }), () => console.log(this.state.lines, this.state.undoList));
+      if (this.state.lines.size === 0) {
+          return
+      }
+      this.setState(prevState => ({
+          undoList: this.state.undoList.push(this.state.lines.last()),
+          lines: this.state.lines.slice(0, this.state.lines.size-2)
+        }), () => console.log(this.state.lines, this.state.undoList));
     }
 
     redo = () => {
-        if (this.state.undoList.size === 0) {
-            return
-        }
-        this.setState(prevState => ({
-            lines: this.state.lines.push(this.state.undoList.pop()),
-            undoList: this.state.undoList.slice(0, this.state.size-2)
-          }), () => console.log(this.state.lines, this.state.undoList));
+      if (this.state.undoList.size === 0) {
+          return
+      }
+      this.setState(prevState => ({
+          lines: this.state.lines.push(this.state.undoList.pop()),
+          undoList: this.state.undoList.slice(0, this.state.size-2)
+        }), () => console.log(this.state.lines, this.state.undoList));
     }
 
     clear = () => {
-        if (this.state.lines.size === 0) {
-            return
-        }
-        this.setState(prevState => ({
-            undoList: this.state.lines,
-            lines: new List()
-          }), () => console.log(this.state.lines, this.state.undoList));
+      if (this.state.lines.size === 0) {
+          return
+      }
+      this.setState(prevState => ({
+          undoList: this.state.lines,
+          lines: new List()
+        }), () => console.log(this.state.lines, this.state.undoList));
     }
 
     updateTopLeft = (db, lines, that) => {
@@ -157,20 +155,18 @@ class Draw extends React.Component {
           let container = {
             lines: allLines[line],
             color: this.state.draw_color,
-            strokeWidth: this.state.strokeWidth
+            strokeWidth: this.state.strokeWidth,
+            windowWidth: this.state.windowWidth,
+            windowHeight: this.state.windowHeight
           }
           lineContainers.push(container)
-          // container.color = allLines[line][0][2] //get color of first SVG path
-          // container.
         }
-        // lines = lines.toJS().flat()
         let that = this;
 
         const target = this.state.targetBoard
 
         let db = fire.firestore();
 
-        console.log(lineContainers)
 
         target(db, lineContainers, that)
     }
@@ -236,10 +232,18 @@ class Draw extends React.Component {
       this.setState({ strokeWidth: event.target.value });
     };
 
+    reportWindowSize = () => {
+      this.setState({
+        windowHeight: window.innerHeight,
+        windowWidth: window.innerWidth
+      }, () => console.log(this.state))
+    }
+
     componentDidMount = () => {
       this.loadBoardTimes();
       document.addEventListener("mouseup", this.handleMouseUp);
       document.addEventListener("touchend", this.handleMouseUp);
+      window.addEventListener('resize', this.reportWindowSize);
     }
 
     componentWillUnmount() {
@@ -292,8 +296,6 @@ class Draw extends React.Component {
     if (!lines) {
       return <div>Nothing to see here folks!</div>
     }
-
-    console.log(lines)
     return (
       <svg className={styles.drawing}>
         {lines.map((line, index) => (
@@ -321,7 +323,6 @@ class Draw extends React.Component {
     const pathData = "M " +
       line.lines
         .map(p => {
-          console.log(p)
           return `${p['x']} ${p['y']}`;
         })
         .join(" L ");
