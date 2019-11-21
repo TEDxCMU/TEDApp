@@ -17,6 +17,7 @@ class Draw extends React.Component {
         undoList: new List(),
         isDrawing: false,
         targetBoard: null,
+        strokeWidth: 5,
         draw_color: '#000000',
         top_left_color: null,
         top_right_color: null,
@@ -31,13 +32,7 @@ class Draw extends React.Component {
       };
     }
   
-    componentWillUnmount() {
-      document.removeEventListener("mouseup", this.handleMouseUp);
-      // document.removeEventListener("touchend", this.handleMouseUp);
-    }
-  
     handleMouseDown = (mouseEvent) => {
-      console.log('mouse down')
       if (mouseEvent.button !== 0) {
         return;
       }
@@ -51,8 +46,6 @@ class Draw extends React.Component {
     }
   
     handleMouseMove = (mouseEvent) => {
-      console.log('mouse moved')
-
       if (!this.state.isDrawing) {
         return;
       }
@@ -162,7 +155,9 @@ class Draw extends React.Component {
         let lineContainers = []
         for (let line in allLines) {
           let container = {
-            lines: allLines[line]
+            lines: allLines[line],
+            color: this.state.draw_color,
+            strokeWidth: this.state.strokeWidth
           }
           lineContainers.push(container)
           // container.color = allLines[line][0][2] //get color of first SVG path
@@ -237,23 +232,33 @@ class Draw extends React.Component {
       this.setState({ draw_color: color.hex });
     };
 
+    handleStrokeChange = (event) => {
+      this.setState({ strokeWidth: event.target.value });
+    };
+
     componentDidMount = () => {
       this.loadBoardTimes();
       document.addEventListener("mouseup", this.handleMouseUp);
+      document.addEventListener("touchend", this.handleMouseUp);
+    }
+
+    componentWillUnmount() {
+      document.removeEventListener("mouseup", this.handleMouseUp);
+      document.removeEventListener("touchend", this.handleMouseUp);
     }
 
     render() {
         return (
-            <div>
+            <div className={styles.pageContainer}>
                 <div
                     className={styles.drawArea}
                     ref="drawArea"
                     onMouseDown={this.handleMouseDown}
-                    // onTouchStart={this.handleMouseDown}
+                    onTouchStart={this.handleMouseDown}
                     onMouseMove={this.handleMouseMove}
-                    // onTouchMove={this.handleMouseMove}
+                    onTouchMove={this.handleMouseMove}
                 >
-                    <Drawing lines={this.state.lines} color={this.state.draw_color}>
+                    <Drawing lines={this.state.lines} color={this.state.draw_color} strokeWidth={this.state.strokeWidth}>
                       <button className={styles.button} onClick={e => this.undo(e)}>Undo</button>
                       <button className={styles.button} onClick={e => this.redo(e)}>Redo</button>
                       <button className={styles.button} onClick={e => this.clear(e)}>Clear</button>
@@ -261,6 +266,10 @@ class Draw extends React.Component {
                 </div>
                 <button onClick={e => this.submit(e)}>Submit</button>
                 <HuePicker color={this.state.draw_color} onChange={this.handleColorPick}/>
+                <div class="slidecontainer">
+                  <label>Stroke Thickness</label>
+                  <input type="range" min="1" max="100" onChange={this.handleStrokeChange} value={this.state.strokeWidth} class="slider" id="myRange"/>
+                </div>
                 <div className={styles.drawArea} ref="drawSum">
                   <TotalDrawing lines={this.state.total_board}/>
                 </div>
@@ -269,11 +278,11 @@ class Draw extends React.Component {
     }
   }
   
-  function Drawing({ lines, color } ) {
+  function Drawing({ lines, color, strokeWidth } ) {
     return (
       <svg className={styles.drawing}>
         {lines.map((line, index) => (
-          <DrawingLine key={index} line={line} color={color}/>
+          <DrawingLine key={index} line={line} color={color} strokeWidth={strokeWidth}/>
         ))}
       </svg>
     );
@@ -288,30 +297,13 @@ class Draw extends React.Component {
     return (
       <svg className={styles.drawing}>
         {lines.map((line, index) => (
-          <StoredDrawingLine key={index} line={line}/>
+          <StoredDrawingLine key={index} line={line} color={line.color} strokeWidth={line.strokeWidth}/>
         ))}
       </svg>
     );
-
-
-    let pathData = 'M ';
-    for (let i in lines) {
-      if (i !== lines.length -1 && lines[i]['x'] && lines[i]['y']) {
-        pathData += `${lines[i]['x']} ${lines[i]['y']} L `;
-      }
-      else if (i === lines.length - 1) {
-        pathData += `${lines[i]['x']} ${lines[i]['y']}`;
-        break;
-      }
-    }
-    return (
-      <svg className={styles.drawing}>
-        <path className={styles.path} d={pathData}/>;
-      </svg>
-    )
   }
   
-  function DrawingLine({ line, color}) {
+  function DrawingLine({ line, color, strokeWidth}) {
     const pathData = "M " +
       line
         .map(p => {
@@ -319,10 +311,10 @@ class Draw extends React.Component {
         })
         .join(" L ");
 
-    return <path className={styles.path} d={pathData} style={{'stroke': `${color}`}}/>;
+    return <path className={styles.path} d={pathData} style={{'stroke': `${color}`, 'strokeWidth': `${strokeWidth}`}}/>;
   }
 
-  function StoredDrawingLine({ line, color}) {
+  function StoredDrawingLine({ line, color, strokeWidth}) {
     if (!line.lines) {
       return <path/>
     }
@@ -334,7 +326,7 @@ class Draw extends React.Component {
         })
         .join(" L ");
 
-    return <path className={styles.path} d={pathData} style={{'stroke': `${color}`}}/>;
+    return <path className={styles.path} d={pathData} style={{'stroke': `${color}`, 'strokeWidth': `${strokeWidth}`}}/>;
   }
     
 export default Draw;

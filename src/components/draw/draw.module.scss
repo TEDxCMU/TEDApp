@@ -1,26 +1,37 @@
-.button {
-    position: fixed;
-}
+.pageContainer {
 
-.drawArea {
     display: flex;
-    width: 95%;
-    height: 80vh;
-    margin: 20px;
-    border: 1px solid black;
-    float: left;
-    cursor: crosshair;
-}
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 100%;
+    margin: 26px 26px 26px 26px;
 
-.path {
-    fill: none;
-    stroke-width: 1px;
-    stroke: black;
-    stroke-linejoin: round;
-    stroke-linecap: round;
-}
+    .drawArea {
+        display: flex;
+        width: 100%;
+        height: 80vh;
+        border: 1px solid #939393f7;
+        border-radius: 10px;
+        float: left;
+        cursor: crosshair;
+        box-shadow: 0px 0px 5px 1px;
+    }
 
-.drawing {
-    width: 100%;
-    height: 100%;
+    .button {
+        position: fixed;
+    }
+    
+    .path {
+        fill: none;
+        stroke-width: 1px;
+        stroke: black;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+    }
+    
+    .drawing {
+        width: 100%;
+        height: 100%;
+    }
 }
