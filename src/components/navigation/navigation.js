@@ -65,6 +65,9 @@ export class Navigation extends Component {
                                     <li><NavLink onClick={() => this.closeMenu()} to="/map" exact activeStyle={{color:'#6EEBFC'}}>
                                         Map
                                     </NavLink></li>
+                                    <li><NavLink onClick={() => this.closeMenu()} to="/draw" exact activeStyle={{color:'#6EEBFC'}}>
+                                        Pixel Pen
+                                    </NavLink></li>
                                     <li><NavLink onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6EEBFC'}}>
                                         FAQs
                                     </NavLink></li>
