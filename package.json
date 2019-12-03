@@ -51,8 +51,8 @@
     "extends": "react-app"
   },
   "engines": {
-    "node": "10.16.3",
-    "npm": "6.9.0"
+    "node": "v12.13.1",
+    "npm": "6.12.1"
   },
   "browserslist": [
     ">0.2%",
