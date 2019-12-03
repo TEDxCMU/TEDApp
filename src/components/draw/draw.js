@@ -7,12 +7,13 @@ import moment from 'moment';
 import ReactGA from 'react-ga';
 import { HuePicker } from 'react-color';
 import cn from 'classnames';
+import Popup from "reactjs-popup";
+import bottle from '../../questionbottle.svg';
 
 // preliminary code thanks to: https://codepen.io/philipp-spiess/pen/WpQpGr
 class Draw extends React.Component {
     constructor() {
       super();
-  
       this.state = {
         lines: new List(),
         undoList: new List(),
@@ -31,7 +32,10 @@ class Draw extends React.Component {
           '1': this.updateTopRight,
           '2': this.updateBottomRight,
           '3': this.updateBottomLeft
-        } 
+        },
+        drawingSentToDb: false,
+        submitModalOpen: false,
+        name: ''
       };
     }
   
@@ -59,6 +63,10 @@ class Draw extends React.Component {
     handleMouseUp = () => {
       console.log("mouse up")
       this.setState({ isDrawing: false });
+    }
+
+    handleChange = (e) => {
+      this.setState({ [e.target.name] : e.target.value });        
     }
   
     relativeCoordinatesForEvent(mouseEvent) {
@@ -143,6 +151,12 @@ class Draw extends React.Component {
       )
     }
 
+    toggleSubmitModal = () => {
+      this.setState({
+        submitModalOpen: !this.state.submitModalOpen
+      }, console.log(this.state.submitModalOpen))
+    }
+
     submit = () => {
         if (this.state.lines.size === 0 || this.state.targetBoard === null) {
             return
@@ -168,7 +182,6 @@ class Draw extends React.Component {
 
         let db = fire.firestore();
 
-
         target(db, lineContainers, that)
     }
 
@@ -178,7 +191,9 @@ class Draw extends React.Component {
           undoList: new List(),
           isDrawing: false,
           targetBoard: null,
-          submitted: true
+          submitted: true,
+          submitModalOpen: false,
+          drawingSentToDb: true
       }, () =>                 
       ReactGA.event({
           category: 'User',
@@ -225,6 +240,35 @@ class Draw extends React.Component {
       })
     }
 
+    SubmitModal = (style) => {
+      return (
+        <Popup open={this.state.submitModalOpen} closeOnDocumentClick onClose={e => this.toggleSubmitModal(e)} contentStyle={style}>
+          <div className="modal">
+            <div>
+                <h2>And what is your name, old chap?</h2>
+                <input type="text" style={{ height: '20px' }} className="popup-input-small" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={"Please add your name."} onChange={e => { this.handleChange(e); } } />
+                <div className="popup-btns">
+                  <button className="popup-btn-cancel" onClick={e => this.toggleSubmitModal(e)}>Cancel</button>
+                  <button className="popup-btn-success button-primary" onClick={e => this.submit(e)}>Submit</button>
+                </div>
+            </div>
+          </div>
+        </Popup>
+      )
+    }
+  
+    sentConfirmationPopup = (style) => {
+      return <Popup open={this.state.confirmationOpen} closeOnDocumentClick onClose={this.closeConfirmation} contentStyle={style}>
+          <div className="modal">
+              <div className="popup-response">
+                  <img src={bottle} className="bottle" alt="Bottle" />
+                  <p className="confirmation-text">Thank you for drawing! Hope you had fun :)</p>
+                  <button className="popup-button-success button-primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
+              </div>
+          </div>
+      </Popup>;
+    }
+
     handleColorPick = (color) => {
       this.setState({ draw_color: color.hex });
     };
@@ -242,47 +286,62 @@ class Draw extends React.Component {
 
     componentDidMount = () => {
       this.loadBoardTimes();
-      document.addEventListener("mouseup", this.handleMouseUp);
-      document.addEventListener("touchend", this.handleMouseUp);
+      let drawArea = document.getElementById("drawArea")
+      drawArea.addEventListener("mouseup", this.handleMouseUp);
+      drawArea.addEventListener("touchend", this.handleMouseUp);
       window.addEventListener('resize', this.reportWindowSize);
     }
 
     componentWillUnmount() {
-      document.removeEventListener("mouseup", this.handleMouseUp);
-      document.removeEventListener("touchend", this.handleMouseUp);
+      let drawArea = document.getElementById("drawArea")
+      drawArea.removeEventListener("mouseup", this.handleMouseUp);
+      drawArea.removeEventListener("touchend", this.handleMouseUp);
+      window.removeEventListener('resize', this.reportWindowSize);
     }
 
     render() {
         return (
-            <div className={styles.pageContainer}>
-                <h1>Draw something and send it to the LED display!</h1>
-                <div
-                    className={styles.drawArea}
-                    ref="drawArea"
-                    onMouseDown={this.handleMouseDown}
-                    onTouchStart={this.handleMouseDown}
-                    onMouseMove={this.handleMouseMove}
-                    onTouchMove={this.handleMouseMove}
-                >
-                    <Drawing lines={this.state.lines} color={this.state.draw_color} strokeWidth={this.state.strokeWidth}>
+            <div>
+                {!this.state.drawingSentToDb ? 
+                  <div className={styles.pageContainer}>
+                    {this.state.submitModalOpen &&
+                      this.SubmitModal()
+                    }
+                    <h3>Draw something and send it to the LED display!</h3>
+                    <div
+                      className={styles.drawArea}
+                      id="drawArea"
+                      ref="drawArea"
+                      onMouseDown={this.handleMouseDown}
+                      onTouchStart={this.handleMouseDown}
+                      onMouseMove={this.handleMouseMove}
+                      onTouchMove={this.handleMouseMove}
+                    >
+                      <Drawing lines={this.state.lines} color={this.state.draw_color} strokeWidth={this.state.strokeWidth}/>
+                    </div>
+                    <div className={styles.buttonBox}>
                       <button className={styles.button} onClick={e => this.undo(e)}>Undo</button>
                       <button className={styles.button} onClick={e => this.redo(e)}>Redo</button>
                       <button className={styles.button} onClick={e => this.clear(e)}>Clear</button>
-                    </Drawing>
-                </div>
-                <button type="button" style={{marginTop: '2rem', marginBottom: '10px'}} className="button-primary" onClick={e => this.submit(e)}>Submit</button> 
-
-                <div className={styles.effectContainerBox}>
-                    <HuePicker color={this.state.draw_color} onChange={this.handleColorPick}/>
-                    <div className={styles.slidecontainer}>
-                    <label>Stroke Thickness</label>
-                    <input type="range" min="1" max="100" onChange={this.handleStrokeChange} value={this.state.strokeWidth} className={styles.slider} id="myRange"/>
+                      <button type="button" style={{marginTop: '2rem', marginBottom: '10px'}} className="button-primary" onClick={e => this.toggleSubmitModal(e)}>Submit</button> 
                     </div>
-                </div>
-
-                <div className={styles.drawArea} ref="drawSum">
-                  <TotalDrawing lines={this.state.total_board}/>
-                </div>
+                    
+                    <div className={styles.effectContainerBox}>
+                        <HuePicker color={this.state.draw_color} onChange={this.handleColorPick}/>
+                        <div className={styles.slidecontainer}>
+                        <label>Stroke Thickness</label>
+                        <input type="range" min="1" max="100" onChange={this.handleStrokeChange} value={this.state.strokeWidth} className={styles.slider} id="myRange"/>
+                        </div>
+                    </div>
+                  </div>
+                :
+                  <div className={styles.pageContainer}>
+                    <h1>Here's everyone's drawings, thrown together!</h1>
+                    <div className={styles.drawArea} ref="drawSum">
+                      <TotalDrawing lines={this.state.total_board}/>
+                    </div>
+                  </div>
+                }
             </div>
         );
     }
