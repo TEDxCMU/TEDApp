@@ -249,7 +249,7 @@ class Draw extends React.Component {
                 <input type="text" style={{ height: '20px' }} className="popup-input-small" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={"Please add your name."} onChange={e => { this.handleChange(e); } } />
                 <div className="popup-btns">
                   <button className="popup-btn-cancel" onClick={e => this.toggleSubmitModal(e)}>Cancel</button>
-                  <button className="popup-btn-success button-primary" onClick={e => this.submit(e)}>Submit</button>
+                  <button className={this.state.lines === new List() ? 'popup-btn-success button-disabled' : "popup-btn-success button-primary"} onClick={e => this.submit(e)}>Submit</button>
                 </div>
             </div>
           </div>
@@ -308,6 +308,12 @@ class Draw extends React.Component {
                       this.SubmitModal()
                     }
                     <h3>Draw something and send it to the LED display!</h3>
+                    <div className={styles.buttonBox}>
+                      <button className={styles.button} onClick={e => this.undo(e)}>Undo</button>
+                      <button className={styles.button} onClick={e => this.redo(e)}>Redo</button>
+                      <button className={styles.button} onClick={e => this.clear(e)}>Clear</button>
+                      <button type="button" style={{marginTop: '2rem', marginBottom: '10px'}} className="button-primary" onClick={e => this.toggleSubmitModal(e)}>Submit</button> 
+                    </div>
                     <div
                       className={styles.drawArea}
                       id="drawArea"
@@ -319,18 +325,14 @@ class Draw extends React.Component {
                     >
                       <Drawing lines={this.state.lines} color={this.state.draw_color} strokeWidth={this.state.strokeWidth}/>
                     </div>
-                    <div className={styles.buttonBox}>
-                      <button className={styles.button} onClick={e => this.undo(e)}>Undo</button>
-                      <button className={styles.button} onClick={e => this.redo(e)}>Redo</button>
-                      <button className={styles.button} onClick={e => this.clear(e)}>Clear</button>
-                      <button type="button" style={{marginTop: '2rem', marginBottom: '10px'}} className="button-primary" onClick={e => this.toggleSubmitModal(e)}>Submit</button> 
-                    </div>
-                    
                     <div className={styles.effectContainerBox}>
-                        <HuePicker color={this.state.draw_color} onChange={this.handleColorPick}/>
+                        <div>
+                          <label>Stroke Color</label>
+                          <HuePicker color={this.state.draw_color} onChange={this.handleColorPick}/>
+                        </div>
                         <div className={styles.slidecontainer}>
-                        <label>Stroke Thickness</label>
-                        <input type="range" min="1" max="100" onChange={this.handleStrokeChange} value={this.state.strokeWidth} className={styles.slider} id="myRange"/>
+                          <label>Stroke Thickness</label>
+                          <input type="range" min="1" max="100" onChange={this.handleStrokeChange} value={this.state.strokeWidth} className={styles.slider} id="myRange"/>
                         </div>
                     </div>
                   </div>
@@ -340,7 +342,13 @@ class Draw extends React.Component {
                     <div className={styles.drawArea} ref="drawSum">
                       <TotalDrawing lines={this.state.total_board}/>
                     </div>
+
+                    <iframe src={'https://www.youtube.com/embed/gWxY58PMVUM'} title={"LED Wall Live Feed"} style={{ position: 'relative', left: '0', top: '0', width: '100%', height: '100vh' }} frameBorder="0" scrolling="no" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}>
+                    </iframe>
+
                   </div>
+
+                  // https://youtu.be/gWxY58PMVUM
                 }
             </div>
         );
