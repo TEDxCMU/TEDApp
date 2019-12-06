@@ -17,12 +17,16 @@ class Draw extends React.Component {
       this.state = {
         lines: new List(),
         undoList: new List(),
+        colors: new List(),
+        undoColors: new List(),
+        widths: new List(),
+        undoWidths: new List(),
         isDrawing: false,
         targetBoard: null,
         windowHeight: window.innerHeight,
         windowWidth: window.innerWidth,
         strokeWidth: 5,
-        draw_color: '#000000',
+        drawColor: '#000000',
         top_left_color: null,
         top_right_color: null,
         bottom_right_color: null,
@@ -46,7 +50,9 @@ class Draw extends React.Component {
       const point = this.relativeCoordinatesForEvent(mouseEvent);
       this.setState(prevState => ({
         lines: prevState.lines.push(new List([point])),
-        isDrawing: true
+        isDrawing: true,
+        colors: this.state.colors.push(this.state.drawColor),
+        widths: this.state.widths.push(this.state.strokeWidth)
       }));
     }
   
@@ -62,7 +68,10 @@ class Draw extends React.Component {
   
     handleMouseUp = () => {
       console.log("mouse up")
-      this.setState({ isDrawing: false });
+      this.setState({ 
+        isDrawing: false
+      },
+       () => console.log(this.state.lines.toJS(), this.state.colors.toJS()));
     }
 
     handleChange = (e) => {
@@ -83,18 +92,33 @@ class Draw extends React.Component {
       }
       this.setState(prevState => ({
           undoList: this.state.undoList.push(this.state.lines.last()),
-          lines: this.state.lines.slice(0, this.state.lines.size-2)
-        }), () => console.log(this.state.lines, this.state.undoList));
+          lines: this.state.lines.delete(-1),
+          undoColors: this.state.undoColors.push(this.state.colors.last()),
+          colors: this.state.colors.delete(-1),
+          undoWidths: this.state.undoWidths.push(this.state.widths.last()),
+          widths: this.state.widths.delete(-1)
+
+        }), () => console.log(this.state.lines.toJS(), this.state.undoList.toJS()));
     }
 
     redo = () => {
       if (this.state.undoList.size === 0) {
-          return
-      }
+        console.log('nothing here folks')
+        return
+      }  
+
+      let undoList = this.state.undoList;
+      let undoColors = this.state.undoColors;
+      let undoWidths = this.state.undoWidths;
+      
       this.setState(prevState => ({
-          lines: this.state.lines.push(this.state.undoList.pop()),
-          undoList: this.state.undoList.slice(0, this.state.size-2)
-        }), () => console.log(this.state.lines, this.state.undoList));
+          lines: prevState.lines.push(this.state.undoList.last()),
+          undoList: undoList.delete(-1),
+          colors: prevState.colors.push(this.state.undoColors.last()),
+          undoColors: undoColors.delete(-1),
+          widths: prevState.widths.push(this.state.undoWidths.last()),
+          undoWidths: undoWidths.delete(-1)
+        }), () => console.log(this.state.lines.toJS(), this.state.undoList.toJS()));
     }
 
     clear = () => {
@@ -169,8 +193,8 @@ class Draw extends React.Component {
         for (let line in allLines) {
           let container = {
             lines: allLines[line],
-            color: this.state.draw_color,
-            strokeWidth: this.state.strokeWidth,
+            color: this.state.colors.get(line),
+            strokeWidth: this.state.widths.get(line),
             windowWidth: this.state.windowWidth,
             windowHeight: this.state.windowHeight
           }
@@ -187,13 +211,17 @@ class Draw extends React.Component {
 
     cleanUp = () => {
       this.setState({
-          lines: new List(),
-          undoList: new List(),
-          isDrawing: false,
-          targetBoard: null,
-          submitted: true,
-          submitModalOpen: false,
-          drawingSentToDb: true
+        lines: new List(),
+        undoList: new List(),
+        colors: new List(),
+        undoColors: new List(),
+        widths: new List(),
+        undoWidths: new List(),
+        isDrawing: false,
+        targetBoard: null,
+        submitted: true,
+        submitModalOpen: false,
+        drawingSentToDb: true
       }, () =>                 
       ReactGA.event({
           category: 'User',
@@ -247,30 +275,19 @@ class Draw extends React.Component {
             <div>
                 <h2>And what is your name, old chap?</h2>
                 <input type="text" style={{ height: '20px' }} className="popup-input-small" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={"Please add your name."} onChange={e => { this.handleChange(e); } } />
+                <small className="small-red">{this.state.lines === new List() && `Please draw something before submitting.`}</small>
                 <div className="popup-btns">
                   <button className="popup-btn-cancel" onClick={e => this.toggleSubmitModal(e)}>Cancel</button>
-                  <button className={this.state.lines === new List() ? 'popup-btn-success button-disabled' : "popup-btn-success button-primary"} onClick={e => this.submit(e)}>Submit</button>
+                  <button className={`popup-btn-success ${this.state.lines === new List() ? ' button-disabled' : ' button-primary'}`} onClick={e => this.submit(e)}>Submit</button>
                 </div>
             </div>
           </div>
         </Popup>
       )
     }
-  
-    sentConfirmationPopup = (style) => {
-      return <Popup open={this.state.confirmationOpen} closeOnDocumentClick onClose={this.closeConfirmation} contentStyle={style}>
-          <div className="modal">
-              <div className="popup-response">
-                  <img src={bottle} className="bottle" alt="Bottle" />
-                  <p className="confirmation-text">Thank you for drawing! Hope you had fun :)</p>
-                  <button className="popup-button-success button-primary" style={{ width: '100%', borderRadius: '24px' }} onClick={this.closeConfirmation}>Ok</button>
-              </div>
-          </div>
-      </Popup>;
-    }
 
     handleColorPick = (color) => {
-      this.setState({ draw_color: color.hex });
+      this.setState({ drawColor: color.hex });
     };
 
     handleStrokeChange = (event) => {
@@ -300,12 +317,22 @@ class Draw extends React.Component {
     }
 
     render() {
+      const style = {
+        display: 'flex',
+        justifyText: 'center',
+        flexDirection: 'column',
+        alignItems: 'space-between',
+        padding: '40px 40px',
+        width: '70%',
+        border: 'none',
+        borderRadius: '10px'
+      }
         return (
             <div>
                 {!this.state.drawingSentToDb ? 
                   <div className={styles.pageContainer}>
                     {this.state.submitModalOpen &&
-                      this.SubmitModal()
+                      this.SubmitModal(style)
                     }
                     <h3>Draw something and send it to the LED display!</h3>
                     <div className={styles.buttonBox}>
@@ -323,12 +350,12 @@ class Draw extends React.Component {
                       onMouseMove={this.handleMouseMove}
                       onTouchMove={this.handleMouseMove}
                     >
-                      <Drawing lines={this.state.lines} color={this.state.draw_color} strokeWidth={this.state.strokeWidth}/>
+                      <Drawing lines={this.state.lines} colors={this.state.colors} widths={this.state.widths}/>
                     </div>
                     <div className={styles.effectContainerBox}>
                         <div>
                           <label>Stroke Color</label>
-                          <HuePicker color={this.state.draw_color} onChange={this.handleColorPick}/>
+                          <HuePicker color={this.state.drawColor} onChange={this.handleColorPick}/>
                         </div>
                         <div className={styles.slidecontainer}>
                           <label>Stroke Thickness</label>
@@ -342,24 +369,20 @@ class Draw extends React.Component {
                     <div className={styles.drawArea} ref="drawSum">
                       <TotalDrawing lines={this.state.total_board}/>
                     </div>
-
                     <iframe src={'https://www.youtube.com/embed/gWxY58PMVUM'} title={"LED Wall Live Feed"} style={{ position: 'relative', left: '0', top: '0', width: '100%', height: '100vh' }} frameBorder="0" scrolling="no" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}>
                     </iframe>
-
                   </div>
-
-                  // https://youtu.be/gWxY58PMVUM
                 }
             </div>
         );
     }
   }
   
-  function Drawing({ lines, color, strokeWidth } ) {
+  function Drawing({ lines, colors, widths } ) {
     return (
       <svg className={styles.drawing}>
         {lines.map((line, index) => (
-          <DrawingLine key={index} line={line} color={color} strokeWidth={strokeWidth}/>
+          <DrawingLine key={index} line={line} color={colors.get(index)} strokeWidth={widths.get(index)}/>
         ))}
       </svg>
     );
