@@ -12,83 +12,85 @@ header {
 .header-container {
     top: 0;
     width: 100%;
+
+    &--sticky {
+        position: fixed;
+        top: 0;
+        height: 296px;
+        width: 100%;
+        transition: height 0.3s;
+    }
+
+    &--sticky-short {
+        height: 150px;
+    }
 }
 
-.header-container--sticky {
-    position: fixed;
-    top: 0;
-    height: 296px;
-    width: 100%;
-    transition: height 0.3s;
-}
+.header {
+    &__title {
+        color: $white;
+        line-height: 2em;
+    }
 
-.header-container--sticky-short {
-    height: 150px;
-}
+    &__title--speaker {
+        margin: 0;
+    }
 
-.header__title {
-    color: $white;
-    line-height: 2em;
-}
+    &__desc {
+        color: $white;
+        padding-top: 0;
+        margin-bottom: 0;
+        padding-bottom: 20px;
 
-.header__title--speaker {
-    margin: 0;
-}
+        &--speaker {
+            padding-bottom: 0;
+        }
 
-.header__desc {
-    color: $white;
-    padding-top: 0;
-    margin-bottom: 0;
-    padding-bottom: 20px;
-}
+        &--collapsed {
+            width: 70%;
+            padding: 20px 5% 20px 25px;
+        }
+    }
 
-.header__desc--speaker {
-    padding-bottom: 0;
-}
+    &__back {
+        left: 26px;
+        top: 36px;
+        position: absolute;
+        z-index: 1;
 
-.header__desc--collapsed {
-    width: 70%;
-    padding: 20px 5% 20px 25px;
-}
+        &--logo { max-width: 60px; }
+        &--arrow { height: 40px; }
+    }
 
-.header__back {
-    left: 26px;
-    top: 36px;
-    position: absolute;
-    z-index: 1;
-}
+    &__content {
+        padding: 100px 26px 16px 26px;
+    }
 
-.header__back--logo { max-width: 60px; }
-.header__back--arrow { height: 40px; }
+    &__profile {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        align-items: center;
+    }
 
-.header__content {
-    padding: 100px 26px 16px 26px;
-}
+    &__img {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 10px solid rgba(255,255,255,0.1);
 
-.header__profile {
-    display: flex;
-    justify-content: flex-end;
-    flex-direction: column;
-    align-items: center;
-}
-
-.header__img {
-    width: 100px;
-    height: 100px;
-    overflow: hidden;
-    border-radius: 50%;
-    border: 10px solid rgba(255,255,255,0.1);
-}
-
-.header__img--border::before {
-    content: '';
-    position: absolute;
-    top: -15px;
-    left: -15px;
-    width: 130px;
-    height: 130px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.06);
+        &--border::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+    }
 }
 
 /* QUESTIONS POPUP
@@ -98,51 +100,51 @@ header {
     flex-direction: column;
     border: none;
     border-radius: 10px;
-}
 
-.popup__btn-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
-}
+    &__btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
 
-/* btn group spacing */
-.popup__btn-group > * {
-    margin: 4px;
-}
+        /* btn group spacing */
+        & > * {
+            margin: 4px;
+        }
+    }
 
-.popup__input {
-    display: block;
-    width: 100%;
-    border-radius: 3px;
-    padding: 12px;
-    color: $grey-20;
-    margin-top: 10px;
-    padding: 12px;
-}
+    &__input {
+        display: block;
+        width: 100%;
+        border-radius: 3px;
+        padding: 12px;
+        color: $grey-20;
+        margin-top: 10px;
+        padding: 12px;
 
-.popup__input--invalid {
-    height: 120px;
-    color: $bggrey;
-    border: 2px solid $red !important;
-}
+        &--invalid {
+            height: 120px;
+            color: $bggrey;
+            border: 2px solid $red !important;
+        }
 
-.popup__input--sm {
-    height: 20px;
-    padding-left: 12px !important; 
-}
+        &--sm {
+            height: 20px;
+            padding-left: 12px !important; 
+        }
 
-.popup__input--sm-invalid {
-    height: 20px;
-    padding-left: 12px !important;
-    border: 2px solid $red !important;
-}
+        &--sm-invalid {
+            height: 20px;
+            padding-left: 12px !important;
+            border: 2px solid $red !important;
+        }
+    }
 
-.popup__response {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    &__response {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
 
 /* MISCESLLANEOUS */

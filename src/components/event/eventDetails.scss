@@ -6,30 +6,26 @@
   margin: auto;
   margin-top: 30px;
   text-align: left;
-}
 
-.speaker__info {
-  padding: 20px;
-}
+  &__info {
+    padding: 20px;
+  }
 
-.talk {
-  color: $grey-70;
-}
+  &__talk-title {
+    margin-top: 20px;
+    color: $red;
+  }
 
-.speaker__talk-title {
-  margin-top: 20px;
-  color: $red;
-}
+  &__bio {
+    margin-top: 50px;
+    color: $black;
+  }
 
-.speaker__bio {
-  margin-top: 50px;
-  color: $black;
-}
-
-.speaker__related {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  &__related {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
 
 /* The responsive YT video CSS is listed on mult online sources */
@@ -43,12 +39,12 @@
   position: relative;
   height: 0;
   margin-bottom: 20px;
-}
 
-.video iframe {
-  position: absolute;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
+  iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
 }

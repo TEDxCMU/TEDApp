@@ -2,19 +2,19 @@
 
 .nav {
     background: $redgradient;
-}
 
-.nav__link {
-  color: $white;
-  float: left;
-  text-align: center;
-  padding: 20px 0;
-  line-height: 25px;
-  transition: color 0.3s ease-out;
-}
+    &__link {
+      color: $white;
+      float: left;
+      text-align: center;
+      padding: 20px 0;
+      line-height: 25px;
+      transition: color 0.3s ease-out;
+    }
 
-.nav__link:hover {
-  color: $rippleblue;
+    &__link:hover {
+      color: $rippleblue;
+    }
 }
 
 /* Position and sizing of burger button */

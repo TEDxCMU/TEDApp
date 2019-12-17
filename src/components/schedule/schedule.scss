@@ -23,7 +23,6 @@
   margin-top: 0;
 }
 
-
 .timeline {
   list-style-type: none;
   position: relative;
@@ -80,52 +79,52 @@
 .event-card {
   border-radius: 3px;
   padding: 10px 20px;
-}
 
-.event-card--clickable {
-  margin: 2rem 0;
-  cursor: pointer;
-  background: $white;
-  border: 1px solid #F5F5F5;
-  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
+  &--clickable {
+    margin: 2rem 0;
+    cursor: pointer;
+    background: $white;
+    border: 1px solid #F5F5F5;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 
-.event-card--static {
-  margin: 1rem 0 2rem;
-  border-color: 1px solid $red;
-  border-radius: 3px;
-}
+  &--static {
+    margin: 1rem 0 2rem;
+    border-color: 1px solid $red;
+    border-radius: 3px;
+  }
 
-.event-card__content {
-  margin-right: 5px;
-}
+  &__content {
+    margin-right: 5px;
+  }
 
-.event-card__arrow {
-  color: $grey-70;
-  padding: 0 15px 0 10px;
-  margin: 0;
-  position: absolute;
-  right: 0;
-  vertical-align: middle;
-}
+  &__arrow {
+    color: $grey-70;
+    padding: 0 15px 0 10px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    vertical-align: middle;
+  }
 
-.event-card--clickable:hover {
-  background-color: rgba(0, 0, 0, 0.05);
-  transition: all 0.3s ease-in-out;
-}
+  &--clickable:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+  }
 
-.event-card__img {
-  vertical-align: middle;
-  position: relative;
-  top: 5px;
-  height: 1.2rem;
-  width: 1.2rem;
-  margin: 0;
-  float: left;
-  border-radius: 50%;
+  &__img {
+    vertical-align: middle;
+    position: relative;
+    top: 5px;
+    height: 1.2rem;
+    width: 1.2rem;
+    margin: 0;
+    float: left;
+    border-radius: 50%;
+  }
 }
 
 .bullet__bg {

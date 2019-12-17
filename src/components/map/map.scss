@@ -12,15 +12,15 @@
   margin-top: 20px;
   height: 450px;
   position: relative;
-}
 
-.map__indoor-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 20%;
+  &__indoor-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-bottom: 20%;
+  }
 }
   
   /* Medium devices (landscape tablets, 768px and up) */
