@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import '../../App.css';
+import '../../App.scss';
 import logo from '../../logo.svg';
 import back from '../../back.svg';
 import bottle from '../../questionbottle.svg';
 import { Link } from 'react-router-dom';
-import './header.css';
+import './header.scss';
 import { SocialIcon } from 'react-social-icons';
 import Popup from "reactjs-popup";
 import fire from '../../fire.js';

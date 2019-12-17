@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import { auth } from './fire';
 import { Schedule } from './components/schedule/schedule.js';
 import { EventDetails } from './components/event/eventDetails.js';

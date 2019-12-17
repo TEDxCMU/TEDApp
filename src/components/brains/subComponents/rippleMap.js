@@ -9,8 +9,8 @@ import {
 } from "react-simple-maps";
 import { Motion, spring } from "react-motion";
 import map from '../static/world-110m.json';
-import '../../../App.css';
-import './rippleMap.css';
+import '../../../App.scss';
+import './rippleMap.scss';
 import fire from '../../../fire.js';
 
 export class RippleMap extends Component {
@@ -55,7 +55,7 @@ export class RippleMap extends Component {
       return (<div></div>)
     } 
     return (
-      <div className="map-container">
+      <div className="map">
         <h5>{this.state.cityClicked === undefined ? "Click on the dots!" : ("Rippler: " + this.state.cityClicked)}</h5>
         <div onTouchStart={e => this.touchWarning(e)}>
           <Motion
@@ -77,7 +77,7 @@ export class RippleMap extends Component {
               }}
                 width={980}
                 height={551}
-                className="composable-map"
+                className="map__composable-map"
                 >
                 <ZoomableGroup center={[x,y]} zoom={zoom}>
                   <Geographies geography={map}>
@@ -117,8 +117,8 @@ export class RippleMap extends Component {
                         marker={city}
                         onClick={this.handleCityClick}
                         >
-                          <circle className="ripple" cx = {0} cy = {0} r = {8}></circle>
-                          <circle className = "ripple pulse" cx = {0} cy = {0} r = {11}></circle>
+                          <circle className="map__marker" cx = {0} cy = {0} r = {8}></circle>
+                          <circle className = "map__marker map__marker--ripple" cx = {0} cy = {0} r = {11}></circle>
                       </Marker>
                     ))}
                   </Markers>

@@ -1,0 +1,50 @@
+@import '../../sass/variables';
+
+.speaker {
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 30px;
+  text-align: left;
+
+  &__info {
+    padding: 20px;
+  }
+
+  &__talk-title {
+    margin-top: 20px;
+    color: $red;
+  }
+
+  &__bio {
+    margin-top: 50px;
+    color: $black;
+  }
+
+  &__related {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+
+/* The responsive YT video CSS is listed on mult online sources */
+.video-container {
+  max-width: 100%;
+}
+
+.video {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+  margin-bottom: 20px;
+
+  iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+}

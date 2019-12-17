@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../../../App.css';
-import './qAndA.css';
-import '../../questions/myQuestions.css';
+import '../../../App.scss';
+import './qAndA.scss';
+import '../../questions/myQuestions.scss';
 import fire from '../../../fire.js';
 import Dropdown from '../../dropdown/dropdown';
 import Popup from "reactjs-popup";

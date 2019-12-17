@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../../App.css';
+import '../../App.scss';
 import { auth } from '../../fire.js';
 import {NavLink} from 'react-router-dom';
-import './navigation.css';
+import './navigation.scss';
 import { slide as Menu } from 'react-burger-menu';
 
 export class Navigation extends Component {
@@ -48,7 +48,7 @@ export class Navigation extends Component {
                                     </NavLink></li>
                                     <div>
                                         {this.props.user !== null && this.props.isAdmin !== true ?
-                                            <NavLink onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6eebfc'}}>
+                                            <NavLink className="nav__link" onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6eebfc'}}>
                                                 My Questions
                                             </NavLink>
                                         :

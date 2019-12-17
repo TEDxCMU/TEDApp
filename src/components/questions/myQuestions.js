@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'rc-time-picker/assets/index.css';
-import '../../App.css';
-import '../questions/myQuestions.css';
+import '../../App.scss';
+import '../questions/myQuestions.scss';
 import fire from '../../fire.js';
 import QuestionComponent from './questionComponent.js'
 import moment from 'moment';
@@ -47,7 +47,9 @@ export class MyQuestions extends Component {
     return (
       <div>
           {fire.auth().currentUser !== null && <div className="text-center">Account: {fire.auth().currentUser.email}</div> }
+          <div className="">
           {newList}
+          </div>
       </div>
     );
   }

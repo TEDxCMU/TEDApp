@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'rc-time-picker/assets/index.css';
-import '../../App.css';
-import './myQuestions.css';
+import '../../App.scss';
+import './myQuestions.scss';
 import Dropdown from '../dropdown/dropdown';
 
 export class QuestionComponent extends Component {
@@ -14,7 +14,7 @@ export class QuestionComponent extends Component {
         let question = this.props.question;
         let name = this.props.name;
         return (
-            <div className="speaker">
+            <div className="speaker__questions">
                 <Dropdown question={question} open={this.state.open} answered={this.props.answered} check={this.props.answerInDB}>
                     <form>
                         <label className="mt0">Question:</label>

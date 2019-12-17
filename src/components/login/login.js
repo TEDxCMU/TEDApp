@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../../App.css';
-import './login.css';
+import '../../App.scss';
+import './login.scss';
 import fire from '../../fire.js';
 import { Redirect } from 'react-router-dom';
 

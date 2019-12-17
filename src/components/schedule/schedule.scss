@@ -1,0 +1,242 @@
+@import '../../sass/variables';
+
+.loader {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.schedule-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* timeline */
+.timeline-container {
+  margin-top: 270px;
+  padding: 10% 4% 10% calc(4% + 2rem + 4px);
+}
+
+.timeline-container--admin {
+  margin-top: 0;
+}
+
+.timeline {
+  list-style-type: none;
+  position: relative;
+  margin: 20px;
+  transition: all 1s linear;
+
+  // the schedule line
+  &::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+    border: 1px solid $grey-70;
+    position: absolute;
+    left: -2rem;
+  }
+
+  &__timepicker {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 320px auto auto;
+    width: 90%;
+  }
+}
+
+.event {
+  position: relative;
+
+  &__title {
+    margin: 0;
+  }
+
+  &__time {
+    font-size: 0.9rem;
+    color: $red;
+    margin-bottom: 0;
+  }
+
+  &__desc {
+    font-size: 0.9rem;
+    float: left;
+    top: 5px;
+    vertical-align: middle;  
+    position: relative;
+    padding-left: 5px;
+    margin-bottom: 5px;
+  }
+
+}
+
+
+/* event cards */
+.event-card {
+  border-radius: 3px;
+  padding: 10px 20px;
+
+  &--clickable {
+    margin: 2rem 0;
+    cursor: pointer;
+    background: $white;
+    border: 1px solid #F5F5F5;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &--static {
+    margin: 1rem 0 2rem;
+    border-color: 1px solid $red;
+    border-radius: 3px;
+  }
+
+  &__content {
+    margin-right: 5px;
+  }
+
+  &__arrow {
+    color: $grey-70;
+    padding: 0 15px 0 10px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    vertical-align: middle;
+  }
+
+  &--clickable:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__img {
+    vertical-align: middle;
+    position: relative;
+    top: 5px;
+    height: 1.2rem;
+    width: 1.2rem;
+    margin: 0;
+    float: left;
+    border-radius: 50%;
+  }
+}
+
+.bullet__bg {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  left: calc(-2rem - 12px);
+  top: calc(50% - 11px);
+  background-color: $bggrey;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+/* static timeline styles */
+.bullet__now {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: calc(-2rem - 4px);
+  top: calc(50% - 4px);
+  background-color: $red;
+  border-radius: 50%;
+  animation: now-pulse 2.5s infinite;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 0;
+    top: 0;
+    background-color: $red;
+    border-radius: 50%;
+    animation: now-pulse-1 2.5s infinite;
+    z-index: 1;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    left: 0;
+    top: 0;
+    background-color: $red;
+    border-radius: 50%;
+    animation: now-pulse-2 2.5s infinite;
+    z-index: 1;
+  }
+}
+
+.bullet__upcoming {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: calc(-2rem - 4px);
+  top: calc(50% - 4px);
+  background-color: $red;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+.bullet__past {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  left: calc(-2rem - 4px);
+  top: calc(50% - 4px);
+  background-color: $grey-60;
+  border-radius: 50%;
+  z-index: 1;
+}
+
+@keyframes now-pulse-1
+{
+  0%, 35% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(1.2);
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+@keyframes now-pulse-2
+{
+  0%, 35% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  47% {
+    transform: scale(2);
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .timeline-container { margin-top: 240px; }
+} 
+
