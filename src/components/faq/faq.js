@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import '../../App.scss';
-import './faq.scss';
+import classNames from 'classnames';
 import Dropdown from '../dropdown/dropdown';
 import Parser from 'html-react-parser';
+import '../../App.scss';
+import styles from './faq.module.scss';
 
 export class Faq extends Component {
 
@@ -123,11 +124,11 @@ export class Faq extends Component {
 
 
         return (
-            <div className="faq">
-                <div className="faq__btn-group">
-                    <button className="btn btn--primary" onClick={this.toggleGeneral} className={generalClasses}>General</button>
-                    <button className="btn btn--primary" onClick={this.toggleTickets} className={ticketsClasses}>Tickets</button>
-                    <button className="btn btn--primary" onClick={this.toggleVolunteer} className={volunteerClasses}>Volunteers</button>
+            <div className={styles['faq']}>
+                <div className={styles['faq__btn-group']}>
+                    <button className={classNames('btn btn--primary', generalClasses)} onClick={this.toggleGeneral}>General</button>
+                    <button className={classNames('btn btn--primary', ticketsClasses)} onClick={this.toggleTickets}>Tickets</button>
+                    <button className={classNames('btn btn--primary', volunteerClasses)} onClick={this.toggleVolunteer}>Volunteers</button>
                 </div>
                 {content}
             </div>
