@@ -1,0 +1,61 @@
+/** 
+* reset and normalization
+*/
+
+/// import variables for colors
+@import '../variables/import';
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+}
+
+html,
+body {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  font-family: 'Open Sans', sans-serif;
+  line-height: 1.1875rem;
+  z-index: -20;
+}
+
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section { 
+    display: block;
+}
+
+nav ul { list-style: none; }
+
+a {
+    vertical-align: baseline;
+    background: transparent;
+}
+
+mark {
+    background-color: $red;
+    color: $black; 
+    font-style: italic;
+    font-weight: bold;
+}
+
+del { text-decoration: line-through; }
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;   
+    border-top: 1px solid $grey-20;
+}
+
+input,
+select {
+    vertical-align: middle;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}

@@ -1,0 +1,32 @@
+/// Need to import color variables
+@import 'variables/import';
+
+/**
+ * iOS mobile status bar background hack
+ *
+ * manifest.json settings did not appropriately adjust theme, so we added
+ * a 300px pseudo-element on the body floating above the app as a fix.
+ * Should attempt to refactor and solve when possible.
+ */
+
+body::before {
+    content: "";
+    top: 0;
+    left: 0;
+    background: $bggrey;
+    z-index: -2;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+}
+  
+body::after {
+    content: "";
+    top: -300px;
+    left: 0;
+    background: $redhover;
+    z-index: 10;
+    width: 100vw;
+    height: 300px;
+    position: fixed;
+}
