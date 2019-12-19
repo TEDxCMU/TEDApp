@@ -21,6 +21,7 @@ import Popup from 'react-popup';
 import moment from 'moment';
 import Header from './components/header/header';
 import QANDA from './components/brains/subComponents/qAndA';
+import Draw from './components/draw/draw';
 
 class App extends Component {
   constructor() {
@@ -62,6 +63,7 @@ class App extends Component {
             <Route path="/ripple" exact strict render={this.RipplePage}/>
             <Route path="/qanda" exact strict render={this.QANDAPage}/>
             <Route path="/map" exact strict render={this.mapPage}/>
+            <Route path="/draw" exact strict render={this.drawPage}/>
             {this.state.user !== null && this.state.isAdmin !== true ?
               <Route path="/questions" exact strict render={this.questionsPage}/>
             :
@@ -226,6 +228,23 @@ class App extends Component {
     );
   }
 
+  drawPage = () => {
+    return (
+      <div>
+        <Header
+          title="Pixel Pen"
+          description="Get creative. Draw live and see it in real time."
+          db={this.state.db} 
+          isAdmin={this.state.isAdmin} />
+        <Draw
+        user={this.state.user}
+        isLoaded={this.isLoaded}
+        db={this.state.db}
+        isAdmin={this.state.isAdmin} />
+      </div>
+    );
+  }
+
   QANDAPage = () => {
     return (
       <div>
@@ -360,7 +379,7 @@ class App extends Component {
   // only run if this is the first time the unique device has accessed the web-app
   // adds the device type, ID, and time accessed to the 'audience' collection of the active event
   sendFingerprintToFirestore = (type, id) => {
-    let timeAccessed = moment().format('MMMM Do YYYY, h:mm:ss a');
+    let timeAccessed = moment().format('MMMM DD YYYY, h:mm:ss a');
     let db = fire.firestore()
     db.collection(this.state.db).doc('audience').collection('audience').doc(id.toString()).set({
       id, type, timeAccessed

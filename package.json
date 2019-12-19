@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "chartist": "^0.11.0",
+    "classnames": "^2.2.6",
     "email-validator": "^2.0.4",
     "emotion": "^10.0.9",
     "fingerprintjs2": "^1.8.6",
@@ -11,11 +12,13 @@
     "firebase-admin": "^6.0.0",
     "google-map-react": "^1.1.2",
     "html-react-parser": "^0.6.1",
+    "immutable": "^4.0.0-rc.12",
     "moment": "^2.22.2",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.0",
     "rc-time-picker": "^3.4.0",
     "react": "^16.5.2",
     "react-burger-menu": "^2.5.4",
+    "react-color": "^2.17.3",
     "react-device-detect": "^1.6.1",
     "react-dom": "^16.6.3",
     "react-edit-inline": "^1.0.8",
@@ -46,6 +49,10 @@
   },
   "eslintConfig": {
     "extends": "react-app"
+  },
+  "engines": {
+    "node": "12.13.1",
+    "npm": "6.12.1"
   },
   "browserslist": [
     ">0.2%",
