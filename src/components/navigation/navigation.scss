@@ -1,18 +1,20 @@
-#navigation {
-    background: var(--tedredgradient);
-}
+@import '../../sass/_variables.scss';
 
-#navigation a {
-  color: var(--white);
-  float: left;
-  text-align: center;
-  padding: 20px 0;
-  line-height: 25px;
-  transition: color 0.3s ease-out;
-}
+.nav {
+    background: $redgradient;
 
-#navigation a:hover {
-  color: var(--tedblue);
+    &__link {
+      color: $white;
+      float: left;
+      text-align: center;
+      padding: 20px 0;
+      line-height: 25px;
+      transition: color 0.3s ease-out;
+    }
+
+    &__link:hover {
+      color: $rippleblue;
+    }
 }
 
 /* Position and sizing of burger button */
@@ -26,7 +28,7 @@
 
 /* Color/shape of burger icon bars */
 .bm-burger-bars {
-  background: var(--tedred);
+  background: $red;
 }
 
 /* Position and sizing of clickable cross button */
@@ -45,8 +47,8 @@
 }
 
 /* Color/shape of close button cross */
-span .bm-cross {
-  background: var(--tedwhite);
+.bm-cross {
+  background: $white;
   right: 20px;
   top: 25px;
   height: 30px !important;
@@ -56,14 +58,13 @@ span .bm-cross {
 .bm-menu-wrap {
   position: absolute;
   top: 0;
-  box-sizing: border-box;
   width: 100% !important;
   background-color: rgba(0,0,0,0.1);
 }
 
 /* General sidebar styles */
 .bm-menu {
-  background: var(--tedredgradient);
+  background: $redgradient;
   padding: 0;
   font-size: 1.4rem;
   width: 100%;
@@ -89,17 +90,8 @@ span .bm-cross {
 .bm-item-list {
   display: flex;
   justify-content: center !important;
-  color: var(--tedwhite);
+  color: $white;
   padding: 0.8em;
   text-align: center !important;
   position: relative;
-  box-sizing: border-box;
 }
-
-/* Styling of overlay */
-/* .bm-overlay {
-  background: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: 0;
-  left: 0;
-} */

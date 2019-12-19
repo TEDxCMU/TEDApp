@@ -1,0 +1,24 @@
+@import '../../sass/variables';
+
+.faq {
+    width: 90%;
+    margin: 20px auto;
+
+    &__btn-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        /* btn group spacing */
+        & > * {
+            margin: 4px;
+        }
+    }
+}
+
+/* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .faq { margin-top: 30px; }
+}

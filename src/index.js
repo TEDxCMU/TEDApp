@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactGA from 'react-ga';
 import createHistory from 'history/createBrowserHistory';
 
-import './index.css';
+import './index.scss';
 import App from './App';
 import registerServiceWorker from './serviceWorker';
 

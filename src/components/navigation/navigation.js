@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../../App.css';
+import '../../App.scss';
 import { auth } from '../../fire.js';
 import {NavLink} from 'react-router-dom';
-import './navigation.css';
+import './navigation.scss';
 import { slide as Menu } from 'react-burger-menu';
 
 export class Navigation extends Component {
@@ -36,56 +36,53 @@ export class Navigation extends Component {
         return (
             <div>
                 {this.props.loaded ? 
-                    <div id="navigation">
+                    <div className="nav">
                         <Menu noOverlay right 
                             isOpen={this.state.menuOpen}
                             onStateChange={(state) => this.handleStateChange(state)}
                             styles={burgerBarStyle}>
-                            <div className="nav">
+                            <div>
                                 <ul>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/" exact activeStyle={{color:'#6EEBFC'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/" exact activeStyle={{color:'#6eebfc'}}>
                                         Home
                                     </NavLink></li>
                                     <div>
                                         {this.props.user !== null && this.props.isAdmin !== true ?
-                                            <NavLink onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6EEBFC'}}>
+                                            <NavLink className="nav__link" onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6eebfc'}}>
                                                 My Questions
                                             </NavLink>
                                         :
-                                            <div></div>
-                                            
+                                            null
                                         }
                                     </div>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/qanda" exact activeStyle={{color:'#6EEBFC'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/qanda" exact activeStyle={{color:'#6eebfc'}}>
                                         Speaker Q&amp;A
                                     </NavLink></li>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/ripple" exact activeStyle={{color:'#6EEBFC'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/ripple" exact activeStyle={{color:'#6eebfc'}}>
                                         Ripple
                                     </NavLink></li>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/map" exact activeStyle={{color:'#6EEBFC'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/map" exact activeStyle={{color:'#6eebfc'}}>
                                         Map
                                     </NavLink></li>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/draw" exact activeStyle={{color:'#6EEBFC'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/draw" exact activeStyle={{color:'#6EEBFC'}}>
                                         Pixel Pen
                                     </NavLink></li>
-                                    <li><NavLink onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6EEBFC'}}>
+                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6eebfc'}}>
                                         FAQs
                                     </NavLink></li>
-                                    {this.props.user === null ?
-                                        <div></div>
-                                        :
-                                        <div>
+                                    {this.props.user !== null &&
+                                        (<div>
                                             <li>
-                                                <button className="full-width button-primary" onClick={this.props.logout}>Log Out</button> 
+                                                <button className="btn btn-full button--primary" onClick={this.props.logout}>Log Out</button> 
                                             </li>
-                                        </div>
+                                        </div>)
                                     }
                                 </ul>
                             </div>
                         </Menu>
                     </div>
                 :
-                    <div></div>
+                    null
                 }
             </div>
         );        

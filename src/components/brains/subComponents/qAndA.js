@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import '../../../App.css';
-import './qAndA.css';
-import '../../questions/myQuestions.css';
+import '../../../App.scss';
+import './qAndA.scss';
+import '../../questions/myQuestions.scss';
 import fire from '../../../fire.js';
 import Dropdown from '../../dropdown/dropdown';
 import Popup from "reactjs-popup";
@@ -37,12 +37,10 @@ export class QAndAMain extends Component {
         })
     }
 
-
     openConfirmation = (e) => {
         e.preventDefault()
         this.setState({confirmationOpen: true})
     }
-
 
     // opens the pop-up modal
     openModal = () => {
@@ -207,7 +205,7 @@ export class QAndAMain extends Component {
                     question: '',
                     open: false,
                     openCheck: false
-                }, () =>                 
+                }, () =>
                 ReactGA.event({
                     category: 'User',
                     action: 'Create Question with Fingerprint on Q&A Page'
@@ -264,7 +262,7 @@ export class QAndAMain extends Component {
 
         for (let speaker in this.state.speakers) {
             speakerButtons.push(
-                <button key={speaker} onClick={e => this.toggleButtons(e, speaker)} style={{boxShadow: 'none'}} className={speaker.toString() === this.state.selectedSpeaker.toString() ? "button-primary medium" : "button-primary medium blank"}>{this.state.speakers[speaker].first}</button>
+                <button key={speaker} onClick={e => this.toggleButtons(e, speaker)} className={speaker.toString() === this.state.selectedSpeaker.toString() ? "btn btn--primary" : "btn btn--tertiary"}>{this.state.speakers[speaker].first}</button>
             )
         }
         let newList = [];
@@ -272,62 +270,57 @@ export class QAndAMain extends Component {
         this.state.questions.forEach(question => {  
             if (question.answer.length > 0 ) {
             newList.push (
-                <div className="speaker" key={Math.random()}>
+                <div key={Math.random()}>
                 <Dropdown question={question.question}>
-                    <form className="questions-form">
-                        <label style={{marginTop: '0'}}>Question:</label>
+                    <form>
+                        <label>Question:</label>
                         <p>"{question.question}"</p>
-                        <label style={{marginTop: '0'}}>FROM: {question.name}</label>
+                        <label>FROM: {question.name}</label>
                         <p>Answer: </p>
                         <p>"{question.answer}"</p>
                     </form>
                 </Dropdown>
                 </div>
             )
-            }  
+            }
     
         })
     }
     return (
-        <div className="faq">
-            <div className="justified">
+        <div className="qanda">
+            <div className="qanda__btn-group">
                 {speakerButtons}
             </div>
-            <div className="content">
+
+            <div className="qanda__content">
             {this.state.asked !== undefined ? 
                 <div>
                 { this.state.asked === true ?
                     // prevent user from asking multiple questions, if we have their device fingerprint on file
-                    <div className="questi0n-btn-container">
-                        <h6><button className="questi0n-btn question-pos-asked">Asked</button></h6>
-                    </div>
+                    <button className="btn q-btn">Asked</button>
                 :
-                    <div className="questi0n-btn-container">
-                        <h6><button onClick={() => this.openModal()} className="questi0n-btn question-pos">Ask Question</button></h6>
+                    <div className="text-center mt2">
+                        <button onClick={() => this.openModal()} className="btn q-btn">Ask Question</button>
                         <Popup
                         open={this.state.open}
                         closeOnDocumentClick
                         onClose={this.closeModal}
                         contentStyle={popupStyle}
                         >
-                        <div className="modal">
+                        <div className="popup">
                             <div>
-                                {this.state.speakerRef !== undefined && this.state.speakerRef !== null ? 
-                                    <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4>
+                                { this.state.speakerRef && <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4> }
+                                <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup__input" : "popup__input popup__input--invalid" } name="question" value={this.state.question} placeholder="Write your question here..." onChange={this.handleChange}/>
+                                { !this.state.errors === undefined ?
+                                    null
                                 :
-                                    <div></div>
-                                }
-                                <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup-input" : "popup-input-invalid" } name="question" value={this.state.question} placeholder="Write your question here..." onChange={this.handleChange}/>
-                                {this.state.errors === undefined ?
-                                    <small> </small>
-                                :
-                                    <small className="small-red">Please ask a question before submitting.</small>
+                                    <small className="text-red">Please ask a question before submitting.</small>
                                 }
                                 <h4>Sincerely, </h4>
-                                <input type="text" style={{height: '20px'}} autoComplete="off" className="popup-input-small" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>
-                                <div className="popup-btns">
-                                    <button className="popup-btn-cancel" onClick={this.closeModal}>Cancel</button>
-                                    <button className="popup-btn-success button-primary" onClick={this.openCheck}>Submit</button>
+                                <input type="text" autoComplete="off" className="popup__input popup__input__sm" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>
+                                <div className="popup__btn-group">
+                                    <button className="btn btn-full btn--cancel" onClick={this.closeModal}>Cancel</button>
+                                    <button className="btn btn-full btn--primary" onClick={this.openCheck}>Submit</button>
                                 </div>
                             </div>
                         </div>
@@ -338,13 +331,13 @@ export class QAndAMain extends Component {
                         onClose={this.closeCheck}
                         contentStyle={popupStyle}
                         >
-                        <div className="modal">
+                        <div className="popup">
                             <div>
                                 <h4>Ready to send off? </h4>
-                                <h6 style={{color: 'black'}}>To prevent spam, you are limited to one question per speaker.</h6>
-                                <div className="popup-btns">
-                                    <button className="popup-btn-cancel" onClick={this.closeCheck}>Go Back</button>
-                                    <button className="popup-btn-success button-primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
+                                <h6>To prevent spam, you are limited to one question per speaker.</h6>
+                                <div className="popup__btn-group">
+                                    <button className="btn btn-full btn--cancel" onClick={this.closeCheck}>Go Back</button>
+                                    <button className="btn btn-full btn--primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
                                 </div>
                             </div>
                         </div>
@@ -355,11 +348,11 @@ export class QAndAMain extends Component {
                         onClose={this.closeConfirmation}
                         contentStyle={popupStyle}
                         >
-                        <div className="modal">
-                            <div className="popup-response">
+                        <div className="popup">
+                            <div className="popup__response">
                                 <img src={bottle} className="bottle" alt="Bottle" />
-                                <p className="confirmation-text">Thank you for asking a question! Please check back on the Q &amp; A page later.</p>
-                                <button className="popup-button-success button-primary" style={{width: '100%', borderRadius: '24px'}} onClick={this.closeConfirmation}>Ok</button>
+                                <p className="text-center">Thank you for asking a question! Please check back on the Q &amp; A page later.</p>
+                                <button className="btn btn-full btn-rounded btn--primary" onClick={this.closeConfirmation}>Ok</button>
                             </div>
                         </div>
                         </Popup>
@@ -367,14 +360,14 @@ export class QAndAMain extends Component {
                 }
                 </div>
             :
-                <div></div>
+                null
             }
                 {this.state.questions !== null && this.state.questions.length > 0 ?
-                    <div className="speakers">
+                    <div>
                         {newList}
                     </div>
                     :
-                    <h4 className="speakers" style={{paddingTop: '20px', textAlign: 'center'}}>{this.state.speakerRef !== undefined && this.state.speakerRef !== null ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
+                    <h4 className="qanda__message--empty">{this.state.speakerRef !== undefined && this.state.speakerRef !== null ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
                 }
             </div>
 
