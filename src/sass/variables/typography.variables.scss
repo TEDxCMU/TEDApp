@@ -67,7 +67,7 @@ h6, .h6 {
   
 p {
     font-size: 1rem;
-    color: $grey-20;
+    color: $grey__900;
     margin-bottom: 1.3rem;
     line-height: 1.4rem;
 }
@@ -104,7 +104,7 @@ code {
     margin: 0 .3rem;
     padding: .3rem .6rem;
     white-space: nowrap;
-    background: $offwhite;
-    border: 1px solid $offwhite;
+    background: $grey__050;
+    border: 1px solid $grey__050;
     border-radius: 3px;
 }

@@ -13,7 +13,7 @@ body::before {
     content: "";
     top: 0;
     left: 0;
-    background: $bggrey;
+    background: $color__page-background;
     z-index: -2;
     width: 100vw;
     height: 100vh;
@@ -24,7 +24,7 @@ body::after {
     content: "";
     top: -300px;
     left: 0;
-    background: $redhover;
+    background: $red__dark;
     z-index: 10;
     width: 100vw;
     height: 300px;

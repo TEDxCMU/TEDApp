@@ -1,107 +1,81 @@
-// Colors
-// --------------------------------------------------------
-$black: #000;
-$grey-0: #111;
-$grey-20: #333;
-$grey-40: #666;
-$grey-60: #999;
-$grey-80: #ccc;
-$grey-70: #aaa;
-$grey-100: #eee;
-$white: #fff;
-
-$bggrey: #fcfcfc;
-$offwhite: #f8f8f8;
-
-$red: #e62b1e;
-$redhover: #cb2d3e;
-$redhover-opaque: rgba(203, 45, 62, 0.35);
-
-$redgradient: linear-gradient(180deg, #cb2d3e 0%, #ef473a 100%);
-$redgradient45: linear-gradient(315deg, #cb2d3e 0%, #ef473a 100%);
-
-$opaque: rgba(0, 0, 0, 0.3);
-$rippleblue: #6eebfc;
-
-// --------------------------------------------------------
-
 /// neutral palette
 /// -------------------------------------------------------
-$palette__white	    :	#FFF !default;
-$palette__neutral-050 : rgb(250, 247, 247) !default;
-$palette__neutral-100	:	rgb(252, 236, 236) !default;
-$palette__neutral-200	:	#F0EBE0 !default;
-$palette__neutral-300	:	rgb(184, 167, 167) !default;
-$palette__neutral-500	:	#786262 !default;
-$palette__neutral-700	:	rgb(82, 61, 61) !default;
-$palette__neutral-900	:	rgb(39, 29, 29) !default;
-$palette__black	    :	$palette__neutral-900 !default;
+$black: #000  !default;
+$grey__950: #111 !default; // @Depricated grey-0
+$grey__900: #333 !default; // @Depricated grey-20
+$grey__700: #666 !default; // @Depricated grey-40
+$grey__500: #999 !default; // @Depricated grey-60
+$grey__300: #ccc !default; // @Depricated grey-60
+$grey__200: #aaa !default; // @Depricated grey-80
+$grey__100: #eee !default; // @Depricated grey-100
+$grey__050: #f8f8f8 !default; // @Depricated offwhite
+$white: #fff !default;
 
 
 /// primary palette
 /// -------------------------------------------------------
-$palette__sol	     : #FFD400 !default;
-$palette__shore	   : #02BAC9 !default;
-//$palette__sand	   : #F0EBE0 !default;
-//$palette__atlantic : #044CB8 !default;
-$palette__florida	 : #1477D7 !default;
+$red: #e62b1e !default;
+$rippleblue: #6eebfc !default;
 
-//@TODO: build out the whole series from designer and update names
 
 /// primary palette shades
 /// -------------------------------------------------------
-$palette__florida-900: #003C7C !default;
-$palette__florida-300: #8ACCFF !default;
-$palette__florida-100: #FFFAE6 !default;
+$red__dark: #cb2d3e !default;
+$red__light: #ef473a !default;
+
+// red variants
+$redgradient: linear-gradient(180deg, $red__dark 0%, $red__light 100%);
+$redgradient45: linear-gradient(315deg, $red__dark 0%, $red__light 100%);
+$redhover-opaque: rgba(203, 45, 62, 0.35);
 
 
 /// UI system palette
 /// -------------------------------------------------------
-$palette__coral	   : #EA335E !default;
-$palette__grove    : #008A00 !default;
-$palette__tangerine: #FDAD45 !default;
+$system__red    : #e62b1e !default;
+$system__green  : #0fbb09 !default;
+$system__orange : #f09e23 !default;
+
 
 /// UI system background palette
 /// -------------------------------------------------------
-$palette__coral--background   	: #FFF4F4 !default;
-$palette__florida--background   : #EAF7FF !default;
-$palette__shore--background		: #DBF8F8 !default;
-$palette__tangerine--background	: #FCF7EC !default;
-
+$red--background   	: #FFF4F4 !default;
+$rippleblue--background		: #dbf0f8 !default;
 
 // color for ui highlights
-$palette__highlighter : $palette__sol !default;
+$palette__highlighter : $red !default;
+
 
 /// color roles | background-colors
 /// -------------------------------------------------------
-$color__page-background   : $palette__white !default;
+$color__page-background   : #fcfcfc !default;
+
 
 /// color roles | typography
 /// -------------------------------------------------------
-$color__text              : $palette__neutral-900 !default; 		// default text color
-$color__text--hint        : $palette__neutral-500 !default;		// ancillary (eg. disclaimers, legalese)
-//$color__text--secondary   : $palette__neutral-700 !default;
+$color__text              : $grey__950 !default; 		// default text color
+$color__text--hint        : $grey__500 !default;		// ancillary (eg. disclaimers, legalese)
+$color__text--secondary   : $grey__700 !default;
 
 /// color roles | status colors
 /// -------------------------------------------------------
-$color__news	    :	$palette__florida !default;
-$color__promotion	:	$palette__sol !default;
-$color__crisis	  :	$palette__coral !default;
-$color__error     : $palette__coral !default;
-$color__positive  : $palette__grove !default;
-$color__negative  : $palette__coral !default;
-$color__warning	  : $palette__tangerine !default;
-$color__notification	: $palette__florida-900 !default;
+$color__news	  :	$system__green !default;
+$color__promotion :	$red !default;
+$color__crisis	  :	$red !default;
+$color__error     : $red !default;
+$color__positive  : $system__green !default;
+$color__negative  : $red !default;
+$color__warning	  : $system__orange !default;
+$color__notification	: $red !default;
 
 
 /// color roles | links
 /// -------------------------------------------------------
-$color__link              : $palette__neutral-900 !default;
-$color__link--hover       : $palette__florida !default;
+$color__link              : $red !default;
+$color__link--hover       : $red__dark !default;
+
 
 /// color roles | ui
 /// -------------------------------------------------------
-$color__ui-accent            : $palette__florida !default;
-
-$color__border               : $palette__neutral-300 !default;
-$color__overlay              : rgba(0,0,0,0.4) !default;
+$color__ui-accent            : $rippleblue !default;
+$color__border               : $grey__200 !default;
+$color__overlay              : rgba(0,0,0,0.3) !default;

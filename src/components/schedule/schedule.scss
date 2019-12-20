@@ -35,7 +35,7 @@
     display: block;
     width: 0;
     height: 100%;
-    border: 1px solid $grey-70;
+    border: 1px solid $grey__200;
     position: absolute;
     left: -$space-5;
   }
@@ -101,7 +101,7 @@
   }
 
   &__arrow {
-    color: $grey-70;
+    color: $grey__200;
     padding: 0 $space-8 0 $space-9;
     margin: 0;
     position: absolute;
@@ -133,7 +133,7 @@
   height: $space-6;
   left: calc(-2rem - 12px);
   top: calc(50% - 11px);
-  background-color: $bggrey;
+  background-color: $color__page-background;
   border-radius: 50%;
   z-index: 0;
 }
@@ -177,7 +177,7 @@
 
 .bullet__past {
   @extend %bullet;
-  background-color: $grey-60;
+  background-color: $grey__500;
 }
 
 @keyframes now-pulse-1

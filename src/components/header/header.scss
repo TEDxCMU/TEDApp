@@ -117,13 +117,13 @@ header {
         width: 100%;
         border-radius: $space-12;
         padding: $space-9; //12px
-        color: $grey-20;
+        color: $grey__900;
         margin-top: $space-9;
         padding: $space-9;
 
         &--invalid {
             height: $space-1;
-            color: $bggrey;
+            color: $color__page-background;
             border: 2px solid $red !important;
         }
 
