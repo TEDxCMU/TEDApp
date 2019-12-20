@@ -1,4 +1,4 @@
-@import '../../../sass/variables';
+@import '../../../sass/import';
 
 .map {
   width: 100%;
@@ -12,7 +12,7 @@
   &__marker {
     stroke: $red; 
     fill: $red;
-    stroke-width: 2px;
+    stroke-width: $space-12;
     stroke-opacity: 1;
 
     &--ripple {
@@ -32,7 +32,7 @@
 
     /* btn group spacing */
     & > button {
-      margin: 4px;
+      margin: $space-11;
     }
   }
 
@@ -41,7 +41,7 @@
 /* Pulses on map */
 @keyframes pulse {
   from {
-    stroke-width: 3px;
+    stroke-width: $space-12;
     stroke-opacity: 1;
     transform: scale(0.3);
   }
@@ -57,6 +57,6 @@
       box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
   }
   100% {
-      box-shadow: 0 0 0 35px rgba(0, 0, 0, 0);
+      box-shadow: 0 0 0 $space-5 rgba(0, 0, 0, 0);
   }
 }

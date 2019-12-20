@@ -1,4 +1,4 @@
-@import '../../sass/variables';
+@import '../../sass/import';
 
 .loader {
   width: 100vw;
@@ -17,16 +17,16 @@
 .timeline-container {
   margin-top: 270px;
   padding: 10% 4% 10% calc(4% + 2rem + 4px);
-}
 
-.timeline-container--admin {
-  margin-top: 0;
+  &--admin {
+    margin-top: 0;
+  }
 }
 
 .timeline {
   list-style-type: none;
   position: relative;
-  margin: 20px;
+  margin: $space-7;
   transition: all 1s linear;
 
   // the schedule line
@@ -37,7 +37,7 @@
     height: 100%;
     border: 1px solid $grey-70;
     position: absolute;
-    left: -2rem;
+    left: -$space-5;
   }
 
   &__timepicker {
@@ -65,23 +65,22 @@
   &__desc {
     font-size: 0.9rem;
     float: left;
-    top: 5px;
+    top: $space-11;
     vertical-align: middle;  
     position: relative;
-    padding-left: 5px;
-    margin-bottom: 5px;
+    padding-left: $space-11;
+    margin-bottom: $space-11;
   }
 
 }
 
-
 /* event cards */
 .event-card {
-  border-radius: 3px;
-  padding: 10px 20px;
+  border-radius: $space-11;
+  padding: $space-9 $space-7;
 
   &--clickable {
-    margin: 2rem 0;
+    margin: $space-5 0;
     cursor: pointer;
     background: $white;
     border: 1px solid #F5F5F5;
@@ -92,18 +91,18 @@
   }
 
   &--static {
-    margin: 1rem 0 2rem;
+    margin: $space-8 0 $space-5;
     border-color: 1px solid $red;
     border-radius: 3px;
   }
 
   &__content {
-    margin-right: 5px;
+    margin-right: $space-11;
   }
 
   &__arrow {
     color: $grey-70;
-    padding: 0 15px 0 10px;
+    padding: 0 $space-8 0 $space-9;
     margin: 0;
     position: absolute;
     right: 0;
@@ -119,8 +118,8 @@
     vertical-align: middle;
     position: relative;
     top: 5px;
-    height: 1.2rem;
-    width: 1.2rem;
+    height: $space-7;
+    width: $space-7;
     margin: 0;
     float: left;
     border-radius: 50%;
@@ -130,8 +129,8 @@
 .bullet__bg {
   content: '';
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: $space-6;
+  height: $space-6;
   left: calc(-2rem - 12px);
   top: calc(50% - 11px);
   background-color: $bggrey;
@@ -139,68 +138,46 @@
   z-index: 0;
 }
 
-/* static timeline styles */
-.bullet__now {
+// bullet base styling for all bullet types
+%bullet {
   content: '';
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: 12px;
+  height: 12px;
+  z-index: 1;
+  border-radius: 50%;
   left: calc(-2rem - 4px);
   top: calc(50% - 4px);
   background-color: $red;
-  border-radius: 50%;
+}
+
+/* static timeline styles */
+.bullet__now {
+  @extend %bullet;
   animation: now-pulse 2.5s infinite;
-  z-index: 1;
 
   &::before {
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
+    @extend %bullet;
     left: 0;
     top: 0;
-    background-color: $red;
-    border-radius: 50%;
     animation: now-pulse-1 2.5s infinite;
-    z-index: 1;
   }
 
   &::after {
-    content: '';
-    position: absolute;
-    width: 10px;
-    height: 10px;
+    @extend %bullet;
     left: 0;
     top: 0;
-    background-color: $red;
-    border-radius: 50%;
     animation: now-pulse-2 2.5s infinite;
-    z-index: 1;
   }
 }
 
 .bullet__upcoming {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  left: calc(-2rem - 4px);
-  top: calc(50% - 4px);
-  background-color: $red;
-  border-radius: 50%;
-  z-index: 1;
+  @extend %bullet;
 }
 
 .bullet__past {
-  content: '';
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  left: calc(-2rem - 4px);
-  top: calc(50% - 4px);
+  @extend %bullet;
   background-color: $grey-60;
-  border-radius: 50%;
-  z-index: 1;
 }
 
 @keyframes now-pulse-1

@@ -1,8 +1,8 @@
-@import '../../sass/variables';
+@import '../../sass/import';
 
 .faq {
     width: 90%;
-    margin: 20px auto;
+    margin: $space-7 auto;
 
     &__btn-group {
         display: flex;
@@ -12,7 +12,7 @@
 
         /* btn group spacing */
         & > * {
-            margin: 4px;
+            margin: $space-11;
         }
     }
 }
@@ -20,5 +20,5 @@
 /* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .faq { margin-top: 30px; }
+  .faq { margin-top: $space-5; }
 }

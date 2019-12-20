@@ -4,15 +4,19 @@ $system__unit    : 16px !default;
 
 /// system spacing
 /// -------------------------------------------------------
-$space-1: system-unit(8);    //128
-$space-2: system-unit(6);    //96
-$space-3: system-unit(4);    //64
-$space-4: system-unit(3);    //48
-$space-5: system-unit(2);    //32
-$space-6: system-unit(1.5);  //24
-$space-7: system-unit(1);    //16
-$space-8: system-unit(0.75); //12
-$space-9: system-unit(0.5);  //8
+$space-0: system-unit(16);    //256
+$space-1: system-unit(8);     //128
+$space-2: system-unit(6);     //96
+$space-3: system-unit(4);     //64
+$space-4: system-unit(3);     //48
+$space-5: system-unit(2);     //32
+$space-6: system-unit(1.5);   //24
+$space-7: system-unit(1.25);  //20
+$space-8: system-unit(1);     //16
+$space-9: system-unit(0.75);  //12
+$space-10: system-unit(0.5);   // 8
+$space-11: system-unit(0.25); // 4
+$space-12: system-unit(0.125);// 2
 
 /// system appearance vars
 /// -------------------------------------------------------
