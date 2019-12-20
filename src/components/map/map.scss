@@ -1,4 +1,4 @@
-@import '../../sass/_variables.scss';
+@import '../../sass/import';
 
 .map-container {
   display: flex;
@@ -9,8 +9,8 @@
 }
 
 .map {
-  margin-top: 20px;
-  height: 450px;
+  margin-top: $space-7;
+  height: 450px; // figure out how to make this not strictly pixel val
   position: relative;
 
   &__indoor-img {
@@ -26,6 +26,6 @@
   /* Medium devices (landscape tablets, 768px and up) */
   @media only screen and (min-width: 768px) {
     .map {
-        margin-top: 30px;
+        margin-top: $space-5;
     }
   }

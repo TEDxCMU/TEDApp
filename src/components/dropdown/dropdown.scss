@@ -1,4 +1,4 @@
-@import '../../sass/variables';
+@import '../../sass/import';
 
 .dropdown-container {
     padding: 1em;
@@ -6,7 +6,7 @@
 
 .dropdown {
     border-radius: 3px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 5px $space-8 rgba(0,0,0,0.2);
     background-color: $white;
     position: relative;
     margin: 20px 0;
@@ -21,38 +21,38 @@
         &:hover,
         .dropdown__label:active,
         .dropdown__label:focus {
-            background-color: $offwhite;
+            background-color: $grey__050;
         }
     }
 
     &__toggle {
         font-size: 1.5rem;
-        padding: 0 15px;
+        padding: 0 $space-8; //16px
         margin: 0;
         position: absolute;
-        right: 0.75rem;
+        right: $space-9; //12px
     }
     
     &__checkmark {
         font-size: 2rem;
-        padding: 0 15px;
-        width: 2em;
-        height: 2em;
+        padding: 0 $space-8;
+        width: $space-5;
+        height: $space-5;
         margin: 0;
         position: absolute;
-        right: 2rem;
+        right: $space-5;
     }
 
     &__text {
         position: relative;
-        margin-right: 4rem;
+        margin-right: $space-3;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
 
         &--open {
             position: relative;
-            margin-right: 4rem;
+            margin-right: $space-3;
         }
     }
 }

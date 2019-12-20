@@ -1,0 +1,56 @@
+/// system unit of measurement
+/// -------------------------------------------------------
+$system__unit    : 16px !default;
+
+/// system spacing
+/// -------------------------------------------------------
+$space-0: system-unit(16);    //256
+$space-1: system-unit(8);     //128
+$space-2: system-unit(6);     //96
+$space-3: system-unit(4);     //64
+$space-4: system-unit(3);     //48
+$space-5: system-unit(2);     //32
+$space-6: system-unit(1.5);   //24
+$space-7: system-unit(1.25);  //20
+$space-8: system-unit(1);     //16
+$space-9: system-unit(0.75);  //12
+$space-10: system-unit(0.5);   // 8
+$space-11: system-unit(0.25); // 4
+$space-12: system-unit(0.125);// 2
+
+/// system appearance vars
+/// -------------------------------------------------------
+$system__radius  : 0px !default;
+$system__border  : 1px solid $color__border !default;
+$system__shadow  : 0 2px 6px 0 hsla(0,0%,45%,0.2) !default;
+
+/// z-index
+/// -------------------------------------------------------
+$system__z-index--ui	    : 1000 !default;
+$system__z-index--overlay : 100000 !default;
+
+/// system container width vars
+/// -------------------------------------------------------
+$system__container-width     : 90vw !default;
+$system__container-max-width : 1200px !default;
+$system__narrow-container-max-width : 720px !default;
+
+$system__extended-container-max-width : 992px !default;
+$system__extended-container-max-width-tablet : 608px !default;
+
+
+/// system breakpoints
+/// https://getbootstrap.com/docs/4.3/layout/overview/
+/// -------------------------------------------------------
+$viewport__xx: 320px !default;  // min-width of tiny phone
+$viewport__xs: 375px !default;  // min-width of small phone
+$viewport__small: 576px !default;  // min-width of small tablet & large phone
+$viewport__medium: 768px !default;  // min-width of tablet portrait & landscape
+$viewport__large: 1025px !default; // min-width of small desktop
+$viewport__xl: 1200px !default; // min-width of large desktop
+$viewport__xxl: 1440px !default; // min-width of extra large desktop
+
+/// system transitions
+/// -------------------------------------------------------
+$transition__default : all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94) !default;
+$transition__quick   : all 0.1s !default;

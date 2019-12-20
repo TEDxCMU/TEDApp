@@ -1,4 +1,4 @@
-@import '../../sass/variables';
+@import '../../sass/import';
 
 header {
     position: relative;
@@ -16,13 +16,13 @@ header {
     &--sticky {
         position: fixed;
         top: 0;
-        height: 296px;
+        height: 296px; // figure out how to make this dynamic w/ js
         width: 100%;
         transition: height 0.3s;
     }
 
     &--sticky-short {
-        height: 150px;
+        height: 150px; // figure out how to make this dynamic w/ js
     }
 }
 
@@ -40,7 +40,7 @@ header {
         color: $white;
         padding-top: 0;
         margin-bottom: 0;
-        padding-bottom: 20px;
+        padding-bottom: $space-7;
 
         &--speaker {
             padding-bottom: 0;
@@ -48,22 +48,22 @@ header {
 
         &--collapsed {
             width: 70%;
-            padding: 20px 5% 20px 25px;
+            padding: $space-7 5% $space-7 $space-7;
         }
     }
 
     &__back {
-        left: 26px;
-        top: 36px;
+        left: $space-6; //26px->24px
+        top: $space-5;
         position: absolute;
         z-index: 1;
 
-        &--logo { max-width: 60px; }
-        &--arrow { height: 40px; }
+        &--logo { max-width: $space-3; }
+        &--arrow { height: $space-5; }
     }
 
     &__content {
-        padding: 100px 26px 16px 26px;
+        padding: $space-2 $space-6 $space-8 $space-6; //26px->24px
     }
 
     &__profile {
@@ -74,8 +74,8 @@ header {
     }
 
     &__img {
-        width: 100px;
-        height: 100px;
+        width: $space-2;
+        height: $space-2;
         overflow: hidden;
         border-radius: 50%;
         border: 10px solid rgba(255,255,255,0.1);
@@ -83,10 +83,10 @@ header {
         &--border::before {
             content: '';
             position: absolute;
-            top: -15px;
-            left: -15px;
-            width: 130px;
-            height: 130px;
+            top: -$space-8;
+            left: -$space-8;
+            width: $space-1;
+            height: $space-1;
             border-radius: 50%;
             background-color: rgba(255, 255, 255, 0.06);
         }
@@ -99,43 +99,43 @@ header {
     display: flex;
     flex-direction: column;
     border: none;
-    border-radius: 10px;
+    border-radius: $space-9;
 
     &__btn-group {
         display: flex;
         justify-content: space-between;
-        margin-top: 20px;
+        margin-top: $space-7;
 
         /* btn group spacing */
         & > * {
-            margin: 4px;
+            margin: $space-11;
         }
     }
 
     &__input {
         display: block;
         width: 100%;
-        border-radius: 3px;
-        padding: 12px;
-        color: $grey-20;
-        margin-top: 10px;
-        padding: 12px;
+        border-radius: $space-12;
+        padding: $space-9; //12px
+        color: $grey__900;
+        margin-top: $space-9;
+        padding: $space-9;
 
         &--invalid {
-            height: 120px;
-            color: $bggrey;
+            height: $space-1;
+            color: $color__page-background;
             border: 2px solid $red !important;
         }
 
         &--sm {
-            height: 20px;
-            padding-left: 12px !important; 
+            height: $space-7;
+            padding-left: $space-9 !important; 
         }
 
         &--sm-invalid {
-            height: 20px;
-            padding-left: 12px !important;
-            border: 2px solid $red !important;
+            height: $space-7;
+            padding-left: $space-9 !important;
+            border: $space-12 solid $red !important;
         }
     }
 
@@ -161,14 +161,14 @@ header {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .header__desc {
-        padding-bottom: 30px;
+        padding-bottom: $space-5;
     }
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .header__desc {
-        padding-bottom: 40px;
+        padding-bottom: $space-4;
     }
 }
 
@@ -181,14 +181,14 @@ header {
     }
 
     .header-container--sticky {
-        height: 275px;
+        height: $space-0; //256px
     }
 
     .header-container--sticky-short {
-        height: 120px;
+        height: $space-1;
     }
 
     .header__desc {
-        padding-bottom: 25px;
+        padding-bottom: $space-6;
     }
 } 

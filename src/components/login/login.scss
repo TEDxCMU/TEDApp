@@ -1,11 +1,11 @@
-@import '../../sass/_variables.scss';
+@import '../../sass/import';
 
 .login {
     display: flex;
     justify-content: center;
     margin: auto;
     text-align: left;
-    margin-top: 30px;
+    margin-top: $space-5;
 
     &__form { width: 75%; }
     &__input--invalid {
@@ -15,10 +15,10 @@
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-  .login { margin-top: 40px; }
+  .login { margin-top: $space-5; }
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-  .login { margin-top: 50px; }
+  .login { margin-top: $space-4; }
 }

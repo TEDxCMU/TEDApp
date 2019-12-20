@@ -1,8 +1,8 @@
-@import '../../../sass/variables';
+@import '../../../sass/import';
 
 .qanda {
     width: 90%;
-    margin: 20px auto;
+    margin: $space-7 auto;
 
     &__content {
         display: flex;
@@ -18,7 +18,7 @@
 
         /* btn group spacing */
         & > * {
-            margin: 4px;
+            margin: $space-11;
         }
     }
 

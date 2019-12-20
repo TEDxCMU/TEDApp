@@ -1,23 +1,23 @@
-@import '../../sass/variables';
+@import '../../sass/import';
 
 .speaker {
   display: flex;
   justify-content: center;
   margin: auto;
-  margin-top: 30px;
+  margin-top: $space-5;
   text-align: left;
 
   &__info {
-    padding: 20px;
+    padding: $space-7;
   }
 
   &__talk-title {
-    margin-top: 20px;
+    margin-top: $space-7;
     color: $red;
   }
 
   &__bio {
-    margin-top: 50px;
+    margin-top: $space-4;
     color: $black;
   }
 
@@ -38,7 +38,7 @@
   padding-bottom: 56.25%;
   position: relative;
   height: 0;
-  margin-bottom: 20px;
+  margin-bottom: $space-7;
 
   iframe {
     position: absolute;

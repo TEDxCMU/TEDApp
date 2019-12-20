@@ -186,13 +186,13 @@ export class BrainFood extends Component {
             width: '100%',
             borderRadius: '3px',
             padding: '1em',
-            color: '$grey-20',
+            color: '$grey__900',
             marginTop: '10px',
             height: '20px',
             fontSize: '1em',
             lineHeight: '1em',
             background: "transparent", 
-            border: '1px solid $grey-70'
+            border: '1px solid $grey__200'
         }
 
         return <Popup open={this.state.open} closeOnDocumentClick onClose={this.closeModal} contentStyle={style}>
