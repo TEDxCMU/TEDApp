@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Dropdown from '../dropdown/dropdown';
 import Parser from 'html-react-parser';
-import '../../App.scss';
 import styles from './faq.module.scss';
 
 export class Faq extends Component {

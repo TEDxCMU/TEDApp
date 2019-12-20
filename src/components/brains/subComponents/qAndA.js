@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import '../../../App.scss';
-import './qAndA.scss';
-import '../../questions/myQuestions.scss';
+import styles from './qAndA.module.scss';
+import questionStyles from '../../questions/myQuestions.module.scss';
 import fire from '../../../fire.js';
 import Dropdown from '../../dropdown/dropdown';
 import Popup from "reactjs-popup";
 import bottle from '../../../questionbottle.svg';
 import moment from 'moment';
 import ReactGA from 'react-ga';
+import classNames from 'classnames';
 
 
 export class QAndAMain extends Component {
@@ -287,12 +287,11 @@ export class QAndAMain extends Component {
         })
     }
     return (
-        <div className="qanda">
-            <div className="qanda__btn-group">
+        <div className={styles['qanda']}>
+            <div className={styles['qanda__btn-group']}>
                 {speakerButtons}
             </div>
-
-            <div className="qanda__content">
+            <div className={styles['qanda__content']}>
             {this.state.asked !== undefined ? 
                 <div>
                 { this.state.asked === true ?
@@ -307,18 +306,18 @@ export class QAndAMain extends Component {
                         onClose={this.closeModal}
                         contentStyle={popupStyle}
                         >
-                        <div className="popup">
+                        <div className={questionStyles['popup']}>
                             <div>
                                 { this.state.speakerRef && <h4>Dear {this.state.speakerRef.first + " " + this.state.speakerRef.last},</h4> }
-                                <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? "popup__input" : "popup__input popup__input--invalid" } name="question" value={this.state.question} placeholder="Write your question here..." onChange={this.handleChange}/>
+                                <textarea type="text" id="iOS" required autoComplete="off" className={this.state.errors === undefined || this.state.errors.question === false ? questionStyles['popup__input'] : classNames(styles['popup__input'], styles['popup__input--invalid']) } name="question" value={this.state.question} placeholder="Write your question here..." onChange={this.handleChange}/>
                                 { !this.state.errors === undefined ?
                                     null
                                 :
                                     <small className="text-red">Please ask a question before submitting.</small>
                                 }
                                 <h4>Sincerely, </h4>
-                                <input type="text" autoComplete="off" className="popup__input popup__input__sm" required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>
-                                <div className="popup__btn-group">
+                                <input type="text" autoComplete="off" className={classNames(styles['popup__input'], styles['popup__input__sm'])} required minLength="4" size="10" placeholder="Your name..." name="name" value={this.state.name} onChange={this.handleChange}/>
+                                <div className={questionStyles['popup__btn-group']}>
                                     <button className="btn btn-full btn--cancel" onClick={this.closeModal}>Cancel</button>
                                     <button className="btn btn-full btn--primary" onClick={this.openCheck}>Submit</button>
                                 </div>
@@ -331,11 +330,11 @@ export class QAndAMain extends Component {
                         onClose={this.closeCheck}
                         contentStyle={popupStyle}
                         >
-                        <div className="popup">
+                        <div className={questionStyles['popup']}>
                             <div>
                                 <h4>Ready to send off? </h4>
                                 <h6>To prevent spam, you are limited to one question per speaker.</h6>
-                                <div className="popup__btn-group">
+                                <div className={questionStyles['popup__btn-group']}>
                                     <button className="btn btn-full btn--cancel" onClick={this.closeCheck}>Go Back</button>
                                     <button className="btn btn-full btn--primary" onClick={e => this.sendQuestion(e)}>Confirm</button>
                                 </div>
@@ -348,8 +347,8 @@ export class QAndAMain extends Component {
                         onClose={this.closeConfirmation}
                         contentStyle={popupStyle}
                         >
-                        <div className="popup">
-                            <div className="popup__response">
+                        <div className={questionStyles['popup']}>
+                            <div className={questionStyles['popup__response']}>
                                 <img src={bottle} className="bottle" alt="Bottle" />
                                 <p className="text-center">Thank you for asking a question! Please check back on the Q &amp; A page later.</p>
                                 <button className="btn btn-full btn-rounded btn--primary" onClick={this.closeConfirmation}>Ok</button>
@@ -367,7 +366,7 @@ export class QAndAMain extends Component {
                         {newList}
                     </div>
                     :
-                    <h4 className="qanda__message--empty">{this.state.speakerRef !== undefined && this.state.speakerRef !== null ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
+                    <h4 className={styles['qanda__message--empty']}>{this.state.speakerRef !== undefined && this.state.speakerRef !== null ? this.state.speakerRef.first + " " + this.state.speakerRef.last + " has not answered any questions yet. Check back later!" : "No answered questions yet. Check back later!"}</h4>
                 }
             </div>
 

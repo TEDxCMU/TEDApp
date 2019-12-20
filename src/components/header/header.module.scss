@@ -1,11 +1,18 @@
 @import '../../sass/variables';
 
-header {
+.header-background {
     position: relative;
     background-image: url(../../header-bg.svg);
     background-repeat: no-repeat;
     background-size: cover;
     z-index: 2;
+
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (min-width: 992px) {
+        background: $redgradient;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.09);
+        border-radius: 0;
+    }
 }
 
 /* Sticky header container variants are for schedule page */
@@ -19,10 +26,20 @@ header {
         height: 296px;
         width: 100%;
         transition: height 0.3s;
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            height: 275px;
+        }
     }
 
     &--sticky-short {
         height: 150px;
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            height: 120px;
+        }
     }
 }
 
@@ -41,6 +58,21 @@ header {
         padding-top: 0;
         margin-bottom: 0;
         padding-bottom: 20px;
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            padding-bottom: 25px;
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+            padding-bottom: 40px;
+        }
+
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 600px) {
+            padding-bottom: 30px;
+        }
 
         &--speaker {
             padding-bottom: 0;
@@ -93,8 +125,7 @@ header {
     }
 }
 
-/* QUESTIONS POPUP
-------------------------------------*/
+/* Questions Popup */
 .popup {
     display: flex;
     flex-direction: column;
@@ -105,6 +136,11 @@ header {
         display: flex;
         justify-content: space-between;
         margin-top: 20px;
+
+        @media only screen and (max-width: 600px) {
+            display: flex;
+            flex-direction: column;
+        }
 
         /* btn group spacing */
         & > * {
@@ -147,48 +183,4 @@ header {
     }
 }
 
-/* MISCESLLANEOUS */
-#iOS { -webkit-user-select: text; }
-
-/* RESPONSIVE STYLING */
-@media only screen and (max-width: 600px) {
-    .popup__btn-group {
-        display: flex;
-        flex-direction: column;
-    }
-} 
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-    .header__desc {
-        padding-bottom: 30px;
-    }
-} 
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-    .header__desc {
-        padding-bottom: 40px;
-    }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-    header {
-        background: $redgradient;
-        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.09);
-        border-radius: 0;
-    }
-
-    .header-container--sticky {
-        height: 275px;
-    }
-
-    .header-container--sticky-short {
-        height: 120px;
-    }
-
-    .header__desc {
-        padding-bottom: 25px;
-    }
-} 
+#iOS {  -webkit-user-select: text; }

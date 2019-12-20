@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import '../../App.scss';
-import './dropdown.scss';
+
+import styles from './dropdown.module.scss';
 import check from '../../check.svg'
 
 export class Dropdown extends Component {
@@ -19,18 +19,18 @@ export class Dropdown extends Component {
       let content = null;
       if (this.state.showContent ) {
         content = (
-          <div className="dropdown-container">
+          <div className={styles['dropdown-container']}>
             {this.props.children}
           </div>
         );
       }
       
       return (
-        <div className="dropdown">
-            <div onClick={this.toggleShow} className="dropdown__label">
-                <h6 className={this.state.showContent ? "dropdown__text--open" : "dropdown__text"}>{this.props.question}</h6>
-                {this.props.check && <img className="dropdown__checkmark" src={check} alt="checkmark"></img> }
-                <h4 className="dropdown__toggle">{this.state.showContent ? "-" : "+"}</h4>
+        <div className={styles['dropdown']}>
+            <div onClick={this.toggleShow} className={styles['dropdown__label']}>
+                <h6 className={this.state.showContent ? styles['dropdown__text--open'] : styles['dropdown__text']}>{this.props.question}</h6>
+                {this.props.check && <img className={styles['dropdown__checkmark']} src={check} alt="checkmark"></img> }
+                <h4 className={styles['dropdown__toggle']}>{this.state.showContent ? "-" : "+"}</h4>
             </div>
             {content}
         </div>

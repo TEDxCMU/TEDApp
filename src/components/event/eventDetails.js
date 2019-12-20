@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import '../../App.scss';
-import './eventDetails.scss';
-import '../questions/myQuestions.scss';
+import styles from './eventDetails.module.scss';
 import Header from '../header/header.js'
 import fire from '../../fire.js';
 import moment from 'moment';
@@ -63,19 +61,19 @@ export class EventDetails extends Component {
 
     //Render Functions
     eventDetailsRender = (self, videos) => {
-        return <div className="speaker">
+        return <div className={styles['speaker']}>
             {self.speaker !== undefined ?
-                <div className="speaker__info">
+                <div className={styles['speaker__info']}>
                     <p className="text-lightgrey">TEDxCMU Talk</p>
 
-                    <h6 className="speaker__talk-title">{self.props.title}</h6>
+                    <h6 className={styles['speaker__talk-title']}>{self.props.title}</h6>
                     <p>{self.props.description}</p>
 
-                    <h6 className="speaker__bio">Speaker Bio</h6>
+                    <h6 className={styles['speaker__bio']}>Speaker Bio</h6>
                     <p>{self.speaker.bio}</p>
 
-                    <h6 className="speaker__talk-title">Related TED Talks</h6>
-                    <div className="speaker__related">
+                    <h6 className={styles['speaker__talk-title']}>Related TED Talks</h6>
+                    <div className={styles['speaker__related']}>
                         {videos}
                     </div>
                 </div>
@@ -85,9 +83,9 @@ export class EventDetails extends Component {
     }
 
     makeVideoListElement = (video, self) => {
-        return <div key={video} className="video-container">
-            <div className="video">
-                <iframe className="video__frame" src={self.props.related[video]} title={self.props.related[video]} frameBorder="0" scrolling="no" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}></iframe>
+        return <div key={video} className={styles['video-container']}>
+            <div className={styles['video']}>
+                <iframe className={styles['video__frame']} src={self.props.related[video]} title={self.props.related[video]} frameBorder="0" scrolling="no" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowFullScreen={true}></iframe>
             </div>
         </div>;
     }

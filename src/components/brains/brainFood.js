@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import '../../App.scss';
-import './brainFood.scss';
+import styles from './brainFood.module.scss';
 import RippleMap from './subComponents/rippleMap.js';
 import fire from '../../fire.js';
 import Autocomplete from 'react-google-autocomplete';
@@ -9,6 +8,7 @@ import bottle from '../../questionbottle.svg';
 import moment from 'moment';
 import ReactGA from 'react-ga';
 import * as EmailValidator from 'email-validator';
+import classNames from 'classnames';
 
 export class BrainFood extends Component {
   constructor() {
@@ -35,8 +35,8 @@ export class BrainFood extends Component {
         borderRadius: '10px'
     }
     return (
-        <div className="ripple-map">
-            <h1 className="ripple-map__title">A Global Ripple Effect</h1>
+        <div className={styles['ripple-map']}>
+            <h1 className={styles['ripple-map__title']}>A Global Ripple Effect</h1>
             <div>
                 {this.addLocationButton()}
                 {this.locationInputPopup(style)}
@@ -196,7 +196,7 @@ export class BrainFood extends Component {
         }
 
         return <Popup open={this.state.open} closeOnDocumentClick onClose={this.closeModal} contentStyle={style}>
-            <div className="popup">
+            <div className={styles['popup']}>
                 <div>
                     <h2>And where are you from?</h2>
                     <h4>City:</h4>
@@ -210,15 +210,15 @@ export class BrainFood extends Component {
                         null
                     }
                     <h4>Name:</h4>
-                    <input type="text"className="popup__input popup__input--sm" required minLength="4" siz="10" name="name" value={this.state.name} placeholder={"Please add your name"} onChange={e => { this.handleChange(e); } } />
+                    <input type="text" className={classNames(styles['popup__input'], styles['popup__input--sm'])} required minLength="4" siz="10" name="name" value={this.state.name} placeholder={"Please add your name"} onChange={e => { this.handleChange(e); } } />
                     <h4>Email:</h4>
-                    <input type="email" className={this.state.errors !== undefined && this.state.errors.email === true ? "popup__input popup__input--sm-invalid" : "popup__input popup__input--sm"} minLength="4" siz="10" name="email" value={this.state.email} placeholder={"Please add your email"} onChange={e => { this.handleChange(e); } } />
+                    <input type="email" className={this.state.errors !== undefined && this.state.errors.email === true ? classNames(styles['popup__input'], styles['popup__input--sm-invalid']) : classNames(styles['popup__input'], styles['popup__input--sm'])} minLength="4" siz="10" name="email" value={this.state.email} placeholder={"Please add your email"} onChange={e => { this.handleChange(e); } } />
                     {this.state.errors !== undefined && this.state.errors.email === true ?
                         <small className="text-red">Please enter a valid email before submitting.</small>
                         :
                         null
                     }
-                    <div className="popup__btn-group">
+                    <div className={styles['popup__btn-group']}>
                         <button className="btn btn-full btn--cancel" onClick={this.closeModal}>Cancel</button>
                         <button className="btn btn-full btn--primary" onClick={e => this.sendLocation(e)}>Submit</button>
                     </div>
@@ -236,8 +236,8 @@ export class BrainFood extends Component {
 
     locationConfirmationPopup(style) {
         return <Popup open={this.state.confirmationOpen} closeOnDocumentClick onClose={this.closeConfirmation} contentStyle={style}>
-            <div className="popup">
-                <div className="popup__response">
+            <div className={styles['popup']}>
+                <div className={styles['popup__response']}>
                     <img src={bottle} className="bottle" alt="Bottle" />
                     <p className="text-center">Thank you for telling us more about yourself! Check this page later to see the Ripple Effect!</p>
                     <button className="btn btn-full btn-rounded btn--primary" onClick={this.closeConfirmation}>Ok</button>

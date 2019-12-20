@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
-import classNames from 'classnames';
 import { auth } from '../../fire.js';
-import '../../App.scss';
 import styles from './navigation.module.scss';
 
 export class Navigation extends Component {
@@ -72,7 +70,7 @@ export class Navigation extends Component {
                                     {this.props.user !== null &&
                                         (<div>
                                             <li>
-                                                <button className={classNames(styles['btn'], styles['btn-full'], styles['button--primary'])} onClick={this.props.logout}>Log Out</button> 
+                                                <button className="btn btn-full button--primary" onClick={this.props.logout}>Log Out</button> 
                                             </li>
                                         </div>)
                                     }

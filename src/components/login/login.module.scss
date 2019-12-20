@@ -1,0 +1,24 @@
+@import '../../sass/_variables.scss';
+
+.login {
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    text-align: left;
+    margin-top: 30px;
+
+    /* Small devices (portrait tablets and large phones, 600px and up) */
+    @media only screen and (min-width: 600px) {
+      margin-top: 40px;
+    }
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+      margin-top: 50px;
+    }
+
+    &__form { width: 75%; }
+    &__input--invalid {
+      border: 2px solid $red;
+    }
+}

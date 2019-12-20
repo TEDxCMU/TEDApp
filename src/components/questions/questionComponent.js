@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import 'rc-time-picker/assets/index.css';
-import '../../App.scss';
-import './myQuestions.scss';
+import styles from './myQuestions.module.scss';
 import Dropdown from '../dropdown/dropdown';
 
 export class QuestionComponent extends Component {
@@ -14,13 +13,13 @@ export class QuestionComponent extends Component {
         let question = this.props.question;
         let name = this.props.name;
         return (
-            <div className="speaker__questions">
+            <div className={styles['speaker__questions']}>
                 <Dropdown question={question} open={this.state.open} answered={this.props.answered} check={this.props.answerInDB}>
                     <form>
                         <label className="mt0">Question:</label>
                         <p>"{question}"</p>
                         <p>FROM: {name}</p>
-                        <textarea className="popup__input" type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
+                        <textarea className={styles['popup__input']} type="text" name="answer" value={this.state.answer} onChange={this.handleChange}/>
                         {this.props.answered === true ? 
                             <button type="button" className="btn btn-full btn--secondary">Answered</button>  
                         :
