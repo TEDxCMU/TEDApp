@@ -4,6 +4,11 @@
     width: 90%;
     margin: $space-7 auto;
 
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+        margin-top: $space-5;
+    }
+
     &__btn-group {
         display: flex;
         justify-content: center;
@@ -15,10 +20,4 @@
             margin: $space-11;
         }
     }
-}
-
-/* MEDIA QUERIES TO DISPLAY ACCORDING TO HEADER */
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  .faq { margin-top: $space-5; }
 }

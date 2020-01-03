@@ -9,9 +9,9 @@ import {
 } from "react-simple-maps";
 import { Motion, spring } from "react-motion";
 import map from '../static/world-110m.json';
-import '../../../App.scss';
-import './rippleMap.scss';
+import styles from './rippleMap.module.scss';
 import fire from '../../../fire.js';
+import classNames from 'classnames';
 
 export class RippleMap extends Component {
   constructor() {
@@ -55,7 +55,7 @@ export class RippleMap extends Component {
       return (<div></div>)
     } 
     return (
-      <div className="map">
+      <div className={styles['map']}>
         <h5>{this.state.cityClicked === undefined ? "Click on the dots!" : ("Rippler: " + this.state.cityClicked)}</h5>
         <div onTouchStart={e => this.touchWarning(e)}>
           <Motion
@@ -77,7 +77,7 @@ export class RippleMap extends Component {
               }}
                 width={980}
                 height={551}
-                className="map__composable-map"
+                className={styles['map__composable-map']}
                 >
                 <ZoomableGroup center={[x,y]} zoom={zoom}>
                   <Geographies geography={map}>
@@ -117,8 +117,8 @@ export class RippleMap extends Component {
                         marker={city}
                         onClick={this.handleCityClick}
                         >
-                          <circle className="map__marker" cx = {0} cy = {0} r = {8}></circle>
-                          <circle className = "map__marker map__marker--ripple" cx = {0} cy = {0} r = {11}></circle>
+                          <circle className={styles['map__marker']} cx = {0} cy = {0} r = {8}></circle>
+                          <circle className = {classNames(styles['map__marker'], styles['map__marker--ripple'])} cx = {0} cy = {0} r = {11}></circle>
                       </Marker>
                     ))}
                   </Markers>
@@ -127,7 +127,7 @@ export class RippleMap extends Component {
             )}
           </Motion>
         </div>
-        <div className="map__btn-group">
+        <div className={styles['map__btn-group']}>
           <button className="btn btn--primary" onClick={this.handleZoomIn}>
             { "Zoom in" }
           </button>

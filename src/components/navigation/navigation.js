@@ -1,26 +1,25 @@
 import React, { Component } from 'react';
-import '../../App.scss';
-import { auth } from '../../fire.js';
-import {NavLink} from 'react-router-dom';
-import './navigation.scss';
+import { NavLink } from 'react-router-dom';
 import { slide as Menu } from 'react-burger-menu';
+import { auth } from '../../fire.js';
+import styles from './navigation.module.scss';
 
 export class Navigation extends Component {
     constructor (props) {
         super(props)
         this.state = {
-          menuOpen: false,
-          burgerColor: '#fff'
+            menuOpen: false,
+            burgerColor: '#fff'
         }
     }
 
     handleStateChange (state) {
         this.setState({menuOpen: state.isOpen})  
-      }
+    }
 
     closeMenu () {
         this.setState({menuOpen: false})
-      }
+    }
 
     toggleMenu () {
         this.setState({menuOpen: !this.state.menuOpen})
@@ -33,41 +32,39 @@ export class Navigation extends Component {
                 transition: 'background 1s ease-in-out'
             }
         };
+
         return (
             <div>
                 {this.props.loaded ? 
-                    <div className="nav">
-                        <Menu noOverlay right 
+                    <div className={styles['nav']}>
+                        <Menu noOverlay right
                             isOpen={this.state.menuOpen}
                             onStateChange={(state) => this.handleStateChange(state)}
                             styles={burgerBarStyle}>
                             <div>
                                 <ul>
-                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/" exact activeStyle={{color:'#6eebfc'}}>
+                                    <li><NavLink className={styles['nav__link']} onClick={() => this.closeMenu()} to="/" exact activeStyle={{color:'#6eebfc'}}>
                                         Home
                                     </NavLink></li>
                                     <div>
                                         {this.props.user !== null && this.props.isAdmin !== true ?
-                                            <NavLink className="nav__link" onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6eebfc'}}>
+                                            <NavLink className={styles['nav__link']} onClick={() => this.closeMenu()} to="/questions" exact activeStyle={{color:'#6eebfc'}}>
                                                 My Questions
                                             </NavLink>
                                         :
                                             null
                                         }
                                     </div>
-                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/qanda" exact activeStyle={{color:'#6eebfc'}}>
+                                    <li><NavLink className={styles['nav__link']} onClick={() => this.closeMenu()} to="/qanda" exact activeStyle={{color:'#6eebfc'}}>
                                         Speaker Q&amp;A
                                     </NavLink></li>
-                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/ripple" exact activeStyle={{color:'#6eebfc'}}>
+                                    <li><NavLink className={styles['nav__link']} onClick={() => this.closeMenu()} to="/ripple" exact activeStyle={{color:'#6eebfc'}}>
                                         Ripple
                                     </NavLink></li>
-                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/map" exact activeStyle={{color:'#6eebfc'}}>
+                                    <li><NavLink className={styles['nav__link']} onClick={() => this.closeMenu()} to="/map" exact activeStyle={{color:'#6eebfc'}}>
                                         Map
                                     </NavLink></li>
-                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/draw" exact activeStyle={{color:'#6EEBFC'}}>
-                                        Pixel Pen
-                                    </NavLink></li>
-                                    <li><NavLink className="nav__link" onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6eebfc'}}>
+                                    <li><NavLink className={styles['nav__link']} onClick={() => this.closeMenu()} to="/faq" exact activeStyle={{color:'#6eebfc'}}>
                                         FAQs
                                     </NavLink></li>
                                     {this.props.user !== null &&
@@ -89,15 +86,13 @@ export class Navigation extends Component {
     }
 
     logout() {
-        auth.signOut()
-          .then(() => {
-          });
-      }
+        auth.signOut().then(() => {});
+    }
 
-      componentWillUnmount = () => {
+    componentWillUnmount = () => {
         window.removeEventListener('scroll', this.handleScroll);
     }
-  
+
     // If the window is scrolled more than 225 vertical pixels from the top (tested and proven value), the burger menu button 
     // color will become TED-red (#e62b1e). If it is less  than 225 pixels from the top, the burger menu button will be white. 
     handleScroll = () => {
@@ -114,9 +109,9 @@ export class Navigation extends Component {
                         scroll: window.scrollY})
         }
     }
-    
+
     componentDidMount = () => {
-      window.addEventListener('scroll', this.handleScroll);
+        window.addEventListener('scroll', this.handleScroll);
     }
 
 };

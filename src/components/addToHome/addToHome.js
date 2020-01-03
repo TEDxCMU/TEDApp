@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../../App.scss';
-import './addToHome.scss';
+import styles from './addToHome.module.scss';
 import downloadIcon from './downloadIcon.png';
 
 export class PopUp extends Component {
@@ -10,18 +10,18 @@ export class PopUp extends Component {
             closed: false
         }
     }
-    
+
     render() {
         const closed = this.state.closed;
-        
+
         return (
-            <div className={closed ? 'home-popup--inactive' : ''}>
+            <div className={closed ? styles['home-popup--inactive'] : ''}>
                 { this.props.iOS && this.props.loaded ? 
-                    <div className="home-popup">
-                        <div className="home-popup--active" onClick={(e) => {this.closeModal(e)}}>X</div>
-                        <div className="home-popup__content">
+                    <div className={styles['home-popup']}>
+                        <div className={styles['home-popup--active']} onClick={(e) => {this.closeModal(e)}}>X</div>
+                        <div className={styles['home-popup__content']}>
                             <p><strong>Install TEDxCMU</strong> for quick and easy access when you're on the go.</p>
-                            <p>Tap <img src={downloadIcon} className="i-download" alt="download icon" title="download icon" /> and then "Add to Homescreen."</p>
+                            <p>Tap <img src={downloadIcon} className={styles['i-download']} alt="download icon" title="download icon" /> and then "Add to Homescreen."</p>
                         </div>
                     </div>
                 :

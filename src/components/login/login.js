@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import '../../App.scss';
-import './login.scss';
+import styles from './login.module.scss';
 import fire from '../../fire.js';
 import { Redirect } from 'react-router-dom';
 
@@ -26,12 +25,12 @@ export class Login extends Component {
         }
       }
       return (
-        <div className="login">
-            <form className="login__form" onSubmit={this.login}>
+        <div className={styles['login']}>
+            <form className={styles['login__form']} onSubmit={this.login}>
                 <label>Email:</label>
-                <input className={this.state.found ? '' : 'login__input--invalid' } type="text" name="email" autoComplete="email" value={this.state.email} onChange={this.handleChange}/>
+                <input className={this.state.found ? '' : styles['login__input--invalid'] } type="text" name="email" autoComplete="email" value={this.state.email} onChange={this.handleChange}/>
                 <label>Password:</label>
-                <input className={this.state.found ? '' : 'login__input--invalid' } type="password" name="password" autoComplete="password" value={this.state.password} onChange={this.handleChange}/>
+                <input className={this.state.found ? '' : styles['login__input--invalid'] } type="password" name="password" autoComplete="password" value={this.state.password} onChange={this.handleChange}/>
                 <br />
                 {this.state.found === true ? null : <small className="text-red">Could not find an account with that email/password.</small>}
                 <br />

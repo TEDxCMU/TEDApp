@@ -1,0 +1,18 @@
+@import '../../sass/_variables.scss';
+
+.nav {
+    background: $redgradient;
+
+    &__link {
+        color: $white;
+        float: left;
+        text-align: center;
+        padding: $space-7 0;
+        line-height: 25px;
+        transition: color 0.3s ease-out;
+    }
+
+    &__link:hover {
+        color: $rippleblue;
+    }
+}
