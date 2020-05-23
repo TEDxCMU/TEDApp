@@ -1,0 +1,30 @@
+@import '../../sass/variables/color.variables.scss';
+@import '../../sass/variables/system.variables.scss';
+
+.map-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    padding: 0 5%;
+}
+
+.map {
+    margin-top: $space-7;
+    height: 450px;
+    position: relative;
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+        margin-top: $space-5;
+    }
+
+    &__indoor-img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 20%;
+    }
+}

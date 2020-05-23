@@ -1,0 +1,62 @@
+@import '../../../sass/import';
+
+.map {
+  width: 100%;
+  margin: 0 auto;
+
+  &__composable-map {
+    width: 100%;
+    height: auto;
+  }
+
+  &__marker {
+    stroke: $red; 
+    fill: $red;
+    stroke-width: $space-12;
+    stroke-opacity: 1;
+
+    &--ripple {
+      fill: $white;
+      fill-opacity: 0;
+      animation-duration: 2s;
+      animation-name: pulse;
+      animation-iteration-count: infinite;
+    }
+  }
+
+  &__btn-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    /* btn group spacing */
+    & > button {
+      margin: $space-11;
+    }
+  }
+
+}
+
+/* Pulses on map */
+@keyframes pulse {
+  from {
+    stroke-width: $space-12;
+    stroke-opacity: 1;
+    transform: scale(0.3);
+  }
+  to {
+    stroke-width: 0;
+    stroke-opacity: 0;
+    transform: scale(2);
+  }
+}
+
+@keyframes shadow-pulse {
+  0% {
+      box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.2);
+  }
+  100% {
+      box-shadow: 0 0 0 $space-5 rgba(0, 0, 0, 0);
+  }
+}

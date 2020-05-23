@@ -1,0 +1,21 @@
+/// Converts pixels to rems
+/// @param {Number} $pixels
+/// @param {Number} $root the root pixel value
+/// @return {Number} a rem measurement
+/// @example
+///   $system--font-size : 16px;
+///   rem(16px) /* returns 1rem */
+///
+@function rem($pixels, $root: $system__font-size){
+
+    @if (unitless($pixels)) {
+      $pixels: $pixels * 1px;
+    }
+  
+    @if (unitless($root)) {
+      $root: $root * 1px;
+    }
+  
+    @return ($pixels / $root) * 1rem;
+  }
+  

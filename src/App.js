@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import { auth } from './fire';
 import { Schedule } from './components/schedule/schedule.js';
 import { EventDetails } from './components/event/eventDetails.js';
@@ -14,12 +14,14 @@ import fire from './fire.js';
 import Faq from './components/faq/faq';
 import { isAndroid, isIOS } from "react-device-detect";
 import Fingerprint from "fingerprintjs2";
+
 import error404 from './404.png';
 
 import Popup from 'react-popup';
 import moment from 'moment';
 import Header from './components/header/header';
 import QANDA from './components/brains/subComponents/qAndA';
+import Draw from './components/draw/draw';
 
 class App extends Component {
   constructor() {
@@ -61,19 +63,19 @@ class App extends Component {
             <Route path="/ripple" exact strict render={this.RipplePage}/>
             <Route path="/qanda" exact strict render={this.QANDAPage}/>
             <Route path="/map" exact strict render={this.mapPage}/>
+            <Route path="/draw" exact strict render={this.drawPage}/>
             {this.state.user !== null && this.state.isAdmin !== true ?
               <Route path="/questions" exact strict render={this.questionsPage}/>
             :
-              <div></div>
+              null
             }
-            {/* <Route path="/questions" exact strict render={this.questionsPage}/> */}
             <Route component={this.noMatch} />
             </Switch>
-              <div style={{display: 'flex', flexDirection: "column", alignItems:"flex-end", justifyContent: 'flex-end', width: '100%'}}> 
+              <div>
                 {this.state.iosPopUp === true && JSON.parse(localStorage.getItem("popup")) === null && localStorage.getItem("fingerprint") !== null ?
                 <PopUp iOS={true} loaded={this.state.loaded}/>
                 :
-                <div align="center"></div>
+                null
                 }
               </div>
             </div>
@@ -105,7 +107,7 @@ class App extends Component {
         title="404: Not Found"
         description=  {error}  
         db={this.state.db} />
-      <img src={error404} alt="404 Error: Page Not Found" style={{ width: '40vh', height: '40vh', display: 'flex', justifyContent: 'center', alignItems: 'center', margin: 'auto'}}></img>
+      <img src={error404} alt="404 Error: Page Not Found" className="page-error"></img>
     </div>
     
     )
@@ -129,16 +131,13 @@ class App extends Component {
   schedulePage = (props) => {
     return (
       <div> 
-          {/* now the main app div will be 100% of the total screen real estate, which means the popup appears at the bottom */}
-          <div style= {{ width: '100vw', height: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-            <Schedule
-              user={this.state.user}
-              isLoaded={this.isLoaded}
-              scroll={window.scrollY}
-              db={this.state.db} 
-              isAdmin={this.state.isAdmin}
-              eventDate={this.state.eventDate}/> 
-          </div>
+        <Schedule
+          user={this.state.user}
+          isLoaded={this.isLoaded}
+          scroll={window.scrollY}
+          db={this.state.db} 
+          isAdmin={this.state.isAdmin}
+          eventDate={this.state.eventDate}/> 
       </div>
 
     );
@@ -221,6 +220,23 @@ class App extends Component {
           db={this.state.db}
           isAdmin={this.state.isAdmin} />
         <BrainFood
+        user={this.state.user}
+        isLoaded={this.isLoaded}
+        db={this.state.db}
+        isAdmin={this.state.isAdmin} />
+      </div>
+    );
+  }
+
+  drawPage = () => {
+    return (
+      <div>
+        <Header
+          title="Pixel Pen"
+          description="Get creative. Draw live and see it in real time."
+          db={this.state.db} 
+          isAdmin={this.state.isAdmin} />
+        <Draw
         user={this.state.user}
         isLoaded={this.isLoaded}
         db={this.state.db}
@@ -363,7 +379,7 @@ class App extends Component {
   // only run if this is the first time the unique device has accessed the web-app
   // adds the device type, ID, and time accessed to the 'audience' collection of the active event
   sendFingerprintToFirestore = (type, id) => {
-    let timeAccessed = moment().format('MMMM Do YYYY, h:mm:ss a');
+    let timeAccessed = moment().format('MMMM DD YYYY, h:mm:ss a');
     let db = fire.firestore()
     db.collection(this.state.db).doc('audience').collection('audience').doc(id.toString()).set({
       id, type, timeAccessed
