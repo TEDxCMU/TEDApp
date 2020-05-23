@@ -13,7 +13,6 @@
         "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
         "test": "react-scripts test",
         "predeploy": "npm run build",
-        "deploy": "git push master origin",
         "lint": "eslint . --fix",
         "eject": "react-scripts eject"
     },
