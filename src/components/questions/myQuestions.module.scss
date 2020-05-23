@@ -1,4 +1,5 @@
-@import '../../sass/variables';
+@import '../../sass/variables/color.variables.scss';
+@import '../../sass/variables/system.variables.scss';
 
 .speaker__questions {
     width: 90%;
@@ -33,13 +34,13 @@
         width: 100%;
         border-radius: 3px;
         padding: 12px;
-        color: $grey-20;
+        color: $grey__900;
         margin-top: 10px;
         padding: 12px;
 
         &--invalid {
             height: 120px;
-            color: $bggrey;
+            color: $grey__700;
             border: 2px solid $red !important;
         }
 
