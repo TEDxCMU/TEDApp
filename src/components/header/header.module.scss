@@ -1,0 +1,186 @@
+@import '../../sass/import';
+
+.header-background {
+    position: relative;
+    background-image: url(../../header-bg.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 2;
+
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (min-width: 992px) {
+        background: $redgradient;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.09);
+        border-radius: 0;
+    }
+}
+
+/* Sticky header container variants are for schedule page */
+.header-container {
+    top: 0;
+    width: 100%;
+
+    &--sticky {
+        position: fixed;
+        top: 0;
+        height: 296px; // figure out how to make this dynamic w/ js
+        width: 100%;
+        transition: height 0.3s;
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            height: $space-0; //256px
+        }
+    }
+
+    &--sticky-short {
+        height: 150px;
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            height: $space-1;
+        }
+    }
+}
+
+.header {
+    &__title {
+        color: $white;
+        line-height: 2em;
+    }
+
+    &__title--speaker {
+        margin: 0;
+    }
+
+    &__desc {
+        color: $white;
+        padding-top: 0;
+        margin-bottom: 0;
+        padding-bottom: $space-7;
+
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            padding-bottom: $space-6;
+        }
+
+        /* Medium devices (landscape tablets, 768px and up) */
+        @media only screen and (min-width: 768px) {
+            padding-bottom: $space-4;
+        }
+
+        /* Small devices (portrait tablets and large phones, 600px and up) */
+        @media only screen and (min-width: 600px) {
+            padding-bottom: $space-5;
+        }
+
+        &--speaker {
+            padding-bottom: 0;
+        }
+
+        &--collapsed {
+            width: 70%;
+            padding: $space-7 5% $space-7 $space-7;
+        }
+    }
+
+    &__back {
+        left: $space-6; //26px->24px
+        top: $space-5;
+        position: absolute;
+        z-index: 1;
+
+        &--logo { max-width: $space-3; }
+        &--arrow { height: $space-5; }
+    }
+
+    &__content {
+        padding: $space-2 $space-6 $space-8 $space-6; //26px->24px
+    }
+
+    &__profile {
+        display: flex;
+        justify-content: flex-end;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    &__img {
+        width: $space-2;
+        height: $space-2;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 10px solid rgba(255,255,255,0.1);
+
+        &--border::before {
+            content: '';
+            position: absolute;
+            top: -$space-8;
+            left: -$space-8;
+            width: $space-1;
+            height: $space-1;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+    }
+}
+
+/* Questions Popup */
+.popup {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: $space-9;
+
+    &__btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: $space-7;
+
+        @media only screen and (max-width: 600px) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* btn group spacing */
+        & > * {
+            margin: $space-11;
+        }
+    }
+
+    &__input {
+        display: block;
+        width: 100%;
+        border-radius: $space-12;
+        padding: $space-9; //12px
+        color: $grey__900;
+        margin-top: $space-9;
+        padding: $space-9;
+
+        &--invalid {
+            height: $space-1;
+            color: $color__page-background;
+            border: 2px solid $red !important;
+        }
+
+        &--sm {
+            height: $space-7;
+            padding-left: $space-9 !important; 
+        }
+
+        &--sm-invalid {
+            height: $space-7;
+            padding-left: $space-9 !important;
+            border: $space-12 solid $red !important;
+        }
+    }
+
+    &__response {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+#iOS {  -webkit-user-select: text; }

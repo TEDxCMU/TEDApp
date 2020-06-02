@@ -1,0 +1,69 @@
+@import '../../sass/variables/color.variables.scss';
+
+.ripple-map {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center; 
+
+    &__title {
+        width: 90%;
+    }
+}
+
+.popup {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 10px;
+
+    &__btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+
+        @media only screen and (max-width: 600px) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* btn group spacing */
+        & > * {
+            margin: 4px;
+        }
+    }
+
+    &__input {
+        display: block;
+        width: 100%;
+        border-radius: 3px;
+        padding: 12px;
+        color: $grey__900;
+        margin-top: 10px;
+        padding: 12px;
+
+        &--invalid {
+            height: 120px;
+            color: $grey__700;
+            border: 2px solid $red !important;
+        }
+
+        &--sm {
+            height: 20px;
+            padding-left: 12px !important; 
+        }
+
+        &--sm-invalid {
+            height: 20px;
+            padding-left: 12px !important;
+            border: 2px solid $red !important;
+        }
+    }
+
+    &__response {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

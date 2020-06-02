@@ -1,0 +1,58 @@
+@import '../../sass/import';
+
+.dropdown-container {
+    padding: 1em;
+}
+
+.dropdown {
+    border-radius: 3px;
+    box-shadow: 0 5px $space-8 rgba(0,0,0,0.2);
+    background-color: $white;
+    position: relative;
+    margin: 20px 0;
+
+    &__label {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        padding: 1rem;
+        transition: all 0.3s ease-in-out;
+
+        &:hover,
+        .dropdown__label:active,
+        .dropdown__label:focus {
+            background-color: $grey__050;
+        }
+    }
+
+    &__toggle {
+        font-size: 1.5rem;
+        padding: 0 $space-8; //16px
+        margin: 0;
+        position: absolute;
+        right: $space-9; //12px
+    }
+    
+    &__checkmark {
+        font-size: 2rem;
+        padding: 0 $space-8;
+        width: $space-5;
+        height: $space-5;
+        margin: 0;
+        position: absolute;
+        right: $space-5;
+    }
+
+    &__text {
+        position: relative;
+        margin-right: $space-3;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+
+        &--open {
+            position: relative;
+            margin-right: $space-3;
+        }
+    }
+}

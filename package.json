@@ -1,62 +1,157 @@
 {
-  "name": "ted",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "chartist": "^0.11.0",
-    "email-validator": "^2.0.4",
-    "emotion": "^10.0.9",
-    "fingerprintjs2": "^1.8.6",
-    "firebase": "^5.5.4",
-    "firebase-admin": "^6.0.0",
-    "google-map-react": "^1.1.2",
-    "html-react-parser": "^0.6.1",
-    "immutable": "^4.0.0-rc.12",
-    "moment": "^2.22.2",
-    "node-sass": "^4.13.0",
-    "rc-time-picker": "^3.4.0",
-    "react": "^16.12.0",
-    "react-burger-menu": "^2.5.4",
-    "react-color": "^2.17.3",
-    "react-device-detect": "^1.6.1",
-    "react-dom": "^16.12.0",
-    "react-edit-inline": "^1.0.8",
-    "react-ga": "^2.5.7",
-    "react-google-autocomplete": "^1.0.18",
-    "react-motion": "^0.5.2",
-    "react-popup": "^0.10.0",
-    "react-pose": "^4.0.7",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.5",
-    "react-simple-maps": "^0.12.1",
-    "react-social-icons": "^4.1.0",
-    "react-spinners": "^0.5.1",
-    "react-spring": "^8.0.7",
-    "reactjs-popup": "^1.3.2",
-    "reactstrap": "^7.1.0",
-    "styled-components": "^4.1.3",
-    "sw-precache": "^5.2.1",
-    "sw-precache-webpack-plugin": "^0.11.5"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
-    "test": "react-scripts test",
-    "predeploy": "npm run build",
-    "eject": "react-scripts eject",
-    "heroku-postbuild": "npm run build"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ],
-  "devDependencies": {
-    "babel-plugin-transform-remove-console": "^6.9.4",
-    "react-social-icons": "^4.1.0"
-  }
+    "name": "tedapp",
+    "version": "2.0.0",
+    "description": "TEDxCMU Mobile App",
+    "homepage": "https://www.tedxcmu.app/",
+    "private": true,
+    "engines": {
+        "node": "12.x",
+        "npm": "6.x"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
+        "test": "react-scripts test",
+        "predeploy": "npm run build",
+        "lint": "eslint . --fix",
+        "eject": "react-scripts eject"
+    },
+    "dependencies": {
+        "classnames": "^2.2.6",
+        "email-validator": "^2.0.4",
+        "fingerprintjs2": "^1.8.6",
+        "firebase": "^7.14.5",
+        "firebase-admin": "^6.0.0",
+        "html-react-parser": "^0.6.1",
+        "immutable": "^4.0.0-rc.12",
+        "moment": "^2.22.2",
+        "node-sass": "^4.13.0",
+        "rc-time-picker": "^3.4.0",
+        "react": "^16.5.2",
+        "react-burger-menu": "^2.5.4",
+        "react-color": "^2.17.3",
+        "react-device-detect": "^1.6.1",
+        "react-dom": "^16.6.3",
+        "react-ga": "^2.5.7",
+        "react-google-autocomplete": "^1.0.18",
+        "react-motion": "^0.5.2",
+        "react-popup": "^0.10.0",
+        "react-pose": "^4.0.7",
+        "react-router-dom": "^4.3.1",
+        "react-scripts": "^2.1.5",
+        "react-simple-maps": "^0.12.1",
+        "react-social-icons": "^4.1.0",
+        "react-spinners": "^0.5.1",
+        "react-spring": "^8.0.7",
+        "reactjs-popup": "^1.3.2",
+        "sw-precache": "^5.2.1",
+        "sw-precache-webpack-plugin": "^0.11.5"
+    },
+    "devDependencies": {
+        "babel-plugin-transform-remove-console": "^6.9.4"
+    },
+    "eslintConfig": {
+        "extends": [
+            "eslint:recommended",
+            "plugin:react/recommended"
+        ],
+        "env": {
+            "browser": true,
+            "node": true,
+            "es6": true,
+            "jest": true
+        },
+        "parser": "babel-eslint",
+        "parserOptions": {
+            "ecmaVersion": 2018,
+            "sourceType": "module",
+            "ecmaFeatures": {
+                "jsx": true
+            }
+        },
+        "plugins": [
+            "react"
+        ],
+        "settings": {
+            "react": {
+                "version": "detect"
+            }
+        },
+        "rules": {
+            "block-spacing": "error",
+            "brace-style": [
+                "error",
+                "1tbs",
+                {
+                    "allowSingleLine": true
+                }
+            ],
+            "comma-dangle": [
+                "error",
+                "always-multiline"
+            ],
+            "comma-spacing": "error",
+            "comma-style": "error",
+            "curly": "error",
+            "default-case": "error",
+            "handle-callback-err": "error",
+            "indent": "error",
+            "jsx-quotes": "error",
+            "no-console": "off",
+            "no-empty-function": "error",
+            "no-floating-decimal": "error",
+            "no-inline-comments": "off",
+            "no-lonely-if": "error",
+            "no-multi-spaces": "error",
+            "no-multiple-empty-lines": [
+                "error",
+                {
+                    "max": 1,
+                    "maxEOF": 1,
+                    "maxBOF": 0
+                }
+            ],
+            "no-trailing-spaces": "error",
+            "object-curly-spacing": [
+                "error",
+                "always"
+            ],
+            "prefer-const": "error",
+            "quotes": [
+                "error",
+                "single"
+            ],
+            "react/no-unescaped-entities": "off",
+            "react/prop-types": "off",
+            "react/react-in-jsx-scope": "off",
+            "semi": "error",
+            "space-before-blocks": "error",
+            "space-before-function-paren": [
+                "error",
+                {
+                    "anonymous": "never",
+                    "named": "never",
+                    "asyncArrow": "always"
+                }
+            ],
+            "space-in-parens": "error",
+            "space-infix-ops": "error",
+            "space-unary-ops": [
+                "error",
+                {
+                    "words": true,
+                    "nonwords": false
+                }
+            ],
+            "spaced-comment": "error",
+            "yoda": "error",
+            "eol-last": "error"
+        }
+    },
+    "browserslist": [
+        ">0.2%",
+        "not dead",
+        "not ie <= 11",
+        "not op_mini all"
+    ]
 }

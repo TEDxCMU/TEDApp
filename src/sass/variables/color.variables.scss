@@ -1,0 +1,81 @@
+/// neutral palette
+/// -------------------------------------------------------
+$black: #000  !default;
+$grey__950: #111 !default; // @Depricated grey-0
+$grey__900: #333 !default; // @Depricated grey-20
+$grey__700: #666 !default; // @Depricated grey-40
+$grey__500: #999 !default; // @Depricated grey-60
+$grey__300: #ccc !default; // @Depricated grey-60
+$grey__200: #aaa !default; // @Depricated grey-80
+$grey__100: #eee !default; // @Depricated grey-100
+$grey__050: #f8f8f8 !default; // @Depricated offwhite
+$white: #fff !default;
+
+
+/// primary palette
+/// -------------------------------------------------------
+$red: #e62b1e !default;
+$rippleblue: #6eebfc !default;
+
+
+/// primary palette shades
+/// -------------------------------------------------------
+$red__dark: #cb2d3e !default;
+$red__light: #ef473a !default;
+
+// red variants
+$redgradient: linear-gradient(180deg, $red__dark 0%, $red__light 100%);
+$redgradient45: linear-gradient(315deg, $red__dark 0%, $red__light 100%);
+$redhover-opaque: rgba(203, 45, 62, 0.35);
+
+
+/// UI system palette
+/// -------------------------------------------------------
+$system__red    : #e62b1e !default;
+$system__green  : #0fbb09 !default;
+$system__orange : #f09e23 !default;
+
+
+/// UI system background palette
+/// -------------------------------------------------------
+$red--background   	: #FFF4F4 !default;
+$rippleblue--background		: #dbf0f8 !default;
+
+// color for ui highlights
+$palette__highlighter : $red !default;
+
+
+/// color roles | background-colors
+/// -------------------------------------------------------
+$color__page-background   : #fcfcfc !default;
+
+
+/// color roles | typography
+/// -------------------------------------------------------
+$color__text              : $grey__950 !default; 		// default text color
+$color__text--hint        : $grey__500 !default;		// ancillary (eg. disclaimers, legalese)
+$color__text--secondary   : $grey__700 !default;
+
+/// color roles | status colors
+/// -------------------------------------------------------
+$color__news	  :	$system__green !default;
+$color__promotion :	$red !default;
+$color__crisis	  :	$red !default;
+$color__error     : $red !default;
+$color__positive  : $system__green !default;
+$color__negative  : $red !default;
+$color__warning	  : $system__orange !default;
+$color__notification	: $red !default;
+
+
+/// color roles | links
+/// -------------------------------------------------------
+$color__link              : $red !default;
+$color__link--hover       : $red__dark !default;
+
+
+/// color roles | ui
+/// -------------------------------------------------------
+$color__ui-accent            : $rippleblue !default;
+$color__border               : $grey__200 !default;
+$color__overlay              : rgba(0,0,0,0.3) !default;

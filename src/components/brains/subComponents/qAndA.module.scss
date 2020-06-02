@@ -1,0 +1,28 @@
+@import '../../../sass/import';
+
+.qanda {
+    width: 90%;
+    margin: $space-7 auto;
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    &__btn-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        /* btn group spacing */
+        & > * {
+            margin: $space-11;
+        }
+    }
+
+    &__message--empty {
+        text-align: center;
+    }
+}

@@ -1,0 +1,23 @@
+@import '../../sass/import';
+
+.faq {
+    width: 90%;
+    margin: $space-7 auto;
+
+    /* Medium devices (landscape tablets, 768px and up) */
+    @media only screen and (min-width: 768px) {
+        margin-top: $space-5;
+    }
+
+    &__btn-group {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+
+        /* btn group spacing */
+        & > * {
+            margin: $space-11;
+        }
+    }
+}

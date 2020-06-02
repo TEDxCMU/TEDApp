@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import '../../App.css';
-import './faq.css';
+import classNames from 'classnames';
 import Dropdown from '../dropdown/dropdown';
 import Parser from 'html-react-parser';
+import styles from './faq.module.scss';
 
 export class Faq extends Component {
 
@@ -98,38 +98,37 @@ export class Faq extends Component {
             </div>
         );
 
-        let generalClasses = "button-primary medium blank";
-        let ticketsClasses = "button-primary medium blank";
-        let volunteerClasses = "button-primary medium blank";
+        let generalClasses = "btn btn--tertiary";
+        let ticketsClasses = "btn btn--tertiary";
+        let volunteerClasses = "btn btn--tertiary";
 
         if (this.state.displayItems[0] === 0) {
-            generalClasses = "button-primary medium";
+            generalClasses = "btn btn--primary";
         } else {
-            generalClasses += "button-primary medium blank";
+            generalClasses += "btn btn--tertiary";
         }
 
         if (this.state.displayItems[0] === 3) {
-            ticketsClasses = "button-primary medium";
+            ticketsClasses = "btn btn--primary";
         } else {
-            ticketsClasses += "button-primary medium blank";
+            ticketsClasses += "btn btn--tertiary";
         }
 
         if (this.state.displayItems[0] === 8) {
-            volunteerClasses = "button-primary medium";
+            volunteerClasses = "btn btn--primary";
         } else {
-            volunteerClasses = "button-primary medium blank";
+            volunteerClasses = "btn btn--tertiary";
         }
 
 
 
         return (
-            <div className="faq">
-                <div className="justified">
-                    <button onClick={this.toggleGeneral} style={{boxShadow: 'none'}} className={generalClasses}>General</button>
-                    <button onClick={this.toggleTickets} style={{boxShadow: 'none'}} className={ticketsClasses}>Tickets</button>
-                    <button onClick={this.toggleVolunteer} style={{boxShadow: 'none'}} className={volunteerClasses}>Volunteers</button>
+            <div className={styles['faq']}>
+                <div className={styles['faq__btn-group']}>
+                    <button className={classNames('btn btn--primary', generalClasses)} onClick={this.toggleGeneral}>General</button>
+                    <button className={classNames('btn btn--primary', ticketsClasses)} onClick={this.toggleTickets}>Tickets</button>
+                    <button className={classNames('btn btn--primary', volunteerClasses)} onClick={this.toggleVolunteer}>Volunteers</button>
                 </div>
-
                 {content}
             </div>
         );

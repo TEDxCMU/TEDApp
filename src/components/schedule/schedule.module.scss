@@ -1,0 +1,276 @@
+@import '../../sass/import';
+
+.loader {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.schedule-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+/* timeline */
+.timeline-container {
+  margin-top: 270px;
+  padding: 10% 4% 10% calc(4% + 2rem + 4px);
+
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    margin-top: 240px;
+  }
+
+  &--admin {
+    margin-top: 0;
+  }
+}
+
+.timeline {
+  list-style-type: none;
+  position: relative;
+  margin: $space-7;
+  transition: all 1s linear;
+
+  // the schedule line
+  &::before {
+    content: "";
+    display: block;
+    width: 0;
+    height: 100%;
+    border: 1px solid $grey__200;
+    position: absolute;
+    left: -$space-5;
+  }
+
+  &__timepicker {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 320px auto auto;
+    width: 90%;
+  }
+}
+
+.event {
+  position: relative;
+
+  &__title {
+    margin: 0;
+  }
+
+  &__time {
+    font-size: 0.9rem;
+    color: $red;
+    margin-bottom: 0;
+  }
+
+  &__desc {
+    font-size: 0.9rem;
+    float: left;
+    top: $space-11;
+    vertical-align: middle;  
+    position: relative;
+    padding-left: $space-11;
+    margin-bottom: $space-11;
+  }
+
+}
+
+/* event cards */
+.event-card {
+  border-radius: $space-11;
+  padding: $space-9 $space-7;
+
+  &--clickable {
+    margin: $space-5 0;
+    cursor: pointer;
+    background: $white;
+    border: 1px solid #F5F5F5;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.13);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &--static {
+    margin: $space-8 0 $space-5;
+    border-color: 1px solid $red;
+    border-radius: 3px;
+  }
+
+  &__content {
+    margin-right: $space-11;
+  }
+
+  &__arrow {
+    color: $grey__200;
+    padding: 0 $space-8 0 $space-9;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    vertical-align: middle;
+  }
+
+  &--clickable:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease-in-out;
+  }
+
+  &__img {
+    vertical-align: middle;
+    position: relative;
+    top: 5px;
+    height: $space-7;
+    width: $space-7;
+    margin: 0;
+    float: left;
+    border-radius: 50%;
+  }
+}
+
+.bullet__bg {
+  content: '';
+  position: absolute;
+  width: $space-6;
+  height: $space-6;
+  left: calc(-2rem - 12px);
+  top: calc(50% - 11px);
+  background-color: $color__page-background;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+// bullet base styling for all bullet types
+%bullet {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  z-index: 1;
+  border-radius: 50%;
+  left: calc(-2rem - 4px);
+  top: calc(50% - 4px);
+  background-color: $red;
+}
+
+/* static timeline styles */
+.bullet__now {
+  @extend %bullet;
+  animation: now-pulse 2.5s infinite;
+
+  &::before {
+    @extend %bullet;
+    left: 0;
+    top: 0;
+    animation: now-pulse-1 2.5s infinite;
+  }
+
+  &::after {
+    @extend %bullet;
+    left: 0;
+    top: 0;
+    animation: now-pulse-2 2.5s infinite;
+  }
+}
+
+.bullet__upcoming {
+  @extend %bullet;
+}
+
+.bullet__past {
+  @extend %bullet;
+  background-color: $grey__500;
+}
+
+/* Questions Popup */
+.popup {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 10px;
+
+    &__btn-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+
+        @media only screen and (max-width: 600px) {
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* btn group spacing */
+        & > * {
+            margin: 4px;
+        }
+    }
+
+    &__input {
+        display: block;
+        width: 100%;
+        border-radius: 3px;
+        padding: 12px;
+        color: $grey__900;
+        margin-top: 10px;
+        padding: 12px;
+
+        &--invalid {
+            height: 120px;
+            color: $grey__700;
+            border: 2px solid $red !important;
+        }
+
+        &--sm {
+            height: 20px;
+            padding-left: 12px !important; 
+        }
+
+        &--sm-invalid {
+            height: 20px;
+            padding-left: 12px !important;
+            border: 2px solid $red !important;
+        }
+    }
+
+    &__response {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@keyframes now-pulse-1
+{
+  0%, 35% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  45% {
+    transform: scale(1.2);
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+@keyframes now-pulse-2
+{
+  0%, 35% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  47% {
+    transform: scale(2);
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(4);
+  }
+}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import '../../App.css';
-import './schedule.css';
+import styles from './schedule.module.scss';
 import {Link} from 'react-router-dom';
 import moment from 'moment';
 import fire from '../../fire.js';
@@ -13,6 +12,7 @@ import { BounceLoader } from 'react-spinners';
 import Popup from "reactjs-popup";
 import posed from 'react-pose';
 import { networkOnly } from 'sw-toolbox';
+import classNames from 'classnames';
 
 const Item = posed.li({
   enter: { y: 0, x: 0, opacity: 1, 
@@ -52,7 +52,7 @@ export class Schedule extends Component {
       // default announcement that appears before conference is in session
       announcement: "The conference is currently not in progress. Please check back at another time.",
       // default announcement that appears after conference is over
-      eventEndedAnnouncement: '<div>The conference is now over, thanks for coming! Please leave your feedback at <a class="a-link" href="http://bit.ly/tedxsurvey">bit.ly/tedxsurvey</a></div>',
+      eventEndedAnnouncement: 'The conference is now over, thanks for coming! Please leave your feedback at <a class="link-white" href="http://bit.ly/tedxsurvey">bit.ly/tedxsurvey</a>',
       isOpen: false,
       scroll: 0,
       // boolean - if Header should be normal height (true) or collapsed (false)
@@ -77,7 +77,7 @@ export class Schedule extends Component {
     let eventDate = moment(this.props.eventDate).format('L')
     if (this.state.allEvents.length === 0) {
       return (
-        <div>
+        <div className={styles['loader']}>
           <BounceLoader
             sizeUnit={"px"}
             size={150}
@@ -98,57 +98,49 @@ export class Schedule extends Component {
       border: 'none',
       borderRadius: '10px'
     }
+    
     let newList = [];
     let notification = this.state.announcement;
     this.state.allEvents.forEach(event => {
         //mark event as either being in the past, happening right now, or being in the future if it is just static
-        let className = "bullet-static";
+        let className = styles['bullet__upcoming'];
         if (this.state.altAnnouncement) {
           notification = this.state.announcement;
         }
         else if (moment().isBetween(moment(event.start, "hh:mm A"), moment(event.end, "hh:mm A"))) {
-          className = "now";
+          className = styles['bullet__now'];
           notification = event.announcement;
         }
         // when the app is LIVE, uncomment the 2nd line to ensure  
         else if (eventDate < moment().format('L') && (moment() > moment(this.state.allEvents[0].end, "hh:mm A"))) {
-          notification = this.state.eventEndedAnnouncement
+          notification = this.state.eventEndedAnnouncement;
         }
         if (moment().isAfter(moment(event.end, "hh:mm A"))) {
-          className = "past";
+          className = styles['bullet__past'];
         }
 
-        let infoTalkStyle = "info-talk";
-        if (className === "now") {
-          infoTalkStyle = "info-talk info-talk-pulse"
-        } else {
-          infoTalkStyle = "info-talk"
-        }
-
+        const infoTalkStyle = classNames(styles['event-card'], styles['event-card--clickable']);
         if (event.type !== "static") {
           newList.push(
-            <Item key={event.id} id={className === "now" ? "eventNow" : null}>
+            <Item className={styles['event']} key={event.id} id={className === styles['bullet__now'] ? styles['eventNow'] : null}>
               {this.props.isAdmin ? 
               <div>
-                <span className="event"></span>
                 <span className={className}></span>
-                <span className="bullet-bg"></span>
-                  <div className={infoTalkStyle}>
-                    <div>
-                      <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-                      <h4 className="event-title">{event.title}</h4>
-                      <p className="event-description">{event.blurb}</p>
+                <span className={styles['bullet__bg']}></span>
+                <div className={infoTalkStyle}>
+                  <div>
+                      <p className={styles['event__time']}><strong>{event.start}</strong> — {event.end}</p>
+                      <h4 className={styles['event__title']}>{event.title}</h4>
+                      <p className={styles['event__desc']}>{event.blurb}</p>
                       <br />
-                      {this.props.isAdmin ? 
-                      <div>
-                        <button className="button-primary" onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
-                      </div>
-                      :
-                        <div></div>
+                      { this.props.isAdmin && 
+                      (<div>
+                        <button className="btn btn--primary" onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
+                      </div>)
                       }
-                    </div>
-                    <img src={arrow} className="info-arrow" alt="information arrow" />
                   </div>
+                  <img src={arrow} className={styles['event-card__arrow']} alt="information arrow" />
+                </div>
               </div>
               :
               <div>
@@ -169,17 +161,16 @@ export class Schedule extends Component {
                   }
                 }}>
                 {/* THIS IS WHAT PEOPLE SEE FOR SPEAKERS:  */}
-                  <span className="event"></span>
                   <span className={className}></span>
-                  <span className="bullet-bg"></span>
-                    <div className="info-talk">
-                      <div>
-                        <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-                        <h4 className="event-title">{event.blurb}</h4>
-                        <img src={event.image !== undefined || networkOnly ? event.image : placeholder} className="speakerPicture" alt="speaker" />
-                        <p className="event-description">{event.title}</p>
+                  <span className={styles['bullet__bg']}></span>
+                    <div className={classNames(styles['event-card'], styles['event-card--clickable'])}>
+                      <div className={styles['event-card__content']}>
+                        <p className={styles['event__time']}><strong>{event.start}</strong> — {event.end}</p>
+                        <h4 className={styles['event__title']}>{event.blurb}</h4>
+                        <img src={event.image !== undefined || networkOnly ? event.image : placeholder} className={styles['event-card__img']} alt="speaker" />
+                        <p className={styles['event__desc']}>{event.title}</p>
                       </div>
-                      <img src={arrow} className="info-arrow" alt="information arrow" />
+                      <img src={arrow} className={styles['event-card__arrow']} alt="information arrow" />
                     </div>
                 </Link>
               </div>
@@ -190,21 +181,18 @@ export class Schedule extends Component {
       else {
       // Change bullet color here, time, and the info in a timeline event
       newList.push(
-          <Item key={event.id} id={className === "now" ? "eventNow" : null}>
-              <span className="event-static"></span>
+          <Item className={styles['event']} key={event.id} id={className === styles['bullet__now'] ? styles['eventNow'] : null}>
               <span className={className}></span>
-              <span className="bullet-bg"></span>
-              <div className="info-static">
-                <p className="time"><strong>{event.start}</strong> — {event.end}</p>
-                <h5 className="event-title">{event.title}</h5>
+              <span className={styles['bullet__bg']}></span>
+              <div className={classNames(styles['event-card'], styles['event-card--static'])}>
+                <p className={styles['event__time']}><strong>{event.start}</strong> — {event.end}</p>
+                <h5 className={styles['event__title']}>{event.title}</h5>
                 <small>{event.blurb}</small>
-                {this.props.isAdmin  ? 
-                  <div>
-                    <button className="button-primary"
+                {this.props.isAdmin && 
+                  (<div>
+                    <button className="btn btn--primary"
                     onClick={() => { this.openDelayModal(allEvents.indexOf(event)) }}>End</button>
-                  </div>
-                :
-                  <div></div>
+                  </div>)
                 }
               </div>
           </Item>
@@ -215,7 +203,7 @@ export class Schedule extends Component {
     let index = this.state.eventNum;
     if (newList.length > 0) {
     return (
-        <div style={{height: '100%', width: '100%'}}>
+        <div className={styles['schedule-container']}>
           {this.globalTimeChangePopup(style)}
           {this.singleEventTimeChangePopup(style, index, allEvents)}
           <div>
@@ -229,18 +217,18 @@ export class Schedule extends Component {
           </div>
           { localStorage.getItem("canShiftGlobalStartTime") === null && this.props.isAdmin  ? 
             <div>
-              <div className="new-event-time">
+              <div className={styles['timeline__timepicker']}>
                 <TimePicker
                   defaultValue={this.state.value}
                   onChange={this.handleValueChange} />
-                <button className="button-primary" style={{marginTop: '10px'}} onClick={e => this.openGlobalChangeModal(e)}>New Conference Start Time</button>
+                <button className="btn btn--primary" onClick={e => this.openGlobalChangeModal(e)}>New Conference Start Time</button>
               </div> 
-              <div className="timeline-admin">      
+              <div className={classNames(styles['timeline-container'], styles['timeline-container--admin'])}> {/* admin timeline */}   
                 {this.sideBar(newList)}
               </div>
             </div>
           :
-            <div className="timeline">      
+            <div className={styles['timeline-container']}> {/* user timeline */}
               {this.sideBar(newList)}
             </div>
           }
@@ -509,13 +497,13 @@ export class Schedule extends Component {
   globalTimeChangePopup= (style) => {
     return (
       <Popup open={this.state.endAllOpen} closeOnDocumentClick onClose={this.closeGlobalChangeModal} contentStyle={style}>
-        <div className="modal">
+        <div className={styles['popup']}>
           {this.state.shiftingGlobal !== null && this.state.shiftingGlobal === true ?
             <div>
               <h4>Are you sure you want to change the conference start time to {this.state.value.format('hh:mm A')}?</h4>
-              <div className="popup-btns">
-                <button className="popup-btn-cancel" onClick={this.closeGlobalChangeModal}>Cancel</button>
-                <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftAll(e)}>Confirm</button>
+              <div className={styles['popup__btn-group']}>
+                <button className="btn btn-full btn--cancel" onClick={this.closeGlobalChangeModal}>Cancel</button>
+                <button className="btn btn-full btn--primary" onClick={e => this.confirmShiftAll(e)}>Confirm</button>
               </div>
             </div>
             :
@@ -533,16 +521,16 @@ export class Schedule extends Component {
         onClose={this.closeDelayModal}
         contentStyle={style}
         >
-        <div className="modal">
+        <div className={styles['popup']}>
           <div> New End Time:
             <TimePicker
               defaultValue={this.state.value}
               onChange={this.handleValueChange}
             />
             <h4>Are you sure you want to change the end time of "{index === undefined ? "Event Name" : allEvents[index].title}" to {this.state.value === null ? moment().format('hh:mm A') : moment(this.state.value).format('hh:mm A')}?</h4>
-            <div className="popup-btns">
-                <button className="popup-btn-cancel" onClick={this.closeDelayModal}>Cancel</button>
-                <button className="popup-btn-success button-primary" onClick={e => this.confirmShiftOneWithDelay(e, index, this.state.value)}>Confirm</button>
+            <div className={styles['popup__btn-group']}>
+                <button className="btn btn-full btn--cancel" onClick={this.closeDelayModal}>Cancel</button>
+                <button className="btn btn-full btn--primary" onClick={e => this.confirmShiftOneWithDelay(e, index, this.state.value)}>Confirm</button>
             </div>                      
           </div>
         </div>
@@ -554,7 +542,7 @@ export class Schedule extends Component {
 
   sideBar = (newList) => {
     return (
-      <Sidebar id="itinerary" pose={this.state.isOpen ? 'enter' : 'exit'}>
+      <Sidebar id="itinerary" className={styles['timeline']} pose={this.state.isOpen ? 'enter' : 'exit'}>
         {newList}
       </Sidebar>
     )
