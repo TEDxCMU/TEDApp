@@ -33,6 +33,10 @@ cite {
   color: $grey__900;
   display: block;
   padding: 0;
+<<<<<<< HEAD:src/App.css
+  overflow-x: hidden;
+  min-height: 100vh;
+=======
   text-align: right;
   font-style: italic;
 }
@@ -155,6 +159,7 @@ legend {
 
 .btn--tertiary:focus {
   background: $redgradient45;
+>>>>>>> develop:src/App.scss
 }
 
 /* black outline button */
