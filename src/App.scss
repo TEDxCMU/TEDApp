@@ -1,11 +1,3 @@
-/** CSS General Styles Sheet
- *
- * Imports, CSS Variables, Reset, Typography,
- * Buttons, Forms, Tables
-------------------------------------*/
-
-/* IMPORTS
-------------------------------------*/
 @import 'sass/import';
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700');
 
@@ -492,4 +484,4 @@ td {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .mm-popup__box__footer { padding-top: 20px; }
-} 
+}
