@@ -183,3 +183,30 @@ export const Event_Desc = styled.p`
     padding-left: ${props => props.theme.system.space11};
     font-size: 0.9rem;
 `;
+
+// Timeline Styles
+export const Timeline_Container = styled.div`
+    margin-top: 270px;
+    padding: 10% 4% 10% calc(4% + 2rem + 4px);
+
+    @media only screen and (min-width: 992px) {
+        margin-top: 240px;
+    }
+`;
+
+export const Timeline = styled(Sidebar)`
+    position: relative;
+    margin: ${props => props.theme.system.space7};
+    list-style-type: none;
+    transition: all 1s linear;
+
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: -${props => props.theme.system.space5};
+        height: 100%;
+        width: 0;
+        border: 1px solid ${props => props.theme.color.grey200};
+    }
+`;
