@@ -1,0 +1,24 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+    font-weight: 400;
+}
+
+html {
+    font-family: 'Helvetica', sans-serif;
+    font-size: 62.5%;
+}
+
+body {
+    box-sizing: border-box;
+    background-color: #fff;
+    color: #000;
+    width: 100%;
+}
+
+@media only screen and (max-width: 812px) {
+    html {
+        font-size: 50%;
+    }
+}
