@@ -17,12 +17,12 @@ A step by step series of examples that tell you how to get a development env run
 
 1. Clone the repository
 ```
-git clone https://github.com/kazijawad/tedapp.git
+git clone https://github.com/kazijawad/TEDApp.git
 ```
 
 2. Enter the directory and install the necessary packages
 ```
-cd tedapp/
+cd TEDApp/
 npm install
 ```
 
@@ -38,5 +38,7 @@ Deployed with [Vercel](https://vercel.com)
 ## Built With
 
 * [React](http://www.reactjs.com) - JavaScript UI Framework
-* [React-Router](https://reacttraining.com/react-router/) - React Routing Library
+* [Next.js](https://nextjs.org/) - React Framework
+* [Prismic](https://prismic.io/) - CMS Platform
 * [SASS](https://sass-lang.com/) - CSS Preprocessor
+* [CSS Modules](https://github.com/css-modules/css-modules) - Scoped CSS Utility
