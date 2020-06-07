@@ -1,0 +1,20 @@
+{
+    "short_name": "TEDxCMU",
+    "name": "TEDxCMU Mobile App",
+    "icons": [
+        {
+            "src": "/icons/favicon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/icons/favicon.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "start_url": "/?utm_source=a2hs",
+    "display": "standalone",
+    "theme_color": "#CB2D3E",
+    "background_color": "#CB2D3E"
+}

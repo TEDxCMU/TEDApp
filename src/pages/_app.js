@@ -1,7 +1,8 @@
-import { useEffect } from 'react';
+import { useEffect, Fragment } from 'react';
 import Router from 'next/router';
 
 import '../styles/global.css';
+import Meta from '../components/Meta';
 import * as gtag from '../utils/gtag';
 
 function MyApp({ Component, pageProps }) {
@@ -16,7 +17,10 @@ function MyApp({ Component, pageProps }) {
     }, []);
 
     return (
-        <Component {...pageProps} />
+        <Fragment>
+            <Meta />
+            <Component {...pageProps} />
+        </Fragment>
     );
 }
 
