@@ -1,38 +1,11 @@
 import React, { Component } from 'react';
 import Link from 'next/link';
-import { Box } from 'rebass';
 import moment from 'moment';
 import { BounceLoader } from 'react-spinners';
 import TimePicker from 'rc-time-picker';
 import Popup from 'reactjs-popup';
-import posed from 'react-pose';
-import classNames from 'classnames';
 
-const styles = {};
-
-const Item = posed.li({
-    enter: { y: 0, x: 0, opacity: 1,
-        transition: {
-            x: { type: 'spring', stiffness: 300, damping: 15 },
-            y: { type: 'spring', stiffness: 300, damping: 15 },
-            default: { duration: 300 },
-        },
-    },
-    exit: { y: 20, opacity: 0, transition: { duration: 150 } },
-});
-
-const Sidebar = posed.ul({
-    enter: {
-        x: 0,
-        delayChildren: 1100,
-        staggerChildren: 50,
-        transition: {
-            x: { type: 'spring', stiffness: 100, damping: 15 },
-            y: { type: 'spring', stiffness: 100, damping: 15 },
-        },
-    },
-    exit: { x: '-100%', delay: 0, transition: { duration: 0 } },
-});
+import * as Styled from '../styles/Schedule';
 
 class Schedule extends Component {
     state = {
@@ -70,21 +43,14 @@ class Schedule extends Component {
         const eventDate = moment(this.props.eventDate).format('L');
         if (this.state.allEvents.length === 0) {
             return (
-                <Box
-                    sx={{
-                        display: 'flex',
-                        height: '100vh',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                        width: '100vw',
-                    }}>
+                <Styled.Loader>
                     <BounceLoader
                         sizeUnit={'px'}
                         size={150}
                         color={'#e62b1e'}
                         loading={this.state.loading}
                     />
-                </Box>
+                </Styled.Loader>
             );
         }
 
@@ -99,125 +65,92 @@ class Schedule extends Component {
             borderRadius: '10px',
         };
 
-        const newList = [];
+        const list = [];
         let notification = this.state.announcement;
         this.state.allEvents.forEach(event => {
-            let className = styles['bullet__upcoming'];
+            let ActiveBullet = <Styled.Bullet />;
             if (moment().isBetween(moment(event.start, 'hh:mm A'), moment(event.end, 'hh:mm A'))) {
-                className = styles['bullet__now'];
+                ActiveBullet = <Styled.Bullet_Now />;
                 notification = event.announcement;
             } else if (eventDate < moment().format('L') && (moment() > moment(this.state.allEvents[0].end, 'hh:mm A'))) {
                 notification = this.state.eventEndedAnnouncement;
             }
 
             if (moment().isAfter(moment(event.end, 'hh:mm A'))) {
-                className = styles['bullet__past'];
+                ActiveBullet = <Styled.Bullet_Past />;
             }
 
-            const infoTalkStyle = classNames(styles['event-card'], styles['event-card--clickable']);
             if (event.type !== 'static') {
-                newList.push(
-                    <Item className={styles['event']} key={event.id} id={className === styles['bullet__now'] ? styles['eventNow'] : null}>
-                        {this.props.isAdmin ?
-                            <div>
-                                <span className={className}></span>
-                                <span className={styles['bullet__bg']}></span>
-                                <div className={infoTalkStyle}>
-                                    <div>
-                                        <p className={styles['event__time']}><strong>{event.start}</strong> — {event.end}</p>
-                                        <h4 className={styles['event__title']}>{event.title}</h4>
-                                        <p className={styles['event__desc']}>{event.blurb}</p>
-                                        <br />
-                                        {this.props.isAdmin && (
-                                            <div>
-                                                <button className="btn btn--primary" onClick={() => { this.openDelayModal(allEvents.indexOf(event)); }}>End</button>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <img src="../../../public/vectors/smallArrow.svg" className={styles['event-card__arrow']} alt="information arrow" />
-                                </div>
-                            </div>
-                            :
-                            <div>
-                                <Link href={'talks/' + event.id}>
-                                    <a>
-                                        <span className={className}></span>
-                                        <span className={styles['bullet__bg']}></span>
-                                        <div className={classNames(styles['event-card'], styles['event-card--clickable'])}>
-                                            <div className={styles['event-card__content']}>
-                                                <p className={styles['event__time']}><strong>{event.start}</strong> — {event.end}</p>
-                                                <h4 className={styles['event__title']}>{event.blurb}</h4>
-                                                <img src={event.image !== undefined ? event.image : '../../../public/vectors/placeholder.svg'} className={styles['event-card__img']} alt="speaker" />
-                                                <p className={styles['event__desc']}>{event.title}</p>
-                                            </div>
-                                            <img src="../../../public/vectors/smallArrow.svg" className={styles['event-card__arrow']} alt="information arrow" />
-                                        </div>
-                                    </a>
-                                </Link>
-                            </div>
-                        }
-                    </Item>,
+                list.push(
+                    <Styled.Event key={event.id}>
+                        <Link href={'talks/' + event.id}>
+                            <a>
+                                {ActiveBullet}
+                                <Styled.Bullet_BG />
+                                <Styled.Event_Card_Clickable>
+                                    <Styled.Event_Card_Content>
+                                        <Styled.Event_Time>
+                                            <strong>{event.start}</strong> — {event.end}
+                                        </Styled.Event_Time>
+                                        <Styled.Event_Title>
+                                            {event.blurb}
+                                        </Styled.Event_Title>
+                                        <Styled.Event_Card_Img
+                                            src={event.image !== undefined ? event.image : '../../../public/vectors/placeholder.svg'}
+                                            alt="Speaker"
+                                        />
+                                        <Styled.Event_Desc>
+                                            {event.title}
+                                        </Styled.Event_Desc>
+                                    </Styled.Event_Card_Content>
+                                    <Styled.Event_Card_Arrow
+                                        src="../../../public/vectors/smallArrow.svg"
+                                        alt="Information Arrow"
+                                    />
+                                </Styled.Event_Card_Clickable>
+                            </a>
+                        </Link>
+                    </Styled.Event>,
                 );
             } else {
-                newList.push(
-                    <Item className={styles['event']} key={event.id} id={className === styles['bullet__now'] ? styles['eventNow'] : null}>
-                        <span className={className}></span>
-                        <span className={styles['bullet__bg']}></span>
-                        <div className={classNames(styles['event-card'], styles['event-card--static'])}>
-                            <p className={styles['event__time']}><strong>{event.start}</strong> — {event.end}</p>
-                            <h5 className={styles['event__title']}>{event.title}</h5>
-                            <small>{event.blurb}</small>
-                            {this.props.isAdmin && (
-                                <div>
-                                    <button
-                                        className="btn btn--primary"
-                                        onClick={() => {
-                                            this.openDelayModal(allEvents.indexOf(event));
-                                        }}
-                                    >
-                                        End
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </Item>,
+                list.push(
+                    <Styled.Event key={event.id}>
+                        {ActiveBullet}
+                        <Styled.Bullet_BG />
+                        <Styled.Event_Card_Static>
+                            <Styled.Event_Time>
+                                <strong>{event.start}</strong> — {event.end}
+                            </Styled.Event_Time>
+                            <Styled.Event_Title>
+                                {event.title}
+                            </Styled.Event_Title>
+                            <small>
+                                {event.blurb}
+                            </small>
+                        </Styled.Event_Card_Static>
+                    </Styled.Event>,
                 );
             }
         });
+
         const allEvents = this.state.allEvents;
         const index = this.state.eventNum;
-        if (newList.length > 0) {
+        if (list.length > 0) {
             return (
                 <div className={styles['schedule-container']}>
                     {this.globalTimeChangePopup(style)}
                     {this.singleEventTimeChangePopup(style, index, allEvents)}
-                    <div>
-                        <Header
-                            link={this.state.headerLink}
-                            title={this.state.headerTitle}
-                            description={notification}
-                            db={this.props.db}
-                            isAdmin={this.props.isAdmin}
-                            headerStyle="fixed"
-                        />
+                    <Header
+                        link={this.state.headerLink}
+                        title={this.state.headerTitle}
+                        description={notification}
+                        db={this.props.db}
+                        isAdmin={this.props.isAdmin}
+                        headerStyle="fixed"
+                    />
+                    <div className={styles['timeline-container']}>
+                        {this.sideBar(list)}
                     </div>
-                    {localStorage.getItem('canShiftGlobalStartTime') === null && this.props.isAdmin ? (
-                        <div>
-                            <div className={styles['timeline__timepicker']}>
-                                <TimePicker
-                                    defaultValue={this.state.date}
-                                    onChange={this.handleValueChange} />
-                                <button className="btn btn--primary" onClick={e => this.openGlobalChangeModal(e)}>New Conference Start Time</button>
-                            </div>
-                            <div className={classNames(styles['timeline-container'], styles['timeline-container--admin'])}> {/* admin timeline */}
-                                {this.sideBar(newList)}
-                            </div>
-                        </div>
-                    ) : (
-                        <div className={styles['timeline-container']}>
-                            {this.sideBar(newList)}
-                        </div>
-                    )}
                 </div>
             );
         }
@@ -400,10 +333,10 @@ class Schedule extends Component {
         );
     }
 
-    sideBar = (newList) => {
+    sideBar = (list) => {
         return (
             <Sidebar id="itinerary" className={styles['timeline']} pose={this.state.isOpen ? 'enter' : 'exit'}>
-                {newList}
+                {list}
             </Sidebar>
         );
     }

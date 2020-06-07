@@ -1,9 +1,0 @@
-/// A function to keep all measurements and spacing aligned to the system's standard unit of measurement
-/// @example
-/// 	$system--unit : 16px;
-///   @include system-unit(2);
-///   /* 32px */
-@function system-unit($number: 1){
-    @return $number * $system__unit;
-  }
-  

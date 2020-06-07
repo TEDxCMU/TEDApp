@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Schedule from '../components/Schedule/Schedule';
+import Schedule from '../components/Schedule';
 
 function Home({ eventDate }) {
     return (

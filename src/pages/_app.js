@@ -1,11 +1,10 @@
-import { useEffect, Fragment } from 'react';
+import { useEffect } from 'react';
 import Router from 'next/router';
 
-import '../styles/global.css';
-import Meta from '../components/Meta';
+import Page from '../components/Page';
 import * as gtag from '../utils/gtag';
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
     useEffect(() => {
         const handleRouteChange = url => {
             gtag.pageview(url);
@@ -17,10 +16,9 @@ function MyApp({ Component, pageProps }) {
     }, []);
 
     return (
-        <Fragment>
-            <Meta />
-            <Component {...pageProps} />
-        </Fragment>
+        <Page>
+            <Component key={router.route} {...pageProps} />
+        </Page>
     );
 }
 
