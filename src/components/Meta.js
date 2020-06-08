@@ -12,6 +12,15 @@ function Meta() {
             <meta key="author" name="author" content="TEDxCMU" />
             <meta key="description" name="description" content="TEDxCMU is a conference at Carnegie Mellon University that brings together some of the world’s most bold and innovative thinkers to give the talk of their lives. We want to spread great ideas to the Carnegie Mellon and Pittsburgh community and that starts with you attending this event!" />
             <meta key="keywords" name="keywords" content="ted, tedxcmu, ripple, synapse, carnegie mellon, cmu" />
+            <meta property="og:url" content="https://www.tedxcmu.app/" />
+            <meta property="og:title" content="TEDxCMU" />
+            <meta property="og:description" content="TEDxCMU is a conference at Carnegie Mellon University that brings together some of the world’s most bold and innovative thinkers to give the talk of their lives. We want to spread great ideas to the Carnegie Mellon and Pittsburgh community and that starts with you attending this event!" />
+            <meta property="og:image" content="/icons/favicon.png" />
+            <meta name="twitter:card" content="app" />
+            <meta name="twitter:site" content="@TEDxCMU" />
+            <meta name="twitter:title" content="TEDxCMU" />
+            <meta name="twitter:description" content="TEDxCMU is a conference at Carnegie Mellon University that brings together some of the world’s most bold and innovative thinkers to give the talk of their lives. We want to spread great ideas to the Carnegie Mellon and Pittsburgh community and that starts with you attending this event!" />
+            <meta name="twitter:image" content="/icons/favicon.png" />
             <title>TEDxCMU</title>
             <link key="manifest" rel="manifest" href="/data/manifest.json" />
             <link key="favicon" rel="icon" href="/icons/favicon.png" importance="low" />
