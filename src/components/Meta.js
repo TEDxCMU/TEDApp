@@ -15,12 +15,12 @@ function Meta() {
             <meta key="open-graph-url" property="og:url" content="https://tedapp-git-develop.kazijawad.now.sh/" />
             <meta key="open-graph-title" property="og:title" content="TEDxCMU" />
             <meta key="open-graph-desc" property="og:description" content="TEDxCMU is a conference at Carnegie Mellon University that brings together some of the world’s most bold and innovative thinkers to give the talk of their lives. We want to spread great ideas to the Carnegie Mellon and Pittsburgh community and that starts with you attending this event!" />
-            <meta key="open-graph-image" property="og:image" content="/icons/favicon.png" />
+            <meta key="open-graph-image" property="og:image" content="https://tedapp-git-develop.kazijawad.now.sh/icons/favicon.png" />
             <meta key="twitter-card" name="twitter:card" content="summary" />
             <meta key="twitter-site" name="twitter:site" content="@TEDxCMU" />
             <meta key="twitter-title" name="twitter:title" content="TEDxCMU" />
             <meta key="twitter-desc" name="twitter:description" content="TEDxCMU is a conference at Carnegie Mellon University that brings together some of the world’s most bold and innovative thinkers to give the talk of their lives. We want to spread great ideas to the Carnegie Mellon and Pittsburgh community and that starts with you attending this event!" />
-            <meta key="twitter-image" name="twitter:image" content="/icons/favicon.png" />
+            <meta key="twitter-image" name="twitter:image" content="https://tedapp-git-develop.kazijawad.now.sh/icons/favicon.png" />
             <title key="title">TEDxCMU</title>
             <link key="manifest" rel="manifest" href="/data/manifest.json" />
             <link key="favicon" rel="icon" href="/icons/favicon.png" importance="low" />
