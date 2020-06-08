@@ -39,6 +39,5 @@ Deployed with [Vercel](https://vercel.com)
 
 * [React](http://www.reactjs.com) - JavaScript UI Framework
 * [Next.js](https://nextjs.org/) - React Framework
-* [Prismic](https://prismic.io/) - CMS Platform
-* [SASS](https://sass-lang.com/) - CSS Preprocessor
-* [CSS Modules](https://github.com/css-modules/css-modules) - Scoped CSS Utility
+* [Strapi](https://strapi.io/) - CMS Platform
+* [Styled-Components](https://styled-components.com/) - CSS-in-JS Library
