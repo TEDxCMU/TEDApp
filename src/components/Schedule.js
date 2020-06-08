@@ -7,18 +7,11 @@ import * as Styled from '../styles/Schedule';
 
 class Schedule extends Component {
     state = {
-        date: moment(),
-        canShiftAll: true,
         allEvents: [],
-        updateCount: 0,
-        watchingForChanges: false,
-        announcement: 'The conference is currently not in progress. Please check back at another time.',
-        eventEndedAnnouncement: 'The conference is now over, thanks for coming! Please leave your feedback at <a class="link-white" href="http://bit.ly/tedxsurvey">bit.ly/tedxsurvey</a>',
         isOpen: false,
         scroll: 0,
         headerLink: true,
         headerTitle: 'Live Schedule',
-        nowDist: 0,
     };
 
     componentDidMount() {
