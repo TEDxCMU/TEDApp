@@ -1,15 +1,18 @@
 import React from 'react';
 
 import Client from '../utils/prismic';
-import Schedule from '../components/Schedule';
 
-function Home({ data }) {
+function Home() {
     return (
-        <Schedule data={data} />
+        <div>Test</div>
     );
 }
 
 export async function getStaticProps(context) {
+    if (context.res) {
+        context.res.setHeader('Cache-Control', 's-maxage=1, stale-while-revalidate');
+    }
+
     const req = context.req;
     const data = await Client(req).getSingle('experience');
     return {
