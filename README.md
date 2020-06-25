@@ -26,6 +26,8 @@ cd TEDApp/
 npm install
 ```
 
+3. Create `.env.local` from `sample.env.local` and fill in your information
+
 3. The website will be available locally
 ```
 npm start
@@ -39,5 +41,5 @@ Deployed with [Vercel](https://vercel.com)
 
 * [React](http://www.reactjs.com) - JavaScript UI Framework
 * [Next.js](https://nextjs.org/) - React Framework
-* [Strapi](https://strapi.io/) - CMS Platform
+* [Prismic](https://prismic.io/) - CMS Platform
 * [Styled-Components](https://styled-components.com/) - CSS-in-JS Library
