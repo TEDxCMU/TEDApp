@@ -1,20 +1,19 @@
 import React from 'react';
-import Prismic from 'prismic-javascript';
 
 import Client from '../utils/prismic';
 import Schedule from '../components/Schedule';
 
-function Home({ eventDate }) {
+function Home({ data }) {
     return (
-        <Schedule eventDate={eventDate} />
+        <Schedule data={data} />
     );
 }
 
 export async function getStaticProps(context) {
     const req = context.req;
-    const home = await Client(req).query(Prismic.Predicates.at('document.type', 'event'));
+    const data = await Client(req).getSingle('experience');
     return {
-        props: { home },
+        props: { data },
     };
 }
 
