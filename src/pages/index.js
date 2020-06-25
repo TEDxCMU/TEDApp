@@ -1,5 +1,7 @@
 import React from 'react';
+import Prismic from 'prismic-javascript';
 
+import Client from '../utils/prismic';
 import Schedule from '../components/Schedule';
 
 function Home({ eventDate }) {
@@ -8,11 +10,11 @@ function Home({ eventDate }) {
     );
 }
 
-export async function getStaticProps() {
+export async function getStaticProps(context) {
+    const req = context.req;
+    const home = await Client(req).query(Prismic.Predicates.at('document.type', 'event'));
     return {
-        props: {
-            eventDate: '2020-06-06T23:33:49-04:00',
-        },
+        props: { home },
     };
 }
 
