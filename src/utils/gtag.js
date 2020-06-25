@@ -1,7 +1,5 @@
-export const GA_TRACKING_ID = 'UA-134356076';
-
 export const pageview = (url) => {
-    window.gtag('config', GA_TRACKING_ID, { page_path: url });
+    window.gtag('config', process.env.GA_TRACKING_ID, { page_path: url });
 };
 
 export const event = ({ action, category, label, value }) => {
